@@ -12,8 +12,10 @@
     "@expo/cli": "xxx"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.1.4",
     "expo": "~48.0.18",
     "expo-status-bar": "~1.4.4",
+    "install": "^0.13.0",
     "react": "18.2.0",
     "react-countdown-circle-timer": "^3.2.1",
     "react-dom": "^18.2.0",
@@ -23,7 +25,8 @@
     "yarn": "^1.22.19"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@iconify/react": "^4.1.0"
   },
   "private": true
 }

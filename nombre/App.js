@@ -1,22 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Button, Text, View, Alert, SafeAreaView} from 'react-native';
-import { CountdownCircleTimer } from 'react-countdown-circle-timer'
+import { CountdownCircleTimer } from 'react-countdown-circle-timer';
+import {HomeFilled} from '@ant-design/icons';
+import { Icon } from '@iconify/react';
 
 export default function App() {
-  const renderTime = ({ remainingTime }) => {
-    if (remainingTime === 0) {
-      return <div className="timer">Too lale...</div>;
-    }
-  const UrgeWithPleasureComponent = () => (
-    <CountdownCircleTimer
-      isPlaying
-      duration={7}
-      colors={['#004777', '#F7B801', '#A30000', '#A30000']}
-      colorsTime={[0, 2, 5, 7]}
-    >
-      {({ remainingTime }) => remainingTime}
-    </CountdownCircleTimer>
-  )
   return (
     <View style={styles.container}>
       <View style={{flex: 1.2}}> <Text style={styles.title}>Snifterly!</Text> </View>
@@ -47,18 +35,22 @@ export default function App() {
 
       </View>
       <View style={{flex: 2}}>
-      <View style={styles.cuarounico}>  
-          <Text style={styles.textodos}>te falta para alcanzar alcohol 0 en sangre</Text>
-          <View className="timer">
-          <View className="text">Remaining</View>
-          <View className="value">{remainingTime}</View>
-          <View className="text">seconds</View>
-          </View>
+        <View style={styles.cuarounico}>  
+            
+            <Text style={styles.textodos}>te falta para alcanzar </Text> <Text style={styles.textodos}>alcohol 0 en sangre</Text>
         </View>
       </View>
       
       <View style={{flex: 1}}><View style={{flexDirection:'row', backgroundColor:'black'}}></View>
-      <Button style={styles.boton} color="#5654E1" borderRadius="20" title="Finalizar"/>
+      <Button style={styles.boton} color="#5654E1" borderRadius={'20rem'} title="Finalizar"/>
+      </View>
+
+      <View style={styles.footer}>
+        <View style={{flexDirection:'row', justifyContent: 'space-between'}}> 
+          <Icon icon="zondicons:calendar" width={'2.5rem'} marginLeft={'2rem'} marginRight={'2rem'}/>
+          <Icon icon="mdi:account" width={'2.5rem'}/>
+          <Icon icon="material-symbols:home"  width={'2.5rem'}/>
+        </View>
       </View>
     </View>
   );
@@ -72,6 +64,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     
+  },
+  footer:{
+    marginBottom: '1rem', 
+    width: '10rem',
   },
   title: {
     fontWeight: 'bold',
@@ -97,6 +93,7 @@ const styles = StyleSheet.create({
   textodos:{
     fontWeight: 'bold',
     fontSize: '0.8rem',
+    textAlign: 'center',
   },
   cuadro: {
     flex: 0.3,
@@ -133,8 +130,8 @@ const styles = StyleSheet.create({
     marginRight: '0.3rem',
     marginLeft: '0.3rem',
     marginTop: '3rem ',
-    minheight: '8rem',
-    minWidth: '10rem',
+    minheight: '13rem',
+    minWidth: '21rem',
     borderRadius: 20,
     backgroundColor: '#ECECEC',
     borderColor: '#ECECEC',
