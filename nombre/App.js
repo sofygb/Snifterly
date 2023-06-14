@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Button, Text, View, Alert, SafeAreaView} from 'react-native';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
+import { useCountdown } from 'react-countdown-circle-timer'
 import {HomeFilled} from '@ant-design/icons';
 import { Icon } from '@iconify/react';
 
@@ -8,7 +9,7 @@ export default function App() {
   const variable = 3;
   return (
     <View style={styles.container}>
-      
+      <StatusBar style='auto'/>
       <View style={{flex: 1.2}}> <Text style={styles.title}>Snifterly!</Text> </View>
 
       <View style={[{flex: 1.5}]}> 
@@ -37,8 +38,11 @@ export default function App() {
 
       </View>
       <View style={{flex: 2}}>
-        <View style={styles.cuarounico}>  
-            
+        <View style={styles.cuarounico}>
+          {/*Poner lindo el coso de abajo :(*/}
+            <CountdownCircleTimer isPlaying duration={60} colors={['#004777', '#F7B801', '#A30000', '#A30000']} colorsTime={[7, 5, 2, 0]}>
+                {({ remainingTime }) => remainingTime}
+            </CountdownCircleTimer>
             <Text style={styles.textodos}>te falta para alcanzar </Text> <Text style={styles.textodos}>alcohol 0 en sangre</Text>
         </View>
       </View>
@@ -141,7 +145,7 @@ const styles = StyleSheet.create({
     marginRight: '0.3rem',
     marginLeft: '0.3rem',
     marginTop: '3rem ',
-    minheight: '13rem',
+    minheight: '25rem',
     minWidth: '21rem',
     borderRadius: 20,
     backgroundColor: '#ECECEC',
