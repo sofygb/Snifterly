@@ -5,30 +5,32 @@ import {HomeFilled} from '@ant-design/icons';
 import { Icon } from '@iconify/react';
 
 export default function App() {
+  const variable = 3;
   return (
     <View style={styles.container}>
+      
       <View style={{flex: 1.2}}> <Text style={styles.title}>Snifterly!</Text> </View>
 
       <View style={[{flex: 1.5}]}> 
 
         <View style={[styles.container,{flexDirection: 'row',},]}>
           <View style={styles.cuadro}>
-            <Text style={styles.subtitulo}>CUADRO 1</Text> 
+            <Text style={styles.subtitulo}><Text style={{fontSize: '1.8rem',}}>{variable}</Text> veces</Text> 
             <Text style={styles.texto}>has ingresado mediciones</Text>
           </View>
           <View style={styles.cuadro}>
-            <Text style={styles.subtitulo}>CUADRO 2</Text> 
+            <Text style={styles.subtitulo}><Text style={{fontSize: '1.8rem',}}>{variable}</Text> mg/l</Text> 
             <Text style={styles.texto}>has ingresado mediciones</Text>
           </View>
         </View>
 
-        <View style={[styles.container,{flexDirection: 'row',},]}>
+        <View style={[styles.container,{flexDirection: 'row', paddingTop: '30px'},]}>
           <View style={styles.cuadro}>
-            <Text style={styles.subtitulo}>CUADRO 3</Text> 
+            <Text style={styles.subtitulo}><Text style={{fontSize: '1.8rem',}}>{variable}</Text> veces</Text> 
             <Text style={styles.texto}>has ingresado mediciones</Text>
           </View>
           <View style={styles.cuadro}>
-            <Text style={styles.subtitulo}>CUADRO 4</Text> 
+            <Text style={styles.subtitulo}><Text style={{fontSize: '1.8rem',}}>{variable}</Text> mg/l</Text> 
             <Text style={styles.texto}>has ingresado mediciones</Text>
           </View>
         </View>
@@ -44,18 +46,18 @@ export default function App() {
       <View style={{flex: 1}}><View style={{flexDirection:'row', backgroundColor:'black'}}></View>
       <Button style={styles.boton} color="#5654E1" borderRadius={'20rem'} title="Finalizar"/>
       </View>
+      
+      <View style={styles.botonAgregar}><Icon icon="zondicons:add-solid" width={'2.5rem'}/></View>
 
       <View style={styles.footer}>
         <View style={{flexDirection:'row', justifyContent: 'space-between'}}> 
-          <Icon icon="zondicons:calendar" width={'2.5rem'} marginLeft={'2rem'} marginRight={'2rem'}/>
-          <Icon icon="mdi:account" width={'2.5rem'}/>
-          <Icon icon="material-symbols:home"  width={'2.5rem'}/>
+        <Icon icon="material-symbols:home"  width={'2.5rem'}/>
+        <Icon icon="zondicons:calendar" width={'2.3rem'}/>
+        <Icon icon="mdi:account" width={'2.5rem'}/>
         </View>
       </View>
     </View>
   );
-
-  //<Text style={styles.title}>Snifterly! {fecha}</Text>
 }
 
 const styles = StyleSheet.create({
@@ -65,9 +67,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     
   },
+  botonAgregar:{
+    width: '100%',
+    paddingRight: '25px',
+    paddingBottom: '30px',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end'
+  },
   footer:{
     marginBottom: '1rem', 
-    width: '10rem',
+    width: '100%',
+    paddingLeft: '30px',
+    paddingRight: '30px',
   },
   title: {
     fontWeight: 'bold',
