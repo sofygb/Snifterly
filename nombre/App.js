@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Button, Text, View, Alert, SafeAreaView} from 'react-native';
+import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity} from 'react-native';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import {HomeFilled} from '@ant-design/icons';
 import { Icon } from '@iconify/react';
@@ -51,10 +51,12 @@ export default function App() {
       </View>
       
       <View><View style={{flexDirection:'row', backgroundColor:'black'}}></View>
-      <Button style={styles.boton} color="#5654E1" borderRadius={'20rem'} title="Finalizar" onPress={handleSubmit}/>
+      <TouchableOpacity style={styles.boton} onPress={handleSubmit}>
+        <Text style={[{color: 'white', fontSize: '1rem',}]}>Finalizar</Text>
+      </TouchableOpacity>
       </View>
       
-      <View style={styles.botonAgregar}><Icon icon="zondicons:add-solid" width={'2.5rem'}/></View>
+      <View style={styles.botonAgregar}><Icon icon="zondicons:add-solid" width={'3rem'}/></View>
 
       <View style={styles.footer}>
         <View style={{flexDirection:'row', justifyContent: 'space-between'}}> 
@@ -121,10 +123,10 @@ const styles = StyleSheet.create({
     padding: '0.5rem',
     marginRight: '0.3rem',
     marginLeft: '0.3rem',
-    marginBottom: '0.3rem',
+    marginBottom: '0.5rem',
     minheight: '8rem',
-    minWidth: '40%',
-    padding: '0.5rem',
+    minWidth: '10rem',
+    padding: '0.3rem',
     backgroundColor: '#ECECEC',
     borderColor: '#ECECEC',
     shadowColor: "#C4C4C4",
@@ -143,7 +145,13 @@ const styles = StyleSheet.create({
     fontSize: '0.8rem'
   },
   boton: {
-    backgroundColor:"#5654E1", borderTopLeftRadius:20, borderBottomRightRadius:20, borderBottomLeftRadius:20, borderTopRightRadius:20
+    minHeight: '3rem',
+    minWidth: '10rem',
+    backgroundColor:"#5654E1",
+    borderRadius: 15,
+    padding: 10,
+    textAlign: 'center',
+    justifyContent: 'center',
   }, 
   cuarounico: {
     flex: 0.3,
@@ -151,7 +159,7 @@ const styles = StyleSheet.create({
     marginRight: '0.3rem',
     marginLeft: '0.3rem',
     marginTop: '1.5rem ',
-    height: '10rem',
+    height: '5rem',
     minWidth: '21rem',
     borderRadius: 20,
     backgroundColor: '#ECECEC',
@@ -180,7 +188,7 @@ const styles = StyleSheet.create({
   },
   info: {
     maxWidth: '360px',
-    margin: '40px auto 0',
+    margin: '40px',
     textAlign: 'center',
     fontSize: '16px',
   },
