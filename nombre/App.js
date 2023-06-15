@@ -17,6 +17,7 @@ export default function App() {
   const loadFonts = async () => {
     await Font.loadAsync({
       'alata': require('./assets/fonts/Alata/Alata.ttf'),
+      'inter': require('./assets/fonts/Inter/Inter.ttf'),
     });
     setFontsLoaded(true);
   }
@@ -67,7 +68,7 @@ export default function App() {
       
       <View><View style={{flexDirection:'row', backgroundColor:'black'}}></View>
       <TouchableOpacity style={styles.boton} onPress={handleSubmit}>
-        <Text style={[{color: 'white', fontSize: '1rem',}]}>Finalizar</Text>
+        <Text style={[{color: 'white', fontSize: '1rem', fontFamily: 'inter'}]}>Finalizar</Text>
       </TouchableOpacity>
       </View>
       
@@ -109,6 +110,7 @@ const styles = StyleSheet.create({
     fontSize: '1.5rem',
     marginTop: '3rem',
     marginBottom: '5rem',
+    fontFamily: 'alata',
   },
   subtitulo: {
     fontSize: '1.2rem',
@@ -118,6 +120,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     fontWeight: 'bold',
+    fontFamily: 'inter',
     color: '#5654E1'
   },
   texto:{
@@ -145,6 +148,7 @@ const styles = StyleSheet.create({
     padding: '0.3rem',
     backgroundColor: '#ECECEC',
     borderColor: '#ECECEC',
+    fontFamily: 'alata',
     shadowColor: "#C4C4C4",
         shadowOffset: {
           width: 2,
