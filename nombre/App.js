@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    fontFamily: 'alata',
+    
   },
   botonAgregar:{
     width: '100%',
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     fontWeight: 'bold',
-    fontFamily: 'inter',
+    fontFamily: 'alata',
     color: '#5654E1'
   },
   texto:{
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     fontFamily:"Alata"
   },
   inter: {
-    fontFamily:"Inter",
+    fontFamily:"inter",
     fontSize: '0.8rem'
   },
   boton: {
