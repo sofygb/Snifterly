@@ -3,9 +3,24 @@ import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity} 
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import {HomeFilled} from '@ant-design/icons';
 import { Icon } from '@iconify/react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import * as Font from 'expo-font';
 
 export default function App() {
+  const[fontsLoaded, setFontsLoaded] = useState(false);
+  useEffect(() => {
+    if(!fontsLoaded){
+      loadFonts();
+    }
+  })
+
+  const loadFonts = async () => {
+    await Font.loadAsync({
+      'alata': require('./assets/fonts/Alata/Alata.ttf'),
+    });
+    setFontsLoaded(true);
+  }
+
   const [variable, setvarible] = useState(3)
   const handleSubmit = (e) => {
     setvarible((e) => 0)
@@ -74,7 +89,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    
+    fontFamily: 'alata',
   },
   botonAgregar:{
     width: '100%',
@@ -110,6 +125,7 @@ const styles = StyleSheet.create({
     marginRight: '1rem',
     fontSize: '0.8rem',
     color: '#4B4B4B',
+    fontFamily: 'alata',
   },
   textodos:{
     fontWeight: 'bold',
