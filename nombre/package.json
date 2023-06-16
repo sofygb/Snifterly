@@ -20,6 +20,7 @@
     "expo-status-bar": "~1.4.4",
     "install": "^0.13.0",
     "react": "18.2.0",
+    "react-circle-progress-bar": "^0.1.4",
     "react-countdown-circle-timer": "^3.2.1",
     "react-dom": "^18.2.0",
     "react-native": "0.71.8",

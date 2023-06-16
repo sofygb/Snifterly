@@ -1,6 +1,6 @@
 //La carpeta screens sirve para especificar las pantallas de la aplicación
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity} from 'react-native';
+import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity, FlatList } from 'react-native';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import {HomeFilled} from '@ant-design/icons';
 import { Icon } from '@iconify/react';
@@ -8,14 +8,18 @@ import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import SemiCircleProgress from '../components/SemiCircleProgress.js';
 import { getJornada } from '../api';
+import Progress from 'react-circle-progress-bar'
 
 export default function Home({ navigation }) {
+
+  const [tiempo, setTiempo] = useState(30)
     
   //conexión al backend
   const [jornada, setJornada] = useState([])
 
   const loadJornada = async () => {
     const data = await getJornada()
+    console.log(data)
     setJornada([data])
   }
 
@@ -24,6 +28,7 @@ export default function Home({ navigation }) {
         if(!fontsLoaded){
         loadFonts();
         }
+        loadJornada()
     })
 
   const loadFonts = async () => {
@@ -37,11 +42,19 @@ export default function Home({ navigation }) {
   const [variable, setvarible] = useState(3)
   const handleSubmit = (e) => {
     setvarible((e) => 0)
+    setTiempo((e => 0))
   }
 
   return(
-
     <View style={styles.container}>
+      <FlatList
+        data={jornada}
+        renderItem={(item) => {
+          console.log(item)
+          return <Text>Hello World</Text>
+        }}
+      />
+
       <Text style={styles.titulo}>Snifterly</Text>
 
       <View style={[styles.espacioCuadros, {marginBottom: '1rem'}]}>
@@ -61,7 +74,7 @@ export default function Home({ navigation }) {
           </View>
       </View>
 
-      <View style={[styles.espacioCuadros, {marginBottom: '1rem'}]}>
+      <View style={[styles.espacioCuadros]}>
           <View style={styles.cuadro}>
             <View style={{flexDirection: 'row', marginLeft: '1rem',}}>
               <Text style={[styles.medicion, {fontSize: '2.5rem'}]}>{variable}</Text>
@@ -79,24 +92,24 @@ export default function Home({ navigation }) {
       </View>
 
       <View style={{display: 'flex', alignItems: 'center'}}>
-        <View style={[styles.cuadroDelCronometro, {marginBottom: '2rem'}]}>
-        {/* <SemiCircleProgress
-            percentage={35}
-            progressColor={"green"}>
-            <Text style={{ fontSize: 32, color: "green" }}>35%</Text>
-        </SemiCircleProgress> */}
-          <Text style={[styles.texto, {fontWeight: 'bold', fontSize: '0.8rem', textAlign: 'center',}]}>te falta para alcanzar </Text> 
+        <View style={[styles.cuadroDelCronometro, {marginBottom: '1rem'}]}>
+        <View style={{display: 'flex', alignItems: 'center'}}>
+          <CountdownCircleTimer isPlaying duration={tiempo} colors={['#5654E1', '#5A58E2', '#5160E3', '#5767E4']} colorsTime={[7, 5, 2, 0]} size={130}>
+            {({ remainingTime }) => remainingTime}
+          </CountdownCircleTimer>
+        </View>
+        <Text style={[styles.texto, {fontWeight: 'bold', fontSize: '0.8rem', textAlign: 'center',}]}>te falta para alcanzar </Text> 
           <Text style={[styles.texto, {fontWeight: 'bold', fontSize: '0.8rem', textAlign: 'center',}]}>alcohol 0 en sangre</Text>
         </View>
       </View>
 
-      <View style={{marginBottom: '3rem', display: 'flex', alignItems: 'center', marginBottom: '3rem'}}>
+      <View style={{ display: 'flex', alignItems: 'center'}}>
         <TouchableOpacity style={styles.botonFinalizar} onPress={handleSubmit}>
           <Text style={[{color: 'white', fontSize: '1rem'}]}>Finalizar</Text>
         </TouchableOpacity>
       </View>
 
-      <View style={[styles.botonAgregar, {flex: 2, display: 'flex', justifyContent: 'flex-end'}]}><Icon icon="zondicons:add-solid" width={'3rem'}/></View>
+      <View style={[styles.botonAgregar, {flex: 2, display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem'}]}><Icon icon="zondicons:add-solid" width={'3rem'}/></View>
 
       <View style={styles.footer}>
         <View style={{flexDirection:'row', justifyContent: 'space-between'}}> 
@@ -106,14 +119,14 @@ export default function Home({ navigation }) {
         </View>
       </View>
 
+      {/*Después hacemos que sea el icon y no un boton*/}
+      <View>
+      <TouchableOpacity style={styles.botonFinalizar} onPress = { () => {navigation.navigate('IngresoDeDatos')}}>
+          <Text style={[{color: 'white', fontSize: '1rem', fontFamily: 'inter'}]}>Ir a agregar medición</Text>
+      </TouchableOpacity>
     </View>
 
-    // <View>
-    //   <TouchableOpacity style={styles.boton} onPress = { () => {navigation.navigate('IngresoDeDatos')}}>
-    //       <Text style={[{color: 'white', fontSize: '1rem', fontFamily: 'inter'}]}>Finalizar</Text>
-    //   </TouchableOpacity>
-    //   <Text>{variable}</Text>
-    // </View>
+    </View>
   )
 }
 
