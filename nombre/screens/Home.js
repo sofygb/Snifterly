@@ -8,20 +8,20 @@ import * as Font from 'expo-font';
 import SemiCircleProgress from '../components/SemiCircleProgress.js';
 
 export default function Home({ navigation }) {
-    // const[fontsLoaded, setFontsLoaded] = useState(false);
-    // useEffect(() => {
-    //     if(!fontsLoaded){
-    //     loadFonts();
-    //     }
-    // })
+    const[fontsLoaded, setFontsLoaded] = useState(false);
+    useEffect(() => {
+        if(!fontsLoaded){
+        loadFonts();
+        }
+    })
 
-  // const loadFonts = async () => {
-  //   await Font.loadAsync({
-  //     'alata': require('../assets/fonts/Alata/Alata.ttf'),
-  //     'inter': require('../assets/fonts/Inter/Inter.ttf'),
-  //   });
-  //   setFontsLoaded(true);
-  // }
+  const loadFonts = async () => {
+    await Font.loadAsync({
+      'alata': require('../assets/fonts/Alata/Alata.ttf'),
+      'inter': require('../assets/fonts/Inter/Inter.ttf'),
+    });
+    setFontsLoaded(true);
+  }
 
   const [variable, setvarible] = useState(3)
   const handleSubmit = (e) => {
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     container: {
       display: 'flex',
       flex: 1,
-      // fontFamily: 'Alata',
+      fontFamily: 'Alata',
     },
     titulo: {
       display: 'flex',
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
       fontSize: '1.5rem',
       marginTop: '3rem',
       marginBottom: '3rem',
-      // fontFamily: 'alata',
+      fontFamily: 'alata',
     },
     cuadroDelCronometro: {
       display: 'flex',
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
       borderRadius: 20,
       backgroundColor: '#ECECEC',
       borderColor: '#ECECEC',
-      // fontFamily: 'alata',
+      fontFamily: 'alata',
       shadowColor: "#C4C4C4",
           shadowOffset: {
             width: 2,
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
       padding: '0.3rem',
       backgroundColor: '#ECECEC',
       borderColor: '#ECECEC',
-      // fontFamily: 'alata',
+      fontFamily: 'alata',
       shadowColor: "#C1C0C0",
           shadowOffset: {
             width: 2,
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     medicion: {
       fontSize: '1.2rem',
       fontWeight: 'bold',
-      // fontFamily: 'alata',
+      fontFamily: 'alata',
       color: '#5654E1',
     },
     texto:{
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
       marginRight: '1rem',
       fontSize: '0.8rem',
       color: '#4B4B4B',
-      // fontFamily: 'alata',
+      fontFamily: 'alata',
     },
     botonFinalizar: {
       flex: 1,
