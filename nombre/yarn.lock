@@ -1896,6 +1896,14 @@
     prompts "^2.4.0"
     semver "^6.3.0"
 
+"@react-native-material/core@^1.3.7":
+  version "1.3.7"
+  resolved "https://registry.npmjs.org/@react-native-material/core/-/core-1.3.7.tgz"
+  integrity sha512-N5d/zKrmL3+fVyWsc/jFRxsDl59N5t3tYx9RlxhV04tQlcFKo9UlyBqCWDZFlxrkLrq3JY5zTRCMJAM3yvOz5w==
+  dependencies:
+    chroma-js "^2.4.2"
+    react-native-flex-layout "^0.1.5"
+
 "@react-native/assets@1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@react-native/assets/-/assets-1.0.0.tgz"
@@ -3156,6 +3164,11 @@ chownr@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/chownr/-/chownr-2.0.0.tgz"
   integrity sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==
+
+chroma-js@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.npmjs.org/chroma-js/-/chroma-js-2.4.2.tgz"
+  integrity sha512-U9eDw6+wt7V8z5NncY2jJfZa+hUH8XEj8FQHgFJTrUFnJfXYf4Ml4adI2vXZOjqRDpFWtYVWypDfZwnJ+HIR4A==
 
 chrome-trace-event@^1.0.2:
   version "1.0.3"
@@ -7388,6 +7401,11 @@ react-native-config@^1.5.1:
   version "1.5.1"
   resolved "https://registry.npmjs.org/react-native-config/-/react-native-config-1.5.1.tgz"
   integrity sha512-g1xNgt1tV95FCX+iWz6YJonxXkQX0GdD3fB8xQtR1GUBEqweB9zMROW77gi2TygmYmUkBI7LU4pES+zcTyK4HA==
+
+react-native-flex-layout@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.npmjs.org/react-native-flex-layout/-/react-native-flex-layout-0.1.5.tgz"
+  integrity sha512-DrLir5Wl0RhgJXHeDBSaa1Y1LdpNuoz0PEe5E1T1+xVWt2DAz/r+1N8bnhtVkTKJE6WrH6jIH2hoe8kogR0X+w==
 
 react-native-gradle-plugin@^0.71.18:
   version "0.71.18"
