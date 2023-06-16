@@ -6,7 +6,6 @@ import {HomeFilled} from '@ant-design/icons';
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
-import SemiCircleProgress from '../components/SemiCircleProgress.js';
 import { getJornada } from '../api';
 import Progress from 'react-circle-progress-bar'
 
@@ -109,22 +108,23 @@ export default function Home({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <View style={[styles.botonAgregar, {flex: 2, display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem'}]}><Icon icon="zondicons:add-solid" width={'3rem'}/></View>
+      <View style={[styles.botonAgregar, {flex: 2, display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem'}]}>
+        <TouchableOpacity onPress = { () => {navigation.navigate('IngresoDeDatos')}}>
+          <Icon icon="zondicons:add-solid" width={'3rem'}/>
+        </TouchableOpacity>
+      </View>
 
       <View style={styles.footer}>
-        <View style={{flexDirection:'row', justifyContent: 'space-between'}}> 
-          <Icon icon="material-symbols:home"  width={'2.5rem'}/>
-          <Icon icon="zondicons:calendar" width={'2.3rem'}/>
+        <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
+          <TouchableOpacity onPress = { () => {navigation.navigate('Home')}}>
+            <Icon icon="material-symbols:home"  width={'2.5rem'}/>
+          </TouchableOpacity>
+          <TouchableOpacity onPress = { () => {navigation.navigate('Historial')}}>
+            <Icon icon="zondicons:calendar" width={'2.3rem'}/>
+          </TouchableOpacity>
           <Icon icon="mdi:account" width={'2.5rem'}/>
         </View>
       </View>
-
-      {/*Después hacemos que sea el icon y no un boton*/}
-      <View>
-      <TouchableOpacity style={styles.botonFinalizar} onPress = { () => {navigation.navigate('IngresoDeDatos')}}>
-          <Text style={[{color: 'white', fontSize: '1rem', fontFamily: 'inter'}]}>Ir a agregar medición</Text>
-      </TouchableOpacity>
-    </View>
 
     </View>
   )
