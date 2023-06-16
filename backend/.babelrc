@@ -1,0 +1,7 @@
+//Archivo de configuración. Una vez instalado babel, con este archivo podemos especificar lo que queremos hacer con él.
+{
+    "presets": [
+        "@babel/preset-env" //Lee el código y luego va a convertirlo (de una versión de java a otra, por ejemplo)
+    ]
+}
+//en package.json creas tu propio comando llamdo build y dev

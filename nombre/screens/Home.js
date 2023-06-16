@@ -1,3 +1,4 @@
+//La carpeta screens sirve para especificar las pantallas de la aplicación
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity} from 'react-native';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
@@ -6,9 +7,19 @@ import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import SemiCircleProgress from '../components/SemiCircleProgress.js';
+import { getJornada } from '../api';
 
 export default function Home({ navigation }) {
-    const[fontsLoaded, setFontsLoaded] = useState(false);
+    
+  //conexión al backend
+  const [jornada, setJornada] = useState([])
+
+  const loadJornada = async () => {
+    const data = await getJornada()
+    setJornada([data])
+  }
+
+  const[fontsLoaded, setFontsLoaded] = useState(false);
     useEffect(() => {
         if(!fontsLoaded){
         loadFonts();
