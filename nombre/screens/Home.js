@@ -103,7 +103,7 @@ export default function Home({ navigation }) {
       </View>
 
       <View style={{ display: 'flex', alignItems: 'center'}}>
-        <TouchableOpacity style={styles.botonFinalizar} onPress={handleSubmit}>
+        <TouchableOpacity style={styles.botonFinalizar} onPress = { () => {navigation.navigate('SalirJornada')}}>
           <Text style={[{color: 'white', fontSize: '1rem'}]}>Finalizar</Text>
         </TouchableOpacity>
       </View>

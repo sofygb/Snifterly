@@ -5,6 +5,8 @@ import { View, Text } from 'react-native'
 import Historial from '../screens/Historial.js'
 import Home from '../screens/Home.js'
 import IngresoDeDatos from '../screens/IngresoDeDatos.js'
+import SalirJornada from '../screens/SalirJornada.js'
+import PrimeraHome from '../screens/PrimeraHome.js'
 
 const Stack = createNativeStackNavigator()
 
@@ -23,6 +25,14 @@ const MainStack = () => {
                 <Stack.Screen
                 name= 'Historial'
                 component={ Historial }
+                />
+                <Stack.Screen
+                name= 'SalirJornada'
+                component={ SalirJornada }
+                />
+                <Stack.Screen
+                name= 'PrimeraHome'
+                component={ PrimeraHome }
                 />
             </Stack.Navigator>
         </NavigationContainer>
