@@ -7,7 +7,7 @@ import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 
-export default function Historial({ navigation }) {
+export default function Usuario({ navigation }) {
     const loadJornada = async () => {
         const data = await getJornada()
         console.log(data)
@@ -31,7 +31,7 @@ export default function Historial({ navigation }) {
     return (
         <View>
 
-            <Text style={styles.titulo}>Tu actividad en la última semana</Text>
+            <Text style={styles.titulo}>Pantalla de perfil</Text>
 
             <View style={styles.footer}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -41,7 +41,7 @@ export default function Historial({ navigation }) {
                     <TouchableOpacity onPress={() => { navigation.navigate('Historial') }}>
                         <Icon icon="zondicons:calendar" width={'2.3rem'} />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => { navigation.navigate('Usuario') }}>
+                    <TouchableOpacity onPress={() => { navigation.navigate('Perfil') }}>
                         <Icon icon="mdi:account" width={'2.5rem'}/>
                     </TouchableOpacity>
                 </View>

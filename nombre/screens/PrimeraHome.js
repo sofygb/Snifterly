@@ -45,7 +45,9 @@ export default function PrimeraHome({ navigation }) {
                     <TouchableOpacity onPress={() => { navigation.navigate('Historial') }}>
                         <Icon icon="zondicons:calendar" width={'2.3rem'} color="white" />
                     </TouchableOpacity>
-                    <Icon icon="mdi:account" width={'2.5rem'} color="white" />
+                    <TouchableOpacity onPress={() => { navigation.navigate('Usuario') }}>
+                        <Icon icon="mdi:account" width={'2.5rem'} color="white" />
+                    </TouchableOpacity>
                 </View>
             </View>
 

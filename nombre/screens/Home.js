@@ -62,14 +62,14 @@ export default function Home({ navigation }) {
               <Text style={[styles.medicion, {fontSize: '2.5rem'}]}>{variable}</Text>
               <Text style={styles.medicion}> veces</Text> 
             </View>
-            <Text style={styles.texto}>has ingresado mediciones</Text>
+            <Text style={styles.texto}>has usado el dispositivo de medición</Text>
           </View>
           <View style={styles.cuadro}>
             <View style={{flexDirection: 'row', marginLeft: '1rem'}}>
               <Text style={[styles.medicion, {fontSize: '2.5rem'}]}>{variable}</Text>
-              <Text style={styles.medicion}> mg/l</Text>
+              <Text style={styles.medicion}> dg/l</Text>
             </View>
-            <Text style={styles.texto}>has ingresado mediciones</Text>
+            <Text style={styles.texto}>es tu promedio de alcohol en sangre</Text>
           </View>
       </View>
 
@@ -77,16 +77,16 @@ export default function Home({ navigation }) {
           <View style={styles.cuadro}>
             <View style={{flexDirection: 'row', marginLeft: '1rem',}}>
               <Text style={[styles.medicion, {fontSize: '2.5rem'}]}>{variable}</Text>
-              <Text style={styles.medicion}> veces</Text> 
+              <Text style={styles.medicion}> tiempo</Text> 
             </View>
-            <Text style={styles.texto}>has ingresado mediciones</Text>
+            <Text style={styles.texto}>es la longitud actual de tu jornada</Text>
           </View>
           <View style={styles.cuadro}>
             <View style={{flexDirection: 'row', marginLeft: '1rem'}}>
               <Text style={[styles.medicion, {fontSize: '2.5rem'}]}>{variable}</Text>
               <Text style={styles.medicion}> mg/l</Text>
             </View>
-            <Text style={styles.texto}>has ingresado mediciones</Text>
+            <Text style={styles.texto}>es tu límite de akcohol en sangre</Text>
           </View>
       </View>
 
@@ -122,7 +122,9 @@ export default function Home({ navigation }) {
           <TouchableOpacity onPress = { () => {navigation.navigate('Historial')}}>
             <Icon icon="zondicons:calendar" width={'2.3rem'}/>
           </TouchableOpacity>
-          <Icon icon="mdi:account" width={'2.5rem'}/>
+          <TouchableOpacity onPress={() => { navigation.navigate('Usuario') }}>
+            <Icon icon="mdi:account" width={'2.5rem'}/>
+          </TouchableOpacity>
         </View>
       </View>
 

@@ -7,6 +7,7 @@ import Home from '../screens/Home.js'
 import IngresoDeDatos from '../screens/IngresoDeDatos.js'
 import SalirJornada from '../screens/SalirJornada.js'
 import PrimeraHome from '../screens/PrimeraHome.js'
+import Usuario from '../screens/Usuario.js'
 
 const Stack = createNativeStackNavigator()
 
@@ -33,6 +34,10 @@ const MainStack = () => {
                 <Stack.Screen
                 name= 'PrimeraHome'
                 component={ PrimeraHome }
+                />
+                <Stack.Screen
+                name= 'Usuario'
+                component={ Usuario }
                 />
             </Stack.Navigator>
         </NavigationContainer>
