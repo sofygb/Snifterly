@@ -108,12 +108,6 @@ export default function Home({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <View style={{ display: 'flex', alignItems: 'center'}}>
-        <TouchableOpacity style={styles.botonFinalizar} onPress = { () => {navigation.navigate('InicioSesion')}}>
-          <Text style={[{color: 'white', fontSize: '1rem'}]}>Ir a inicio sesion</Text>
-        </TouchableOpacity>
-      </View>
-
       <View style={[styles.botonAgregar, {flex: 2, display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem'}]}>
         <TouchableOpacity onPress = { () => {navigation.navigate('IngresoDeDatos')}}>
           <Icon icon="zondicons:add-solid" width={'3rem'}/>
