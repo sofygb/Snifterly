@@ -1,1 +1,3 @@
 # Snifterly
+
+LA CARPETA "NOMBRE" NO DEBERÍA ESTAR
