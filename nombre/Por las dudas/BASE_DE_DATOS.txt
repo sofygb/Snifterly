@@ -1,5 +1,0 @@
-
-INSERT into Usuario VALUES (1, N'Matheo', CAST(N'2006-02-07' AS Date), 54, 1.79, N'sdif@gmail.com', N'Matheo', CAST(N'2023-05-12T00:00:00.000' AS DateTime), NULL)
-, (4, N'SofiB', CAST(N'2005-11-16' AS Date), 50, 1.66, N'sofia@gmail.com', N'SofiB', CAST(N'2021-01-05T00:00:00.000' AS DateTime), NULL)
-, (5, N'Cami', CAST(N'2006-06-29' AS Date), 46, 1.57, N'cami@gmail.com', N'Cami', CAST(N'2018-11-28T00:00:00.000' AS DateTime), NULL)
-, (8, N'SofiC', CAST(N'2005-09-05' AS Date), 51, 171, N'sofi@gmail.com', N'SofiC', CAST(N'2022-04-12T00:00:00.000' AS DateTime), NULL)
