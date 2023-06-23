@@ -32,9 +32,9 @@ export default function PrimeraHome({ navigation }) {
 
             <View style={styles.botonAgregar}>
                 <TouchableOpacity onPress={() => { navigation.navigate('IngresoDeDatos') }}>
-                    <Icon icon="zondicons:add-solid" color="white" width={'10rem'} />
+                    <Icon icon="icon-park-solid:add-one" color="white" width={'9rem'} />
                 </TouchableOpacity>
-                <Text style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', fontFamily: 'Alata' }}>nueva jornada</Text>
+                <Text style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', fontFamily: 'Alata', marginTop: '1rem' }}>nueva jornada</Text>
             </View>
 
             <View style={styles.footer}>
@@ -88,5 +88,6 @@ const styles = StyleSheet.create({
         flex: 1,
         display: 'flex',
         justifyContent: 'center',
+        alignItems: 'center',
     }
 });

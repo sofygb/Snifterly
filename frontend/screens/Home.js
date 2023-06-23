@@ -64,7 +64,7 @@ export default function Home({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <FlatList
+       <FlatList
         data={jornada}
         renderItem={({ item }) => {
           return (

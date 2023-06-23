@@ -44,7 +44,7 @@ export default function IngresoDeDatos({ navigation }) {
         />
 
         <View style={[styles.espaciosBotones, { flexDirection: 'row', display: 'flex', alignItems: 'center' }]}>
-          <TouchableOpacity style={styles.botonAceptar} onPress={() => { navigation.navigate('Home') }}>
+          <TouchableOpacity style={styles.botonAceptar} onPress={() => { navigation.navigate('EstadoUsuario') }}>
             <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Aceptar</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.botonCancelar} onPress={() => { navigation.navigate('Home') }}>
