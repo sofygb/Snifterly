@@ -12,10 +12,10 @@ process.env.DATABASE || 'SnifterlyDB'
 */
 
 export const config = {
-    host        : process.env.SERVER ,
-    user        : process.env.USER,
-    password    : process.env.PASSWORD ,
-    database    : process.env.DATABASE ,
+    host        : 'localhost' ,
+    user        : 'root',
+    password    : '' ,
+    database    : 'SnifterlyDB' ,
 }
 
 //localhost:3000/docs

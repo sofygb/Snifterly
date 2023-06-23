@@ -1,8 +1,8 @@
 //sirve para hacer peticiones como postman. PARA QUE FUNCIONE, INSTALAR LA EXTENSIÓN REST CLIENT
-@api = http://localhost:3000/usuarios
-@api2 = http://localhost:3000/mediciones
-@api3 = http://localhost:3000/jornadas
-@def = http://localhost:3000/def
+@api = http://localhost:3001/usuarios
+@api2 = http://localhost:3001/mediciones
+@api3 = http://localhost:3001/jornadas
+@def = http://localhost:3001/def
 GET {{api}}
 ### Para separar peticiones escribimos triple numeral
 GET {{api3}}
