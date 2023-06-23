@@ -41,12 +41,12 @@ export default function InicioSesion({ navigation }) {
             <TextInput variant="outlined" label="Contraseña" style={{ margin: 16 }} value={textdos} onChangeText={textdos => setTextdos(textdos)}/>
 
             <TouchableOpacity style={styles.botonContrasena}>
-                <Text style={[{ color: 'blue', fontSize: '1rem', fontFamily: 'inter', textAlign: 'right', marginRight: '1rem'}]}>¿Te olvidaste la contraseña?</Text>
+                <Text style={[{ color: '#0D4CEF', fontSize: '0.8rem', fontFamily: 'inter', textAlign: 'right', marginRight: '1rem'}]}>¿Te olvidaste la contraseña?</Text>
             </TouchableOpacity>
 
             <View style={styles.espacioBotonLogin}>
                 <TouchableOpacity style={styles.botonLogin} onPress={() => { navigation.navigate('PrimeraHome') }}>
-                    <Text style={[{ color: 'white', fontSize: '1.5rem', fontFamily: 'inter' }]}>Log in</Text>
+                    <Text style={[{ color: 'white', fontSize: '1.2rem', fontFamily: 'inter' }]}>Log in</Text>
                 </TouchableOpacity>
             </View>
 
@@ -89,16 +89,9 @@ const styles = StyleSheet.create({
     titulo: {
         fontSize: '2rem',
         textAlign: 'center',
-        margin: '1rem'
-    },
-    footer: {
-        flex: 1,
-        display: 'flex',
-        justifyContent: 'flex-end',
-        marginBottom: '1rem',
-        width: '100%',
-        paddingLeft: '2rem',
-        paddingRight: '2rem',
+        margin: '1rem',
+        marginLeft: '1.5rem',
+        marginRight: '1.5rem',
     },
     imagen: {
         width: '80%',
