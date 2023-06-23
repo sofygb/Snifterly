@@ -33,14 +33,16 @@ export default function CompletarDatos({ navigation }) {
             
             <Text style={styles.titulo}>Te damos la bienvenida a Snifterly!</Text>
             <Text style={styles.texto}>SIGN UP</Text>
+
             <TextInput variant="outlined" label="nombre" style={{ margin: 16 }} />
             <TextInput variant="outlined" label="peso" style={{ margin: 16 }} />
             <TextInput variant="outlined" label="altura" style={{ margin: 16 }} />
-            <TouchableOpacity style={styles.botonAceptar} onPress={() => { navigation.navigate('PrimeraHome') }}>
-                <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>OK</Text>
-            </TouchableOpacity>
-            <Icon icon="ri:google-fill" color="white" />
-            <Icon icon="ant-design:facebook-filled" color="white" />
+
+            <View style={styles.espacioBotonLogin}>
+                <TouchableOpacity style={styles.botonLogin} onPress={() => { navigation.navigate('PrimeraHome') }}>
+                    <Text style={[{ color: 'white', fontSize: '1.2rem', fontFamily: 'inter' }]}>OK</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }
@@ -93,6 +95,21 @@ const styles = StyleSheet.create({
         maxWidth: '5rem',
         backgroundColor: "#5654E1",
         borderRadius: 15,
+        padding: 10,
+    },
+    espacioBotonLogin: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    botonLogin: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '3rem',
+        minWidth: '20rem',
+        backgroundColor: "#5654E1",
+        borderRadius: 18,
         padding: 10,
     },
 });
