@@ -32,7 +32,7 @@ export default function SalirJornada({ navigation }) {
         <Text style={styles.textoPrincipal}>¿Desea seguir con la jornada?</Text>
       </View>
 
-      <View style={[styles.espaciosBotones, { flez: 1, flexDirection: 'row', display: 'flex', alignItems: 'flex-start' }]}>
+      <View style={[styles.espaciosBotones, {flexDirection: 'row', display: 'flex', alignItems: 'flex-start' }]}>
         <TouchableOpacity style={styles.botonAceptar} onPress={() => { navigation.navigate('Home') }}>
           <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Seguir</Text>
         </TouchableOpacity>

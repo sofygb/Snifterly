@@ -36,7 +36,7 @@ export default function CompletarDatos({ navigation }) {
             <TextInput variant="outlined" label="nombre" style={{ margin: 16 }} />
             <TextInput variant="outlined" label="peso" style={{ margin: 16 }} />
             <TextInput variant="outlined" label="altura" style={{ margin: 16 }} />
-            <TouchableOpacity style={styles.botonAceptar} onPress={() => { navigation.navigate('CompletarDatos') }}>
+            <TouchableOpacity style={styles.botonAceptar} onPress={() => { navigation.navigate('PrimeraHome') }}>
                 <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>OK</Text>
             </TouchableOpacity>
             <Icon icon="ri:google-fill" color="white" />
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         maxHeight: '3rem',
-        minWidth: '8rem',
+        maxWidth: '5rem',
         backgroundColor: "#5654E1",
         borderRadius: 15,
         padding: 10,
