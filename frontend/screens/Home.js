@@ -46,13 +46,6 @@ export default function Home({ navigation }) {
 
   return(
     <View style={styles.container}>
-      <FlatList
-        data={jornada}
-        renderItem={(item) => {
-          console.log(item)
-          return <Text>Hello World</Text>
-        }}
-      />
 
       <Text style={styles.titulo}>Snifterly</Text>
 

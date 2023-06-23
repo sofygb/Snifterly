@@ -1,13 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity, InputAccessoryView, ScrollView } from 'react-native';
-import { TextInput } from "@react-native-material/core";
-import { CountdownCircleTimer } from 'react-countdown-circle-timer';
-import { HomeFilled } from '@ant-design/icons';
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
+import {Calendar, LocaleConfig} from 'react-native-calendars';
 
 export default function Historial({ navigation }) {
+    const [selected, setSelected] = useState('');
     const loadJornada = async () => {
         const data = await getJornada()
         console.log(data)
@@ -32,6 +31,15 @@ export default function Historial({ navigation }) {
         <View>
 
             <Text style={styles.titulo}>Tu actividad en la última semana</Text>
+
+            <Calendar
+            onDayPress={day => {
+                setSelected(day.dateString);
+            }}
+            markedDates={{
+                [selected]: {selected: true, disableTouchEvent: true, selectedDotColor: 'orange'}
+            }}
+            />
 
             <View style={styles.footer}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
