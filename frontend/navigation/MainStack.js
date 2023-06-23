@@ -11,6 +11,7 @@ import Usuario from '../screens/Usuario.js'
 import InicioSesion from '../screens/InicioSesion.js'
 import CrearCuenta from '../screens/CrearCuenta.js'
 import CompletarDatos from '../screens/CompletarDatos.js'
+import EstadoUsuario from '../screens/EstadoUsuario.js'
 
 const Stack = createNativeStackNavigator()
 
@@ -53,6 +54,10 @@ const MainStack = () => {
                 <Stack.Screen
                 name= 'Usuario'
                 component={ Usuario }
+                />
+                <Stack.Screen
+                name= 'EstadoUsuario'
+                component={ EstadoUsuario }
                 />
             </Stack.Navigator>
         </NavigationContainer>
