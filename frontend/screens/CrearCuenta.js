@@ -29,40 +29,40 @@ export default function CrearCuenta({ navigation }) {
         setFontsLoaded(true);
     }
     return (
-        <View>
+        <View style={styles.container}>
             
             <Image source={require('../assets/icon.png')} style={styles.imagen}/>
             
             <Text style={styles.titulo}>Te damos la bienvenida a Snifterly!</Text>
             <Text style={styles.texto}>SIGN UP</Text>
-            <TextInput variant="outlined" label="Mail" style={{ margin: 16 }} value={text} onChangeText={text => setText(text)}/>
-            <TextInput variant="outlined" label="Contraseña" style={{ margin: 16 }} value={textdos} onChangeText={textdos => setTextdos(textdos)}/>
+            <TextInput variant="outlined" label="Mail" style={{ margin: 14 }} value={text} onChangeText={text => setText(text)}/>
+            <TextInput variant="outlined" label="Contraseña" style={{ margin: 14 }} value={textdos} onChangeText={textdos => setTextdos(textdos)}/>
 
             <View style={styles.espacioBotonLogin}>
                 <TouchableOpacity style={styles.botonLogin} onPress={() => { navigation.navigate('CompletarDatos') }}>
-                    <Text style={[{ color: 'white', fontSize: '1.2rem', fontFamily: 'inter' }]}>SIGN UP</Text>
+                    <Text style={[{ color: 'white', fontSize: '1.2rem', fontFamily: 'inter' }]}>Sign up</Text>
                 </TouchableOpacity>
             </View>
 
-            <Text style={{textAlign: 'center', marginTop: '2rem', marginBottom: '1rem', marginLeft: '1rem', marginRight: '1rem', fontSize: '1.2rem'}}> ───────── Seguir con ─────────</Text>
+            <Text style={{textAlign: 'center', marginTop: '1.5rem', marginBottom: '1rem', marginLeft: '1rem', marginRight: '1rem', fontSize: '1.2rem'}}> ───────── Seguir con ─────────</Text>
 
             <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-around',paddingLeft: '1.5rem', paddingRight: '1.5rem',}}>
                 <TouchableOpacity style={{backgroundColor: '#40A2DA', minHeight: '3rem', minWidth: '10rem', borderRadius: 10, display: 'flex', justifyContent: 'center', }}>
                     <View style={{flexDirection: 'row', marginLeft: '0.3rem'}}>
                         <Icon icon="ri:google-fill" color="white" width={'2.3rem'}/>
-                        <Text style={{color: 'white', display: 'flex', alignItems: 'center'}}>Google</Text>
+                        <Text style={{color: 'white', display: 'flex', alignItems: 'center', fontSize: '0.9rem'}}>Google</Text>
                     </View>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={{backgroundColor: '#0F3A8D', minHeight: '3rem', minWidth: '10rem', borderRadius: 10, display: 'flex', justifyContent: 'center', }}>
                     <View style={{flexDirection: 'row', marginLeft: '0.3rem'}}>
                         <Icon icon="ant-design:facebook-filled" color="white" width={'2.3rem'}/>
-                        <Text style={{color: 'white', display: 'flex', alignItems: 'center'}}>Facebook</Text>
+                        <Text style={{color: 'white', display: 'flex', alignItems: 'center', fontSize: '0.9rem'}}>Facebook</Text>
                     </View>
                 </TouchableOpacity>
             </View>
         
-            <View style={{flexDirection: 'row', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', marginTop: '3rem'}}>
+            <View style={{flexDirection: 'row', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', marginTop: '2rem'}}>
                 <Text style={{fontSize: '1rem', fontFamily: 'inter' }}>¿Ya tienes una cuenta? </Text>
                 <TouchableOpacity onPress={() => { navigation.navigate('InicioSesion') }}>
                     <Text style={{color: 'blue', fontSize: '1rem', fontFamily: 'inter'}}>Loguearse</Text>
@@ -76,8 +76,6 @@ export default function CrearCuenta({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     titulo: {
         fontSize: '2rem',
@@ -92,7 +90,7 @@ const styles = StyleSheet.create({
         resizeMode: "contain",
         display: 'flex',
         alignSelf: 'center',
-        marginTop: '4rem'
+        marginTop: '3rem'
     },
     texto: {
         textAlign: 'center',

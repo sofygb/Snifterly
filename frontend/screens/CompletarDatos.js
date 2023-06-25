@@ -27,7 +27,7 @@ export default function CompletarDatos({ navigation }) {
         setFontsLoaded(true);
     }
     return (
-        <View>
+        <View style={styles.container}>
             
             <Image source={require('../assets/icon.png')} style={styles.imagen}/>
             
@@ -40,7 +40,7 @@ export default function CompletarDatos({ navigation }) {
 
             <View style={styles.espacioBotonLogin}>
                 <TouchableOpacity style={styles.botonLogin} onPress={() => { navigation.navigate('PrimeraHome') }}>
-                    <Text style={[{ color: 'white', fontSize: '1.2rem', fontFamily: 'inter' }]}>OK</Text>
+                    <Text style={[{ color: 'white', fontSize: '1.2rem', fontFamily: 'inter' }]}>Ok</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -51,8 +51,6 @@ export default function CompletarDatos({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     titulo: {
         fontSize: '2rem',

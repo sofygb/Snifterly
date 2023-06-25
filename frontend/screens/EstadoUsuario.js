@@ -33,7 +33,7 @@ export default function EstadoUsuario({ navigation }) {
             <View style={{ flex: 6, display: 'flex', justifyContent: 'center' }}>
                 <Text style={styles.textoPrincipal}>¿Cómo te sentís?</Text>
 
-                <View style={[styles.espacioCuadros, { marginBottom: "1rem" }]}>
+                <View style={[styles.espacioCuadros]}>
                   <View style={styles.cuadro}>
                     <Image source={require('../assets/emojis/SmilingFacewithSunglasses.png')} style={styles.imagen}/>
                   </View>
@@ -41,7 +41,7 @@ export default function EstadoUsuario({ navigation }) {
                     <Image source={require('../assets/emojis/NeutralFace.png')} style={styles.imagen}/>
                   </View>
                 </View>
-                <View style={[styles.espacioCuadros, { marginBottom: "1rem" }]}>
+                <View style={[styles.espacioCuadros]}>
                   <View style={styles.cuadro}>
                     <Image source={require('../assets/emojis/FacewithSpiralEyes.png')} style={styles.imagen}/>
                   </View>
@@ -60,7 +60,7 @@ export default function EstadoUsuario({ navigation }) {
 
             <View style={styles.finalizarJornada}>
                 <TouchableOpacity style={styles.finalizarJornada} onPress={() => { navigation.navigate('SalirJornada') }}>
-                <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter' }]}>Finalizar jornada</Text>
+                  <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter', display:'flex', alignItems: 'center', justifyContent: 'center', }]}>Finalizar jornada</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -69,18 +69,6 @@ export default function EstadoUsuario({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    botonAceptar: {
-        display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      maxHeight: '3rem',
-      minWidth: '8rem',
-      backgroundColor: "#5654E1",
-      borderRadius: 15,
-      padding: 10,
     },
     botonCancelar: {
       display: 'flex',
@@ -109,24 +97,25 @@ const styles = StyleSheet.create({
       marginBottom: '1rem',
     },
     imagen: {
-      width: '30%',
-      height: '30%',
+      width: '40%',
+      height: '40%',
       resizeMode: "contain",
-      padding: '5rem',
+      padding: '4rem',
     },
     espacioCuadros: {
       display: "flex",
       width: "100%",
-      paddingLeft: "1.7rem",
-      paddingRight: "1.7rem",
+      paddingLeft: "1.3rem",
+      paddingRight: "1.3rem",
       flexDirection: "row",
-      justifyContent: "space-between",
+      justifyContent: 'space-around',
+      marginBottom: "1rem",
     },
     cuadro: {
       borderWidth: 2,
       borderRadius: 20,
-      minheight: "11rem",
-      minWidth: "10rem",
+      maxheight: "18rem",
+      maxWidth: "18rem",
       backgroundColor: "#ECECEC",
       borderColor: "#ECECEC",
       fontFamily: "alata",
