@@ -12,6 +12,7 @@ import InicioSesion from '../screens/InicioSesion.js'
 import CrearCuenta from '../screens/CrearCuenta.js'
 import CompletarDatos from '../screens/CompletarDatos.js'
 import EstadoUsuario from '../screens/EstadoUsuario.js'
+import Configuracion from '../screens/Configuracion.js'
 
 const Stack = createNativeStackNavigator()
 
@@ -20,8 +21,8 @@ const MainStack = () => {
         <NavigationContainer>
             <Stack.Navigator screenOptions={{headerShown: false,}}>
             <Stack.Screen
-                name= 'EstadoUsuario'
-                component={ EstadoUsuario }
+                name= 'Usuario'
+                component={ Usuario }
                 />
             <Stack.Screen
                 name= 'InicioSesion'
@@ -56,10 +57,13 @@ const MainStack = () => {
                 component={ PrimeraHome }
                 />
                 <Stack.Screen
-                name= 'Usuario'
-                component={ Usuario }
+                name= 'EstadoUsuario'
+                component={ EstadoUsuario }
                 />
-                
+                <Stack.Screen
+                name= 'Configuracion'
+                component={ Configuracion }
+                />
             </Stack.Navigator>
         </NavigationContainer>
     )

@@ -34,20 +34,20 @@ export default function EstadoUsuario({ navigation }) {
                 <Text style={styles.textoPrincipal}>¿Cómo te sentís?</Text>
 
                 <View style={[styles.espacioCuadros]}>
-                  <View style={styles.cuadro}>
+                  <TouchableOpacity style={styles.cuadro} onPress={() => { navigation.navigate('Home') }}>
                     <Image source={require('../assets/emojis/SmilingFacewithSunglasses.png')} style={styles.imagen}/>
-                  </View>
-                  <View style={styles.cuadro}>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.cuadro} onPress={() => { navigation.navigate('Home') }}>
                     <Image source={require('../assets/emojis/NeutralFace.png')} style={styles.imagen}/>
-                  </View>
+                  </TouchableOpacity>
                 </View>
-                <View style={[styles.espacioCuadros]}>
-                  <View style={styles.cuadro}>
+                <View style={[styles.espacioCuadros] }>
+                  <TouchableOpacity style={styles.cuadro} onPress={() => { navigation.navigate('Home') }}>
                     <Image source={require('../assets/emojis/FacewithSpiralEyes.png')} style={styles.imagen}/>
-                  </View>
-                  <View style={styles.cuadro}>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.cuadro} onPress={() => { navigation.navigate('Home') }}>
                     <Image source={require('../assets/emojis/FacewithCrossed-OutEyes.png')} style={styles.imagen}/>
-                  </View>
+                  </TouchableOpacity>
                 </View>
 
 

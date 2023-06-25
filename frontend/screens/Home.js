@@ -64,7 +64,7 @@ export default function Home({ navigation }) {
 
   return (
     <View style={styles.container}>
-       <FlatList
+      <FlatList
         data={jornada}
         renderItem={({ item }) => {
           return (
@@ -163,22 +163,8 @@ export default function Home({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <View
-        style={[
-          styles.botonAgregar,
-          {
-            flex: 2,
-            display: "flex",
-            justifyContent: "flex-end",
-            marginBottom: "1rem",
-          },
-        ]}
-      >
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("IngresoDeDatos");
-          }}
-        >
+      <View style={[styles.botonAgregar, { flex: 2,display: "flex",justifyContent: "flex-end",marginBottom: "1rem",},]}>
+        <TouchableOpacity onPress={() => {navigation.navigate("IngresoDeDatos");}}>
           <Icon icon="zondicons:add-solid" width={"3rem"} />
         </TouchableOpacity>
       </View>
