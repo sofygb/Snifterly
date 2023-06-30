@@ -47,6 +47,33 @@ export const getUsuariosCount = async (req, res) => {
 
     console.log(rows[0]["COUNT(*)"])
 }
+export const getAvgMedicionesByIdJornada = async (req, res) => {
+    const connection = await connect()
+    const [rows] = await connection.query("SELECT TRUNCATE(AVG(grado), 2) FROM medicion WHERE idJornada = ?", [
+        req.params.idJornada,
+    ])
+    res.json(rows[0]["TRUNCATE(AVG(grado), 2)"])
+
+    console.log(rows[0]["TRUNCATE(AVG(grado), 2)"])
+}
+export const getFistFechaMedicionByIdJornada = async (req, res) => {
+    const connection = await connect()
+    const [rows] = await connection.query("SELECT fecha FROM medicion WHERE idJornada = ? ORDER BY fecha ASC LIMIT 1", [
+        req.params.idJornada,
+    ])
+    res.json(rows[0]["fecha"])
+
+    console.log(rows[0]["fecha"])
+}
+export const getMedicionesCountByIdJornada = async (req, res) => {
+    const connection = await connect()
+    const [rows] = await connection.query("SELECT COUNT(*) FROM Medicion WHERE idJornada = ?", [
+        req.params.idJornada,
+    ])
+    res.json(rows[0]["COUNT(*)"])
+
+    console.log(rows[0]["COUNT(*)"])
+}
 export const getMedicionesFromIdJornada = async (req, res) => {
     const connection = await connect()
     const [rows] = await connection.query("SELECT * FROM Medicion WHERE idJornada = ?", [

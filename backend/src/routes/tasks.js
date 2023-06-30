@@ -1,6 +1,22 @@
 //archivo de tareas. este va a ser las rutas
 import { Router } from "express";
-import { saveUsuario, deleteTask, getUsuarioById, getUsuariosCount, getUsuarios, getJornadas, updateTask, saveMedicion, getJornadaById, def, getMediciones, getMedicionesFromIdJornada } from "../controllers/tasks.js";
+import { 
+    saveUsuario, 
+    deleteTask, 
+    getUsuarioById, 
+    getUsuariosCount, 
+    getUsuarios, 
+    getJornadas, 
+    updateTask, 
+    saveMedicion, 
+    getJornadaById, 
+    def, 
+    getMediciones, 
+    getMedicionesFromIdJornada, 
+    getMedicionesCountByIdJornada,
+    getAvgMedicionesByIdJornada,
+    getFistFechaMedicionByIdJornada
+} from "../controllers/tasks.js";
 
 const router = Router(); //devuelve lo que se ejecuta en una constante. Router nos permite definir las urls
 
@@ -35,6 +51,33 @@ router.get("/usuarios", getUsuarios) //get todas las tareas
  *    tags: [Tasks]
  */
 router.get("/jornadas", getJornadas) //get todas las jornadas
+
+/** 
+ * @swagger
+ * /mediciones/:idJornada:
+ *  get:
+ *    summary: Trae la cantidad de mediciones de una jornada
+ *    tags: [Tasks]
+ */
+router.get("/mediciones/count/:idJornada", getMedicionesCountByIdJornada)
+
+/** 
+ * @swagger
+ * /mediciones/first/:idJornada:
+ *  get:
+ *    summary: Trae la primera fecha de la medicion más antigua de una jornada
+ *    tags: [Tasks]
+ */
+router.get("/mediciones/first/:idJornada", getFistFechaMedicionByIdJornada)
+
+/** 
+ * @swagger
+ * /mediciones/avg/:idJornada:
+ *  get:
+ *    summary: Trae el promedio de todos los grados de las mediciones de una jornada 
+ *    tags: [Tasks]
+ */
+router.get("/mediciones/avg/:idJornada", getAvgMedicionesByIdJornada)
 
 /**
  * @swagger

@@ -3,6 +3,7 @@
 @api2 = http://localhost:3000/mediciones
 @api3 = http://localhost:3000/jornadas
 @def = http://localhost:3000/def
+
 GET {{api}}
 ### Para separar peticiones escribimos triple numeral
 GET {{api3}}

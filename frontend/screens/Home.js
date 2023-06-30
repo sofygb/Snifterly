@@ -15,20 +15,41 @@ import { HomeFilled } from "@ant-design/icons";
 import { Icon } from "@iconify/react";
 import React, { useState, useEffect } from "react";
 import * as Font from "expo-font";
-import { getJornada } from "../api";
+import { getJornada, getMedicionesCountByIdJornada, getAvgMediciones, getFistMedicion } from "../api";
 import { useIsFocused } from "@react-navigation/native";
 import Progress from "react-circle-progress-bar";
+import { render } from "react-dom";
 
 export default function Home({ navigation }) {
   const [tiempo, setTiempo] = useState(30);
 
   //conexión al backend
   const [jornada, setJornada] = useState([]);
-  const isFocused = useIsFocused();
 
+  const [mediciones, setMediciones] = useState(0);
+
+  const [avgMediciones, setAvgMediciones] = useState(0);
+
+  const [primeraMedicion, setPrimeraMedicion] = useState(new Date());
+
+  
+  const isFocused = useIsFocused();
+  
   const loadJornada = async () => {
     const data = await getJornada();
     setJornada(data);
+    
+    const data2 = await getMedicionesCountByIdJornada();
+    setMediciones(data2);
+    
+    const data3 = await getAvgMediciones();
+    setAvgMediciones(data3);
+
+    const data4 = await getFistMedicion();
+    const fecha = new Date(data4)
+    console.log(fecha)
+    setPrimeraMedicion(fecha);
+    console.log(primeraMedicion) //No guarda la fecha
     /*
     try {
       const data = await getJornada()
@@ -39,7 +60,7 @@ export default function Home({ navigation }) {
     }
     */
   };
-
+  
   const [fontsLoaded, setFontsLoaded] = useState(false);
   useEffect(() => {
     if (!fontsLoaded) {
@@ -55,13 +76,15 @@ export default function Home({ navigation }) {
     });
     setFontsLoaded(true);
   };
-
-  const [variable, setvarible] = useState(3);
+  
+  const [variable, setvarible] = useState(0);
   const handleSubmit = (e) => {
-    setvarible((e) => 0);
+    //setvarible ((e) => getCountMediciones())
     setTiempo((e) => 0);
-  };
+  }
 
+  //const tiempoTranscurrido = 
+  
   return (
     <View style={styles.container}>
       {/* <FlatList
@@ -74,24 +97,24 @@ export default function Home({ navigation }) {
             </Text>
           );
         }}
-      /> */}
+      />  */}
 
       <Text style={styles.titulo}>Snifterly</Text>
 
       <View style={[styles.espacioCuadros, { marginBottom: "1rem" }]}>
         <View style={styles.cuadro}>
-          <View style={{ flexDirection: "row", marginLeft: "1rem" }}>
-            <Text style={[styles.medicion, { fontSize: "2.5rem" }]}>
-              {variable}
+          <View style={{ flexDirection: "row", marginLeft: "0.5rem" }}>
+            <Text name='count' style={[styles.medicion, { fontSize: "2.5rem" }]}>
+              {mediciones}
             </Text>
             <Text style={styles.medicion}> veces</Text>
           </View>
           <Text style={styles.texto}>has usado el dispositivo de medición</Text>
         </View>
         <View style={styles.cuadro}>
-          <View style={{ flexDirection: "row", marginLeft: "1rem" }}>
+          <View style={{ flexDirection: "row", marginLeft: "0.5rem" }}>
             <Text style={[styles.medicion, { fontSize: "2.5rem" }]}>
-              {variable}
+              {avgMediciones}
             </Text>
             <Text style={styles.medicion}> dg/l</Text>
           </View>
@@ -101,7 +124,7 @@ export default function Home({ navigation }) {
 
       <View style={[styles.espacioCuadros]}>
         <View style={styles.cuadro}>
-          <View style={{ flexDirection: "row", marginLeft: "1rem" }}>
+          <View style={{ flexDirection: "row", marginLeft: "0.5rem" }}>
             <Text style={[styles.medicion, { fontSize: "2.5rem" }]}>
               {variable}
             </Text>
@@ -110,9 +133,9 @@ export default function Home({ navigation }) {
           <Text style={styles.texto}>es la longitud actual de tu jornada</Text>
         </View>
         <View style={styles.cuadro}>
-          <View style={{ flexDirection: "row", marginLeft: "1rem" }}>
+          <View style={{ flexDirection: "row", marginLeft: "0.5rem" }}>
             <Text style={[styles.medicion, { fontSize: "2.5rem" }]}>
-              {variable}
+              0.2
             </Text>
             <Text style={styles.medicion}> mg/l</Text>
           </View>
@@ -198,6 +221,8 @@ export default function Home({ navigation }) {
   );
 }
 
+
+
 const styles = StyleSheet.create({
   container: {
     display: "flex",
@@ -265,10 +290,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontFamily: "alata",
     color: "#5654E1",
+    display: 'flex',
+    alignSelf: 'flex-end'
   },
   texto: {
-    marginLeft: "1rem",
-    marginRight: "1rem",
+    marginLeft: "0.5rem",
+    marginRight: "0.5rem",
     fontSize: "0.8rem",
     color: "#4B4B4B",
     fontFamily: "alata",

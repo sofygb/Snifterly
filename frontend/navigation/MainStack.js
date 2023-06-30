@@ -21,7 +21,10 @@ const MainStack = () => {
     return(
         <NavigationContainer>
             <Stack.Navigator screenOptions={{headerShown: false,}}>
-            
+            <Stack.Screen
+                name= 'Home'
+                component={ Home }
+                />
             <Stack.Screen
                 name= 'InicioSesion'
                 component={ InicioSesion }
@@ -34,10 +37,7 @@ const MainStack = () => {
                 name= 'CompletarDatos'
                 component={ CompletarDatos }
                 />
-                <Stack.Screen
-                name= 'Home'
-                component={ Home }
-                />
+                
                 <Stack.Screen
                 name= 'IngresoDeDatos'
                 component={ IngresoDeDatos }
