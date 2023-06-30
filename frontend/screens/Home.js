@@ -139,7 +139,7 @@ export default function Home({ navigation }) {
             </Text>
             <Text style={styles.medicion}> mg/l</Text>
           </View>
-          <Text style={styles.texto}>es tu límite de akcohol en sangre</Text>
+          <Text style={styles.texto}>es tu límite de alcohol en sangre</Text>
         </View>
       </View>
 

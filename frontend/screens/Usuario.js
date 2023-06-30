@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
             width: 2,
             height: 4,
         },
-        shadowOpacity: 1,
+        shadowOpacity: .8,
         shadowRadius: 5,
     },
     texto: {
