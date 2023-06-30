@@ -203,6 +203,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flex: 1,
     fontFamily: "Alata",
+    backgroundColor: 'white',
   },
   titulo: {
     display: "flex",

@@ -28,7 +28,15 @@ export default function Configuracion({ navigation }) {
     }
     return (
         <View style={styles.container}>
-            <Text>HOLA MUNDO</Text>
+            <View style={{ margin: '2rem' }}>
+                <TouchableOpacity onPress={() => { navigation.navigate('Usuario') }}>
+                    <Icon icon="formkit:arrowleft" width={25} />
+                </TouchableOpacity>
+                <Text style>Snifterly</Text>
+                <View >
+
+                </View>
+            </View>
         </View>
     )
 }
@@ -37,5 +45,17 @@ export default function Configuracion({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'white',
+    },
+    titulo: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontWeight: 'bold',
+        fontSize: '2rem',
+        marginTop: '3rem',
+        marginBottom: '8rem',
+        fontFamily: 'alata',
+        color: 'white',
     },
 });

@@ -99,7 +99,8 @@ export default function ({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        margin: '2rem'
+        margin: '2rem',
+        backgroundColor: 'white',
     },
     finalizarJornada: {
         flex: 1,

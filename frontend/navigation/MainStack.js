@@ -59,16 +59,16 @@ const MainStack = () => {
                 component={ EstadoUsuario }
                 />
                 <Stack.Screen
-                name= 'Configuracion'
-                component={ Configuracion }
-                />
-                <Stack.Screen
                 name= 'Usuario'
                 component={ Usuario }
                 />
                 <Stack.Screen
                 name= 'Sintomas'
                 component={ Sintomas }
+                />
+                <Stack.Screen
+                name= 'Configuracion'
+                component={ Configuracion }
                 />
             </Stack.Navigator>
         </NavigationContainer>

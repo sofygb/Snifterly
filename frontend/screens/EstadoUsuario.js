@@ -37,15 +37,15 @@ export default function EstadoUsuario({ navigation }) {
                   <TouchableOpacity style={styles.cuadro} onPress={() => { navigation.navigate('Home') }}>
                     <Image source={require('../assets/emojis/SmilingFacewithSunglasses.png')} style={styles.imagen}/>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.cuadro} onPress={() => { navigation.navigate('Home') }}>
+                  <TouchableOpacity style={styles.cuadro} onPress={() => { navigation.navigate('Sintomas') }}>
                     <Image source={require('../assets/emojis/NeutralFace.png')} style={styles.imagen}/>
                   </TouchableOpacity>
                 </View>
                 <View style={[styles.espacioCuadros] }>
-                  <TouchableOpacity style={styles.cuadro} onPress={() => { navigation.navigate('Home') }}>
+                  <TouchableOpacity style={styles.cuadro} onPress={() => { navigation.navigate('Sintomas') }}>
                     <Image source={require('../assets/emojis/FacewithSpiralEyes.png')} style={styles.imagen}/>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.cuadro} onPress={() => { navigation.navigate('Home') }}>
+                  <TouchableOpacity style={styles.cuadro} onPress={() => { navigation.navigate('Sintomas') }}>
                     <Image source={require('../assets/emojis/FacewithCrossed-OutEyes.png')} style={styles.imagen}/>
                   </TouchableOpacity>
                 </View>
@@ -69,6 +69,7 @@ export default function EstadoUsuario({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'white',
     },
     botonCancelar: {
       display: 'flex',

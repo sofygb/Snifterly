@@ -66,7 +66,7 @@ export default function Usuario({ navigation }) {
 
             <View style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                 <View style={styles.cuadroRectangulo}>
-                    <View style={[styles.info, {paddingLeft: '2rem', paddingRight: '2rem', flex: 1,display: 'flex', alignItems: 'center'}]}>
+                    <View style={[styles.info, {paddingLeft: '2rem', paddingRight: '2rem', flex: 1, display: 'flex', alignItems: 'center'}]}>
                         <Image
                             source={{
                                 uri: 'https://logodownload.org/wp-content/uploads/2015/05/uber-logo-1-1.png',
@@ -136,6 +136,7 @@ export default function Usuario({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'white',
     },
     titulo: {
         display: "flex",
@@ -200,7 +201,7 @@ const styles = StyleSheet.create({
         padding: "0.5rem",
         marginRight: "0.3rem",
         marginLeft: "0.3rem",
-        marginTop: "1.5rem ",
+        marginTop: "1rem ",
         minWidth: "22rem",
         minHeight: "6rem",
         borderRadius: 20,
@@ -234,7 +235,7 @@ const styles = StyleSheet.create({
         padding: "0.5rem",
         marginRight: "0.3rem",
         marginLeft: "0.3rem",
-        marginTop: "1.5rem ",
+        marginTop: "1rem ",
         minWidth: "20rem",
         minHeight: "4rem",
         borderRadius: 20,

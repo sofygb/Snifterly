@@ -83,6 +83,7 @@ export default function InicioSesion({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'white',
     },
     titulo: {
         fontSize: '2rem',
@@ -92,12 +93,12 @@ const styles = StyleSheet.create({
         marginRight: '1.5rem',
     },
     imagen: {
-        width: '80%',
-        height: '25%',
+        width: '75%',
+        height: '20%',
         resizeMode: "contain",
         display: 'flex',
         alignSelf: 'center',
-        marginTop: '3rem'
+        marginTop: '3rem',
     },
     texto: {
         textAlign: 'center',
