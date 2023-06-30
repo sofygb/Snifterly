@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 
 export default function EstadoUsuario({ navigation }) {
-    const initialText = '';
+  const initialText = '';
   const [text, setText] = useState(initialText);
   const loadJornada = async () => {
     const data = await getJornada()

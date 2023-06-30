@@ -64,7 +64,7 @@ export default function Home({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <FlatList
+      {/* <FlatList
         data={jornada}
         renderItem={({ item }) => {
           return (
@@ -74,7 +74,7 @@ export default function Home({ navigation }) {
             </Text>
           );
         }}
-      />
+      /> */}
 
       <Text style={styles.titulo}>Snifterly</Text>
 
