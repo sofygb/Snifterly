@@ -21,7 +21,10 @@ const MainStack = () => {
     return(
         <NavigationContainer>
             <Stack.Navigator screenOptions={{headerShown: false,}}>
-            
+            <Stack.Screen
+                name= 'Configuracion'
+                component={ Configuracion }
+                />
             <Stack.Screen
                 name= 'InicioSesion'
                 component={ InicioSesion }
@@ -66,10 +69,7 @@ const MainStack = () => {
                 name= 'Sintomas'
                 component={ Sintomas }
                 />
-                <Stack.Screen
-                name= 'Configuracion'
-                component={ Configuracion }
-                />
+                
             </Stack.Navigator>
         </NavigationContainer>
     )

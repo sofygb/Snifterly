@@ -29,7 +29,7 @@ export default function Configuracion({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={{ margin: '2rem' }}>
-                <View style={{flexDirection: "row", flex: 1}}>
+                <View style={{flexDirection: "row"}}>
                     <TouchableOpacity onPress={() => { navigation.navigate('Usuario') }}>
                         <Icon icon="formkit:arrowleft" width={25} />
                     </TouchableOpacity>
@@ -50,12 +50,45 @@ export default function Configuracion({ navigation }) {
                     <Text style={styles.nombreStyle}>SelenaGomez</Text>
                 </View>
 
-                <View></View>
-                <View></View>
+                <View style={styles.cuadroDos}>
+                    <View style={{flexDirection: "row",}}>
+                        <Text style={{fontSize: '1rem',fontFamily: 'Alata',fontWeight: "bold",}}>mail</Text>
+                        <Text style={{fontSize: '1rem',fontFamily: 'Alata', marginLeft: '1.5rem'}}>SelenaGomez@gmail.com</Text>
+                    </View>
+                </View>
+                <View style={styles.cuadroDos}>
+                    <View style={{flexDirection: "row",}}>
+                        <Text style={{fontSize: '1rem',fontFamily: 'Alata',fontWeight: "bold",}}>Contraseña</Text>
+                        <Text style={{fontSize: '1rem',fontFamily: 'Alata', marginLeft: '1.5rem'}}>**********</Text>
+                    </View>
+                </View>
 
-                <TouchableOpacity>
-                    <Text>Guardar</Text>
-                </TouchableOpacity>
+                <View style={{display: 'flex', alignItems: 'center', marginTop: '2rem'}}>
+                    <TouchableOpacity style={styles.botonGuardar}>
+                        <Text style={{color: 'white', fontFamily: 'inter', textAlign: 'center',fontSize: '1rem',}}>Guardar</Text>
+                    </TouchableOpacity>
+                </View>
+                
+                <View style={styles.cerrarSesion}>
+                    <TouchableOpacity onPress={() => { navigation.navigate('InicioSesion') }}>
+                    <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter', marginTop: '10rem', marginBottom: '2rem' }]}>Cerrar sesión</Text>
+                    </TouchableOpacity>
+                </View>
+                
+                <View style={styles.footer}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <TouchableOpacity onPress={() => { navigation.navigate('PrimeraHome') }}>
+                            <Icon icon="material-symbols:home" width={'2.5rem'} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => { navigation.navigate('Historial') }}>
+                            <Icon icon="zondicons:calendar" width={'2.3rem'} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => { navigation.navigate('Usuario') }}>
+                            <Icon icon="mdi:account" width={'2.5rem'} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
             </View>
         </View>
     )
@@ -67,14 +100,26 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
     },
+    cuadroDos: {
+        display: "flex",
+        padding: "0.5rem",
+        marginRight: "0.3rem",
+        marginLeft: "0.3rem",
+        marginTop: "1.5rem ",
+        minWidth: "18rem",
+        padding: '1rem',
+        borderRadius: 20,
+        backgroundColor: "#F2F2F2",
+        fontFamily: "alata",
+    },
     titulo: {
-        flex: 1,
+        
         display: 'flex',
         alignContent: 'flex-start',
         justifyContent: 'center',
         fontWeight: 'bold',
         fontSize: '2rem',
-        marginBottom: '8rem',
+        marginBottom: '2rem',
         fontFamily: 'alata',
     },
     cuadro: {
@@ -94,5 +139,27 @@ const styles = StyleSheet.create({
         fontFamily: 'Alata',
         fontWeight: "bold",
         margin: '1rem'
-    }
+    },
+    botonGuardar: {
+        maxHeight: '3rem',
+        minWidth: '9rem',
+        backgroundColor: "#5654E1",
+        borderRadius: 15,
+        padding: 10,
+    },
+    cerrarSesion: {
+        
+        display: 'flex',
+        justifyContent: 'flex-end',
+        marginBottom: '1rem',
+        alignItems: 'center'
+    },
+    footer: {
+        
+        display: 'flex',
+        justifyContent: 'flex-end',
+        marginBottom: '1rem',
+        width: '100%',
+        
+    },
 });
