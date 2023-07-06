@@ -37,18 +37,14 @@ export default function IngresoDeDatos({ navigation }) {
         {/*Puede ser util para el inicio sesion
         <TextInput variant="outlined" label="Label" style={{ margin: 16 }} />*/}
 
-        <TextInput style={{ padding: 16 }}
-          onChangeText={setText}
-          value={text}
-          placeholder={'agregar medición...'}
-        />
+        <TextInput style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} onChangeText={setText} value={text} placeholder={'agregar medición...'}/>
 
         <View style={[styles.espaciosBotones, { flexDirection: 'row', display: 'flex', alignItems: 'center' }]}>
           <TouchableOpacity style={styles.botonAceptar} onPress={() => { navigation.navigate('EstadoUsuario') }}>
             <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Aceptar</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.botonCancelar} onPress={() => { navigation.navigate('Home') }}>
-            <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Cancelar</Text>
+            <Text style={[{ fontSize: '1rem', fontFamily: 'inter' }]}>Cancelar</Text>
           </TouchableOpacity>
         </View>
       </View>

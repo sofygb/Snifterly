@@ -53,7 +53,7 @@ export default function EstadoUsuario({ navigation }) {
 
                 <View style={[{display: 'flex', alignItems: 'center' }]}>
                 <TouchableOpacity style={styles.botonCancelar} onPress={() => { navigation.navigate('Home') }}>
-                    <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Cancelar</Text>
+                    <Text style={[{ fontSize: '1rem', fontFamily: 'inter' }]}>Cancelar</Text>
                 </TouchableOpacity>
                 </View>
             </View>

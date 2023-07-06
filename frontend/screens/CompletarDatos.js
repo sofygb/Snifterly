@@ -34,9 +34,9 @@ export default function CompletarDatos({ navigation }) {
             <Text style={styles.titulo}>Te damos la bienvenida a Snifterly!</Text>
             <Text style={styles.texto}>SIGN UP</Text>
 
-            <TextInput variant="outlined" label="nombre" style={{ margin: 16 }} />
-            <TextInput variant="outlined" label="peso" style={{ margin: 16 }} />
-            <TextInput variant="outlined" label="altura" style={{ margin: 16 }} />
+            <TextInput variant="outlined" label="nombre" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} />
+            <TextInput variant="outlined" label="peso" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} />
+            <TextInput variant="outlined" label="altura" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} />
 
             <View style={styles.espacioBotonLogin}>
                 <TouchableOpacity style={styles.botonLogin} onPress={() => { navigation.navigate('PrimeraHome') }}>
@@ -56,7 +56,9 @@ const styles = StyleSheet.create({
     titulo: {
         fontSize: '2rem',
         textAlign: 'center',
-        margin: '1rem'
+        margin: '1rem',
+        marginLeft: '1.5rem',
+        marginRight: '1.5rem',
     },
     footer: {
         flex: 1,
@@ -68,13 +70,13 @@ const styles = StyleSheet.create({
         paddingRight: '2rem',
     },
     imagen: {
-        width: '75%',
+        width: '45%',
         height: '20%',
         resizeMode: "contain",
         display: 'flex',
         alignSelf: 'center',
         marginTop: '4rem',
-        borderRadius: 20,
+        borderRadius: 30,
     },
     texto: {
         textAlign: 'center',

@@ -52,7 +52,7 @@ export default function ({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <View style={{flex: 3, display: 'flex', alignContent: 'center', justifyContent: 'center'}}>
+            <View style={{flex: 3, display: 'flex', alignContent: 'center', justifyContent: 'center', margin: '2rem'}}>
                 <Text style={styles.textoPrincipal}>¿Tenés alguno de estos síntomas?</Text>
                 {renderLabel()}
                 <Dropdown
@@ -99,7 +99,7 @@ export default function ({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        margin: '2rem',
+        
         backgroundColor: 'white',
     },
     finalizarJornada: {

@@ -37,11 +37,11 @@ export default function InicioSesion({ navigation }) {
             <Text style={styles.titulo}>Te damos la bienvenida a Snifterly!</Text>
             <Text style={styles.texto}>SIGN IN</Text>
 
-            <TextInput variant="outlined" label="Usuario" style={{ margin: 14 }} value={text} onChangeText={text => setText(text)}/>
-            <TextInput variant="outlined" label="Contraseña" style={{ margin: 14 }} value={textdos} onChangeText={textdos => setTextdos(textdos)}/>
+            <TextInput variant="outlined" label="Usuario" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem', borderRadius: 10 }} value={text} onChangeText={text => setText(text)}/>
+            <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem', borderRadius: 10  }} value={textdos} onChangeText={textdos => setTextdos(textdos)}/>
 
             <TouchableOpacity style={styles.botonContrasena}>
-                <Text style={[{ color: '#0D4CEF', fontSize: '0.9rem', fontFamily: 'inter', textAlign: 'right', marginRight: '1rem'}]}>¿Te olvidaste la contraseña?</Text>
+                <Text style={[{ color: '#0D4CEF', fontSize: '0.9rem', fontFamily: 'inter', textAlign: 'right', marginRight: '1rem', marginBottom: '1.5rem', marginRight: '2rem'}]}>¿Te olvidaste la contraseña?</Text>
             </TouchableOpacity>
 
             <View style={styles.espacioBotonLogin}>
@@ -50,17 +50,17 @@ export default function InicioSesion({ navigation }) {
                 </TouchableOpacity>
             </View>
 
-            <Text style={{textAlign: 'center', marginTop: '1.5rem', marginBottom: '1rem', marginLeft: '1rem', marginRight: '1rem', fontSize: '1.2rem'}}> ───────── Seguir con ─────────</Text>
+            <Text style={{textAlign: 'center', marginTop: '1.5rem', marginBottom: '1rem', marginLeft: '1rem', marginRight: '1rem', fontSize: '1.2rem'}}> ──────── Seguir con ────────</Text>
 
             <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-around',paddingLeft: '1.5rem', paddingRight: '1.5rem',}}>
-                <TouchableOpacity style={{backgroundColor: '#40A2DA', minHeight: '3rem', minWidth: '10rem', borderRadius: 10, display: 'flex', justifyContent: 'center', }}>
+                <TouchableOpacity style={{backgroundColor: '#40A2DA', minHeight: '3.5rem', minWidth: '10rem', borderRadius: 15, display: 'flex', justifyContent: 'center', }}>
                     <View style={{flexDirection: 'row', marginLeft: '0.3rem'}}>
                         <Icon icon="ri:google-fill" color="white" width={'2.3rem'}/>
                         <Text style={{color: 'white', display: 'flex', alignItems: 'center', fontSize: '0.9rem'}}>Google</Text>
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={{backgroundColor: '#0F3A8D', minHeight: '3rem', minWidth: '10rem', borderRadius: 10, display: 'flex', justifyContent: 'center', }}>
+                <TouchableOpacity style={{backgroundColor: '#0F3A8D', minHeight: '3.5rem', minWidth: '10rem', borderRadius: 15, display: 'flex', justifyContent: 'center', }}>
                     <View style={{flexDirection: 'row', marginLeft: '0.3rem'}}>
                         <Icon icon="ant-design:facebook-filled" color="white" width={'2.3rem'}/>
                         <Text style={{color: 'white', display: 'flex', alignItems: 'center', fontSize: '0.9rem'}}>Facebook</Text>
@@ -93,12 +93,13 @@ const styles = StyleSheet.create({
         marginRight: '1.5rem',
     },
     imagen: {
-        width: '75%',
+        width: '45%',
         height: '20%',
         resizeMode: "contain",
         display: 'flex',
         alignSelf: 'center',
         marginTop: '3rem',
+        borderRadius: 30,
     },
     texto: {
         textAlign: 'center',

@@ -29,9 +29,9 @@ export default function Configuracion({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={{ margin: '2rem' }}>
-                <View style={{flexDirection: "row"}}>
+                <View style={{flexDirection: "row", marginTop: '2rem'}}>
                     <TouchableOpacity onPress={() => { navigation.navigate('Usuario') }}>
-                        <Icon icon="formkit:arrowleft" width={25} />
+                        <Icon icon="basil:cross-outline" width={45} />
                     </TouchableOpacity>
                     <Text style={styles.titulo}>Snifterly</Text>
                 </View>
@@ -71,11 +71,12 @@ export default function Configuracion({ navigation }) {
                 
                 <View style={styles.cerrarSesion}>
                     <TouchableOpacity onPress={() => { navigation.navigate('InicioSesion') }}>
-                    <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter', marginTop: '10rem', marginBottom: '2rem' }]}>Cerrar sesión</Text>
+                    <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter', marginTop: '14rem', }]}>Cerrar sesión</Text>
                     </TouchableOpacity>
                 </View>
-                
-                <View style={styles.footer}>
+
+            </View>
+            <View style={styles.footer}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <TouchableOpacity onPress={() => { navigation.navigate('PrimeraHome') }}>
                             <Icon icon="material-symbols:home" width={'2.5rem'} />
@@ -88,8 +89,6 @@ export default function Configuracion({ navigation }) {
                         </TouchableOpacity>
                     </View>
                 </View>
-
-            </View>
         </View>
     )
 }
@@ -113,7 +112,6 @@ const styles = StyleSheet.create({
         fontFamily: "alata",
     },
     titulo: {
-        
         display: 'flex',
         alignContent: 'flex-start',
         justifyContent: 'center',
@@ -121,6 +119,7 @@ const styles = StyleSheet.create({
         fontSize: '2rem',
         marginBottom: '2rem',
         fontFamily: 'alata',
+        paddingLeft: '4.5rem',
     },
     cuadro: {
         display: "flex",
@@ -155,11 +154,13 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     footer: {
-        
+        flex: 1,
         display: 'flex',
         justifyContent: 'flex-end',
         marginBottom: '1rem',
         width: '100%',
-        
+        paddingLeft: "2rem",
+        paddingRight: "2rem",
+        Height: '3rem',
     },
 });
