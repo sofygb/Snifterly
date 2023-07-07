@@ -34,6 +34,7 @@ export default function InicioSesion({ navigation }) {
             console.log('ERRORRRRR')
         }
     }
+    const [hidePass, setHidePass] = useState(true);
 
     return (
         <View style={styles.container}>
@@ -44,7 +45,7 @@ export default function InicioSesion({ navigation }) {
             <Text style={styles.texto}>SIGN IN</Text>
 
             <TextInput variant="outlined" label="Usuario" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem', borderRadius: 10 }} value={mail} onChangeText={mail => setMail(mail)}/>
-            <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem', borderRadius: 10  }} value={contraseña} onChangeText={contraseña => setContraseña(contraseña)}/>
+            <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem', borderRadius: 10  }} value={contraseña} secureTextEntry={true} onChangeText={contraseña => setContraseña(contraseña)}  right={<TouchableOpacity onPress={() => setHidePass(!hidePass)}> <Icon icon="mdi:eye" width={30}/> </TouchableOpacity>}/>
 
             <TouchableOpacity style={styles.botonContrasena}>
                 <Text style={[{ color: '#0D4CEF', fontSize: '0.9rem', fontFamily: 'inter', textAlign: 'right', marginRight: '1rem', marginBottom: '1.5rem', marginRight: '2rem'}]}>¿Te olvidaste la contraseña?</Text>
