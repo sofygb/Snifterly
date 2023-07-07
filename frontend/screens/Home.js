@@ -77,7 +77,7 @@ export default function Home({ navigation }) {
     setFontsLoaded(true);
   };
   
-  const [variable, setvarible] = useState(0);
+  const [variable, setvarible] = useState(5);
   const handleSubmit = (e) => {
     //setvarible ((e) => getCountMediciones())
     setTiempo((e) => 0);
@@ -128,7 +128,7 @@ export default function Home({ navigation }) {
             <Text style={[styles.medicion, { fontSize: "2.5rem" }]}>
               {variable}
             </Text>
-            <Text style={styles.medicion}> tiempo</Text>
+            <Text style={styles.medicion}> hs</Text>
           </View>
           <Text style={styles.texto}>es la longitud actual de tu jornada</Text>
         </View>

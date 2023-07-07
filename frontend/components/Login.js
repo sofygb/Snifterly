@@ -1,57 +1,97 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Alert } from 'react-native';
+/*
+import React from 'react';
+import { AppLoading } from 'expo';
+import { getUsuario } from '../api'
+import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity, InputAccessoryView, ScrollView } from 'react-native';
 import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
-import { getUsuario } from '../api';
 
-export default function InicioSesion({ navigation }) {
-    const [mail, setMail] = React.useState("");
-    const [contraseña, setContraseña] = React.useState("");
+const consulta = `http://localhost:3000`
 
-    const [fontsLoaded, setFontsLoaded] = useState(false);
-    useEffect(() => {
-        if (!fontsLoaded) {
-            loadFonts();
-        }
-    })
+// /usuario/${}/${Matheo}
 
-    const loadFonts = async () => {
-        await Font.loadAsync({
-            'alata': require('../assets/fonts/Alata/Alata.ttf'),
-            'inter': require('../assets/fonts/Inter/Inter.ttf'),
-        });
-        setFontsLoaded(true);
+
+var obtuvoRespuesta = false
+
+//const respuesta = getUsuario(mail,contraseña)
+
+import firebase from '../database/firebaseDb';
+
+export default class Login extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isReady: false,
+            mail: '',
+            contrasenia: ''
+        };
     }
 
-    const login = async (mail, contraseña) => {
-        const usuario = await getUsuario(mail, contraseña)
-        if (usuario != null) {
-            navigation.navigate("PrimeraHome")
-        }
-        else{
-            console.log('ERRORRRRR')
+    // const [fontsLoaded, setFontsLoaded] = useState(false);
+    // useEffect(() => {
+    //     if (!fontsLoaded) {
+    //         loadFonts();
+    //     }
+    //     loadJornada()
+    // })
+
+    // const loadFonts = async () => {
+    //     await Font.loadAsync({
+    //         'alata': require('../assets/fonts/Alata/Alata.ttf'),
+    //         'inter': require('../assets/fonts/Inter/Inter.ttf'),
+    //     });
+    //     setFontsLoaded(true);
+    // }
+
+    loginUser = (mail, contrasenia) => {
+        try {
+            if (this.state.mail.length < 6) {
+                alert("Debe ingresar el correo")
+                return;
+            }
+            if (this.state.contrasenia.length < 6) {
+                alert("Debe ingresar la contraseña")
+                return;
+            }
+            getUsuario(mail, contrasenia).then(function (user) {
+                //console.log(user)
+                alert(JSON.stringify(user))
+            })
+            this.props.navigation.navigate('PrimeraHome')
+        } catch (error) {
+            console.log(error.toString())
         }
     }
 
-    return (
-        <View style={styles.container}>
+    async componentDidMount() {
+        this.setState({ isReady: true });
+    }
+
+    render() {
+        if (!this.state.isReady) {
+            return <AppLoading />;
+        }
+
+        return (
+            <View style={styles.container}>
             
             <Image source={require('../assets/icon.png')} style={styles.imagen}/>
             
             <Text style={styles.titulo}>Te damos la bienvenida a Snifterly!</Text>
             <Text style={styles.texto}>SIGN IN</Text>
 
-            <TextInput variant="outlined" label="Usuario" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem', borderRadius: 10 }} value={mail} onChangeText={mail => setMail(mail)}/>
-            <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem', borderRadius: 10  }} value={contraseña} onChangeText={contraseña => setContraseña(contraseña)}/>
+            <TextInput id='1' variant="outlined" label="Usuario" onChangeText={mail => this.setState({ mail })} style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem', borderRadius: 10 }} />
+            <TextInput variant="outlined" label="Contraseña" onChangeText={contrasenia => this.setState({ contrasenia })} style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem', borderRadius: 10  }}/>
 
             <TouchableOpacity style={styles.botonContrasena}>
                 <Text style={[{ color: '#0D4CEF', fontSize: '0.9rem', fontFamily: 'inter', textAlign: 'right', marginRight: '1rem', marginBottom: '1.5rem', marginRight: '2rem'}]}>¿Te olvidaste la contraseña?</Text>
             </TouchableOpacity>
 
             <View style={styles.espacioBotonLogin}>
-                <TouchableOpacity style={styles.botonLogin} onPress={() => { login(mail, contraseña) }}>
+                <TouchableOpacity style={styles.botonLogin} onPress={() => this.loginUser(this.state.mail, this.state.contrasenia)}>
                     <Text style={[{ color: 'white', fontSize: '1.2rem', fontFamily: 'inter' }]}>Log in</Text>
                 </TouchableOpacity>
             </View>
@@ -82,9 +122,10 @@ export default function InicioSesion({ navigation }) {
             </View>
 
         </View>
-    )
+            
+        );
+    }
 }
-
 
 const styles = StyleSheet.create({
     container: {
@@ -131,4 +172,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-});
+});*/

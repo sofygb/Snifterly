@@ -8,6 +8,18 @@ const API3 = 'http://localhost:3000/mediciones/avg/3'
 
 const API4 = 'http://localhost:3000/mediciones/first/3'
 
+export var idUsuarioActivo
+
+export const getUsuario = async (mail, contraseña) => {
+    const consulta = `http://localhost:3000`
+    const res = await fetch(consulta + `/usuario/${mail}/${contraseña}`, {
+        METHOD: "GET",
+    })
+    console.log(res) 
+    idUsuarioActivo = res.idUsuario
+    return await res.json()
+}
+
 export const getJornada = async () => {
     const res = await fetch(API, {
         METHOD: "GET",
