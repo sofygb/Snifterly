@@ -15,7 +15,7 @@ import { HomeFilled } from "@ant-design/icons";
 import { Icon } from "@iconify/react";
 import React, { useState, useEffect } from "react";
 import * as Font from "expo-font";
-import { getJornada, getMedicionesCountByIdJornada, getAvgMediciones, getFistMedicion } from "../api";
+import { getJornada, getMedicionesCountByIdJornada, getAvgMediciones, getFistMedicion } from "../../api";
 import { useIsFocused } from "@react-navigation/native";
 import Progress from "react-circle-progress-bar";
 import { render } from "react-dom";

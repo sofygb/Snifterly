@@ -1,6 +1,6 @@
 import { StyleSheet, SafeAreaView} from 'react-native';
 import React, { useState, useEffect } from 'react';
-import MainStack from './navigation/MainStack';
+import MainStack from './src/navigation/MainStack';
 
 export default function App() {
   

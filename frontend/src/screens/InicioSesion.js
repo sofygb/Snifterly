@@ -4,7 +4,7 @@ import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
-import { getUsuario } from '../api';
+import { getUsuario } from '../../api';
 
 export default function InicioSesion({ navigation }) {
     const [mail, setMail] = React.useState("");
