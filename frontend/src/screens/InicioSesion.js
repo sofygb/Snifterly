@@ -25,14 +25,14 @@ export default function InicioSesion({ navigation }) {
         setFontsLoaded(true);
     }
 
-    const login = async (mail, contraseña) => {
-        const usuario = await getUsuario(mail, contraseña)
+    const login = async (mail) => {
+        const usuario = await getUsuario(mail)
         if (usuario != null) {
             navigation.navigate("PrimeraHome")
         }
         else{
             console.log('ERRORRRRR')
-        }
+        }//login('sofia@gmail.com')
     }
     const [hidePass, setHidePass] = useState(true);
 
@@ -52,7 +52,7 @@ export default function InicioSesion({ navigation }) {
             </TouchableOpacity>
 
             <View style={styles.espacioBotonLogin}>
-                <TouchableOpacity style={styles.botonLogin} onPress={() => { login(mail, contraseña) }}>
+                <TouchableOpacity style={styles.botonLogin} onPress={() => { navigation.navigate('PrimeraHome') }}>
                     <Text style={[{ color: 'white', fontSize: '1.2rem', fontFamily: 'inter' }]}>Log in</Text>
                 </TouchableOpacity>
             </View>

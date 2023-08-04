@@ -4,6 +4,9 @@ import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
+import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla } from '../../api';
+//import jornadaActiva from '../../api.js'
+//import siguientePantalla from '../../api.js'
 
 export default function IngresoDeDatos({ navigation }) {
   const initialText = '';
@@ -20,7 +23,6 @@ export default function IngresoDeDatos({ navigation }) {
     }
     loadJornada()
   })
-
   const loadFonts = async () => {
     await Font.loadAsync({
       'alata': require('../assets/fonts/Alata/Alata.ttf'),
@@ -28,6 +30,19 @@ export default function IngresoDeDatos({ navigation }) {
     });
     setFontsLoaded(true);
   }
+
+  
+  var jornadaActiva = getJornadaActiva()
+    var siguientePantalla = getSiguientePantalla()
+
+    if (!jornadaActiva) {
+        setSiguientePantalla('PrimeraHome')
+        //siguientePantalla = 'PrimeraHome'
+    }
+    else if(jornadaActiva) {
+        setSiguientePantalla('Home')
+        //siguientePantalla = 'Home'
+    }
 
   return (
     <View style={styles.container}>
@@ -43,7 +58,7 @@ export default function IngresoDeDatos({ navigation }) {
           <TouchableOpacity style={styles.botonAceptar} onPress={() => { navigation.navigate('EstadoUsuario') }}>
             <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Aceptar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.botonCancelar} onPress={() => { navigation.navigate('Home') }}>
+          <TouchableOpacity style={styles.botonCancelar} onPress={() => { navigation.navigate(siguientePantalla) }}>
             <Text style={[{ fontSize: '1rem', fontFamily: 'inter' }]}>Cancelar</Text>
           </TouchableOpacity>
         </View>

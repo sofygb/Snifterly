@@ -15,6 +15,13 @@ export const getJornadas = async (req, res) => {
     
     console.log(rows)
 }
+export const setJornadaActivaById = async (req, res) => {
+    const connection = await connect()
+    const [rows] = await connection.query("UPDATE jornada SET activo = 1 WHERE idJornada = ?")
+    res.json(rows)
+    
+    console.log(rows)
+}
 export const getMediciones = async (req, res) => {
     const connection = await connect()
     const [rows] = await connection.query("SELECT * FROM Medicion")
@@ -26,6 +33,15 @@ export const getUsuarioById = async (req, res) => {
     const connection = await connect()
     const [rows] = await connection.query("SELECT * FROM Usuario WHERE idUsuario = ?", [
         req.params.idUsuario,
+    ])
+    res.json(rows[0])
+
+    console.log(rows[0])
+}
+export const getUsuarioByEmail = async (req, res) => {
+    const connection = await connect()
+    const [rows] = await connection.query("SELECT * FROM Usuario WHERE email = ?", [
+        req.params.email,
     ])
     res.json(rows[0])
 

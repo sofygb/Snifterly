@@ -15,7 +15,8 @@ import {
     getMedicionesFromIdJornada, 
     getMedicionesCountByIdJornada,
     getAvgMedicionesByIdJornada,
-    getFistFechaMedicionByIdJornada
+    getFistFechaMedicionByIdJornada,
+    getUsuarioByEmail
 } from "../controllers/tasks.js";
 
 const router = Router(); //devuelve lo que se ejecuta en una constante. Router nos permite definir las urls
@@ -110,6 +111,14 @@ router.get("/usuarios/count", getUsuariosCount) //get la cantidad de tareas
  *    summary: Trae el usuario requerido por su id
  */
 router.get("/usuarios/:idUsuario", getUsuarioById) //get una tarea por su id
+
+/** 
+ * @swagger
+ * /usuarios/:email/:contraseña:
+ *  get:
+ *    summary: Trae el usuario requerido por su email y contraseña
+ */
+router.get("/usuarios/:email", getUsuarioByEmail) //NO FUNCIONA
 
 /** 
  * @swagger

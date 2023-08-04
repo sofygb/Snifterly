@@ -1,4 +1,5 @@
 //Archivo necesario para consultar al backend. Funciones de consulta que interactuan con el back
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const API = 'http://localhost:3000/jornadas/count/3'
 
@@ -8,15 +9,57 @@ const API3 = 'http://localhost:3000/mediciones/avg/3'
 
 const API4 = 'http://localhost:3000/mediciones/first/3'
 
-export var idUsuarioActivo
 
+
+export const setJornadaActiva = async (value) => {
+    try {
+      await AsyncStorage.setItem('jornadaActiva', value);
+    } catch (e) {
+      // saving error
+    }
+  };
+  
+  export const getJornadaActiva = async () => {
+    try {
+      const value = await AsyncStorage.getItem('jornadaActiva');
+      if (value !== null) {
+        // value previously stored
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+  
+  export const setSiguientePantalla = async (value) => {
+    try {
+      await AsyncStorage.setItem('siguientePantalla', value);
+    } catch (e) {
+      // saving error
+    }
+  };
+  
+  export const getSiguientePantalla = async () => {
+    try {
+      const value = await AsyncStorage.getItem('siguientePantalla');
+      if (value !== null) {
+        // value previously stored
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+  setJornadaActiva(false)
+  
+  setSiguientePantalla("Home")
+  
 export const getUsuario = async (mail, contraseña) => {
     const consulta = `http://localhost:3000`
-    const res = await fetch(consulta + `/usuario/${mail}/${contraseña}`, {
+    const res = await fetch(consulta + `/usuario/${mail}`, {
         METHOD: "GET",
     })
     console.log(res) 
-    idUsuarioActivo = res.idUsuario
+    storeData(res.idUsuario)
     return await res.json()
 }
 

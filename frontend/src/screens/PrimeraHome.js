@@ -4,6 +4,9 @@ import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
+import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla } from '../../api';
+//import jornadaActiva from '../../api.js'
+//import siguientePantalla from '../../api.js'
 
 export default function PrimeraHome({ navigation }) {
     const loadJornada = async () => {
@@ -18,6 +21,18 @@ export default function PrimeraHome({ navigation }) {
         }
         loadJornada()
     })
+    var jornadaActiva = getJornadaActiva()
+    var siguientePantalla = getSiguientePantalla()
+
+    if (!jornadaActiva) {
+        setSiguientePantalla('PrimeraHome')
+        //siguientePantalla = 'PrimeraHome'
+    }
+    else if(jornadaActiva) {
+        setSiguientePantalla('Home')
+        //siguientePantalla = 'Home'
+    }
+    siguientePantalla = getSiguientePantalla()
 
     const loadFonts = async () => {
         await Font.loadAsync({
