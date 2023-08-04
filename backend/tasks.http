@@ -2,7 +2,7 @@
 @api = http://localhost:3000/usuarios
 @api2 = http://localhost:3000/mediciones
 @api3 = http://localhost:3000/jornadas
-@api4 = http://localhost:3000/usuarios/hola
+@api4 = http://localhost:3000/jornadaActiva
 @def = http://localhost:3000/def
 
 GET {{api}}
@@ -15,7 +15,7 @@ GET {{api3}}/3
 ###
 GET {{api}}/count
 ###
-GET {{api}}/hola
+GET {{api4}}
 ### No funcional de momento
 POST {{api}}
 Content-Type: application/json

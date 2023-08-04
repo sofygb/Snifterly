@@ -56,6 +56,14 @@ export const getJornadaById = async (req, res) => {
 
     console.log(rows[0])
 }
+export const getJornadaActiva = async (req, res) => {
+    const connection = await connect()
+    const [rows] = await connection.query("SELECT * FROM Jornada WHERE activo = 1", [
+    ])
+    res.json(rows[0])
+
+    console.log(rows[0])
+}
 export const getUsuariosCount = async (req, res) => {
     const connection = await connect()
     const [rows] = await connection.query("SELECT COUNT(*) FROM Usuario")
@@ -124,6 +132,19 @@ export const saveMedicion = async (req, res) => {
         req.body.grado,
         req.body.fecha,
         req.body.idJornada,
+    ])
+    res.json(result)
+
+    console.log(result)
+}
+export const saveJornada = async (req, res) => {
+    const connection = await connect()
+    const result = await connection.query("INSERT INTO Jornada(idJornada, fechaInicio, fechaFin, idUsuario, activo) VALUES (?,?,?,?,?)", [
+        req.body.idJornada,
+        req.body.fechaInicio,
+        req.body.fechaFin,
+        req.body.idUsuario,
+        req.body.activo,
     ])
     res.json(result)
 
