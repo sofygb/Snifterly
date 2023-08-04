@@ -30,8 +30,18 @@ export default function IngresoDeDatos({ navigation }) {
     });
     setFontsLoaded(true);
   }
-
   
+  const agregarMedicion = () => {
+    var jornada = getJornadaActiva()
+    
+    if(jornada == null){
+      
+    }
+    else{
+
+    }
+  }
+  /*
   var jornadaActiva = getJornadaActiva()
     var siguientePantalla = getSiguientePantalla()
 
@@ -42,7 +52,7 @@ export default function IngresoDeDatos({ navigation }) {
     else if(jornadaActiva) {
         setSiguientePantalla('Home')
         //siguientePantalla = 'Home'
-    }
+    }*/
 
   return (
     <View style={styles.container}>
@@ -55,10 +65,10 @@ export default function IngresoDeDatos({ navigation }) {
         <TextInput style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} onChangeText={setText} value={text} placeholder={'agregar medición...'}/>
 
         <View style={[styles.espaciosBotones, { flexDirection: 'row', display: 'flex', alignItems: 'center' }]}>
-          <TouchableOpacity style={styles.botonAceptar} onPress={() => { navigation.navigate('EstadoUsuario') }}>
+          <TouchableOpacity style={styles.botonAceptar} onPress={() => { agregarMedicion(), navigation.navigate('EstadoUsuario') }}>
             <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Aceptar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.botonCancelar} onPress={() => { navigation.navigate(siguientePantalla) }}>
+          <TouchableOpacity style={styles.botonCancelar} onPress={() => { navigation.navigate("Home") }}>
             <Text style={[{ fontSize: '1rem', fontFamily: 'inter' }]}>Cancelar</Text>
           </TouchableOpacity>
         </View>

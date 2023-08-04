@@ -21,6 +21,8 @@ export default function PrimeraHome({ navigation }) {
         }
         loadJornada()
     })
+
+    /*
     var jornadaActiva = getJornadaActiva()
     var siguientePantalla = getSiguientePantalla()
 
@@ -33,6 +35,7 @@ export default function PrimeraHome({ navigation }) {
         //siguientePantalla = 'Home'
     }
     siguientePantalla = getSiguientePantalla()
+    */
 
     const loadFonts = async () => {
         await Font.loadAsync({

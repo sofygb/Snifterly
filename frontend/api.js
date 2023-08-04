@@ -9,8 +9,10 @@ const API3 = 'http://localhost:3000/mediciones/avg/3'
 
 const API4 = 'http://localhost:3000/mediciones/first/3'
 
+const API5 = 'http://localhost:3000/jornadaActiva'
 
 
+/*
 export const setJornadaActiva = async (value) => {
     try {
       await AsyncStorage.setItem('jornadaActiva', value);
@@ -52,6 +54,8 @@ export const setJornadaActiva = async (value) => {
   setJornadaActiva(false)
   
   setSiguientePantalla("Home")
+
+*/
   
 export const getUsuario = async (mail, contraseña) => {
     const consulta = `http://localhost:3000`
@@ -65,6 +69,14 @@ export const getUsuario = async (mail, contraseña) => {
 
 export const getJornada = async () => {
     const res = await fetch(API, {
+        METHOD: "GET",
+    })
+    console.log(res) 
+    return await res.json()
+}
+
+export const getJornadaActiva = async () => {
+  const res = await fetch(API5, {
         METHOD: "GET",
     })
     console.log(res) 
