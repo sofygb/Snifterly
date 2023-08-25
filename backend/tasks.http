@@ -5,6 +5,8 @@
 @api4 = http://localhost:3000/jornadaActiva
 @def = http://localhost:3000/def
 
+@api6 = http://localhost:3000/jornada
+
 GET {{api}}
 ### Para separar peticiones escribimos triple numeral
 GET {{api3}}
@@ -40,4 +42,17 @@ Content-Type: application/json
     "grado": "0.06",
     "fecha": "CAST(N'2023-02-21T01:00:00.000' AS DateTime)",
     "idJornada": "null",
+}
+
+POST {}
+
+POST {{api6}}
+Content-Type: application/json
+
+{
+    "idJornada": 10,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "idUsuario": 1,
+    "activo": false
 }

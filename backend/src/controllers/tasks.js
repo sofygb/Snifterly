@@ -139,9 +139,9 @@ export const saveMedicion = async (req, res) => {
 }
 export const saveJornada = async (req, res) => {
     const connection = await connect()
-    const result = await connection.query("INSERT INTO Jornada(idJornada, fechaInicio, fechaFin, idUsuario, activo) VALUES (?,?,?,?,?)", [
+    const result = await connection.query("INSERT INTO Jornada(idJornada, fechaInicio, fechaFin, idUsuario, activo) VALUES (?,NOW(),?,?,?)", [
         req.body.idJornada,
-        req.body.fechaInicio,
+        req.body.fechaInicio, 
         req.body.fechaFin,
         req.body.idUsuario,
         req.body.activo,
@@ -153,7 +153,7 @@ export const saveJornada = async (req, res) => {
 export const deleteTask = async (req, res) => {
     res.send("hello world");
 }
-export const updateTask = async (req, res) => {
+export const updateEstadoMedicion = async (req, res) => { //PENDIENTE
     res.send("hello world");
 }
 

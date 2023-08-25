@@ -50,7 +50,7 @@ export default function PrimeraHome({ navigation }) {
             <Text style={styles.titulo}>Snifterly</Text>
 
             <View style={styles.botonAgregar}>
-                <TouchableOpacity onPress={() => { navigation.navigate('IngresoDeDatos') }}>
+                <TouchableOpacity onPress={() => { crearJornada(), navigation.navigate('IngresoDeDatos') }}>
                     <Icon icon="icon-park-solid:add-one" color="white" width={'9rem'} />
                 </TouchableOpacity>
                 <Text style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', fontFamily: 'Alata', marginTop: '1rem' }}>nueva jornada</Text>

@@ -107,4 +107,12 @@ export const getFistMedicion = async () => {
     return await res.json()
 }
 
+export const setEstadoMedicion = async () => {
+  const res = await fetch(API5, {
+    METHOD: "SET",
+  })
+  console.log(res) 
+  return await res.json()
+}
+
 //el new date() admite la nomenclatura de la base de datos

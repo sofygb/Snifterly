@@ -5,7 +5,7 @@ import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { getUsuario } from '../../api';
-import { ActionTypes, useContextState } from '../navigation/contextState';
+import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 
 export default function InicioSesion({ navigation }) {
     const [mail, setMail] = React.useState("");
@@ -36,6 +36,8 @@ export default function InicioSesion({ navigation }) {
         }//login('sofia@gmail.com')
     }
 
+    //Estado
+
     const { contextState, setContextState } = useContextState()
 
     useEffect(() => {
@@ -52,7 +54,7 @@ export default function InicioSesion({ navigation }) {
             value: "Matheo"
         });
     }, [])
-    
+
     console.log(contextState)
 
 

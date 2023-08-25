@@ -68,104 +68,163 @@ export const reducer = (state = {}, action) => {
         case ActionTypes.SetUsuario:
             return {
                 ...state,
-                usuario: action.value,
+                usuario: {
+                    ...state.usuario,
+                    usuario: action.value
+                }
             };
         case ActionTypes.SetIdUsuario:
             return {
                 ...state,
-                idUsuario: action.value,
+                usuario: {
+                    ...state.usuario,
+                    idUsuario: action.value
+                }
             };
         case ActionTypes.SetNombre:
             return {
                 ...state,
-                nombre: action.value,
+                usuario: {
+                    ...state.usuario,
+                    nombre: action.value
+                }
             };
         case ActionTypes.SetFechaNacimiento:
             return {
                 ...state,
-                fechaNacimiento: action.value,
+                usuario: {
+                    ...state.usuario,
+                    fechaNacimiento: action.value
+                }
             };
         case ActionTypes.SetPeso:
             return {
                 ...state,
-                peso: action.value,
+                usuario: {
+                    ...state.usuario,
+                    peso: action.value
+                }
             };
         case ActionTypes.SetAltura:
             return {
                 ...state,
-                altura: action.value,
+                usuario: {
+                    ...state.usuario,
+                    altura: action.value
+                }
             };
         case ActionTypes.SetEmail:
             return {
                 ...state,
-                email: action.value,
+                usuario: {
+                    ...state.usuario,
+                    email: action.value
+                }
             };
         case ActionTypes.SetContrasenia:
             return {
                 ...state,
-                contrasenia: action.value,
+                usuario: {
+                    ...state.usuario,
+                    contrasenia: action.value
+                }
             };
         case ActionTypes.SetFechaCreacion:
             return {
                 ...state,
-                fechaCreacion: action.value,
+                usuario: {
+                    ...state.usuario,
+                    fechaCreacion: action.value
+                }
             };
         case ActionTypes.SetModResistencia:
             return {
                 ...state,
-                modResistencia: action.value,
+                usuario: {
+                    ...state.usuario,
+                    modResistencia: action.value
+                }
             };
         //JORNADA
         case ActionTypes.SetIdJornada:
             return {
                 ...state,
-                idJornada: action.value,
+                jornada: {
+                    ...state.jornada,
+                    idJornada: action.value,
+                }
             };
         case ActionTypes.SetFechaInicio:
             return {
-                ...state,
-                fechaInicio: action.value,
+                ...state,jornada: {
+                    ...state.jornada,
+                    fechaInicio: action.value,
+                }
             };
         case ActionTypes.SetFechaFin:
             return {
                 ...state,
-                fechaFin: action.value,
+                jornada: {
+                    ...state.jornada,
+                    fechaFin: action.value,
+                }
             };
         case ActionTypes.SetIdUsuarioJornada:
             return {
                 ...state,
-                idUsuario: action.value,
+                jornada: {
+                    ...state.jornada,
+                    idUsuario: action.value,
+                }
             };
         case ActionTypes.SetActivo:
             return {
                 ...state,
-                activo: action.value,
+                jornada: {
+                    ...state.jornada,
+                    activo: action.value,
+                }
             };
         //MEDICION
         case ActionTypes.SetIdMedicion:
             return {
                 ...state,
-                idMedicion: action.value,
+                medicion: {
+                    ...state.medicion,
+                    idMedicion: action.value
+                }
             };
         case ActionTypes.SetGrado:
             return {
                 ...state,
-                grado: action.value,
+                medicion: {
+                    ...state.medicion,
+                    grado: action.value
+                }
             };
         case ActionTypes.SetFecha:
             return {
                 ...state,
-                fecha: action.value,
+                medicion: {
+                    ...state.medicion,
+                    fecha: action.value
+                }
             };
         case ActionTypes.SetIdJornadaMedicion:
             return {
                 ...state,
-                idJornada: action.value,
+                medicion: {
+                    ...state.medicion,
+                    idJornada: action.value
+                }
             };
         case ActionTypes.SetEstado:
             return {
                 ...state,
-                estado: action.value,
+                medicion: {
+                    ...state.medicion,
+                    estado: action.value
+                }
             };
         default:
             return state;

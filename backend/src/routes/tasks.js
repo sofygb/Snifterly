@@ -17,7 +17,8 @@ import {
     getAvgMedicionesByIdJornada,
     getFistFechaMedicionByIdJornada,
     getUsuarioByEmail,
-    getJornadaActiva
+    getJornadaActiva,
+    saveJornada
 } from "../controllers/tasks.js";
 
 const router = Router(); //devuelve lo que se ejecuta en una constante. Router nos permite definir las urls
@@ -161,6 +162,14 @@ router.post("/usuarios", saveUsuario) //crear una tarea
  *    summary: Crea una nueva medicion
  */
 router.post("/mediciones", saveMedicion) //crear una medicion
+
+/** 
+ * @swagger
+ * /jornada:
+ *  post:
+ *    summary: Crea una nueva jornada
+ */
+router.post("/jornada", saveJornada) //crear una nueva jornada
 
 /** 
  * @swagger
