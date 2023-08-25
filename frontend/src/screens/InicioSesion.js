@@ -5,6 +5,7 @@ import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { getUsuario } from '../../api';
+import { ActionTypes, useContextState } from '../navigation/contextState';
 
 export default function InicioSesion({ navigation }) {
     const [mail, setMail] = React.useState("");
@@ -34,6 +35,27 @@ export default function InicioSesion({ navigation }) {
             console.log('ERRORRRRR')
         }//login('sofia@gmail.com')
     }
+
+    const { contextState, setContextState } = useContextState()
+
+    useEffect(() => {
+        setContextState({
+            type: ActionTypes.SetIdUsuario,
+            value: 1
+        });
+        setContextState({
+            type: ActionTypes.SetNombre,
+            value: "Matheo"
+        });
+        setContextState({
+            type: ActionTypes.SetContrasenia,
+            value: "Matheo"
+        });
+    }, [])
+    
+    console.log(contextState)
+
+
     const [hidePass, setHidePass] = useState(true);
 
     return (
@@ -52,7 +74,7 @@ export default function InicioSesion({ navigation }) {
             </TouchableOpacity>
 
             <View style={styles.espacioBotonLogin}>
-                <TouchableOpacity style={styles.botonLogin} onPress={() => { navigation.navigate('PrimeraHome') }}>
+                <TouchableOpacity style={styles.botonLogin} onPress={() => { navigation.navigate('PrimeraHome', { idUsuario: 1 }) }}>
                     <Text style={[{ color: 'white', fontSize: '1.2rem', fontFamily: 'inter' }]}>Log in</Text>
                 </TouchableOpacity>
             </View>

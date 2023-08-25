@@ -9,6 +9,7 @@ import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla } from '..
 //import siguientePantalla from '../../api.js'
 
 export default function PrimeraHome({ navigation }) {
+
     const loadJornada = async () => {
         const data = await getJornada()
         console.log(data)
