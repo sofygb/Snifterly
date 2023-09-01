@@ -4,7 +4,9 @@ import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
-import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla } from '../../api';
+import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, newJornada } from '../../api';
+import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
+
 //import jornadaActiva from '../../api.js'
 //import siguientePantalla from '../../api.js'
 
@@ -22,7 +24,6 @@ export default function PrimeraHome({ navigation }) {
         }
         loadJornada()
     })
-
     /*
     var jornadaActiva = getJornadaActiva()
     var siguientePantalla = getSiguientePantalla()
@@ -50,7 +51,7 @@ export default function PrimeraHome({ navigation }) {
             <Text style={styles.titulo}>Snifterly</Text>
 
             <View style={styles.botonAgregar}>
-                <TouchableOpacity onPress={() => { crearJornada(), navigation.navigate('IngresoDeDatos') }}>
+                <TouchableOpacity onPress={() => { navigation.navigate('IngresoDeDatos') }}>
                     <Icon icon="icon-park-solid:add-one" color="white" width={'9rem'} />
                 </TouchableOpacity>
                 <Text style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', fontFamily: 'Alata', marginTop: '1rem' }}>nueva jornada</Text>
@@ -80,8 +81,9 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'orange',
-        fontFamily: 'alata',
+        //backgroundColor: 'orange',
+        fontFamily: 'alata', 
+        backgroundImage: "linear-gradient(180deg, #FC9B29 0%, #FC8E29 0%, #FF5925 100%, #E93921)"
     },
     titulo: {
         display: 'flex',

@@ -161,15 +161,15 @@ router.post("/usuarios", saveUsuario) //crear una tarea
  *  post:
  *    summary: Crea una nueva medicion
  */
-router.post("/mediciones", saveMedicion) //crear una medicion
+router.post("/medicion/:grado/:idJornada", saveMedicion) //crear una medicion
 
 /** 
  * @swagger
- * /jornada:
+ * /jornada/:idUsuario
  *  post:
  *    summary: Crea una nueva jornada
  */
-router.post("/jornada", saveJornada) //crear una nueva jornada
+router.post("/jornada/:idUsuario", saveJornada) //crear una nueva jornada
 
 /** 
  * @swagger
@@ -185,7 +185,7 @@ router.delete("/tasks/:id", deleteTask) //delete una tarea por su id
  *  put:
  *    summary: Actualiza un usuarios por su id
  */
-router.put("/tasks/:id", updateTask) //modificar una tarea por su id
+//router.put("/tasks/:id", updateTask) //modificar una tarea por su id
 
 router.get("/def", def)
 

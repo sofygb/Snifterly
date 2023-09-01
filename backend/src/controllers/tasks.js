@@ -58,9 +58,9 @@ export const getJornadaById = async (req, res) => {
 }
 export const getJornadaActiva = async (req, res) => {
     const connection = await connect()
-    const [rows] = await connection.query("SELECT * FROM Jornada WHERE activo = 1", [
+    const [rows] = await connection.query("SELECT idJornada FROM Jornada WHERE activo = 1", [
     ])
-    res.json(rows[0])
+    res.json(rows[0]["idJornada"])
 
     console.log(rows[0])
 }
@@ -127,29 +127,23 @@ export const saveUsuario = async (req, res) => {
 }
 export const saveMedicion = async (req, res) => {
     const connection = await connect()
-    const result = await connection.query("INSERT INTO Medicion(idMedicion, grado, fecha, idJornada) VALUES (?,?,?,?)", [
-        req.body.idMedicion,
-        req.body.grado,
-        req.body.fecha,
-        req.body.idJornada,
+    const result = await connection.query("INSERT INTO Medicion(grado, fecha, idJornada) VALUES (?,NOW(),?)", [
+        req.params.grado,
+        req.params.idJornada,
     ])
     res.json(result)
 
     console.log(result)
 }
 export const saveJornada = async (req, res) => {
-    const connection = await connect()
-    const result = await connection.query("INSERT INTO Jornada(idJornada, fechaInicio, fechaFin, idUsuario, activo) VALUES (?,NOW(),?,?,?)", [
-        req.body.idJornada,
-        req.body.fechaInicio, 
-        req.body.fechaFin,
-        req.body.idUsuario,
-        req.body.activo,
-    ])
-    res.json(result)
-
-    console.log(result)
-}
+    console.log(req.body)
+        const connection = await connect();
+        const nuevaJornada = await connection.query("INSERT INTO Jornada(fechaInicio, fechaFin, idUsuario, activo) VALUES (NOW(),?,?,1)", [
+            null,
+            req.params.idUsuario]
+        );
+        res.json(nuevaJornada);
+        }
 export const deleteTask = async (req, res) => {
     res.send("hello world");
 }

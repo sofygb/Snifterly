@@ -11,6 +11,10 @@ const API4 = 'http://localhost:3000/mediciones/first/3'
 
 const API5 = 'http://localhost:3000/jornadaActiva'
 
+const API6 = 'http://localhost:3000/jornada'
+
+const API7 = 'http://localhost:3000/medicion'
+
 
 /*
 export const setJornadaActiva = async (value) => {
@@ -111,6 +115,13 @@ export const setEstadoMedicion = async () => {
   const res = await fetch(API5, {
     METHOD: "SET",
   })
+  console.log(res) 
+  return await res.json()
+}
+
+export const newJornada = async (idUsuario) => {
+  const json = JSON.stringify(idUsuario)
+  const res = await fetch(postMessage(API6 + `/${idUsuario}`), { METHOD: "POST",})
   console.log(res) 
   return await res.json()
 }
