@@ -15,6 +15,8 @@ const API6 = 'http://localhost:3000/jornada'
 
 const API7 = 'http://localhost:3000/medicion'
 
+const API9 = 'http://localhost:3000/jornada/6'
+
 
 /*
 export const setJornadaActiva = async (value) => {
@@ -82,6 +84,14 @@ export const getJornada = async () => {
 export const getJornadaActiva = async () => {
   const res = await fetch(API5, {
         METHOD: "GET",
+    })
+    console.log(res) 
+    return await res.json()
+}
+
+export const setJornadaDesactivaById = async () => {
+  const res = await fetch(API9, {
+        METHOD: "POST",
     })
     console.log(res) 
     return await res.json()

@@ -34,6 +34,18 @@ export default function IngresoDeDatos({ navigation }) {
     setFontsLoaded(true);
   }
   
+  const [jornadaNueva, setNuevaJornada] = useState();
+
+async function miFuncionAsincrona() {
+  try {
+    const jornada = await getJornadaActiva();
+    setNuevaJornada(jornada);
+    console.log('la jornada es:', jornada);
+  } catch (error) {
+    console.error('Error al obtener la jornada activa', error);
+  }
+}
+
   const nuevaJornada = getJornadaActiva()
   console.log(nuevaJornada)
 
@@ -73,7 +85,7 @@ export default function IngresoDeDatos({ navigation }) {
         <TextInput style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} onChangeText={setText} value={text} placeholder={'agregar medición...'} id='grado'/>
 
         <View style={[styles.espaciosBotones, { flexDirection: 'row', display: 'flex', alignItems: 'center' }]}>
-          <TouchableOpacity style={styles.botonAceptar} onPress={() => { agregarMedicionYJornada(text, getJornadaActiva()), navigation.navigate('EstadoUsuario') }}> {//EL GETJORNDADAACTIVA TRAE UN CHOCLO
+          <TouchableOpacity style={styles.botonAceptar} onPress={() => { agregarMedicionYJornada(text, miFuncionAsincrona()), navigation.navigate('EstadoUsuario') }}> {//EL GETJORNDADAACTIVA TRAE UN CHOCLO
           }
             <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Aceptar</Text>
           </TouchableOpacity>

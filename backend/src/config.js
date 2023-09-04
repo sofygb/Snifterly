@@ -15,7 +15,7 @@ export const config = {
     host        : 'localhost' ,
     user        : 'root',
     password    : '' ,
-    database    : 'SnifterlyDB' ,
+    database    : 'snifterlydb' ,
 }
 
 //localhost:3000/docs

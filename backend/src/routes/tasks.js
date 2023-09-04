@@ -18,7 +18,8 @@ import {
     getFistFechaMedicionByIdJornada,
     getUsuarioByEmail,
     getJornadaActiva,
-    saveJornada
+    saveJornada,
+    setJornadaDesactivaById
 } from "../controllers/tasks.js";
 
 const router = Router(); //devuelve lo que se ejecuta en una constante. Router nos permite definir las urls
@@ -178,6 +179,14 @@ router.post("/jornada/:idUsuario", saveJornada) //crear una nueva jornada
  *    summary: Elimina el usuario por su id
  */
 router.delete("/tasks/:id", deleteTask) //delete una tarea por su id
+
+/** 
+ * @swagger
+ * /jornada/:id:
+ *  post:
+ *    summary: el valor activo pasa a 0
+ */
+router.post("/jornada/:id", setJornadaDesactivaById) //termina la jornada
 
 /** 
  * @swagger

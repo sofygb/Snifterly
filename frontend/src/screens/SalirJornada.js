@@ -3,6 +3,7 @@ import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity, 
 import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
+import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, newJornada, setJornadaDesactivaById } from '../../api';
 import * as Font from 'expo-font';
 
 export default function SalirJornada({ navigation }) {
@@ -26,6 +27,12 @@ export default function SalirJornada({ navigation }) {
     });
     setFontsLoaded(true);
   }
+
+  const idJornadaActiva = getJornadaActiva()
+  const salirJornada = () => {
+    setJornadaDesactivaById(6)
+    console.log('hola')
+  }
   return (
     <View style={styles.container}>
       <View style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
@@ -36,7 +43,7 @@ export default function SalirJornada({ navigation }) {
         <TouchableOpacity style={styles.botonAceptar} onPress={() => { navigation.navigate('Home') }}>
           <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Seguir</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.botonCancelar} onPress={() => { navigation.navigate('PrimeraHome') }}>
+        <TouchableOpacity style={styles.botonCancelar} onPress={() => {salirJornada(), navigation.navigate('PrimeraHome') }}>
           <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter' }]}>Finalizar</Text>
         </TouchableOpacity>
       </View>
