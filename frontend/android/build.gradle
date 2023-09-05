@@ -3,6 +3,10 @@ def safeExtGet(prop, fallback) {
 }
 
 buildscript {
+        ext {
+        minSdkVersion = 21
+        }
+        //añadido según tutorial ''''
     repositories {
         jcenter()
         maven {
