@@ -7,11 +7,15 @@
 
 @api6 = http://localhost:3000/jornada
 
+@api7 = http://localhost:3000/newMedicion
+
 @api8 = http://localhost:3000/medicion
 
 @api9 = http://localhost:3000/jornadaDesactiva
 
 @api10 = http://localhost:3000/medicionEstado
+
+@api11 = http://localhost:3000/ultimaMedicion
 
 GET {{api}}
 ### Para separar peticiones escribimos triple numeral
@@ -25,11 +29,15 @@ GET {{api}}/count
 ###
 GET {{api4}}
 ###
+POST {{api7}}/1/10
+###
 POST {{api6}}/1
 ###
 PUT {{api9}}
 ###
 PUT {{api10}}/14/muymal
+###
+GET {{api11}}/1
 ###
 POST {{api8}}/0.2/1
 ### No funcional de momento

@@ -21,7 +21,8 @@ import {
     saveJornada,
     setJornadaDesactiva,
     setMediciones,
-    setEstadoUsuario
+    setEstadoUsuario,
+    getUltimaMedicion
 } from "../controllers/tasks.js";
 
 const router = Router(); //devuelve lo que se ejecuta en una constante. Router nos permite definir las urls
@@ -93,6 +94,15 @@ router.get("/mediciones/count/:idJornada", getMedicionesCountByIdJornada)
  *    tags: [Tasks]
  */
 router.get("/mediciones/first/:idJornada", getFistFechaMedicionByIdJornada)
+
+/** 
+ * @swagger
+ * /ultimaMedicion:
+ *  get:
+ *    summary: Trae la última medición hecha
+ *    tags: [Tasks]
+ */
+router.get("/ultimaMedicion/:idJornada", getUltimaMedicion)
 
 /** 
  * @swagger
@@ -205,7 +215,7 @@ router.put("/jornadaDesactiva", setJornadaDesactiva) //termina la jornada
  *  post:
  *    summary: sube los datos de la nueva medición
  */
-router.post("/mediciones/:grado/:idjornada", setMediciones ) // nueva medición
+router.post("/newMedicion/:grado/:idjornada", setMediciones ) // nueva medición
 
 /** 
  * @swagger

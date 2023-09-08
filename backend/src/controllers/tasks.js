@@ -12,14 +12,14 @@ export const getJornadas = async (req, res) => {
     const connection = await connect()
     const [rows] = await connection.query("SELECT * FROM Jornada")
     res.json(rows)
-    
+
     console.log(rows)
 }
 export const setJornadaActivaById = async (req, res) => {
     const connection = await connect()
     const [rows] = await connection.query("UPDATE jornada SET activo = 1 WHERE idJornada = ?")
     res.json(rows)
-    
+
     console.log(rows)
 }
 
@@ -27,15 +27,15 @@ export const setJornadaDesactiva = async (req, res) => {
     const connection = await connect()
     const [rows] = await connection.query("UPDATE jornada SET activo = 0")
     res.json(rows[0])
-    
+
     console.log(rows[0])
 }
 
 export const setMediciones = async (req, res) => {
     const connection = await connect()
-    const [rows] = await connection.query("INSERT INTO Mediciones(grado, fecha, idJornada, estado) VALUES (?,NOW(),?,null)", [
-	req.params.grado,        
-	req.params.idJornada,
+    const [rows] = await connection.query("INSERT INTO medicion(grado, fecha, idJornada, estado) VALUES (?,NOW(),?,null)", [
+        req.params.grado,
+        req.params.idJornada,
     ])
     res.json(rows)
     console.log(rows)
@@ -48,7 +48,7 @@ export const setEstadoUsuario = async (req, res) => {
         req.params.idMedicion,
     ])
     res.json(rows[0])
-    
+
     console.log(rows[0])
 }
 
@@ -59,6 +59,17 @@ export const getMediciones = async (req, res) => {
 
     console.log(rows)
 }
+
+export const getUltimaMedicion = async (req, res) => {
+    const connection = await connect()
+    const [rows] = await connection.query("SELECT * FROM `medicion` WHERE idJornada = ? ORDER BY fecha DESC LIMIT 1",[
+        req.params.idJornada,
+    ])
+    res.json(rows[0])
+
+    console.log(rows[0])
+}
+
 export const getUsuarioById = async (req, res) => {
     const connection = await connect()
     const [rows] = await connection.query("SELECT * FROM Usuario WHERE idUsuario = ?", [
@@ -167,13 +178,13 @@ export const saveMedicion = async (req, res) => {
 }
 export const saveJornada = async (req, res) => {
     console.log(req.body)
-        const connection = await connect();
-        const nuevaJornada = await connection.query("INSERT INTO Jornada(fechaInicio, fechaFin, idUsuario, activo) VALUES (NOW(),?,?,1)", [
-            null,
-            req.params.idUsuario]
-        );
-        res.json(nuevaJornada);
-        }
+    const connection = await connect();
+    const nuevaJornada = await connection.query("INSERT INTO Jornada(fechaInicio, fechaFin, idUsuario, activo) VALUES (NOW(),?,?,1)", [
+        null,
+        req.params.idUsuario]
+    );
+    res.json(nuevaJornada);
+}
 export const deleteTask = async (req, res) => {
     res.send("hello world");
 }

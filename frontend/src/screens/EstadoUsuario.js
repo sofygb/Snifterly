@@ -5,7 +5,7 @@ import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { setContextState, ActionTypes, contextState, useContextState } from '../navigation/contextState';
-import { getJornada, setEstadoUsuario} from "../../api";
+import { getJornada, setEstadoUsuario, getUltimaMedicion, getJornadaActiva} from "../../api";
 
 
 export default function EstadoUsuario({ navigation }) {
@@ -38,7 +38,8 @@ export default function EstadoUsuario({ navigation }) {
           type: ActionTypes.SetEstado,
           value: estado
       });
-      setEstadoUsuario(15, estado)
+      contextState.medicion.idMedicion
+      setEstadoUsuario(getUltimaMedicion(getJornadaActiva()).idMedicion, estado)
 
       console.log(contextState)
   }

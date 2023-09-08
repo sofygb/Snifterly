@@ -4,7 +4,7 @@ import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
-import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, saveJornada, getJornada  } from '../../api';
+import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, saveJornada, getJornada, setMediciones, getUltimaMedicion  } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 
 //import jornadaActiva from '../../api.js'
@@ -33,26 +33,26 @@ export default function IngresoDeDatos({ navigation }) {
     setFontsLoaded(true);
   }
   
-  const [jornadaNueva, setNuevaJornada] = useState();
 
-async function miFuncionAsincrona() {
-  try {
-    const jornada = await getJornadaActiva();
-    setNuevaJornada(jornada);
-    console.log('la jornada es:', jornada);
-  } catch (error) {
-    console.error('Error al obtener la jornada activa', error);
-  }
-}
+  const agregarMedicionYJornada = (grado) => {
+    /**
+     * setContextState({
+      type: ActionTypes.SetIdJornada,
+      value: idJornada
+    });
 
-  const nuevaJornada = getJornadaActiva()
-  console.log(nuevaJornada)
+    console.log("el idJornada es: " + idJornada)
 
-  const agregarMedicionYJornada = (grado, idJornada) => {
+    //
+
     console.log(grado, idJornada)
+     */
+    
     const idUsuario = contextState.usuario.idUsuario
     console.log(idUsuario)
     saveJornada(idUsuario)
+    console.log('JORNADA ACTIVA:' + getJornadaActiva())
+    setMediciones(grado, getJornadaActiva())
 
 
     //nueva medición: grado - idJornada
@@ -85,7 +85,7 @@ async function miFuncionAsincrona() {
         <TextInput style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} onChangeText={setText} value={text} placeholder={'agregar medición...'} id='grado'/>
 
         <View style={[styles.espaciosBotones, { flexDirection: 'row', display: 'flex', alignItems: 'center' }]}>
-          <TouchableOpacity style={styles.botonAceptar} onPress={() => { agregarMedicionYJornada(text, miFuncionAsincrona()), navigation.navigate('EstadoUsuario') }}> {//EL GETJORNDADAACTIVA TRAE UN CHOCLO
+          <TouchableOpacity style={styles.botonAceptar} onPress={() => { agregarMedicionYJornada(text), navigation.navigate('EstadoUsuario') }}> {//EL GETJORNDADAACTIVA TRAE UN CHOCLO
 }
             <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Aceptar</Text>
           </TouchableOpacity>
