@@ -10,16 +10,6 @@ import { ActionTypes, setContextState, useContextState } from '../navigation/con
 //import jornadaActiva from '../../api.js'
 //import siguientePantalla from '../../api.js'
 
-//bluetooh ,,,
-
-import { BleManager, Device } from 'react-native-ble-plx';
-
-const manager = new BleManager();
-
-
-
-//bluetooth '''
-
 export default function IngresoDeDatos({ navigation }) {
   const initialText = '';
   const [text, setText] = useState(initialText);
