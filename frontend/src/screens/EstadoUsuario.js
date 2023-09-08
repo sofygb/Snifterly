@@ -5,6 +5,8 @@ import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { setContextState, ActionTypes, contextState, useContextState } from '../navigation/contextState';
+import { getJornada, setEstadoUsuario} from "../../api";
+
 
 export default function EstadoUsuario({ navigation }) {
   const initialText = '';
@@ -12,7 +14,6 @@ export default function EstadoUsuario({ navigation }) {
   const loadJornada = async () => {
     const data = await getJornada()
     console.log(data)
-    setJornada([data])
   }
   const [fontsLoaded, setFontsLoaded] = useState(false);
   useEffect(() => {
@@ -37,6 +38,8 @@ export default function EstadoUsuario({ navigation }) {
           type: ActionTypes.SetEstado,
           value: estado
       });
+      setEstadoUsuario(15, estado)
+
       console.log(contextState)
   }
     return(
@@ -48,15 +51,15 @@ export default function EstadoUsuario({ navigation }) {
                   <TouchableOpacity style={styles.cuadro} onPress={() => {  upDateEstadoUsuario('bien'), navigation.navigate('Home') }}>
                     <Image source={require('../assets/emojis/SmilingFacewithSunglasses.png')} style={styles.imagen}/>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.cuadro} onPress={() => { upDateEstadoUsuario('normal'), navigation.navigate('Sintomas') }}>
-                    <Image source={require('../assets/emojis/NeutralFace.png')} style={styles.imagen}/>
+                  <TouchableOpacity style={styles.cuadro} onPress={() => { upDateEstadoUsuario('normal'), navigation.navigate('Home') }}>
+                    <Image source={require('../assets/emojis/NeutralFace.png')} style={styles.imagen}/> 
                   </TouchableOpacity>
                 </View>
                 <View style={[styles.espacioCuadros] }>
-                  <TouchableOpacity style={styles.cuadro} onPress={() => { upDateEstadoUsuario('mal'), navigation.navigate('Sintomas') }}>
+                  <TouchableOpacity style={styles.cuadro} onPress={() => { upDateEstadoUsuario('mal'), navigation.navigate('Home') }}>
                     <Image source={require('../assets/emojis/FacewithSpiralEyes.png')} style={styles.imagen}/>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.cuadro} onPress={() => { upDateEstadoUsuario('muy mal'), navigation.navigate('Sintomas') }}>
+                  <TouchableOpacity style={styles.cuadro} onPress={() => { upDateEstadoUsuario('muy mal'), navigation.navigate('Home') }}>
                     <Image source={require('../assets/emojis/FacewithCrossed-OutEyes.png')} style={styles.imagen}/>
                   </TouchableOpacity>
                 </View>

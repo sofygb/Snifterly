@@ -4,25 +4,18 @@ import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
-import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, newJornada } from '../../api';
+import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, newJornada, getJornada } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 
 //import jornadaActiva from '../../api.js'
 //import siguientePantalla from '../../api.js'
 
 export default function PrimeraHome({ navigation }) {
-
-    const loadJornada = async () => {
-        const data = await getJornada()
-        console.log(data)
-        setJornada([data])
-    }
     const [fontsLoaded, setFontsLoaded] = useState(false);
     useEffect(() => {
         if (!fontsLoaded) {
             loadFonts();
         }
-        loadJornada()
     })
     /*
     var jornadaActiva = getJornadaActiva()

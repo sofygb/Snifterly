@@ -19,7 +19,9 @@ import {
     getUsuarioByEmail,
     getJornadaActiva,
     saveJornada,
-    setJornadaDesactivaById
+    setJornadaDesactiva,
+    setMediciones,
+    setEstadoUsuario
 } from "../controllers/tasks.js";
 
 const router = Router(); //devuelve lo que se ejecuta en una constante. Router nos permite definir las urls
@@ -39,6 +41,15 @@ const router = Router(); //devuelve lo que se ejecuta en una constante. Router n
  *    tags: [Tasks]
  */
 router.get("/usuarios", getUsuarios) //get todas las tareas
+
+/** 
+ * @swagger
+ * /medicionEstado/:idMedicion/:estado:
+ *  put:
+ *    summary: set estado usuario
+ *    tags: [Tasks]
+ */
+router.put("/medicionEstado/:idMedicion/:estado", setEstadoUsuario)
 
 /**
  * @swagger
@@ -182,11 +193,19 @@ router.delete("/tasks/:id", deleteTask) //delete una tarea por su id
 
 /** 
  * @swagger
- * /jornada/:id:
- *  post:
+ * /jornadaDesactiva:   
+ *  put:
  *    summary: el valor activo pasa a 0
  */
-router.post("/jornada/:id", setJornadaDesactivaById) //termina la jornada
+router.put("/jornadaDesactiva", setJornadaDesactiva) //termina la jornada
+
+/**
+ * @swagger
+ * /medicione/:grado/:idjornada
+ *  post:
+ *    summary: sube los datos de la nueva medición
+ */
+router.post("/mediciones/:grado/:idjornada", setMediciones ) // nueva medición
 
 /** 
  * @swagger

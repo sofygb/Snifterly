@@ -23,10 +23,29 @@ export const setJornadaActivaById = async (req, res) => {
     console.log(rows)
 }
 
-export const setJornadaDesactivaById = async (req, res) => {
+export const setJornadaDesactiva = async (req, res) => {
     const connection = await connect()
-    const [rows] = await connection.query("UPDATE jornada SET activo = 0 WHERE idJornada = ?",[
-        req.params.idJornada
+    const [rows] = await connection.query("UPDATE jornada SET activo = 0")
+    res.json(rows[0])
+    
+    console.log(rows[0])
+}
+
+export const setMediciones = async (req, res) => {
+    const connection = await connect()
+    const [rows] = await connection.query("INSERT INTO Mediciones(grado, fecha, idJornada, estado) VALUES (?,NOW(),?,null)", [
+	req.params.grado,        
+	req.params.idJornada,
+    ])
+    res.json(rows)
+    console.log(rows)
+}
+
+export const setEstadoUsuario = async (req, res) => {
+    const connection = await connect()
+    const [rows] = await connection.query("UPDATE medicion SET estado = ? where idMedicion = ?", [
+        req.params.estadoUsuario,
+        req.params.idMedicion,
     ])
     res.json(rows[0])
     
@@ -71,10 +90,9 @@ export const getJornadaActiva = async (req, res) => {
     const connection = await connect()
     const [rows] = await connection.query("SELECT idJornada FROM Jornada WHERE activo = 1", [
     ])
-    const idJornada = rows[0]["idJornada"];
-    res.json(idJornada);
+    res.json(rows[0]["idJornada"])
 
-    console.log(idJornada);
+    console.log(rows[0]["idJornada"])
 }
 export const getUsuariosCount = async (req, res) => {
     const connection = await connect()

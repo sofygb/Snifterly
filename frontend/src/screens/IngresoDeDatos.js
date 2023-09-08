@@ -4,7 +4,7 @@ import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
-import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, newJornada } from '../../api';
+import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, saveJornada, getJornada  } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 
 //import jornadaActiva from '../../api.js'
@@ -17,7 +17,6 @@ export default function IngresoDeDatos({ navigation }) {
   const loadJornada = async () => {
     const data = await getJornada()
     console.log(data)
-    setJornada([data])
   }
   const [fontsLoaded, setFontsLoaded] = useState(false);
   useEffect(() => {
@@ -52,7 +51,8 @@ async function miFuncionAsincrona() {
   const agregarMedicionYJornada = (grado, idJornada) => {
     console.log(grado, idJornada)
     const idUsuario = contextState.usuario.idUsuario
-    newJornada(idUsuario)
+    console.log(idUsuario)
+    saveJornada(idUsuario)
 
 
     //nueva medición: grado - idJornada
@@ -86,7 +86,7 @@ async function miFuncionAsincrona() {
 
         <View style={[styles.espaciosBotones, { flexDirection: 'row', display: 'flex', alignItems: 'center' }]}>
           <TouchableOpacity style={styles.botonAceptar} onPress={() => { agregarMedicionYJornada(text, miFuncionAsincrona()), navigation.navigate('EstadoUsuario') }}> {//EL GETJORNDADAACTIVA TRAE UN CHOCLO
-          }
+}
             <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Aceptar</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.botonCancelar} onPress={() => { navigation.navigate("Home") }}>

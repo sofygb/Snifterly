@@ -15,7 +15,9 @@ const API6 = 'http://localhost:3000/jornada'
 
 const API7 = 'http://localhost:3000/medicion'
 
-const API9 = 'http://localhost:3000/jornada/6'
+const API9 = 'http://localhost:3000/jornadaDesactiva'
+
+const API10 = 'http://localhost:3000/medicionEstado'
 
 
 /*
@@ -83,16 +85,20 @@ export const getJornada = async () => {
 
 export const getJornadaActiva = async () => {
   const res = await fetch(API5, {
-        METHOD: "GET",
+        method: "GET",
     })
     console.log(res) 
     return await res.json()
 }
 
-export const setJornadaDesactivaById = async () => {
-  const res = await fetch(API9, {
-        METHOD: "POST",
-    })
+export const setJornadaDesactiva = async () => {
+  const res = await fetch(API9, { method: "PUT",})
+    console.log(res) 
+    return await res.json()
+}
+
+export const setEstadoUsuario = async (idMedicion, estadoUsuario) => {
+  const res = await fetch(API10 + `/${idMedicion}/${estadoUsuario}`, { method: "PUT",})
     console.log(res) 
     return await res.json()
 }
@@ -129,10 +135,9 @@ export const setEstadoMedicion = async () => {
   return await res.json()
 }
 
-export const newJornada = async (idUsuario) => {
-  const json = JSON.stringify(idUsuario)
-  const res = await fetch(postMessage(API6 + `/${idUsuario}`), { METHOD: "POST",})
-  console.log(res) 
+export const saveJornada = async (idUsuario) => {
+  const res = await fetch(API6 + `/${idUsuario}`, { method: "POST",})
+  console.log(res)  
   return await res.json()
 }
 
