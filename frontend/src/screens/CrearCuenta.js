@@ -4,22 +4,71 @@ import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
+import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 
 export default function CrearCuenta({ navigation }) {
     const [text, setText] = React.useState("");
     const [textdos, setTextdos] = React.useState("");
-    const loadJornada = async () => {
-        const data = await getJornada()
+    const { contextState, setContextState } = useContextState()
+    const [ usuarios, setUsuarios] = React.useState([])
+
+    const validacion = usuarios.findIndex(usuario => usuario.email === mail && usuario.contrasenia === contraseña)
+
+    const guardarDatos = () => {
+        const validacion = usuarios.findIndex(usuario => usuario.email === mail && usuario.contrasenia === contraseña)
+        
+        if(validacion == -1) {
+            setContextState({
+                type: ActionTypes.SetIdUsuario,
+                value: usuarios[validacion].idUsuario
+            });
+            setContextState({
+                type: ActionTypes.SetNombre,
+                value: usuarios[validacion].nombre
+            });
+            setContextState({
+                type: ActionTypes.SetContrasenia,
+                value: usuarios[validacion].contrasenia
+            });
+            setContextState({
+                type: ActionTypes.SetEmail,
+                value: usuarios[validacion].email
+            });
+            setContextState({
+                type: ActionTypes.SetFechaNacimiento,
+                value: new Date(usuarios[validacion].fechaNacimiento)
+            });
+            setContextState({
+                type: ActionTypes.SetFechaCreacion,
+                value: new Date(usuarios[validacion].fechaCreacion)
+            });
+            setContextState({
+                type: ActionTypes.SetModResistencia,
+                value: usuarios[validacion].modResistencia
+            });
+            setContextState({
+                type: ActionTypes.SetPeso,
+                value: usuarios[validacion].peso
+            });
+            setContextState({
+                type: ActionTypes.SetAltura,
+                value: usuarios[validacion].altura
+            });
+
+    }
+
+    const getUsuarios = async () => {
+        const data = await getUsuarios()
+        setUsuarios(data)
         console.log(data)
-        setJornada([data])
     }
     const [fontsLoaded, setFontsLoaded] = useState(false);
     useEffect(() => {
         if (!fontsLoaded) {
             loadFonts();
         }
-        loadJornada()
-    })
+        getUsuarios()
+    },[])
 
     const loadFonts = async () => {
         await Font.loadAsync({
@@ -35,6 +84,7 @@ export default function CrearCuenta({ navigation }) {
             
             <Text style={styles.titulo}>Te damos la bienvenida a Snifterly!</Text>
             <Text style={styles.texto}>SIGN UP</Text>
+            <TextInput variant="outlined" label="nombre" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} />
             <TextInput variant="outlined" label="Mail" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={text} onChangeText={text => setText(text)}/>
             <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={textdos} onChangeText={textdos => setTextdos(textdos)}/>
 
@@ -62,7 +112,7 @@ export default function CrearCuenta({ navigation }) {
                 </TouchableOpacity>
             </View>
         
-            <View style={{flexDirection: 'row', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', marginTop: '2rem'}}>
+            <View style={{flexDirection: 'row', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', marginTop: '1rem'}}>
                 <Text style={{fontSize: '1rem', fontFamily: 'inter' }}>¿Ya tienes una cuenta? </Text>
                 <TouchableOpacity onPress={() => { navigation.navigate('InicioSesion') }}>
                     <Text style={{color: 'blue', fontSize: '1rem', fontFamily: 'inter'}}>Loguearse</Text>
@@ -70,6 +120,7 @@ export default function CrearCuenta({ navigation }) {
             </View>
         </View>
     )
+}
 }
 
 

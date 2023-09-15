@@ -26,7 +26,7 @@ import {
     getUsuarioByEmailAndContrasenia,
     getJornadaRecienteByIdUsuario,
     getUltimaMedicionByIdJornada,
-    setFechaFinJornada
+    setFechaFinJornada,
 } from "../controllers/tasks.js";
 
 const router = Router(); //devuelve lo que se ejecuta en una constante. Router nos permite definir las urls

@@ -191,12 +191,12 @@ export const getMedicionesFromIdJornada = async (req, res) => {
 }
 export const getUltimaMedicionByIdJornada = async (req, res) => {
     const connection = await connect()
-    const [rows] = await connection.query("SELECT * FROM Medicion WHERE idJornada = ? ORDER BY fecha ASC LIMIT 1", [
+    const [rows] = await connection.query("SELECT * FROM Medicion WHERE idJornada = ? ORDER BY fecha DESC LIMIT 1", [
         req.params.idJornada,
     ])
-    res.json(rows)
+    res.json(rows[0])
 
-    console.log(rows)
+    console.log(rows[0])
 }
 
 export const saveUsuario = async (req, res) => {

@@ -15,7 +15,7 @@ import { HomeFilled } from "@ant-design/icons";
 import { Icon } from "@iconify/react";
 import React, { useState, useEffect } from "react";
 import * as Font from "expo-font";
-import { getJornada, getMedicionesCountByIdJornada, getAvgMediciones, getFistMedicion, getUsuarios, getMedicionReciente } from "../../api";
+import { getJornada, getMedicionesCountByIdJornada, getAvgMediciones, getFistMedicion, getUsuarios, getMedicionReciente, getLastMedicionByIdJornada } from "../../api";
 import { useIsFocused } from "@react-navigation/native";
 import Progress from "react-circle-progress-bar";
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
@@ -33,6 +33,8 @@ export default function Home({ navigation }) {
 
   const [gradoActual, setGradoActual] = useState(0);
 
+  const [lastMedicion, setLastMedicion] = useState(0);
+
   const [primeraMedicion, setPrimeraMedicion] = useState(new Date());
 
   const { contextState, setContextState } = useContextState()
@@ -48,7 +50,7 @@ export default function Home({ navigation }) {
     setJornada(data);
     console.log(data);
 
-    const allUsuarios = await getUsuarios();
+    const data5 = await getUsuarios();
     setJornada(data5);
     console.log(data5);
     
@@ -58,13 +60,31 @@ export default function Home({ navigation }) {
     const data3 = await getAvgMediciones();
     setAvgMediciones(data3);
 
+    const lastMedicionn = await getLastMedicionByIdJornada(contextState.jornada.idJornada)
+    console.log(lastMedicionn)
+    setLastMedicion(lastMedicionn)
+    setGradoActual(lastMedicionn.grado)
 
+    async function calcularDiferencia() {
+      try {
+        const data4 = await getFistMedicion(contextState.jornada.idJornada); // Obtener la fecha de la primera medición
+        const fecha = new Date(data4);
+        const horaActual = new Date();
+        const diferenciaEnMilisegundos = horaActual - fecha;
+    
+        const horas = Math.floor(diferenciaEnMilisegundos / 3600000); // 1 hora = 3600000 milisegundos
+        const minutos = Math.floor((diferenciaEnMilisegundos % 3600000) / 60000); // 1 minuto = 60000 milisegundos
+        const segundos = Math.floor((diferenciaEnMilisegundos % 60000) / 1000); // 1 segundo = 1000 milisegundos
+    
+        console.log(`Diferencia: ${horas} horas, ${minutos} minutos, ${segundos} segundos`);
+      } catch (error) {
+        console.error("Error al obtener la fecha de la primera medición", error);
+      }
+    }
+    
+    calcularDiferencia();
 
-    const data4 = await getFistMedicion();
-    const fecha = new Date(data4)
-    console.log(fecha)
-    setPrimeraMedicion(fecha);
-    console.log(primeraMedicion) //No guarda la fecha
+    
     /*
     try {
       const data = await getJornada()
@@ -129,7 +149,7 @@ export default function Home({ navigation }) {
         <View style={styles.cuadro}>
           <View style={{ flexDirection: "row", marginLeft: "0.5rem" }}>
             <Text style={[styles.medicion, { fontSize: "2.5rem" }]}>
-              {avgMediciones}
+              {lastMedicion.grado}
             </Text>
             <Text style={styles.medicion}> dg/l</Text>
           </View>

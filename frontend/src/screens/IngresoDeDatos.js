@@ -46,7 +46,13 @@ export default function IngresoDeDatos({ navigation }) {
   
 
   const agregarMedicion = (grado) => {
-    setMediciones(grado, contextState.jornada.idJornada)
+    if(grado != null) {
+      setMediciones(grado, contextState.jornada.idJornada)
+      navigation.navigate('EstadoUsuario')
+    }
+    else{
+      console.error("Error: No se ingresó el grado")
+    }
   }
   /*
   var jornadaActiva = getJornadaActiva()
@@ -72,7 +78,7 @@ export default function IngresoDeDatos({ navigation }) {
         <TextInput style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} onChangeText={setText} value={text} placeholder={'agregar medición...'} id='grado'/>
 
         <View style={[styles.espaciosBotones, { flexDirection: 'row', display: 'flex', alignItems: 'center' }]}>
-          <TouchableOpacity style={styles.botonAceptar} onPress={() => { agregarMedicion(text), navigation.navigate('EstadoUsuario') }}> {//EL GETJORNDADAACTIVA TRAE UN CHOCLO
+          <TouchableOpacity style={styles.botonAceptar} onPress={() => { agregarMedicion(text) }}> {//EL GETJORNDADAACTIVA TRAE UN CHOCLO
 }
             <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Aceptar</Text>
           </TouchableOpacity>

@@ -13,6 +13,8 @@
 
 @api9 = http://localhost:3000/jornada
 
+@api10 = http://localhost:3000/mediciones/first
+
 GET {{api}}
 ### Para separar peticiones escribimos triple numeral
 GET {{api3}}
@@ -30,6 +32,8 @@ POST {{api7}}/1
 POST {{api9}}/6
 ###
 POST {{api8}}/0.2/1
+###
+GET {{api10}}/1
 ### No funcional de momento
 POST {{api}}
 Content-Type: application/json

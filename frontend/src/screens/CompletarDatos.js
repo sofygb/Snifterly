@@ -4,8 +4,12 @@ import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
+import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
+
 
 export default function CompletarDatos({ navigation }) {
+    const { contextState, setContextState } = useContextState()
+
     const loadJornada = async () => {
         const data = await getJornada()
         console.log(data)
@@ -34,7 +38,6 @@ export default function CompletarDatos({ navigation }) {
             <Text style={styles.titulo}>Te damos la bienvenida a Snifterly!</Text>
             <Text style={styles.texto}>SIGN UP</Text>
 
-            <TextInput variant="outlined" label="nombre" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} />
             <TextInput variant="outlined" label="peso" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} />
             <TextInput variant="outlined" label="altura" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} />
 

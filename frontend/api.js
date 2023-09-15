@@ -7,7 +7,7 @@ const API2 = 'http://localhost:3000/mediciones/count/3'
 
 const API3 = 'http://localhost:3000/mediciones/avg/3'
 
-const API4 = 'http://localhost:3000/mediciones/first/3'
+const API4 = 'http://localhost:3000/mediciones/first'
 
 const API5 = 'http://localhost:3000/jornadaActiva'
 
@@ -32,6 +32,8 @@ const API15 = 'http://localhost:3000/jornadaReciente'
 const API16 = 'http://localhost:3000/mediciones/last'
 
 const API17 = 'http://localhost:3000/jornadaActual'
+
+const API18 = 'http://localhost:3000/mediciones/last'
 
 /*
 export const setJornadaActiva = async (value) => {
@@ -153,6 +155,14 @@ export const getMedicionesCountByIdJornada = async () => {
     return await res.json()
 }
 
+export const getLastMedicionByIdJornada = async (idJornada) => {
+  const res = await fetch(API18 + `/${idJornada}`, {
+      METHOD: "GET",
+  })
+  console.log(res) 
+  return await res.json()
+}
+
 export const getAvgMediciones = async () => {
     const res = await fetch(API3, {
         METHOD: "GET",
@@ -161,8 +171,8 @@ export const getAvgMediciones = async () => {
     return await res.json()
 }
 
-export const getFistMedicion = async () => {
-    const res = await fetch(API4, {
+export const getFistMedicion = async (idJornada) => {
+    const res = await fetch(API4 + `/${idJornada}`, {
         METHOD: "GET",
     })
     console.log(res) 

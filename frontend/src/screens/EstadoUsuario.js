@@ -14,7 +14,7 @@ export default function EstadoUsuario({ navigation }) {
   const { contextState, setContextState } = useContextState()
 
   const loadJornada = async () => {
-    const [medicionReciente] = await getMedicionReciente(contextState.jornada.idJornada)
+    const medicionReciente = await getMedicionReciente(contextState.jornada.idJornada)
     console.log(medicionReciente)
 
     setContextState({
