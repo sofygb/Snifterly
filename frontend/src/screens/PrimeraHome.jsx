@@ -23,6 +23,12 @@ export default function PrimeraHome({ navigation }) {
             Bluetooth.scanForPeripherals()
         }
       }
+
+      const [devices, setDevices] = useState(null)
+
+      const getDevices = async () => {
+        setDevices(await Bluetooth.getAllDevices())
+      }
     
       const hideModal = () => {
         setIsModalVisible(false)
@@ -33,17 +39,21 @@ export default function PrimeraHome({ navigation }) {
         setIsModalVisible(true)
       }
 
+
       const crearJornada = async () => {
         const idUsuario = contextState.usuario.idUsuario
         console.log(idUsuario)
         saveJornada(idUsuario)
     }
+    
     const [fontsLoaded, setFontsLoaded] = useState(false);
     useEffect(() => {
         if (!fontsLoaded) {
             loadFonts();
         }
-    })
+        getDevices()
+        console.log(devices)
+    },[])
     /*
     var jornadaActiva = getJornadaActiva()
     var siguientePantalla = getSiguientePantalla()
@@ -70,7 +80,7 @@ export default function PrimeraHome({ navigation }) {
 
         
         <View style={styles.container}>
-            {Bluetooth.getAllDevices() != null ? (<> {/* Página post-conexión*/}</>) : (<></>)}{/**no funciona bien o no se */}
+            {devices != null ? (<> {/* Página post-conexión*/}</>) : (<>{/**no funciona bien o no se */}
             <Text style={styles.titulo}>Snifterly</Text>
 
             <View style={styles.botonAgregar}>
@@ -99,7 +109,7 @@ export default function PrimeraHome({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </View>
-
+            </>)}
         </View>
     )
 }
