@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.dfriyia2.expoblesample" xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.snifterly" xmlns:tools="http://schemas.android.com/tools">
   <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION"/>
   <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION"/>
   <uses-permission android:name="android.permission.BLUETOOTH"/>
@@ -33,7 +33,7 @@
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:scheme="com.dfriyia2.expoblesample"/>
+        <data android:scheme="com.snifterly"/>
       </intent-filter>
     </activity>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false"/>

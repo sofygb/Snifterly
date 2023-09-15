@@ -4,7 +4,7 @@ import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
-import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, newJornada } from '../../api';
+import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, saveJornada, getJornada, getJornadaReciente, getUltimaMedicion, setMediciones } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 
 //import jornadaActiva from '../../api.js'
@@ -14,10 +14,20 @@ export default function IngresoDeDatos({ navigation }) {
   const initialText = '';
   const [text, setText] = useState(initialText);
   const { contextState, setContextState } = useContextState()
+  /* 
   const loadJornada = async () => {
     const data = await getJornada()
     console.log(data)
-    setJornada([data])
+  }
+  */
+  const loadJornada = async () => {
+    const data = await getJornadaReciente(contextState.usuario.idUsuario)
+    console.log(data)
+
+    setContextState({
+      type: ActionTypes.SetIdJornada,
+      value: data.idJornada
+  });
   }
   const [fontsLoaded, setFontsLoaded] = useState(false);
   useEffect(() => {
@@ -25,7 +35,7 @@ export default function IngresoDeDatos({ navigation }) {
       loadFonts();
     }
     loadJornada()
-  })
+  },[])
   const loadFonts = async () => {
     await Font.loadAsync({
       'alata': require('../assets/fonts/Alata/Alata.ttf'),
@@ -34,32 +44,9 @@ export default function IngresoDeDatos({ navigation }) {
     setFontsLoaded(true);
   }
   
-  const [jornadaNueva, setNuevaJornada] = useState();
 
-async function miFuncionAsincrona() {
-  try {
-    const jornada = await getJornadaActiva();
-    setNuevaJornada(jornada);
-    console.log('la jornada es:', jornada);
-  } catch (error) {
-    console.error('Error al obtener la jornada activa', error);
-  }
-}
-
-  const nuevaJornada = getJornadaActiva()
-  console.log(nuevaJornada)
-
-  const agregarMedicionYJornada = (grado, idJornada) => {
-    console.log(grado, idJornada)
-    const idUsuario = contextState.usuario.idUsuario
-    newJornada(idUsuario)
-
-
-    //nueva medición: grado - idJornada
-
-
-
-
+  const agregarMedicion = (grado) => {
+    setMediciones(grado, contextState.jornada.idJornada)
   }
   /*
   var jornadaActiva = getJornadaActiva()
@@ -85,8 +72,8 @@ async function miFuncionAsincrona() {
         <TextInput style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} onChangeText={setText} value={text} placeholder={'agregar medición...'} id='grado'/>
 
         <View style={[styles.espaciosBotones, { flexDirection: 'row', display: 'flex', alignItems: 'center' }]}>
-          <TouchableOpacity style={styles.botonAceptar} onPress={() => { agregarMedicionYJornada(text, miFuncionAsincrona()), navigation.navigate('EstadoUsuario') }}> {//EL GETJORNDADAACTIVA TRAE UN CHOCLO
-          }
+          <TouchableOpacity style={styles.botonAceptar} onPress={() => { agregarMedicion(text), navigation.navigate('EstadoUsuario') }}> {//EL GETJORNDADAACTIVA TRAE UN CHOCLO
+}
             <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Aceptar</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.botonCancelar} onPress={() => { navigation.navigate("Home") }}>

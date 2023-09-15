@@ -4,9 +4,9 @@ import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
-import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, newJornada } from '../../api';
+import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, newJornada, getJornada, saveJornada } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
-import Bluetooth from '../utils/Bluetooth.jsx';
+import { Bluetooth } from '../utils/Bluetooth';
 import DeviceModal from "../components/DeviceConnectionModal.jsx";
 
 //import jornadaActiva from '../../api.js'
@@ -15,22 +15,12 @@ import DeviceModal from "../components/DeviceConnectionModal.jsx";
 
 
 export default function PrimeraHome({ navigation }) {
-
-    const {
-        requestPermissions,
-        scanForPeripherals,
-        allDevices,
-        connectToDevice,
-        connectedDevice,
-        medicion,
-        disconnectFromDevice,
-      } = Bluetooth();
       const [isModalVisible, setIsModalVisible] = useState(false)
 
       const scanForDevices = async () => {
-        const isPermissionsEnabled = await requestPermissions()
+        const isPermissionsEnabled = await Bluetooth.requestPermissions()
         if (isPermissionsEnabled) {
-          scanForPeripherals()
+            Bluetooth.scanForPeripherals()
         }
       }
     
@@ -43,17 +33,16 @@ export default function PrimeraHome({ navigation }) {
         setIsModalVisible(true)
       }
 
-    const loadJornada = async () => {
-        const data = await getJornada()
-        console.log(data)
-        setJornada([data])
+      const crearJornada = async () => {
+        const idUsuario = contextState.usuario.idUsuario
+        console.log(idUsuario)
+        saveJornada(idUsuario)
     }
     const [fontsLoaded, setFontsLoaded] = useState(false);
     useEffect(() => {
         if (!fontsLoaded) {
             loadFonts();
         }
-        loadJornada()
     })
     /*
     var jornadaActiva = getJornadaActiva()
@@ -81,18 +70,18 @@ export default function PrimeraHome({ navigation }) {
 
         
         <View style={styles.container}>
-            {connectedDevice() != null ? (<> {/* Página post-conexión*/}</>) : (<>
+            {Bluetooth.getAllDevices() != null ? (<> {/* Página post-conexión*/}</>) : (<></>)}{/**no funciona bien o no se */}
             <Text style={styles.titulo}>Snifterly</Text>
 
             <View style={styles.botonAgregar}>
-                <TouchableOpacity onPress={openModal}>
+                <TouchableOpacity onPress={() => { openModal, crearJornada(), navigation.navigate('IngresoDeDatos') }}>
                     <Icon icon="icon-park-solid:add-one" color="white" width={'9rem'} />
                 </TouchableOpacity>
                 <DeviceModal
                     closeModal={hideModal}
                     visible={isModalVisible}
-                    connectToPeripheral={connectToDevice}
-                    devices={allDevices}
+                    connectToPeripheral={Bluetooth.getConnectedDevice()}
+                    devices={Bluetooth.getAllDevices()}
                 />
                 <Text style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', fontFamily: 'Alata', marginTop: '1rem' }}>nueva jornada</Text>
             </View>
@@ -109,7 +98,7 @@ export default function PrimeraHome({ navigation }) {
                         <Icon icon="mdi:account" width={'2.5rem'} color="white" />
                     </TouchableOpacity>
                 </View>
-            </View></>)}
+            </View>
 
         </View>
     )

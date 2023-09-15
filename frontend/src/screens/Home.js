@@ -15,9 +15,10 @@ import { HomeFilled } from "@ant-design/icons";
 import { Icon } from "@iconify/react";
 import React, { useState, useEffect } from "react";
 import * as Font from "expo-font";
-import { getJornada, getMedicionesCountByIdJornada, getAvgMediciones, getFistMedicion } from "../../api";
+import { getJornada, getMedicionesCountByIdJornada, getAvgMediciones, getFistMedicion, getUsuarios, getMedicionReciente } from "../../api";
 import { useIsFocused } from "@react-navigation/native";
 import Progress from "react-circle-progress-bar";
+import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 import { render } from "react-dom";
 
 export default function Home({ navigation }) {
@@ -32,12 +33,22 @@ export default function Home({ navigation }) {
 
   const [primeraMedicion, setPrimeraMedicion] = useState(new Date());
 
+  const { contextState, setContextState } = useContextState()
+
   
   const isFocused = useIsFocused();
   
   const loadJornada = async () => {
+    const medicionReciente = await getMedicionReciente(contextState.jornada.idJornada)
+    console.log(medicionReciente)
+
     const data = await getJornada();
     setJornada(data);
+    console.log(data);
+
+    const data5 = await getUsuarios();
+    setJornada(data5);
+    console.log(data5);
     
     const data2 = await getMedicionesCountByIdJornada();
     setMediciones(data2);

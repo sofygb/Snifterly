@@ -4,19 +4,32 @@ import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
-import { getUsuario } from '../../api';
+import { useIsFocused } from "@react-navigation/native";
+import { getUsuario, getUsuarioByEmailAndContrasenia, getUsuarios } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 
 export default function InicioSesion({ navigation }) {
     const [mail, setMail] = React.useState("");
     const [contraseña, setContraseña] = React.useState("");
+    const [usuarios, setUsuarios] = React.useState([]);
+    const isFocused = useIsFocused();
+    
+    const loadUsuarios = async () => {
+        const data = await getUsuarios()
+        setUsuarios(data)
+        console.log(data)
+    }
+
+    useEffect(() =>{
+        loadUsuarios()
+    },[isFocused])
 
     const [fontsLoaded, setFontsLoaded] = useState(false);
     useEffect(() => {
         if (!fontsLoaded) {
             loadFonts();
         }
-    })
+    },[])
 
     const loadFonts = async () => {
         await Font.loadAsync({
@@ -26,39 +39,57 @@ export default function InicioSesion({ navigation }) {
         setFontsLoaded(true);
     }
 
-    const login = async (mail) => {
-        const usuario = await getUsuario(mail)
-        if (usuario != null) {
-            navigation.navigate("PrimeraHome")
+    const { contextState, setContextState } = useContextState()
+    
+    const [hidePass, setHidePass] = useState(true);
+    
+    const logIn = () => {
+        const validacion = usuarios.findIndex(usuario => usuario.email === mail && usuario.contrasenia === contraseña)
+
+        if(validacion != -1) {
+            setContextState({
+                type: ActionTypes.SetIdUsuario,
+                value: usuarios[validacion].idUsuario
+            });
+            setContextState({
+                type: ActionTypes.SetNombre,
+                value: usuarios[validacion].nombre
+            });
+            setContextState({
+                type: ActionTypes.SetContrasenia,
+                value: usuarios[validacion].contrasenia
+            });
+            setContextState({
+                type: ActionTypes.SetEmail,
+                value: usuarios[validacion].email
+            });
+            setContextState({
+                type: ActionTypes.SetFechaNacimiento,
+                value: new Date(usuarios[validacion].fechaNacimiento)
+            });
+            setContextState({
+                type: ActionTypes.SetFechaCreacion,
+                value: new Date(usuarios[validacion].fechaCreacion)
+            });
+            setContextState({
+                type: ActionTypes.SetModResistencia,
+                value: usuarios[validacion].modResistencia
+            });
+            setContextState({
+                type: ActionTypes.SetPeso,
+                value: usuarios[validacion].peso
+            });
+            setContextState({
+                type: ActionTypes.SetAltura,
+                value: usuarios[validacion].altura
+            });
+
+            navigation.navigate('PrimeraHome')
         }
         else{
-            console.log('ERRORRRRR')
-        }//login('sofia@gmail.com')
+            console.error("Error: Usuario no encontrado")
+        }
     }
-
-    //Estado
-
-    const { contextState, setContextState } = useContextState()
-
-    useEffect(() => {
-        setContextState({
-            type: ActionTypes.SetIdUsuario,
-            value: 1
-        });
-        setContextState({
-            type: ActionTypes.SetNombre,
-            value: "Matheo"
-        });
-        setContextState({
-            type: ActionTypes.SetContrasenia,
-            value: "Matheo"
-        });
-    }, [])
-
-    console.log(contextState)
-
-
-    const [hidePass, setHidePass] = useState(true);
 
     return (
         <View style={styles.container}>
@@ -76,7 +107,7 @@ export default function InicioSesion({ navigation }) {
             </TouchableOpacity>
 
             <View style={styles.espacioBotonLogin}>
-                <TouchableOpacity style={styles.botonLogin} onPress={() => { navigation.navigate('PrimeraHome', { idUsuario: 1 }) }}>
+                <TouchableOpacity style={styles.botonLogin} onPress={() => { logIn() }}>
                     <Text style={[{ color: 'white', fontSize: '1.2rem', fontFamily: 'inter' }]}>Log in</Text>
                 </TouchableOpacity>
             </View>

@@ -20,13 +20,25 @@ const HEART_RATE_CHARACTERISTIC = "00002a37-0000-1000-8000-00805f9b34fb"
   medicion: number;
 }*/
 
-function bluetooth() {
-  const bleManager = useMemo(() => new BleManager(), [])
-  const [allDevices, setAllDevices] = useState([])
-  const [connectedDevice, setConnectedDevice] = useState(null)
-  const [medicion, setMedicion] = useState(0)
+export class  Bluetooth {
+  bleManager = new BleManager()
+  allDevices = [];
+  connectedDevice = [];
+  medicion = 0
 
-  const requestAndroid31Permissions = async () => {
+  static getAllDevices = async () => {
+    return this.allDevices;
+  }
+
+  static getConnectedDevice = async () => {
+    return this.allDevices;
+  }
+
+  static getMedicion = async () => {
+    return this.allDevices;
+  }
+
+  static requestAndroid31Permissions = async () => {
     const bluetoothScanPermission = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
       {
@@ -59,7 +71,7 @@ function bluetooth() {
     )
   }
 
-  const requestPermissions = async () => {
+  static requestPermissions = async () => {
     if (Platform.OS === "android") {
       if ((ExpoDevice.platformApiLevel ?? -1) < 31) {
         const granted = await PermissionsAndroid.request(
@@ -81,10 +93,10 @@ function bluetooth() {
     }
   }
 
-  const isDuplicteDevice = (devices, nextDevice) =>
+  static isDuplicteDevice = (devices, nextDevice) =>
     devices.findIndex(device => nextDevice.id === device.id) > -1
 
-  const scanForPeripherals = () =>
+  static scanForPeripherals = () =>
     bleManager.startDeviceScan(null, null, (error, device) => {
       if (error) {
         console.log(error)
@@ -99,7 +111,7 @@ function bluetooth() {
       }
     })
 
-  const connectToDevice = async device => {
+  static connectToDevice = async device => {
     try {
       const deviceConnection = await bleManager.connectToDevice(device.id)
       setConnectedDevice(deviceConnection)
@@ -111,7 +123,7 @@ function bluetooth() {
     }
   }
 
-  const disconnectFromDevice = () => {
+  static disconnectFromDevice = () => {
     if (connectedDevice) {
       bleManager.cancelDeviceConnection(connectedDevice.id)
       setConnectedDevice(null)
@@ -119,7 +131,7 @@ function bluetooth() {
     }
   }
 
-  const onMedicionUpdate = (error, characteristic) => {
+  static onMedicionUpdate = (error, characteristic) => {
     if (error) {
       console.log(error)
       return -1
@@ -143,7 +155,7 @@ function bluetooth() {
     setMedicion(innerMedicion)
   }
 
-  const startStreamingData = async device => {
+  static startStreamingData = async device => {
     if (device) {
       device.monitorCharacteristicForService(
         HEART_RATE_UUID,
@@ -154,16 +166,4 @@ function bluetooth() {
       console.log("No Device Connected")
     }
   }
-
-  return {
-    scanForPeripherals,
-    requestPermissions,
-    connectToDevice,
-    allDevices,
-    connectedDevice,
-    disconnectFromDevice,
-    medicion
-  }
 }
-
-export default bluetooth

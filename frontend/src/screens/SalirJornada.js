@@ -3,12 +3,13 @@ import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity, 
 import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
-import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, newJornada, setJornadaDesactivaById } from '../../api';
+import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, newJornada, setJornadaDesactiva } from '../../api';
 import * as Font from 'expo-font';
 
 export default function SalirJornada({ navigation }) {
   const loadJornada = async () => {
     const data = await getJornada()
+    console.log(data)
     console.log(data)
     setJornada([data])
   }
@@ -30,7 +31,7 @@ export default function SalirJornada({ navigation }) {
 
   const idJornadaActiva = getJornadaActiva()
   const salirJornada = () => {
-    setJornadaDesactivaById(6)
+    setJornadaDesactiva()
     console.log('hola')
   }
   return (

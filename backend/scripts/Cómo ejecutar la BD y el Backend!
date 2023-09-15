@@ -1,0 +1,4 @@
+1. cd backend para posicionarte en la carpeta y luego npm i --force para instalar las dependencias.
+2. npm run build para ejecutar la carpeta dinámica 'dist'. 
+3. npm run dev para ejecutar el backend. SIEMPRE QUE SE HAGA UN CAMBIO EN EL BACKEND EJECUTAR ESTOS DOS ÚLTIMOS COMANDOS
+4. (opcional) descargar la extensión REST API para probar las consultas que se hacen a la base de datos en 'tasks.http' como si fuese Postman.

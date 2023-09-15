@@ -19,7 +19,13 @@ import {
     getUsuarioByEmail,
     getJornadaActiva,
     saveJornada,
-    setJornadaDesactivaById
+    setJornadaDesactiva,
+    setMediciones,
+    setEstadoUsuario,
+    getUltimaMedicion,
+    getUsuarioByEmailAndContrasenia,
+    getJornadaRecienteByIdUsuario,
+    getUltimaMedicionByIdJornada
 } from "../controllers/tasks.js";
 
 const router = Router(); //devuelve lo que se ejecuta en una constante. Router nos permite definir las urls
@@ -39,6 +45,15 @@ const router = Router(); //devuelve lo que se ejecuta en una constante. Router n
  *    tags: [Tasks]
  */
 router.get("/usuarios", getUsuarios) //get todas las tareas
+
+/** 
+ * @swagger
+ * /medicionEstado/:idMedicion/:estado:
+ *  put:
+ *    summary: set estado usuario
+ *    tags: [Tasks]
+ */
+router.put("/medicionEstado/:idMedicion/:estado", setEstadoUsuario)
 
 /**
  * @swagger
@@ -67,6 +82,15 @@ router.get("/jornadaActiva", getJornadaActiva) //get jornada activa
 
 /** 
  * @swagger
+ * /jornadaActiva:
+ *  get:
+ *    summary: Trae la jornada activa
+ *    tags: [Tasks]
+ */
+router.get("/jornadaReciente/:idUsuario", getJornadaRecienteByIdUsuario) //get jornada activa
+
+/** 
+ * @swagger
  * /mediciones/:idJornada:
  *  get:
  *    summary: Trae la cantidad de mediciones de una jornada
@@ -78,10 +102,28 @@ router.get("/mediciones/count/:idJornada", getMedicionesCountByIdJornada)
  * @swagger
  * /mediciones/first/:idJornada:
  *  get:
- *    summary: Trae la primera fecha de la medicion más antigua de una jornada
+ *    summary: Trae la primera medicion más de una jornada
  *    tags: [Tasks]
  */
 router.get("/mediciones/first/:idJornada", getFistFechaMedicionByIdJornada)
+
+/** 
+ * @swagger
+ * /mediciones/last/:idJornada:
+ *  get:
+ *    summary: Trae la última medicion más de una jornada
+ *    tags: [Tasks]
+ */
+router.get("/mediciones/last/:idJornada", getUltimaMedicionByIdJornada)
+
+/** 
+ * @swagger
+ * /ultimaMedicion:
+ *  get:
+ *    summary: Trae la última medición hecha
+ *    tags: [Tasks]
+ */
+router.get("/ultimaMedicion/:idJornada", getUltimaMedicion)
 
 /** 
  * @swagger
@@ -134,6 +176,14 @@ router.get("/usuarios/:email", getUsuarioByEmail) //NO FUNCIONA
 
 /** 
  * @swagger
+ * /usuarios/:email/:contraseña:
+ *  get:
+ *    summary: Trae el usuario requerido por su email y contraseña
+ */
+router.get("/getUsuario/:email/:contrasenia", getUsuarioByEmailAndContrasenia)
+
+/** 
+ * @swagger
  * /jornadas/:idJornada:
  *  get:
  *    summary: Trae la jornada requerida por su id
@@ -182,11 +232,19 @@ router.delete("/tasks/:id", deleteTask) //delete una tarea por su id
 
 /** 
  * @swagger
- * /jornada/:id:
- *  post:
+ * /jornadaDesactiva:   
+ *  put:
  *    summary: el valor activo pasa a 0
  */
-router.post("/jornada/:id", setJornadaDesactivaById) //termina la jornada
+router.put("/jornadaDesactiva", setJornadaDesactiva) //termina la jornada
+
+/**
+ * @swagger
+ * /medicione/:grado/:idjornada
+ *  post:
+ *    summary: sube los datos de la nueva medición
+ */
+router.post("/newMedicion/:grado/:idJornada", setMediciones ) // nueva medición
 
 /** 
  * @swagger
