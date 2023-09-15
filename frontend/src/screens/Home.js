@@ -27,9 +27,11 @@ export default function Home({ navigation }) {
   //conexión al backend
   const [jornada, setJornada] = useState([]);
 
-  const [mediciones, setMediciones] = useState(0);
+  const [mediciones, setMediciones] = useState(0); //Array de mediciones de la jornada actual
 
   const [avgMediciones, setAvgMediciones] = useState(0);
+
+  const [gradoActual, setGradoActual] = useState(0);
 
   const [primeraMedicion, setPrimeraMedicion] = useState(new Date());
 
@@ -42,11 +44,11 @@ export default function Home({ navigation }) {
     const medicionReciente = await getMedicionReciente(contextState.jornada.idJornada)
     console.log(medicionReciente)
 
-    const data = await getJornada();
+    const data = await getJornada(); //HARDCODEADO
     setJornada(data);
     console.log(data);
 
-    const data5 = await getUsuarios();
+    const allUsuarios = await getUsuarios();
     setJornada(data5);
     console.log(data5);
     
@@ -55,6 +57,8 @@ export default function Home({ navigation }) {
     
     const data3 = await getAvgMediciones();
     setAvgMediciones(data3);
+
+
 
     const data4 = await getFistMedicion();
     const fecha = new Date(data4)
@@ -120,7 +124,7 @@ export default function Home({ navigation }) {
             </Text>
             <Text style={styles.medicion}> veces</Text>
           </View>
-          <Text style={styles.texto}>has usado el dispositivo de medición</Text>
+          <Text style={styles.texto}>te has hecho una medición</Text>
         </View>
         <View style={styles.cuadro}>
           <View style={{ flexDirection: "row", marginLeft: "0.5rem" }}>
@@ -129,7 +133,7 @@ export default function Home({ navigation }) {
             </Text>
             <Text style={styles.medicion}> dg/l</Text>
           </View>
-          <Text style={styles.texto}>es tu promedio de alcohol en sangre</Text>
+          <Text style={styles.texto}>es tu de alcohol en sangre actual</Text>
         </View>
       </View>
 

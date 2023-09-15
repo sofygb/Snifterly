@@ -3,22 +3,18 @@ import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity, 
 import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
-import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, newJornada, setJornadaDesactiva } from '../../api';
+import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, newJornada, setJornadaDesactiva,setFechaFinJornada } from '../../api';
+import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 import * as Font from 'expo-font';
 
 export default function SalirJornada({ navigation }) {
-  const loadJornada = async () => {
-    const data = await getJornada()
-    console.log(data)
-    console.log(data)
-    setJornada([data])
-  }
+  const { contextState, setContextState } = useContextState()
+
   const [fontsLoaded, setFontsLoaded] = useState(false);
   useEffect(() => {
     if (!fontsLoaded) {
       loadFonts();
     }
-    loadJornada()
   })
 
   const loadFonts = async () => {
@@ -29,9 +25,9 @@ export default function SalirJornada({ navigation }) {
     setFontsLoaded(true);
   }
 
-  const idJornadaActiva = getJornadaActiva()
   const salirJornada = () => {
     setJornadaDesactiva()
+    setFechaFinJornada(contextState.jornada.idJornada)
     console.log('hola')
   }
   return (

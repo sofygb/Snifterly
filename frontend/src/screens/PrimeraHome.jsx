@@ -16,6 +16,7 @@ import DeviceModal from "../components/DeviceConnectionModal.jsx";
 
 export default function PrimeraHome({ navigation }) {
       const [isModalVisible, setIsModalVisible] = useState(false)
+      const { contextState, setContextState } = useContextState()
 
       const scanForDevices = async () => {
         const isPermissionsEnabled = await Bluetooth.requestPermissions()

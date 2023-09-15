@@ -25,7 +25,8 @@ import {
     getUltimaMedicion,
     getUsuarioByEmailAndContrasenia,
     getJornadaRecienteByIdUsuario,
-    getUltimaMedicionByIdJornada
+    getUltimaMedicionByIdJornada,
+    setFechaFinJornada
 } from "../controllers/tasks.js";
 
 const router = Router(); //devuelve lo que se ejecuta en una constante. Router nos permite definir las urls
@@ -54,6 +55,15 @@ router.get("/usuarios", getUsuarios) //get todas las tareas
  *    tags: [Tasks]
  */
 router.put("/medicionEstado/:idMedicion/:estado", setEstadoUsuario)
+
+/** 
+ * @swagger
+ * /jornadaActual/:idJornada:
+ *  put:
+ *    summary: update fechaFin
+ *    tags: [Tasks]
+ */
+router.put("/jornadaActual/:idJornada", setFechaFinJornada)
 
 /**
  * @swagger

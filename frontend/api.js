@@ -31,6 +31,7 @@ const API15 = 'http://localhost:3000/jornadaReciente'
 
 const API16 = 'http://localhost:3000/mediciones/last'
 
+const API17 = 'http://localhost:3000/jornadaActual'
 
 /*
 export const setJornadaActiva = async (value) => {
@@ -134,6 +135,12 @@ export const setJornadaDesactiva = async () => {
 
 export const setEstadoUsuario = async (idMedicion, estadoUsuario) => {
   const res = await fetch(API10 + `/${idMedicion}/${estadoUsuario}`, { method: "PUT",})
+    console.log(res) 
+    return await res
+}
+
+export const setFechaFinJornada = async (idJornada) => {
+  const res = await fetch(API17 + `/${idJornada}`, { method: "PUT",})
     console.log(res) 
     return await res
 }
