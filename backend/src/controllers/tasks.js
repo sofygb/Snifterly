@@ -201,13 +201,13 @@ export const getUltimaMedicionByIdJornada = async (req, res) => {
 
 export const saveUsuario = async (req, res) => {
     const connection = await connect()
-    const result = await connection.query("INSERT INTO Usuario(nombre, fechaNacimiento, peso, altura, email, contraseña, fechaCreacion, modResistencia) VALUES (?,?,?,?,?,?,NOW(),null)", [
+    const result = await connection.query("INSERT INTO Usuario(nombre, fechaNacimiento, peso, altura, email, contrasenia, fechaCreacion, modResistencia) VALUES (?,?,?,?,?,?,NOW(),null)", [
         req.params.nombre,
         req.params.fechaNacimiento,
         req.params.peso,
         req.params.altura,
         req.params.email,
-        req.params.contraseña,
+        req.params.contrasenia,
     ])
     res.json(result)
 

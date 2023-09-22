@@ -210,11 +210,11 @@ router.get("/jornadas/count/:idJornada", getMedicionesFromIdJornada)
 
 /** 
  * @swagger
- * /usuarios:
+ * /usuarioNuevo:
  *  post:
  *    summary: Crea un nuevo usuario
  */
-router.post("/usuarios", saveUsuario) //crear una tarea
+router.post("/usuarioNuevo/:nombre/:fechaNacimiento/:peso/:altura/:email/:contrasenia", saveUsuario) //crear una tarea
 
 /** 
  * @swagger
