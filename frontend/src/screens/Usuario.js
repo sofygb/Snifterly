@@ -6,8 +6,13 @@ import { HomeFilled } from '@ant-design/icons';
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
+import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
+import { getJornadaActiva } from '../../api';
+
 
 export default function Usuario({ navigation }) {
+    const { contextState, setContextState } = useContextState()
+
     const loadJornada = async () => {
         const data = await getJornada()
         console.log(data)
@@ -20,6 +25,15 @@ export default function Usuario({ navigation }) {
         }
         loadJornada()
     })
+    const jornadaActivaes = getJornadaActiva(contextState.usuario.idUsuario)
+    const proximaPantalla = () => {
+        if(jornadaActivaes !== null){
+            navigation.navigate('Home')
+        }
+        else{
+            navigation.navigate('PrimeraHome')
+        }
+    }
 
     const loadFonts = async () => {
         await Font.loadAsync({
@@ -116,7 +130,7 @@ export default function Usuario({ navigation }) {
 
             <View style={styles.footer}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <TouchableOpacity onPress={() => { navigation.navigate('Home') }}>
+                    <TouchableOpacity onPress={() => { proximaPantalla() }}>
                         <Icon icon="material-symbols:home" width={'2.5rem'} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { navigation.navigate('Historial') }}>

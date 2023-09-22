@@ -48,6 +48,10 @@ export default function IngresoDeDatos({ navigation }) {
   const agregarMedicion = (grado) => {
     if(grado != null) {
       setMediciones(grado, contextState.jornada.idJornada)
+      setContextState({
+        type: ActionTypes.SetActivo,
+        value: 1
+    });
       navigation.navigate('EstadoUsuario')
     }
     else{
@@ -55,7 +59,7 @@ export default function IngresoDeDatos({ navigation }) {
     }
   }
   /*
-  var jornadaActiva = getJornadaActiva()
+  var jornadaActiva = getJornadaActiva(contextState.usuario.idUsuario)
     var siguientePantalla = getSiguientePantalla()
 
     if (!jornadaActiva) {

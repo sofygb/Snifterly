@@ -27,6 +27,8 @@ import {
     getJornadaRecienteByIdUsuario,
     getUltimaMedicionByIdJornada,
     setFechaFinJornada,
+    getHayJornada,
+    getJornadaActiva2
 } from "../controllers/tasks.js";
 
 const router = Router(); //devuelve lo que se ejecuta en una constante. Router nos permite definir las urls
@@ -83,12 +85,30 @@ router.get("/jornadas", getJornadas) //get todas las jornadas
 
 /** 
  * @swagger
+ * /jornadas:
+ *  get:
+ *    summary: Trae la jornada activa si la hay
+ *    tags: [Tasks]
+ */
+router.get("/jornadaActiva2", getJornadaActiva2)
+
+/** 
+ * @swagger
  * /jornadaActiva:
  *  get:
  *    summary: Trae la jornada activa
  *    tags: [Tasks]
  */
-router.get("/jornadaActiva", getJornadaActiva) //get jornada activa
+router.get("/jornadaActiva/:idUsuario", getJornadaActiva) //get jornada activa
+
+/** 
+ * @swagger
+ * /jornadaActiva:
+ *  get:
+ *    summary: Trae la jornada activa
+ *    tags: [Tasks]
+ */
+router.get("/jornadaActivaHay/:idUsuario", getHayJornada) //get jornada activa
 
 /** 
  * @swagger

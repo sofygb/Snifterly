@@ -37,6 +37,10 @@ const API18 = 'http://localhost:3000/mediciones/last'
 
 const API19 = 'http://localhost:3000/usuarioNuevo'
 
+const API20 = 'http://localhost:3000/jornadaActivaHay'
+
+const API21 = 'http://localhost:3000/jornadaActiva2'
+
 /*
 export const setJornadaActiva = async (value) => {
     try {
@@ -91,6 +95,14 @@ export const getUsuarios = async () => {
     return await res.json()
 }
 
+export const getJornadaActiva2 = async () => {
+  const res = await fetch(API21, {
+      method: "GET",
+  })
+  console.log(res) 
+  return await res.json()
+}
+
 export const getUsuarioByEmailAndContrasenia = async (mail, contraseña) => {
   const res = await fetch(API13 + `/${mail}/${contraseña}`, {
       method: "GET",
@@ -107,12 +119,12 @@ export const getJornada = async () => {
     return await res.json()
 }
 
-export const getJornadaActiva = async () => {
-  const res = await fetch(API5, {
+export const getJornadaActiva = async (idUsuario) => {
+  const res = await fetch(API5 + `/${idUsuario}`, {
         method: "GET",
     })
     console.log(res) 
-    return await res.json()
+    return await res
 }
 
 export const getJornadaReciente = async (idUsuario) => {
@@ -128,6 +140,14 @@ export const getMedicionReciente = async (idJornada) => {
         method: "GET",
     })
     console.log(res) 
+    return await res.json()
+}
+
+export const getHayJornada = async (idUsuario) => {
+  const res = await fetch(API20 + `/${idUsuario}`, {
+      method: "GET",
+    })
+    console.log(res)
     return await res.json()
 }
 

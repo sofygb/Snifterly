@@ -5,13 +5,14 @@ import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { useIsFocused } from "@react-navigation/native";
-import { getUsuario, getUsuarioByEmailAndContrasenia, getUsuarios } from '../../api';
+import { getUsuario, getUsuarioByEmailAndContrasenia, getUsuarios, getJornadaActiva, getHayJornada, getJornadaActiva2 } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 
 export default function InicioSesion({ navigation }) {
     const [mail, setMail] = React.useState("");
     const [contraseña, setContraseña] = React.useState("");
     const [usuarios, setUsuarios] = React.useState([]);
+    const [jornadaActiva, setJornadaActiva] = React.useState([]);
     const isFocused = useIsFocused();
     
     const loadUsuarios = async () => {
@@ -19,9 +20,15 @@ export default function InicioSesion({ navigation }) {
         setUsuarios(data)
         console.log(data)
     }
+    const loadJornadaActiva = async () => {
+        const data = await getJornadaActiva2()
+        setJornadaActiva(data)
+        console.log(data)
+    }
 
     useEffect(() =>{
         loadUsuarios()
+        loadJornadaActiva()
     },[isFocused])
 
     const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -42,6 +49,10 @@ export default function InicioSesion({ navigation }) {
     const { contextState, setContextState } = useContextState()
     
     const [hidePass, setHidePass] = useState(true);
+
+    const traerDatos = async (data) => {
+        return await getHayJornada(data)
+    }
     
     const logIn = () => {
         const validacion = usuarios.findIndex(usuario => usuario.email === mail && usuario.contrasenia === contraseña)
@@ -83,8 +94,20 @@ export default function InicioSesion({ navigation }) {
                 type: ActionTypes.SetAltura,
                 value: usuarios[validacion].altura
             });
-
-            navigation.navigate('PrimeraHome')
+            //const datos = traerDatos(usuarios[validacion].idUsuario)
+            //console.log(datos)
+            var hayJornada = false
+            jornadaActiva.forEach((jornada) => {
+                if(jornada.idUsuario === usuarios[validacion].idUsuario){
+                    hayJornada = true
+                }
+            })
+            if(hayJornada){
+                navigation.navigate('Home')
+            }
+            else{
+                navigation.navigate('PrimeraHome')
+            }
         }
         else{
             console.error("Error: Usuario no encontrado")
@@ -99,7 +122,7 @@ export default function InicioSesion({ navigation }) {
             <Text style={styles.titulo}>Te damos la bienvenida a Snifterly!</Text>
             <Text style={styles.texto}>SIGN IN</Text>
 
-            <TextInput variant="outlined" label="Usuario" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem', borderRadius: 10 }} value={mail} onChangeText={mail => setMail(mail)}/>
+            <TextInput variant="outlined" label="Mail" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem', borderRadius: 10 }} value={mail} onChangeText={mail => setMail(mail)}/>
             <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem', borderRadius: 10  }} value={contraseña} secureTextEntry={true} onChangeText={contraseña => setContraseña(contraseña)}  right={<TouchableOpacity onPress={() => setHidePass(!hidePass)}> <Icon icon="mdi:eye" width={30}/> </TouchableOpacity>}/>
 
             <TouchableOpacity style={styles.botonContrasena}>

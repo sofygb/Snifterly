@@ -56,7 +56,7 @@ export default function PrimeraHome({ navigation }) {
         console.log(devices)
     },[])
     /*
-    var jornadaActiva = getJornadaActiva()
+    var jornadaActiva = getJornadaActiva(contextState.usuario.idUsuario)
     var siguientePantalla = getSiguientePantalla()
 
     if (!jornadaActiva) {

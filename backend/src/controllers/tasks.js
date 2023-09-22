@@ -15,6 +15,13 @@ export const getJornadas = async (req, res) => {
 
     console.log(rows)
 }
+export const getJornadaActiva2 = async (req, res) => {
+    const connection = await connect()
+    const [rows] = await connection.query("SELECT * FROM Jornada WHERE activo = 1")
+    res.json(rows)
+
+    console.log(rows)
+}
 export const setJornadaActiva = async (req, res) => {
     const connection = await connect()
     const [rows] = await connection.query("INSERT INTO jornada(fechaInicio, fechaFin, idUsuario, activo) VALUES (NOW(),null,?,1)",[
@@ -82,6 +89,16 @@ export const getUltimaMedicion = async (req, res) => {
     console.log(rows[0])
 }
 
+export const getHayJornada = async (req, res) => {
+    const connection = await connect()
+    const [rows] = await connection.query("SELECT activo FROM `jornada` WHERE idUsuario = 11 ORDER BY fechaInicio DESC LIMIT 1",[
+        req.params.idUsuario,
+    ])
+    res.json(rows[0]["activo"])
+
+    console.log(rows[0]["activo"])
+}
+
 export const getAllMedicionesByIdJornada = async (req, res) => {
     const connection = await connect()
     const [rows] = await connection.query("SELECT * FROM `medicion` WHERE idJornada = ? ORDER BY fecha DESC LIMIT 1",[
@@ -140,11 +157,12 @@ export const getJornadaRecienteByIdUsuario = async (req, res) => {
 }
 export const getJornadaActiva = async (req, res) => {
     const connection = await connect()
-    const [rows] = await connection.query("SELECT idJornada FROM Jornada WHERE activo = 1", [
+    const [rows] = await connection.query("SELECT idJornada FROM Jornada WHERE idUsuario = ? AND activo = 1", [
+    req.params.idUsuario
     ])
-    res.json(rows[0]["idJornada"])
+    res.json(rows[0])
 
-    console.log(rows[0]["idJornada"])
+    console.log(rows[0])
 }
 export const getUsuariosCount = async (req, res) => {
     const connection = await connect()

@@ -22,7 +22,7 @@ import { ActionTypes, setContextState, useContextState } from '../navigation/con
 import { render } from "react-dom";
 
 export default function Home({ navigation }) {
-  const [tiempo, setTiempo] = useState(30);
+  const [tiempo, setTiempo] = useState(100);
 
   //conexión al backend
   const [jornada, setJornada] = useState([]);

@@ -15,6 +15,10 @@
 
 @api10 = http://localhost:3000/mediciones/first
 
+@api11 = http://localhost:3000/jornadaActivaHay
+
+@api12 = http://localhost:3000/jornadaActiva2
+
 GET {{api}}
 ### Para separar peticiones escribimos triple numeral
 GET {{api3}}
@@ -34,6 +38,10 @@ POST {{api9}}/6
 POST {{api8}}/0.2/1
 ###
 GET {{api10}}/1
+###
+GET {{api11}}/11
+###
+GET {{api12}}
 ### No funcional de momento
 POST {{api}}
 Content-Type: application/json
