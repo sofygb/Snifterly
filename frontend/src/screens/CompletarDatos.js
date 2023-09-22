@@ -28,7 +28,7 @@ export default function CompletarDatos({ navigation }) {
             loadFonts();
         }
         loadJornada()
-    })
+    },[])
 
     const loadFonts = async () => {
         await Font.loadAsync({
@@ -41,7 +41,9 @@ export default function CompletarDatos({ navigation }) {
     const validacion = () => {
         if(!/[^\d,.\d]|[,.]\Z|\A[,.]|[\,\.]{2}/.test(peso + altura) && (peso+altura).split(".").length <= 3 && (peso+altura).split(",").length <= 3){
             console.log("nombre del usuario que se esta creando: ", contextState.usuario.nombre)
-            saveUsuario(nombre, fechaNacimiento, peso, altura, mail, contrasenia)
+
+            const fecha = new Date(fechaNacimiento)
+            saveUsuario(nombre, `${fecha.getFullYear()}-${fecha.getMonth()}-${fecha.getDate()}`, peso, altura, mail, contrasenia)
             navigation.navigate('PrimeraHome')
         }
         else{
@@ -59,7 +61,7 @@ export default function CompletarDatos({ navigation }) {
 
             <TextInput keyboardType='decimal' variant="outlined" label="peso" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={peso} onChangeText={peso => setPeso(peso)}/>
             <TextInput keyboardType='decimal' variant="outlined" label="altura" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={altura} onChangeText={altura => setAltura(altura)}/>
-            <TextInput keyboardType='date' variant="outlined" label="fecha de nacimiento" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={fechaNacimiento} onChangeText={fechaNacimiento => setFechaNacimiento(fechaNacimiento)}/>
+            <TextInput keyboardType='date' variant="outlined" label="fecha de nacimiento" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={fechaNacimiento} placeholder="Ejemplo: dia-mes-año..." onChangeText={fechaNacimiento => setFechaNacimiento(fechaNacimiento)}/>
 
             <View style={styles.espacioBotonLogin}>
                 <TouchableOpacity style={styles.botonLogin} onPress={() => { validacion() }}>

@@ -12,24 +12,44 @@ export default function CrearCuenta({ navigation }) {
     const [contrasenia, setContrasenia] = React.useState("");
     const { contextState, setContextState } = useContextState()
     const [usuarios, setUsuarios] = React.useState([])
+    const [esMayor, setEsMayor] = React.useState("✗")//✓✗
+
+    useEffect(() => {
+        if(contrasenia.length >= 10){
+            setEsMayor("✓")
+        }
+        else{
+            setEsMayor("✗")
+        }
+    },[contrasenia])
     
     const guardarDatos = () => {
         const validacion = usuarios.findIndex(usuario => usuario.email === mail && usuario.contrasenia === contraseña)
 
         if (validacion == -1) {
-            setContextState({
-                type: ActionTypes.SetNombre,
-                value: nombre
-            });
-            setContextState({
-                type: ActionTypes.SetContrasenia,
-                value: contrasenia
-            });
-            setContextState({
-                type: ActionTypes.SetEmail,
-                value: mail
-            });
-            navigation.navigate('CompletarDatos')
+                if(/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(mail)){
+                    if(contrasenia.length >= 10){
+                        setContextState({
+                            type: ActionTypes.SetNombre,
+                            value: nombre
+                        });
+                        setContextState({
+                            type: ActionTypes.SetContrasenia,
+                            value: contrasenia
+                        });
+                        setContextState({
+                            type: ActionTypes.SetEmail,
+                            value: mail
+                        });
+                        navigation.navigate('CompletarDatos')
+                    }
+                    else{
+                        console.error("Error: La contraseña debe ser mayor a 10 caracteres")
+                    }
+                }
+                else{
+                    console.error("Error: El mail ingresado es inválido")
+                }
         }
     }
 
@@ -63,8 +83,9 @@ export default function CrearCuenta({ navigation }) {
                 <Text style={styles.titulo}>Te damos la bienvenida a Snifterly!</Text>
                 <Text style={styles.texto}>SIGN UP</Text>
                 <TextInput variant="outlined" label="nombre" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={nombre} onChangeText={nombre => setNombre(nombre)} />
-                <TextInput keyboardType='email' variant="outlined" label="Mail" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={mail} onChangeText={mail => setMail(mail)} />
+                <TextInput keyboardType='email' variant="outlined" label="Mail" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={mail} onChangeText={e => setMail(e)} />
                 <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={contrasenia} onChangeText={contrasenia => setContrasenia(contrasenia)} />
+                <Text style={{margin: 14, fontSize: '1rem', marginRight: '2rem', marginLeft: '2rem'}}>Es mayor a 10 caracteres: {esMayor}</Text>
 
                 <View style={styles.espacioBotonLogin}>
                     <TouchableOpacity style={styles.botonLogin} onPress={() => { guardarDatos() }}>
