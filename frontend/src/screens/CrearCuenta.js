@@ -4,7 +4,7 @@ import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
-import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
+import { setContextState, ActionTypes, contextState, useContextState } from '../navigation/contextState';
 
 export default function CrearCuenta({ navigation }) {
     const [nombre, setNombre] = React.useState("");
@@ -12,41 +12,40 @@ export default function CrearCuenta({ navigation }) {
     const [contrasenia, setContrasenia] = React.useState("");
     const { contextState, setContextState } = useContextState()
     const [usuarios, setUsuarios] = React.useState([])
-
-    const validacion = usuarios.findIndex(usuario => usuario.email === mail && usuario.contrasenia === contraseña)
-
+    
     const guardarDatos = () => {
         const validacion = usuarios.findIndex(usuario => usuario.email === mail && usuario.contrasenia === contraseña)
 
         if (validacion == -1) {
             setContextState({
                 type: ActionTypes.SetNombre,
-                value: usuarios.nombre
+                value: nombre
             });
             setContextState({
                 type: ActionTypes.SetContrasenia,
-                value: usuarios.contrasenia
+                value: contrasenia
             });
             setContextState({
                 type: ActionTypes.SetEmail,
-                value: usuarios.email
+                value: mail
             });
             navigation.navigate('CompletarDatos')
-            console.log("nombre del usuario que se esta creando: ", contextState.usuarios.nombre)
         }
+    }
 
-        const getUsuarios = async () => {
-            const data = await getUsuarios()
-            setUsuarios(data)
-            console.log(data)
-        }
+        // const getUsuarios = async () => {
+        //     const data = await getUsuarios()
+        //     setUsuarios(data)
+        //     console.log(data)
+        // }
+
         const [fontsLoaded, setFontsLoaded] = useState(false);
-        useEffect(() => {
-            if (!fontsLoaded) {
-                loadFonts();
-            }
-            getUsuarios()
-        }, [])
+        // useEffect(() => {
+        //     if (!fontsLoaded) {
+        //         loadFonts();
+        //     }
+        //     getUsuarios()
+        // }, [])
 
         const loadFonts = async () => {
             await Font.loadAsync({
@@ -55,7 +54,7 @@ export default function CrearCuenta({ navigation }) {
             });
             setFontsLoaded(true);
         }
-    }
+    
         return (
             <View style={styles.container}>
 
