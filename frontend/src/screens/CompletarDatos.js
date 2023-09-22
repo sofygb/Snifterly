@@ -10,6 +10,9 @@ import { ActionTypes, setContextState, useContextState } from '../navigation/con
 export default function CompletarDatos({ navigation }) {
     const { contextState, setContextState } = useContextState()
 
+    const [peso, setPeso] = useState("");
+    const [altura, setAltura] = useState("");
+
     const loadJornada = async () => {
         const data = await getJornada()
         console.log(data)
@@ -30,6 +33,15 @@ export default function CompletarDatos({ navigation }) {
         });
         setFontsLoaded(true);
     }
+
+    const validacion = () => {
+        if(!/[^\d,.\d]|[,.]\Z|\A[,.]|[\,\.]{2}/.test(peso + altura) && (peso+altura).split(".").length <= 3 && (peso+altura).split(",").length <= 3){
+            navigation.navigate('PrimeraHome')
+        }
+        else{
+            console.error('Error: Los valores introducidos no son números')
+        }
+    }
     return (
         <View style={styles.container}>
             
@@ -38,11 +50,11 @@ export default function CompletarDatos({ navigation }) {
             <Text style={styles.titulo}>Te damos la bienvenida a Snifterly!</Text>
             <Text style={styles.texto}>SIGN UP</Text>
 
-            <TextInput variant="outlined" label="peso" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} />
-            <TextInput variant="outlined" label="altura" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} />
+            <TextInput keyboardType='decimal' variant="outlined" label="peso" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={peso} onChangeText={peso => setPeso(peso)}/>
+            <TextInput keyboardType='decimal' variant="outlined" label="altura" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={altura} onChangeText={altura => setAltura(altura)}/>
 
             <View style={styles.espacioBotonLogin}>
-                <TouchableOpacity style={styles.botonLogin} onPress={() => { navigation.navigate('PrimeraHome') }}>
+                <TouchableOpacity style={styles.botonLogin} onPress={() => { validacion() }}>
                     <Text style={[{ color: 'white', fontSize: '1.2rem', fontFamily: 'inter' }]}>Ok</Text>
                 </TouchableOpacity>
             </View>

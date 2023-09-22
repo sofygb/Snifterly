@@ -90,7 +90,7 @@ export default function InicioSesion({ navigation }) {
             console.error("Error: Usuario no encontrado")
         }
     }
-
+    
     return (
         <View style={styles.container}>
             

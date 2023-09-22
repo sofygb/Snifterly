@@ -7,17 +7,18 @@ import * as Font from 'expo-font';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 
 export default function CrearCuenta({ navigation }) {
-    const [text, setText] = React.useState("");
-    const [textdos, setTextdos] = React.useState("");
+    const [nombre, setNombre] = React.useState("");
+    const [mail, setMail] = React.useState("");
+    const [contrasenia, setContrasenia] = React.useState("");
     const { contextState, setContextState } = useContextState()
-    const [ usuarios, setUsuarios] = React.useState([])
+    const [usuarios, setUsuarios] = React.useState([])
 
     const validacion = usuarios.findIndex(usuario => usuario.email === mail && usuario.contrasenia === contraseña)
 
     const guardarDatos = () => {
         const validacion = usuarios.findIndex(usuario => usuario.email === mail && usuario.contrasenia === contraseña)
-        
-        if(validacion == -1) {
+
+        if (validacion == -1) {
             setContextState({
                 type: ActionTypes.SetIdUsuario,
                 value: usuarios[validacion].idUsuario
@@ -55,72 +56,72 @@ export default function CrearCuenta({ navigation }) {
                 value: usuarios[validacion].altura
             });
 
-    }
-
-    const getUsuarios = async () => {
-        const data = await getUsuarios()
-        setUsuarios(data)
-        console.log(data)
-    }
-    const [fontsLoaded, setFontsLoaded] = useState(false);
-    useEffect(() => {
-        if (!fontsLoaded) {
-            loadFonts();
         }
-        getUsuarios()
-    },[])
 
-    const loadFonts = async () => {
-        await Font.loadAsync({
-            'alata': require('../assets/fonts/Alata/Alata.ttf'),
-            'inter': require('../assets/fonts/Inter/Inter.ttf'),
-        });
-        setFontsLoaded(true);
+        const getUsuarios = async () => {
+            const data = await getUsuarios()
+            setUsuarios(data)
+            console.log(data)
+        }
+        const [fontsLoaded, setFontsLoaded] = useState(false);
+        useEffect(() => {
+            if (!fontsLoaded) {
+                loadFonts();
+            }
+            getUsuarios()
+        }, [])
+
+        const loadFonts = async () => {
+            await Font.loadAsync({
+                'alata': require('../assets/fonts/Alata/Alata.ttf'),
+                'inter': require('../assets/fonts/Inter/Inter.ttf'),
+            });
+            setFontsLoaded(true);
+        }
     }
-    return (
-        <View style={styles.container}>
-            
-            <Image source={require('../assets/icon.png')} style={styles.imagen}/>
-            
-            <Text style={styles.titulo}>Te damos la bienvenida a Snifterly!</Text>
-            <Text style={styles.texto}>SIGN UP</Text>
-            <TextInput variant="outlined" label="nombre" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} />
-            <TextInput variant="outlined" label="Mail" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={text} onChangeText={text => setText(text)}/>
-            <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={textdos} onChangeText={textdos => setTextdos(textdos)}/>
+        return (
+            <View style={styles.container}>
 
-            <View style={styles.espacioBotonLogin}>
-                <TouchableOpacity style={styles.botonLogin} onPress={() => { navigation.navigate('CompletarDatos') }}>
-                    <Text style={[{ color: 'white', fontSize: '1.2rem', fontFamily: 'inter' }]}>Sign up</Text>
-                </TouchableOpacity>
+                <Image source={require('../assets/icon.png')} style={styles.imagen} />
+
+                <Text style={styles.titulo}>Te damos la bienvenida a Snifterly!</Text>
+                <Text style={styles.texto}>SIGN UP</Text>
+                <TextInput variant="outlined" label="nombre" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={nombre} onChangeText={nombre => setNombre(nombre)} />
+                <TextInput keyboardType='email' variant="outlined" label="Mail" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={mail} onChangeText={mail => setMail(mail)} />
+                <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={contrasenia} onChangeText={contrasenia => setContrasenia(contrasenia)} />
+
+                <View style={styles.espacioBotonLogin}>
+                    <TouchableOpacity style={styles.botonLogin} onPress={() => { navigation.navigate('CompletarDatos') }}>
+                        <Text style={[{ color: 'white', fontSize: '1.2rem', fontFamily: 'inter' }]}>Sign up</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <Text style={{ textAlign: 'center', marginTop: '1.5rem', marginBottom: '1rem', marginLeft: '1rem', marginRight: '1rem', fontSize: '1.2rem' }}> ──────── Seguir con ────────</Text>
+
+                <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-around', paddingLeft: '1.5rem', paddingRight: '1.5rem', }}>
+                    <TouchableOpacity style={{ backgroundColor: '#40A2DA', minHeight: '3.5rem', minWidth: '10rem', borderRadius: 10, display: 'flex', justifyContent: 'center', }}>
+                        <View style={{ flexDirection: 'row', marginLeft: '0.3rem' }}>
+                            <Icon icon="ri:google-fill" color="white" width={'2.3rem'} />
+                            <Text style={{ color: 'white', display: 'flex', alignItems: 'center', fontSize: '0.9rem' }}>Google</Text>
+                        </View>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={{ backgroundColor: '#0F3A8D', minHeight: '3.5rem', minWidth: '10rem', borderRadius: 10, display: 'flex', justifyContent: 'center', }}>
+                        <View style={{ flexDirection: 'row', marginLeft: '0.3rem' }}>
+                            <Icon icon="ant-design:facebook-filled" color="white" width={'2.3rem'} />
+                            <Text style={{ color: 'white', display: 'flex', alignItems: 'center', fontSize: '0.9rem' }}>Facebook</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+
+                <View style={{ flexDirection: 'row', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', marginTop: '1rem' }}>
+                    <Text style={{ fontSize: '1rem', fontFamily: 'inter' }}>¿Ya tienes una cuenta? </Text>
+                    <TouchableOpacity onPress={() => { navigation.navigate('InicioSesion') }}>
+                        <Text style={{ color: 'blue', fontSize: '1rem', fontFamily: 'inter' }}>Loguearse</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-
-            <Text style={{textAlign: 'center', marginTop: '1.5rem', marginBottom: '1rem', marginLeft: '1rem', marginRight: '1rem', fontSize: '1.2rem'}}> ──────── Seguir con ────────</Text>
-
-            <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-around',paddingLeft: '1.5rem', paddingRight: '1.5rem',}}>
-                <TouchableOpacity style={{backgroundColor: '#40A2DA', minHeight: '3.5rem', minWidth: '10rem', borderRadius: 10, display: 'flex', justifyContent: 'center', }}>
-                    <View style={{flexDirection: 'row', marginLeft: '0.3rem'}}>
-                        <Icon icon="ri:google-fill" color="white" width={'2.3rem'}/>
-                        <Text style={{color: 'white', display: 'flex', alignItems: 'center', fontSize: '0.9rem'}}>Google</Text>
-                    </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={{backgroundColor: '#0F3A8D', minHeight: '3.5rem', minWidth: '10rem', borderRadius: 10, display: 'flex', justifyContent: 'center', }}>
-                    <View style={{flexDirection: 'row', marginLeft: '0.3rem'}}>
-                        <Icon icon="ant-design:facebook-filled" color="white" width={'2.3rem'}/>
-                        <Text style={{color: 'white', display: 'flex', alignItems: 'center', fontSize: '0.9rem'}}>Facebook</Text>
-                    </View>
-                </TouchableOpacity>
-            </View>
-        
-            <View style={{flexDirection: 'row', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', marginTop: '1rem'}}>
-                <Text style={{fontSize: '1rem', fontFamily: 'inter' }}>¿Ya tienes una cuenta? </Text>
-                <TouchableOpacity onPress={() => { navigation.navigate('InicioSesion') }}>
-                    <Text style={{color: 'blue', fontSize: '1rem', fontFamily: 'inter'}}>Loguearse</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    )
-}
+        )
 }
 
 

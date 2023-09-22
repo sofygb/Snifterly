@@ -36,9 +36,10 @@ export default function Home({ navigation }) {
   const [lastMedicion, setLastMedicion] = useState(0);
 
   const [primeraMedicion, setPrimeraMedicion] = useState(new Date());
-
+  
   const { contextState, setContextState } = useContextState()
-
+  
+  const [tiempoRestante, setTiempoRestante] = useState(new Date());
   
   const isFocused = useIsFocused();
   
@@ -77,12 +78,19 @@ export default function Home({ navigation }) {
         const segundos = Math.floor((diferenciaEnMilisegundos % 60000) / 1000); // 1 segundo = 1000 milisegundos
     
         console.log(`Diferencia: ${horas} horas, ${minutos} minutos, ${segundos} segundos`);
+
+        var tiempoFinal = new Date(1970,1,1,horas,minutos,segundos)
+        //tiempoFinal.setHours(tiempoRestante.getHours() + horas, tiempoRestante.getMinutes() + minutos, tiempoRestante.getSeconds() + segundos)
+
+        setTiempoRestante(tiempoFinal)
+        
       } catch (error) {
         console.error("Error al obtener la fecha de la primera medición", error);
       }
     }
     
     calcularDiferencia();
+    console.log(tiempoRestante)
 
     
     /*
@@ -112,7 +120,7 @@ export default function Home({ navigation }) {
     setFontsLoaded(true);
   };
   
-  const [variable, setvarible] = useState(5);
+
   const handleSubmit = (e) => {
     //setvarible ((e) => getCountMediciones())
     setTiempo((e) => 0);
@@ -160,10 +168,18 @@ export default function Home({ navigation }) {
       <View style={[styles.espacioCuadros]}>
         <View style={styles.cuadro}>
           <View style={{ flexDirection: "row", marginLeft: "0.5rem" }}>
-            <Text style={[styles.medicion, { fontSize: "2.5rem" }]}>
-              {variable}
+          <Text style={[styles.medicion, { fontSize: "2.1rem" }]}>
+              {tiempoRestante.getHours()}
             </Text>
-            <Text style={styles.medicion}> hs</Text>
+            <Text style={[styles.medicion, { fontSize: "1rem" }]}> hs, </Text>
+            <Text style={[styles.medicion, { fontSize: "2.1rem" }]}>
+              {tiempoRestante.getMinutes()}
+            </Text>
+            <Text style={[styles.medicion, { fontSize: "1rem" }]}> min, </Text>
+            <Text style={[styles.medicion, { fontSize: "2.1rem" }]}>
+              {tiempoRestante.getSeconds()}
+            </Text>
+            <Text style={[styles.medicion, { fontSize: "1rem" }]}> sec</Text>
           </View>
           <Text style={styles.texto}>es la longitud actual de tu jornada</Text>
         </View>
