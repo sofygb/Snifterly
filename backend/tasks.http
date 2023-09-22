@@ -19,6 +19,7 @@
 
 @api12 = http://localhost:3000/jornadaActiva2
 
+@api13 =  http://localhost:3000/mediciones/last
 GET {{api}}
 ### Para separar peticiones escribimos triple numeral
 GET {{api3}}
@@ -42,6 +43,8 @@ GET {{api10}}/1
 GET {{api11}}/11
 ###
 GET {{api12}}
+###
+GET {{api13}}/13
 ### No funcional de momento
 POST {{api}}
 Content-Type: application/json
