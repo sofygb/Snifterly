@@ -15,10 +15,10 @@ import { HomeFilled } from "@ant-design/icons";
 import { Icon } from "@iconify/react";
 import React, { useState, useEffect } from "react";
 import * as Font from "expo-font";
-import { getJornada, getMedicionesCountByIdJornada, getAvgMediciones, getFistMedicion, getUsuarios, getMedicionReciente, getLastMedicionByIdJornada } from "../../api";
+import { getJornada, getMedicionesCountByIdJornada, getAvgMediciones, getFirstMedicion, getUsuarios, getMedicionReciente, getLastMedicionByIdJornada, getJornadaActiva, getJornadaReciente } from "../../api";
 import { useIsFocused } from "@react-navigation/native";
 import Progress from "react-circle-progress-bar";
-import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
+import { setContextState, ActionTypes, contextState, useContextState } from '../navigation/contextState';
 import { render } from "react-dom";
 
 export default function Home({ navigation }) {
@@ -40,9 +40,33 @@ export default function Home({ navigation }) {
   const { contextState, setContextState } = useContextState()
   
   const [tiempoRestante, setTiempoRestante] = useState(new Date());
+
+  const [idJornadaActiva, setIdJornadaActiva] = useState(0);
   
   const isFocused = useIsFocused();
-  
+
+const loadJornadaActiva = async () => {
+  const data = await getJornadaActiva(contextState.usuario.idUsuario)
+  setIdJornadaActiva(data)
+  /* 
+  setContextState({
+    type: ActionTypes.SetIdJornada,
+    value: data
+  });
+  */
+  console.log(data)
+  }
+
+  const loadJornada2 = async () => {
+    const data = await getJornadaReciente(contextState.usuario.idUsuario)
+    console.log(data)
+
+    setContextState({
+      type: ActionTypes.SetIdJornada,
+      value: data.idJornada
+  });
+  }
+
   const loadJornada = async () => {
     const medicionReciente = await getMedicionReciente(contextState.jornada.idJornada)
     console.log(medicionReciente)
@@ -55,8 +79,9 @@ export default function Home({ navigation }) {
     setJornada(data5);
     console.log(data5);
     
-    const data2 = await getMedicionesCountByIdJornada();
+    const data2 = await getMedicionesCountByIdJornada(idJornadaActiva);
     setMediciones(data2);
+    console.log(data2);
     
     const data3 = await getAvgMediciones();
     setAvgMediciones(data3);
@@ -68,8 +93,8 @@ export default function Home({ navigation }) {
 
     async function calcularDiferencia() {
       try {
-        const data4 = await getFistMedicion(contextState.jornada.idJornada); // Obtener la fecha de la primera medición
-        const fecha = new Date(data4);
+        const data4 = await getFirstMedicion(contextState.jornada.idJornada); // Obtener la fecha de la primera medición
+        const fecha = new Date(data4.fecha);
         const horaActual = new Date();
         const diferenciaEnMilisegundos = horaActual - fecha;
     
@@ -109,9 +134,13 @@ export default function Home({ navigation }) {
     if (!fontsLoaded) {
       loadFonts();
     }
-    loadJornada();
+    loadJornada2()
+    loadJornadaActiva()
   }, [isFocused]);
-
+  useEffect(() => {
+    loadJornada();
+  },[idJornadaActiva])
+  
   const loadFonts = async () => {
     await Font.loadAsync({
       alata: require("../assets/fonts/Alata/Alata.ttf"),

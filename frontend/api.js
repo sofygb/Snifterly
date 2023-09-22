@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const API = 'http://localhost:3000/jornadas/count/3'
 
-const API2 = 'http://localhost:3000/mediciones/count/3'
+const API2 = 'http://localhost:3000/mediciones/count'
 
 const API3 = 'http://localhost:3000/mediciones/avg/3'
 
@@ -124,7 +124,7 @@ export const getJornadaActiva = async (idUsuario) => {
         method: "GET",
     })
     console.log(res) 
-    return await res
+    return await res.json()
 }
 
 export const getJornadaReciente = async (idUsuario) => {
@@ -140,7 +140,7 @@ export const getMedicionReciente = async (idJornada) => {
         method: "GET",
     })
     console.log(res) 
-    return await res.json()
+    return await res
 }
 
 export const getHayJornada = async (idUsuario) => {
@@ -169,8 +169,8 @@ export const setFechaFinJornada = async (idJornada) => {
     return await res
 }
 
-export const getMedicionesCountByIdJornada = async () => {
-    const res = await fetch(API2, {
+export const getMedicionesCountByIdJornada = async (idJornada) => {
+    const res = await fetch(API2 + `/${idJornada}`, {
         METHOD: "GET",
     })
     console.log(res) 
@@ -182,7 +182,7 @@ export const getLastMedicionByIdJornada = async (idJornada) => {
       METHOD: "GET",
   })
   console.log(res) 
-  return await res.json()
+  return await res
 }
 
 export const getAvgMediciones = async () => {
@@ -193,9 +193,9 @@ export const getAvgMediciones = async () => {
     return await res.json()
 }
 
-export const getFistMedicion = async (idJornada) => {
+export const getFirstMedicion = async (idJornada) => {
     const res = await fetch(API4 + `/${idJornada}`, {
-        METHOD: "GET",
+        method: "GET",
     })
     console.log(res) 
     return await res.json()

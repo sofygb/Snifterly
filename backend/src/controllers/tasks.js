@@ -160,9 +160,9 @@ export const getJornadaActiva = async (req, res) => {
     const [rows] = await connection.query("SELECT idJornada FROM Jornada WHERE idUsuario = ? AND activo = 1", [
     req.params.idUsuario
     ])
-    res.json(rows[0])
+    res.json(rows[0]["idJornada"])
 
-    console.log(rows[0])
+    console.log(rows[0]["idJornada"])
 }
 export const getUsuariosCount = async (req, res) => {
     const connection = await connect()
@@ -185,9 +185,9 @@ export const getFistFechaMedicionByIdJornada = async (req, res) => {
     const [rows] = await connection.query("SELECT fecha FROM medicion WHERE idJornada = ? ORDER BY fecha ASC LIMIT 1", [
         req.params.idJornada,
     ])
-    res.json(rows[0]["fecha"])
+    res.json(rows[0])
 
-    console.log(rows[0]["fecha"])
+    console.log(rows[0])
 }
 export const getMedicionesCountByIdJornada = async (req, res) => {
     const connection = await connect()

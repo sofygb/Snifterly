@@ -42,6 +42,7 @@ export default function Usuario({ navigation }) {
         });
         setFontsLoaded(true);
     }
+
     return (
         <View style={styles.container}>
 
@@ -58,7 +59,7 @@ export default function Usuario({ navigation }) {
                     }}
                     style={{ width: 55, height: 55, borderRadius: 100 }}
                 />
-                <Text style={{ fontSize: '1rem', fontFamily: 'Alata' }}>SelanaGomez
+                <Text style={{ fontSize: '1rem', fontFamily: 'Alata' }}>{contextState.usuario.nombre}
                     <Text style={{ fontSize: '1rem', color: 'orange', marginTop: '1rem', fontFamily: 'Alata' }}>{"\n"}Desde 7 meses</Text></Text>
                 <TouchableOpacity onPress={() => { navigation.navigate('Configuracion') }}>
                     <Icon icon="mdi:pencil" width={30} />
