@@ -35,6 +35,8 @@ const API17 = 'http://localhost:3000/jornadaActual'
 
 const API18 = 'http://localhost:3000/mediciones/last'
 
+const API19 = 'http://localhost:3000/usuarioNuevo'
+
 /*
 export const setJornadaActiva = async (value) => {
     try {
@@ -201,6 +203,12 @@ export const getUltimaMedicion = async (idJornada) => {
 
 export const saveJornada = async (idUsuario) => {
   const res = await fetch(API6 + `/${idUsuario}`, { method: "POST",})
+  console.log(res)  
+  return await res.json()
+}
+
+export const saveUsuario = async (nombre, fechaNacimiento, peso, altura, email, contraseña) => {
+  const res = await fetch(API19 + `/${nombre}/${fechaNacimiento}/${peso}/${altura}/${email}/${contraseña}`, { method: "POST",})
   console.log(res)  
   return await res.json()
 }

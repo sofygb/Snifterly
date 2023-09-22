@@ -5,13 +5,17 @@ import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
-
+import { saveUsuario } from '../../api';
 
 export default function CompletarDatos({ navigation }) {
     const { contextState, setContextState } = useContextState()
 
     const [peso, setPeso] = useState("");
     const [altura, setAltura] = useState("");
+    const [fechaNacimiento, setFechaNacimiento] = useState("");
+    const nombre = contextState.usuario.nombre
+    const mail = contextState.usuario.email
+    const contrasenia = contextState.usuario.contrasenia
 
     const loadJornada = async () => {
         const data = await getJornada()
@@ -36,12 +40,14 @@ export default function CompletarDatos({ navigation }) {
 
     const validacion = () => {
         if(!/[^\d,.\d]|[,.]\Z|\A[,.]|[\,\.]{2}/.test(peso + altura) && (peso+altura).split(".").length <= 3 && (peso+altura).split(",").length <= 3){
+            saveUsuario(nombre, fechaNacimiento, peso, altura, mail, contrasenia)
             navigation.navigate('PrimeraHome')
         }
         else{
             console.error('Error: Los valores introducidos no son números')
         }
     }
+    const [chosenDate, setChosenDate] = useState(new Date());
     return (
         <View style={styles.container}>
             
@@ -52,6 +58,7 @@ export default function CompletarDatos({ navigation }) {
 
             <TextInput keyboardType='decimal' variant="outlined" label="peso" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={peso} onChangeText={peso => setPeso(peso)}/>
             <TextInput keyboardType='decimal' variant="outlined" label="altura" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={altura} onChangeText={altura => setAltura(altura)}/>
+            <TextInput keyboardType='date' variant="outlined" label="fecha de nacimiento" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={fechaNacimiento} onChangeText={fechaNacimiento => setFechaNacimiento(fechaNacimiento)}/>
 
             <View style={styles.espacioBotonLogin}>
                 <TouchableOpacity style={styles.botonLogin} onPress={() => { validacion() }}>

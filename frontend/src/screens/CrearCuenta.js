@@ -20,42 +20,19 @@ export default function CrearCuenta({ navigation }) {
 
         if (validacion == -1) {
             setContextState({
-                type: ActionTypes.SetIdUsuario,
-                value: usuarios[validacion].idUsuario
-            });
-            setContextState({
                 type: ActionTypes.SetNombre,
-                value: usuarios[validacion].nombre
+                value: usuarios.nombre
             });
             setContextState({
                 type: ActionTypes.SetContrasenia,
-                value: usuarios[validacion].contrasenia
+                value: usuarios.contrasenia
             });
             setContextState({
                 type: ActionTypes.SetEmail,
-                value: usuarios[validacion].email
+                value: usuarios.email
             });
-            setContextState({
-                type: ActionTypes.SetFechaNacimiento,
-                value: new Date(usuarios[validacion].fechaNacimiento)
-            });
-            setContextState({
-                type: ActionTypes.SetFechaCreacion,
-                value: new Date(usuarios[validacion].fechaCreacion)
-            });
-            setContextState({
-                type: ActionTypes.SetModResistencia,
-                value: usuarios[validacion].modResistencia
-            });
-            setContextState({
-                type: ActionTypes.SetPeso,
-                value: usuarios[validacion].peso
-            });
-            setContextState({
-                type: ActionTypes.SetAltura,
-                value: usuarios[validacion].altura
-            });
-
+            navigation.navigate('CompletarDatos')
+            console.log("nombre del usuario que se esta creando: ", contextState.usuarios.nombre)
         }
 
         const getUsuarios = async () => {
@@ -91,7 +68,7 @@ export default function CrearCuenta({ navigation }) {
                 <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={contrasenia} onChangeText={contrasenia => setContrasenia(contrasenia)} />
 
                 <View style={styles.espacioBotonLogin}>
-                    <TouchableOpacity style={styles.botonLogin} onPress={() => { navigation.navigate('CompletarDatos') }}>
+                    <TouchableOpacity style={styles.botonLogin} onPress={() => { guardarDatos() }}>
                         <Text style={[{ color: 'white', fontSize: '1.2rem', fontFamily: 'inter' }]}>Sign up</Text>
                     </TouchableOpacity>
                 </View>
