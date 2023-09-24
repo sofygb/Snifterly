@@ -14,6 +14,7 @@ import CompletarDatos from '../screens/CompletarDatos.js'
 import EstadoUsuario from '../screens/EstadoUsuario.js'
 import Configuracion from '../screens/Configuracion.js'
 import Sintomas from '../screens/Sintomas.js'
+import CerrarSesion from '../screens/CerrarSesion.js'
 
 const Stack = createNativeStackNavigator()
 
@@ -69,6 +70,10 @@ const MainStack = () => {
                 <Stack.Screen
                 name= 'Configuracion'
                 component={ Configuracion }
+                />
+                <Stack.Screen
+                name= 'CerrarSesion'
+                component={ CerrarSesion }
                 />
             </Stack.Navigator>
         </NavigationContainer>

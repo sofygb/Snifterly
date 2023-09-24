@@ -204,11 +204,11 @@ const loadJornadaActiva = async () => {
             <Text style={[styles.medicion, { fontSize: "2.1rem" }]}>
               {tiempoRestante.getMinutes()}
             </Text>
-            <Text style={[styles.medicion, { fontSize: "1rem" }]}> min, </Text>
-            <Text style={[styles.medicion, { fontSize: "2.1rem" }]}>
+            <Text style={[styles.medicion, { fontSize: "1rem" }]}> min </Text>
+            {/* <Text style={[styles.medicion, { fontSize: "2.1rem" }]}>
               {tiempoRestante.getSeconds()}
             </Text>
-            <Text style={[styles.medicion, { fontSize: "1rem" }]}> sec</Text>
+            <Text style={[styles.medicion, { fontSize: "1rem" }]}> sec</Text> */}
           </View>
           <Text style={styles.texto}>es la longitud actual de tu jornada</Text>
         </View>

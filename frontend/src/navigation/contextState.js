@@ -4,7 +4,7 @@ import React from "react";
 export const initialState = {
     loading: true,
     usuario: {
-        idUsuario: 0,
+        idUsuario: -1,
         nombre: '',
         fechaNacimiento: 1 / 1 / 1970,
         peso: 0,

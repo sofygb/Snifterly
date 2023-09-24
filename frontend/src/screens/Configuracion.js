@@ -70,7 +70,7 @@ export default function Configuracion({ navigation }) {
                 </View>
                 
                 <View style={styles.cerrarSesion}>
-                    <TouchableOpacity onPress={() => { navigation.navigate('InicioSesion') }}>
+                    <TouchableOpacity onPress={() => { navigation.navigate('CerrarSesion') }}>
                     <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter', marginTop: '14rem', }]}>Cerrar sesión</Text>
                     </TouchableOpacity>
                 </View>
