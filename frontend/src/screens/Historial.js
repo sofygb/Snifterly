@@ -1,12 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity, InputAccessoryView, ScrollView } from 'react-native';
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
-import {Calendar, LocaleConfig} from 'react-native-calendars';
 
 export default function Historial({ navigation }) {
-    const [selected, setSelected] = useState('');
+    const [fecha, setFecha] = useState(0)
+
     const loadJornada = async () => {
         const data = await getJornada()
         console.log(data)
@@ -28,18 +27,49 @@ export default function Historial({ navigation }) {
         setFontsLoaded(true);
     }
     return (
-        <View>
-
-            <Text style={styles.titulo}>Tu actividad en la última semana</Text>
-
-            <Calendar
-            onDayPress={day => {
-                setSelected(day.dateString);
-            }}
-            markedDates={{
-                [selected]: {selected: true, disableTouchEvent: true, selectedDotColor: 'orange'}
-            }}
-            />
+        <View style={styles.container}>
+            <View style={{flexDirection: "row", marginTop: '4rem', display: 'flex', justifyContent: 'space-around'}}>
+                <Icon icon="zondicons:arrow-left" /> 
+                <Text style={styles.titulo}>04 de Abril</Text>
+                <Icon icon="zondicons:arrow-right" />
+            </View>
+            <View style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '2rem'}}>
+                <View style={styles.cuadro}>
+                    <View style={{margin: '0.5rem'}}>
+                        <Text style={styles.textoJornda}>Jornada I</Text>
+                        <View style={{flexDirection: "row", marginTop: '1rem', display: 'flex', justifyContent: 'space-between'}}>
+                            <Text style={styles.texto}>01:00</Text>
+                            <Text style={styles.texto}>*Info jornada*</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={styles.cuadro}>
+                    <View style={{margin: '0.5rem'}}>
+                        <Text style={styles.textoJornda}>Jornada II</Text>
+                        <View style={{flexDirection: "row", marginTop: '1rem', display: 'flex', justifyContent: 'space-between'}}>
+                            <Text style={styles.texto}>01:00</Text>
+                            <Text style={styles.texto}>*Info jornada*</Text>
+                        </View>
+                        <View style={{flexDirection: "row", display: 'flex', justifyContent: 'space-between'}}>
+                            <Text style={styles.texto}>01:00</Text>
+                            <Text style={styles.texto}>*Info jornada*</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={styles.cuadro}>
+                    <View style={{margin: '0.5rem'}}>
+                        <Text style={styles.textoJornda}>Jornada III</Text>
+                        <View style={{flexDirection: "row", marginTop: '1rem', display: 'flex', justifyContent: 'space-between'}}>
+                            <Text style={styles.texto}>01:00</Text>
+                            <Text style={styles.texto}>*Info jornada*</Text>
+                        </View>
+                        <View style={{flexDirection: "row", display: 'flex', justifyContent: 'space-between'}}>
+                            <Text style={styles.texto}>02:00</Text>
+                            <Text style={styles.texto}>*Info jornada*</Text>
+                        </View>
+                    </View>
+                </View>
+            </View>
 
             <View style={styles.footer}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -62,13 +92,29 @@ export default function Historial({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
         backgroundColor: 'white',
+        display: "flex",
+        flex: 1,
+        fontFamily: "Alata",
     },
     titulo: {
-
+        fontWeight: "bold",
+        fontSize: "1.5rem",
+        fontFamily: "alata",
+    },
+    textoJornda: {
+        marginLeft: "0.5rem",
+        marginRight: "0.5rem",
+        fontSize: "1.5rem",
+        color: "#4B4B4B",
+        fontFamily: "alata",
+    },
+    texto: {
+        marginLeft: "0.5rem",
+        marginRight: "0.5rem",
+        fontSize: "1rem",
+        color: "#4B4B4B",
+        fontFamily: "alata",
     },
     footer: {
         flex: 1,
@@ -76,8 +122,27 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         marginBottom: '1rem',
         width: '100%',
-        paddingLeft: '2rem',
-        paddingRight: '2rem',
+        paddingLeft: "2rem",
+        paddingRight: "2rem",
+        Height: '3rem',
     },
-
+    cuadro: {
+        borderRadius: 20,
+        padding: "0.5rem",
+        margin: "1rem",
+        minheight: "11rem",
+        minWidth: "18rem",
+        maxWidth: "20rem",
+        padding: "0.3rem",
+        backgroundColor: "#F9F4F0",
+        fontFamily: "alata",
+        shadowColor: "#560000",
+        borderColor: "F9F4F0",
+        shadowOffset: {
+          width: 2,
+          height: 4,
+        },
+        shadowOpacity: 2,
+        shadowRadius: 5,
+      },
 });
