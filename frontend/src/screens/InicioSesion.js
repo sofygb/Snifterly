@@ -5,7 +5,7 @@ import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { useIsFocused } from "@react-navigation/native";
-import { getUsuario, getUsuarioByEmailAndContrasenia, getUsuarios, getJornadaActiva, getHayJornada, getJornadaActiva2 } from '../../api';
+import { getUsuarios, getHayJornada, getJornadaActiva2 } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 
 export default function InicioSesion({ navigation }) {

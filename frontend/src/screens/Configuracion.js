@@ -4,8 +4,15 @@ import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
+import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 
 export default function Configuracion({ navigation }) {
+    const { contextState, setContextState } = useContextState()
+    const [mostrarContrasenia, setMostrarContrasenia] = useState(false);
+
+    const toggleMostrarContrasenia = () => {
+        setMostrarContrasenia(!mostrarContrasenia);
+    };
     const loadJornada = async () => {
         const data = await getJornada()
         console.log(data)
@@ -47,19 +54,22 @@ export default function Configuracion({ navigation }) {
                         }}
                         style={{ width: 100, height: 100, borderRadius: 10 }}
                     />
-                    <Text style={styles.nombreStyle}>SelenaGomez</Text>
+                    <Text style={styles.nombreStyle}>{contextState.usuario.nombre}</Text>
                 </View>
 
                 <View style={styles.cuadroDos}>
                     <View style={{flexDirection: "row",}}>
                         <Text style={{fontSize: '1rem',fontFamily: 'Alata',fontWeight: "bold",}}>mail</Text>
-                        <Text style={{fontSize: '1rem',fontFamily: 'Alata', marginLeft: '1.5rem'}}>SelenaGomez@gmail.com</Text>
+                        <Text style={{fontSize: '1rem',fontFamily: 'Alata', marginLeft: '1.5rem'}}>{contextState.usuario.email}</Text>
                     </View>
                 </View>
                 <View style={styles.cuadroDos}>
                     <View style={{flexDirection: "row",}}>
                         <Text style={{fontSize: '1rem',fontFamily: 'Alata',fontWeight: "bold",}}>Contraseña</Text>
-                        <Text style={{fontSize: '1rem',fontFamily: 'Alata', marginLeft: '1.5rem'}}>**********</Text>
+                        <Text style={{fontSize: '1rem',fontFamily: 'Alata', marginLeft: '1.5rem'}}>{mostrarContrasenia ? contextState.usuario.contrasenia : '********'}</Text>
+                        <TouchableOpacity style={{flex: 1, display: 'flex', alignItems: 'flex-end'}} onPress={toggleMostrarContrasenia}>
+                            <Icon icon={mostrarContrasenia ? 'mdi:eye-off' : 'mdi:eye'} width={30} />
+                        </TouchableOpacity>
                     </View>
                 </View>
 
@@ -71,7 +81,7 @@ export default function Configuracion({ navigation }) {
                 
                 <View style={styles.cerrarSesion}>
                     <TouchableOpacity onPress={() => { navigation.navigate('CerrarSesion') }}>
-                    <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter', marginTop: '14rem', }]}>Cerrar sesión</Text>
+                    <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter', marginTop: '11rem', }]}>Cerrar sesión</Text>
                     </TouchableOpacity>
                 </View>
 
