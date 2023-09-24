@@ -61,7 +61,7 @@ export default function CompletarDatos({ navigation }) {
 
             <TextInput keyboardType='decimal' variant="outlined" label="peso" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={peso} onChangeText={peso => setPeso(peso)}/>
             <TextInput keyboardType='decimal' variant="outlined" label="altura" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={altura} onChangeText={altura => setAltura(altura)}/>
-            <TextInput keyboardType='date' variant="outlined" label="fecha de nacimiento" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={fechaNacimiento} placeholder="Ejemplo: dia-mes-año..." onChangeText={fechaNacimiento => setFechaNacimiento(fechaNacimiento)}/>
+            <TextInput keyboardType='date' variant="outlined" label="fecha de nacimiento" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={fechaNacimiento} placeholder="Ejemplo: dd-mm-yyyy..." onChangeText={fechaNacimiento => setFechaNacimiento(fechaNacimiento)}/>
 
             <View style={styles.espacioBotonLogin}>
                 <TouchableOpacity style={styles.botonLogin} onPress={() => { validacion() }}>

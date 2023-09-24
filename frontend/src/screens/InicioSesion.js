@@ -14,6 +14,8 @@ export default function InicioSesion({ navigation }) {
     const [usuarios, setUsuarios] = React.useState([]);
     const [jornadaActiva, setJornadaActiva] = React.useState([]);
     const isFocused = useIsFocused();
+    const [mostrarContrasenia, setMostrarContrasenia] = useState(false);
+    const [contrasenia, setContrasenia] = useState('');
     
     const loadUsuarios = async () => {
         const data = await getUsuarios()
@@ -123,8 +125,8 @@ export default function InicioSesion({ navigation }) {
             <Text style={styles.texto}>SIGN IN</Text>
 
             <TextInput variant="outlined" label="Mail" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem', borderRadius: 10 }} value={mail} onChangeText={mail => setMail(mail)}/>
-            <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem', borderRadius: 10  }} value={contraseña} secureTextEntry={true} onChangeText={contraseña => setContraseña(contraseña)}  right={<TouchableOpacity onPress={() => setHidePass(!hidePass)}> <Icon icon="mdi:eye" width={30}/> </TouchableOpacity>}/>
-
+            <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem', borderRadius: 10  }} value={contraseña} secureTextEntry={!mostrarContrasenia} onChangeText={contraseña => setContraseña(contraseña)} trailing={<TouchableOpacity onPress={() => setMostrarContrasenia(!mostrarContrasenia)}><Icon icon={mostrarContrasenia ? 'mdi:eye-off' : 'mdi:eye'} width={30} /></TouchableOpacity>}/>
+            
             <TouchableOpacity style={styles.botonContrasena}>
                 <Text style={[{ color: '#0D4CEF', fontSize: '0.9rem', fontFamily: 'inter', textAlign: 'right', marginRight: '1rem', marginBottom: '1.5rem', marginRight: '2rem'}]}>¿Te olvidaste la contraseña?</Text>
             </TouchableOpacity>

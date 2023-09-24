@@ -13,6 +13,7 @@ export default function CrearCuenta({ navigation }) {
     const { contextState, setContextState } = useContextState()
     const [usuarios, setUsuarios] = React.useState([])
     const [esMayor, setEsMayor] = React.useState("✗")//✓✗
+    const [mostrarContrasenia, setMostrarContrasenia] = useState(false);
 
     useEffect(() => {
         if(contrasenia.length >= 10){
@@ -84,7 +85,8 @@ export default function CrearCuenta({ navigation }) {
                 <Text style={styles.texto}>SIGN UP</Text>
                 <TextInput variant="outlined" label="nombre" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={nombre} onChangeText={nombre => setNombre(nombre)} />
                 <TextInput keyboardType='email' variant="outlined" label="Mail" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={mail} onChangeText={e => setMail(e)} />
-                <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={contrasenia} onChangeText={contrasenia => setContrasenia(contrasenia)} />
+                <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={contrasenia} onChangeText={contrasenia => setContrasenia(contrasenia)} secureTextEntry={!mostrarContrasenia} trailing={<TouchableOpacity onPress={() => setMostrarContrasenia(!mostrarContrasenia)}><Icon icon={mostrarContrasenia ? 'mdi:eye-off' : 'mdi:eye'} width={30} /></TouchableOpacity>}/>
+
                 <Text style={{margin: 14, fontSize: '1rem', marginRight: '2rem', marginLeft: '2rem'}}>Es mayor a 10 caracteres: {esMayor}</Text>
 
                 <View style={styles.espacioBotonLogin}>
