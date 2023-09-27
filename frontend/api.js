@@ -182,7 +182,7 @@ export const getLastMedicionByIdJornada = async (idJornada) => {
       METHOD: "GET",
   })
   console.log(res) 
-  return await res
+  return await res.json()
 }
 
 export const getAvgMediciones = async () => {

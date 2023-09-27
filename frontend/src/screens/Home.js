@@ -25,7 +25,6 @@ export default function Home({ navigation }) {
   const [tiempo, setTiempo] = useState(100);
 
   //conexión al backend
-  const [jornada, setJornada] = useState([]);
 
   const [mediciones, setMediciones] = useState(0); //Array de mediciones de la jornada actual
 
@@ -42,49 +41,43 @@ export default function Home({ navigation }) {
   const [tiempoRestante, setTiempoRestante] = useState(new Date());
 
   const [idJornadaActiva, setIdJornadaActiva] = useState(0);
+
+  const [llegaronLosValores, setLlegaronLosValores] = useState(false);
   
   const isFocused = useIsFocused();
-
+/*
 const loadJornadaActiva = async () => {
-  const data = await getJornadaActiva(contextState.usuario.idUsuario)
+  const data = await getJornadaActiva(contextState.usuario.idUsuario) //Trae el ID de la jornada activa
   setIdJornadaActiva(data)
-  /* 
+   
   setContextState({
     type: ActionTypes.SetIdJornada,
     value: data
   });
-  */
+  
   console.log(data)
   }
-
-  const loadJornada2 = async () => {
-    const data = await getJornadaReciente(contextState.usuario.idUsuario)
-    console.log(data)
+*/
+  const loadJornada = async () => {
+    const datax = await getJornadaReciente(contextState.usuario.idUsuario)
+    console.log(datax)
 
     setContextState({
       type: ActionTypes.SetIdJornada,
-      value: data.idJornada
+      value: datax.idJornada
   });
+  setIdJornadaActiva(datax.idJornada)
+  if(Number.isInteger(datax.idJornada))
+    setLlegaronLosValores(true)
   }
 
-  const loadJornada = async () => {
-    const medicionReciente = await getMedicionReciente(contextState.jornada.idJornada)
-    console.log(medicionReciente)
+  const loadJornadaExtra = async () => {
+    const data3 = await getAvgMediciones();
+    setAvgMediciones(data3);
 
-    const data = await getJornada(); //HARDCODEADO
-    setJornada(data);
-    console.log(data);
-
-    const data5 = await getUsuarios();
-    setJornada(data5);
-    console.log(data5);
-    
     const data2 = await getMedicionesCountByIdJornada(idJornadaActiva);
     setMediciones(data2);
     console.log(data2);
-    
-    const data3 = await getAvgMediciones();
-    setAvgMediciones(data3);
 
     const lastMedicionn = await getLastMedicionByIdJornada(contextState.jornada.idJornada)
     console.log(lastMedicionn)
@@ -116,17 +109,6 @@ const loadJornadaActiva = async () => {
     
     calcularDiferencia();
     console.log(tiempoRestante)
-
-    
-    /*
-    try {
-      const data = await getJornada()
-      console.log([data])
-      setJornada(data)
-    } catch (error) {
-      console.log(error); 
-    }
-    */
   };
   
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -134,12 +116,12 @@ const loadJornadaActiva = async () => {
     if (!fontsLoaded) {
       loadFonts();
     }
-    loadJornada2()
-    loadJornadaActiva()
-  }, [isFocused]);
+    loadJornada()
+  }, []);
+
   useEffect(() => {
-    loadJornada();
-  },[idJornadaActiva])
+    loadJornadaExtra();
+  },[llegaronLosValores])
   
   const loadFonts = async () => {
     await Font.loadAsync({
