@@ -14,18 +14,26 @@ export default function Usuario({ navigation }) {
     const { contextState, setContextState } = useContextState()
     const [edad, setEdad] = useState(0)
     const [cantJornadas, setCantJornadas] = useState()
+    const [idJornadaActiva, setIdJornadaActiva] = useState(null)
 
     const [fontsLoaded, setFontsLoaded] = useState(false);
+    
+    const siHayJornadaActiva = async () => {
+        const jornadaActivaes = await getJornadaActiva(contextState.usuario.idUsuario)
+        setIdJornadaActiva(jornadaActivaes)
+    }
+
     useEffect(() => {
         if (!fontsLoaded) {
             loadFonts();
         }
         cantjornadas()
         calcularEdad()
+        siHayJornadaActiva()
     }, [])
-    const jornadaActivaes = getJornadaActiva(contextState.usuario.idUsuario)
+
     const proximaPantalla = () => {
-        if (jornadaActivaes !== null) {
+        if (idJornadaActiva !== null) {
             navigation.navigate('Home')
         }
         else {
