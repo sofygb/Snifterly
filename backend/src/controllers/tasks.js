@@ -159,10 +159,16 @@ export const getJornadaActiva = async (req, res) => {
     const connection = await connect()
     const [rows] = await connection.query("SELECT idJornada FROM Jornada WHERE idUsuario = ? AND activo = 1", [
     req.params.idUsuario
-    ])
-    res.json(rows[0]["idJornada"])
-
-    console.log(rows[0]["idJornada"])
+    ]) //Ni no hay jornada activa tira error y crashea la BD. SOLUCIONAR
+    console.log(rows)
+    if(rows === []){
+        res.json(rows)
+        console.log(rows  + "no") 
+    }
+    else{
+        res.json(rows[0]["idJornada"])
+        console.log(rows[0]["idJornada"] + "si") 
+    }
 }
 export const getUsuariosCount = async (req, res) => {
     const connection = await connect()
