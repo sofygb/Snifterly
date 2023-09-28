@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 import { updateUsuario } from "../../api";
+import { Input } from '@rneui/base';
 
 export default function Configuracion({ navigation }) {
     const { contextState, setContextState } = useContextState()
@@ -66,7 +67,7 @@ export default function Configuracion({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={{ margin: '2rem' }}>
-                <View style={{flexDirection: "row", marginTop: '2rem'}}>
+                <View style={{flexDirection: "row", marginTop: '1.5rem'}}>
                     <TouchableOpacity onPress={() => { navigation.navigate('Usuario') }}>
                         <Icon icon="basil:cross-outline" width={45} />
                     </TouchableOpacity>
@@ -84,7 +85,7 @@ export default function Configuracion({ navigation }) {
                         }}
                         style={{ width: 100, height: 100, borderRadius: 10 }}
                     />
-                    <Text style={styles.nombreStyle}>{contextState.usuario.nombre}</Text>
+                    <TextInput style={{fontSize: '1rem',fontFamily: 'Alata', marginLeft: '1.5rem'}} value={nombre} placeholder={nombre} onChangeText={nombre => setNombre(nombre)}/>
                 </View>
                 <View style={styles.cuadroDos}>
                     <View style={{flexDirection: "row",}}>
@@ -103,15 +104,36 @@ export default function Configuracion({ navigation }) {
                     </View>
                 </View>
 
-                <View style={{display: 'flex', alignItems: 'center', marginTop: '2rem'}}>
+                <View style={styles.cuadroDos}>
+                    <View style={{flexDirection: "row",}}>
+                        <Text style={{fontSize: '1rem',fontFamily: 'Alata',fontWeight: "bold",}}>Peso</Text>
+                        <TextInput style={{fontSize: '1rem',fontFamily: 'Alata', marginLeft: '1.5rem'}} value={peso} placeholder={peso} onChangeText={peso => setPeso(peso)}/>
+                    </View>
+                </View>
+
+                <View style={styles.cuadroDos}>
+                    <View style={{flexDirection: "row",}}>
+                        <Text style={{fontSize: '1rem',fontFamily: 'Alata',fontWeight: "bold",}}>Altura</Text>
+                        <TextInput style={{fontSize: '1rem',fontFamily: 'Alata', marginLeft: '1.5rem'}} value={altura} placeholder={altura} onChangeText={altura => SetAltura(altura)}/>
+                    </View>
+                </View>
+
+                <View style={styles.cuadroDos}>
+                    <View style={{flexDirection: "row",}}>
+                        <Text style={{fontSize: '1rem',fontFamily: 'Alata',fontWeight: "bold",}}>Fecha de nacimiento</Text>
+                        <TextInput style={{fontSize: '1rem',fontFamily: 'Alata', marginLeft: '1.5rem'}} value={fechaNacimiento} placeholder={fechaNacimiento} onChangeText={fechaNacimiento => setFechaNacimiento(fechaNacimiento)}/>
+                    </View>
+                </View>
+
+                <View style={{display: 'flex', alignItems: 'center', marginTop: '1rem'}}>
                     <TouchableOpacity onPress={() => guardarNuevosDatos()} style={styles.botonGuardar}>
                         <Text style={{color: 'white', fontFamily: 'inter', textAlign: 'center',fontSize: '1rem',}}>Guardar</Text>
                     </TouchableOpacity>
                 </View>
                 
                 <View style={styles.cerrarSesion}>
-                    <TouchableOpacity onPress={() => { navigation.navigate('CerrarSesion') }}>
-                        <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter', marginTop: '11rem', }]}>Cerrar sesión</Text>
+                    <TouchableOpacity onPress={() => { navigation.navigate('CerrarSesion') }} style={[{marginTop: '0.5rem'}]} >
+                        <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter',}]}>Cerrar sesión</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -157,7 +179,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         fontWeight: 'bold',
         fontSize: '2rem',
-        marginBottom: '2rem',
+        marginBottom: '0.5rem',
         fontFamily: 'alata',
         paddingLeft: '4.5rem',
     },
@@ -187,7 +209,6 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     cerrarSesion: {
-        
         display: 'flex',
         justifyContent: 'flex-end',
         marginBottom: '1rem',

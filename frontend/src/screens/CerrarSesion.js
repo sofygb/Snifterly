@@ -95,10 +95,10 @@ export default function CerrarSesion({ navigation }) {
       </View>
 
       <View style={[styles.espaciosBotones, {flexDirection: 'row', display: 'flex', alignItems: 'flex-start' }]}>
-        <TouchableOpacity style={styles.botonAceptar} onPress={() => { navigation.navigate('InicioSesion') }}>
+        <TouchableOpacity style={styles.botonAceptar} onPress={() => {cerrarSesion(), navigation.navigate('InicioSesion') }}>
           <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Cerrar sesión</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.botonCancelar} onPress={() => {cerrarSesion(), navigation.navigate('Configuracion') }}>
+        <TouchableOpacity style={styles.botonCancelar} onPress={() => { navigation.navigate('Configuracion') }}>
           <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter' }]}>Cancelar</Text>
         </TouchableOpacity>
       </View>
