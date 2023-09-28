@@ -43,6 +43,7 @@ const API21 = 'http://localhost:3000/jornadaActiva2'
 
 const API22 = 'http://localhost:3000/modificarUsuario'
 
+const API23 = 'http://localhost:3000/cantjornadas/count'
 /*
 export const setJornadaActiva = async (value) => {
     try {
@@ -183,6 +184,14 @@ export const getMedicionesCountByIdJornada = async (idJornada) => {
     })
     console.log(res) 
     return await res.json()
+}
+
+export const getJornadasCountByIdUsuario = async (idUsuario) => {
+  const res = await fetch(API23 + `/${idUsuario}`, {
+      METHOD: "GET",
+  })
+  console.log(res) 
+  return await res.json()
 }
 
 export const getLastMedicionByIdJornada = async (idJornada) => {

@@ -7,33 +7,44 @@ import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
-import { getJornadaActiva } from '../../api';
+import { getJornadaActiva, getJornadasCountByIdUsuario } from '../../api';
 
 
 export default function Usuario({ navigation }) {
     const { contextState, setContextState } = useContextState()
+    const [edad, setEdad] = useState(0)
+    const [cantJornadas, setCantJornadas] = useState()
 
-    const loadJornada = async () => {
-        const data = await getJornada()
-        console.log(data)
-        setJornada([data])
-    }
     const [fontsLoaded, setFontsLoaded] = useState(false);
     useEffect(() => {
         if (!fontsLoaded) {
             loadFonts();
         }
-        loadJornada()
-    })
+        cantjornadas()
+        calcularEdad()
+    }, [])
     const jornadaActivaes = getJornadaActiva(contextState.usuario.idUsuario)
     const proximaPantalla = () => {
-        if(jornadaActivaes !== null){
+        if (jornadaActivaes !== null) {
             navigation.navigate('Home')
         }
-        else{
+        else {
             navigation.navigate('PrimeraHome')
         }
     }
+    const cantjornadas = async () => {
+        const data = await getJornadasCountByIdUsuario(contextState.usuario.idUsuario);
+        setCantJornadas(data)
+    }
+    const calcularEdad = () => {
+        let fechaNacimiento = new Date(); // Declarar con let en lugar de const
+        fechaNacimiento = contextState.usuario.fechaNacimiento; // Asignar el valor
+        const fechaActual = new Date();
+        const diferenciaEnMilisegundos = fechaActual - fechaNacimiento;
+        const edadCalculada = Math.floor(diferenciaEnMilisegundos / (365.25 * 24 * 60 * 60 * 1000));
+        setEdad(edadCalculada);
+        console.log("La edad es:", edadCalculada);
+    }    
 
     const loadFonts = async () => {
         await Font.loadAsync({
@@ -48,7 +59,7 @@ export default function Usuario({ navigation }) {
 
             <Text style={styles.titulo}>Snifterly</Text>
 
-            <View style={[styles.info, {marginBottom: '3rem',paddingLeft: '4rem', paddingRight: '4rem',}]}>
+            <View style={[styles.info, { marginBottom: '3rem', paddingLeft: '4rem', paddingRight: '4rem', }]}>
                 <Image
                     source={{
                         uri: 'https://media.revistavanityfair.es/photos/60e82a56bf8d45dd8c6f5b7e/master/w_1600%2Cc_limit/250726.jpg',
@@ -60,7 +71,7 @@ export default function Usuario({ navigation }) {
                     style={{ width: 55, height: 55, borderRadius: 100 }}
                 />
                 <Text style={{ fontSize: '1rem', fontFamily: 'Alata' }}>{contextState.usuario.nombre}
-                    <Text style={{ fontSize: '1rem', color: 'orange', marginTop: '1rem', fontFamily: 'Alata' }}>{"\n"}Desde 7 meses</Text></Text>
+                    <Text style={{ fontSize: '1rem', color: 'orange', marginTop: '1rem', fontFamily: 'Alata' }}>{"\n"}edad {edad} años</Text></Text>
                 <TouchableOpacity onPress={() => { navigation.navigate('Configuracion') }}>
                     <Icon icon="mdi:pencil" width={30} />
                 </TouchableOpacity>
@@ -68,20 +79,20 @@ export default function Usuario({ navigation }) {
 
             <View style={[styles.espacioCuadros, { marginBottom: "1rem" }]}>
                 <View style={styles.cuadro}>
-                    <Text style={{ color: 'white', fontSize: 24, fontFamily: 'alata', marginRight: '1rem' }}>SESIONES</Text>
-                    <Text style={{ color: 'white', fontSize: 40, fontFamily: 'alata', display: 'flex', justifyContent: 'flex-end' }}>20</Text>
+                    <Text style={{ color: 'white', fontSize: 24, fontFamily: 'alata', marginRight: '1rem' }}>Sesiones</Text>
+                    <Text style={{ color: 'white', fontSize: 40, fontFamily: 'alata', display: 'flex', justifyContent: 'flex-end' }}>{cantJornadas}</Text>
                 </View>
                 <View style={styles.cuadro}>
-                    <Text style={{ color: 'white', fontSize: 24, fontFamily: 'alata', marginRight: '1rem' }}>PROMEDIO</Text>
+                    <Text style={{ color: 'white', fontSize: 24, fontFamily: 'alata', marginRight: '1rem' }}>Limite alcohol</Text>
                     <Text style={{ color: 'white', fontSize: 40, fontFamily: 'alata', display: 'flex', justifyContent: 'flex-end' }}>X%</Text>
                 </View>
             </View>
 
             <Text style={styles.texto}>Conectáte con otras apps:</Text>
 
-            <View style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <View style={styles.cuadroRectangulo}>
-                    <View style={[styles.info, {paddingLeft: '2rem', paddingRight: '2rem', flex: 1, display: 'flex', alignItems: 'center'}]}>
+                    <View style={[styles.info, { paddingLeft: '2rem', paddingRight: '2rem', flex: 1, display: 'flex', alignItems: 'center' }]}>
                         <Image
                             source={{
                                 uri: 'https://logodownload.org/wp-content/uploads/2015/05/uber-logo-1-1.png',
@@ -118,7 +129,7 @@ export default function Usuario({ navigation }) {
 
             <Text style={styles.texto}>Tus últimas jornadas:</Text>
 
-            <View style={{display: 'flex', alignItems: 'center'}}>
+            <View style={{ display: 'flex', alignItems: 'center' }}>
                 <View style={styles.cuadroJornadas}>
                     <Text style={styles.textoJornadas}>Jornada II</Text>
                     <Text style={styles.textofecha}>04-04-23</Text>
@@ -183,7 +194,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         width: '100%',
-        
+
     },
     cuadro: {
         borderWidth: 2,
@@ -237,7 +248,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginTop: '1rem',
     },
-    textoJornadas:{
+    textoJornadas: {
         fontFamily: 'alata',
         marginLeft: '1.5rem',
         fontSize: 24,

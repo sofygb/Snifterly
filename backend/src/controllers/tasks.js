@@ -198,6 +198,15 @@ export const getMedicionesCountByIdJornada = async (req, res) => {
 
     console.log(rows[0]["COUNT(*)"])
 }
+export const getJornadasCountByIdUsuario = async (req, res) => {
+    const connection = await connect()
+    const [rows] = await connection.query("SELECT COUNT(*) FROM jornada WHERE idUsuario = ?", [
+        req.params.idUsuario,
+    ])
+    res.json(rows[0]["COUNT(*)"])
+
+    console.log(rows[0]["COUNT(*)"])
+}
 export const getMedicionesFromIdJornada = async (req, res) => {
     const connection = await connect()
     const [rows] = await connection.query("SELECT * FROM Medicion WHERE idJornada = ?", [

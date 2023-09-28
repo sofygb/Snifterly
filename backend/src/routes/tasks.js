@@ -29,7 +29,8 @@ import {
     setFechaFinJornada,
     getHayJornada,
     getJornadaActiva2,
-    updateUsuario
+    updateUsuario,
+    getJornadasCountByIdUsuario
 } from "../controllers/tasks.js";
 
 const router = Router(); //devuelve lo que se ejecuta en una constante. Router nos permite definir las urls
@@ -137,6 +138,15 @@ router.get("/jornadaReciente/:idUsuario", getJornadaRecienteByIdUsuario) //get j
  *    tags: [Tasks]
  */
 router.get("/mediciones/count/:idJornada", getMedicionesCountByIdJornada)
+
+/** 
+ * @swagger
+ * /cantjornadas/count/:idUsuario
+ *  get:
+ *    summary: Trae la cantidad de jornadas de un usuario
+ *    tags: [Tasks]
+ */
+router.get("/cantjornadas/count/:idUsuario", getJornadasCountByIdUsuario)
 
 /** 
  * @swagger
