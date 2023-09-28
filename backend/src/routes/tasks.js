@@ -28,7 +28,8 @@ import {
     getUltimaMedicionByIdJornada,
     setFechaFinJornada,
     getHayJornada,
-    getJornadaActiva2
+    getJornadaActiva2,
+    updateUsuario
 } from "../controllers/tasks.js";
 
 const router = Router(); //devuelve lo que se ejecuta en una constante. Router nos permite definir las urls
@@ -57,6 +58,15 @@ router.get("/usuarios", getUsuarios) //get todas las tareas
  *    tags: [Tasks]
  */
 router.put("/medicionEstado/:idMedicion/:estado", setEstadoUsuario)
+
+/** 
+ * @swagger
+ * /modificarUsuario/:nombre/:fechaNacimiento/:peso/:altura/:email/:contrasenia/:idUsuario
+ *  put:
+ *    summary: update de los nuevos datos del usuario
+ *    tags: [Tasks]
+ */
+router.put("/modificarUsuario/:nombre/:fechaNacimiento/:peso/:altura/:email/:contrasenia/:idUsuario", updateUsuario)
 
 /** 
  * @swagger

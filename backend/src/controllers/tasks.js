@@ -250,6 +250,21 @@ export const saveJornada = async (req, res) => {
     );
     res.json(nuevaJornada);
 }
+export const updateUsuario = async (req, res) => {
+    const connection = await connect()
+    const [rows] = await connection.query("UPDATE usuario SET nombre = ?, fechaNacimiento = ?, peso = ?, altura = ?, email = ?, contrasenia = ? where idUsuario = ?", [
+        req.params.nombre,
+        req.params.fechaNacimiento,
+        req.params.peso,
+        req.params.altura,
+        req.params.email,
+        req.params.contrasenia,
+        req.params.idUsuario,
+    ])
+    res.json(rows[0])
+
+    console.log(rows[0])
+}
 export const deleteTask = async (req, res) => {
     res.send("hello world");
 }

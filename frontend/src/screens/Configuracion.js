@@ -1,29 +1,59 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
-import { TextInput } from "@react-native-material/core";
+import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput } from 'react-native';
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
+import { updateUsuario } from "../../api";
 
 export default function Configuracion({ navigation }) {
     const { contextState, setContextState } = useContextState()
-    const [mostrarContrasenia, setMostrarContrasenia] = useState(false);
+    const [fontsLoaded, setFontsLoaded] = useState(false)
+    const [mostrarContrasenia, setMostrarContrasenia] = useState(false)
+    const [nombre, setNombre] = useState(contextState.usuario.nombre)
+    const [fechaNacimiento, setFechaNacimiento] = useState(contextState.usuario.fechaNacimiento)
+    const [peso, setPeso] = useState(contextState.usuario.peso)
+    const [altura, SetAltura] = useState(contextState.usuario.altura)
+    const [email, setEmail] = useState(contextState.usuario.email)
+    const [contrasenia, setContrasenia] = useState(contextState.usuario.contrasenia)
 
     const toggleMostrarContrasenia = () => {
         setMostrarContrasenia(!mostrarContrasenia);
     };
-    const loadJornada = async () => {
-        const data = await getJornada()
-        console.log(data)
-        setJornada([data])
+
+    const guardarNuevosDatos = () =>{
+        //aca deberia tmb validar los datos pero bueno, sino no alcanzo a hacerlo
+        updateUsuario(nombre, fechaNacimiento, peso, altura, email, contrasenia, contextState.usuario.idUsuario)
+        setContextState({
+            type: ActionTypes.SetNombre,
+            value: nombre
+        });
+        setContextState({
+            type: ActionTypes.SetContrasenia,
+            value: contrasenia
+        });
+        setContextState({
+            type: ActionTypes.SetEmail,
+            value: email
+        });
+        setContextState({
+            type: ActionTypes.SetFechaNacimiento,
+            value: fechaNacimiento
+        });
+        setContextState({
+            type: ActionTypes.SetPeso,
+            value: peso
+        });
+        setContextState({
+            type: ActionTypes.SetAltura,
+            value: altura
+        });
     }
-    const [fontsLoaded, setFontsLoaded] = useState(false);
+
     useEffect(() => {
         if (!fontsLoaded) {
             loadFonts();
         }
-        loadJornada()
     })
 
     const loadFonts = async () => {
@@ -56,17 +86,17 @@ export default function Configuracion({ navigation }) {
                     />
                     <Text style={styles.nombreStyle}>{contextState.usuario.nombre}</Text>
                 </View>
-
                 <View style={styles.cuadroDos}>
                     <View style={{flexDirection: "row",}}>
-                        <Text style={{fontSize: '1rem',fontFamily: 'Alata',fontWeight: "bold",}}>mail</Text>
-                        <Text style={{fontSize: '1rem',fontFamily: 'Alata', marginLeft: '1.5rem'}}>{contextState.usuario.email}</Text>
+                        <Text style={{fontSize: '1rem',fontFamily: 'Alata',fontWeight: "bold",}}>Mail</Text>
+                        <TextInput style={{fontSize: '1rem',fontFamily: 'Alata', marginLeft: '1.5rem'}} value={email} placeholder={email} onChangeText={email => setEmail(email)}/>
                     </View>
                 </View>
+                
                 <View style={styles.cuadroDos}>
                     <View style={{flexDirection: "row",}}>
                         <Text style={{fontSize: '1rem',fontFamily: 'Alata',fontWeight: "bold",}}>Contraseña</Text>
-                        <Text style={{fontSize: '1rem',fontFamily: 'Alata', marginLeft: '1.5rem'}}>{mostrarContrasenia ? contextState.usuario.contrasenia : '********'}</Text>
+                        <TextInput style={{fontSize: '1rem',fontFamily: 'Alata', marginLeft: '1.5rem'}} value={contrasenia} placeholder={mostrarContrasenia ? contrasenia : '********'} onChangeText={contrasenia => setContrasenia(contrasenia)}/>
                         <TouchableOpacity style={{flex: 1, display: 'flex', alignItems: 'flex-end'}} onPress={toggleMostrarContrasenia}>
                             <Icon icon={mostrarContrasenia ? 'mdi:eye-off' : 'mdi:eye'} width={30} />
                         </TouchableOpacity>
@@ -74,14 +104,14 @@ export default function Configuracion({ navigation }) {
                 </View>
 
                 <View style={{display: 'flex', alignItems: 'center', marginTop: '2rem'}}>
-                    <TouchableOpacity style={styles.botonGuardar}>
+                    <TouchableOpacity onPress={() => guardarNuevosDatos()} style={styles.botonGuardar}>
                         <Text style={{color: 'white', fontFamily: 'inter', textAlign: 'center',fontSize: '1rem',}}>Guardar</Text>
                     </TouchableOpacity>
                 </View>
                 
                 <View style={styles.cerrarSesion}>
                     <TouchableOpacity onPress={() => { navigation.navigate('CerrarSesion') }}>
-                    <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter', marginTop: '11rem', }]}>Cerrar sesión</Text>
+                        <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter', marginTop: '11rem', }]}>Cerrar sesión</Text>
                     </TouchableOpacity>
                 </View>
 

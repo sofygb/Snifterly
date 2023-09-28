@@ -41,6 +41,8 @@ const API20 = 'http://localhost:3000/jornadaActivaHay'
 
 const API21 = 'http://localhost:3000/jornadaActiva2'
 
+const API22 = 'http://localhost:3000/modificarUsuario'
+
 /*
 export const setJornadaActiva = async (value) => {
     try {
@@ -159,6 +161,12 @@ export const setJornadaDesactiva = async () => {
 
 export const setEstadoUsuario = async (idMedicion, estadoUsuario) => {
   const res = await fetch(API10 + `/${idMedicion}/${estadoUsuario}`, { method: "PUT",})
+    console.log(res) 
+    return await res
+}
+
+export const updateUsuario = async (nombre, fechaNacimiento, peso, altura, email, contrasenia, idUsuario) => {
+  const res = await fetch(API22 + `/${nombre}/${fechaNacimiento}/${peso}/${altura}/${email}/${contrasenia}/${idUsuario}`, { method: "PUT",})
     console.log(res) 
     return await res
 }
