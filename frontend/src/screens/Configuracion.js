@@ -12,7 +12,7 @@ export default function Configuracion({ navigation }) {
     const [fontsLoaded, setFontsLoaded] = useState(false)
     const [mostrarContrasenia, setMostrarContrasenia] = useState(false)
     const [nombre, setNombre] = useState(contextState.usuario.nombre)
-    const [fechaNacimiento, setFechaNacimiento] = useState(contextState.usuario.fechaNacimiento)
+    const [fechaNacimiento, setFechaNacimiento] = useState(new Date(contextState.usuario.fechaNacimiento).toDateString())
     const [peso, setPeso] = useState(contextState.usuario.peso)
     const [altura, SetAltura] = useState(contextState.usuario.altura)
     const [email, setEmail] = useState(contextState.usuario.email)
@@ -24,10 +24,11 @@ export default function Configuracion({ navigation }) {
 
     const guardarNuevosDatos = () => {
         if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(email)) {
-            if(!/[^\d.\d]|[.]\Z|\A[.]|[\.]{2}/.test(peso + altura) && (peso+altura).split(".").length <= 3){
+            if(!/[^\d.\d]|[.]\Z|\A[.]|[\.]{2}/.test(peso + altura) && (new String(peso+altura)).split(".").length <= 3){
                 console.log("nombre del usuario que se esta creando: ", contextState.usuario.nombre) 
                 if (contrasenia.length >= 10) {
-                    updateUsuario(nombre, fechaNacimiento, peso, altura, email, contrasenia, contextState.usuario.idUsuario)
+                    const fechaNueva = new Date(fechaNacimiento)
+                    updateUsuario(nombre, `${fechaNueva.getFullYear()}-${fechaNueva.getMonth()}-${fechaNueva.getDate()}`, peso, altura, email, contrasenia, contextState.usuario.idUsuario)
                     setContextState({
                         type: ActionTypes.SetNombre,
                         value: nombre
@@ -136,7 +137,7 @@ export default function Configuracion({ navigation }) {
                 <View style={styles.cuadroDos}>
                     <View style={{ flexDirection: "row", }}>
                         <Text style={{ fontSize: '1rem', fontFamily: 'Alata', fontWeight: "bold", }}>Fecha de nacimiento</Text> {/* no se xq, pero aunque no cambies la fecha en la BD se pone 0000-00-00 */}
-                        <TextInput style={{ fontSize: '1rem', fontFamily: 'Alata', marginLeft: '1.5rem' }} value={fechaNacimiento} placeholder={fechaNacimiento} onChangeText={fechaNacimiento => setFechaNacimiento(fechaNacimiento)} />
+                        <TextInput style={{ fontSize: '1rem', fontFamily: 'Alata', marginLeft: '1.5rem' }} value={fechaNacimiento} placeholder={fechaNacimiento} onChangeText={fechaNacimiento => setFechaNacimiento(fechaNacimiento)} />{/**.toDateString() */}
                     </View>
                 </View>
 
