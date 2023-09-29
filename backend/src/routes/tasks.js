@@ -30,7 +30,8 @@ import {
     getHayJornada,
     getJornadaActiva2,
     updateUsuario,
-    getJornadasCountByIdUsuario
+    getJornadasCountByIdUsuario,
+    getUltimasDosJornadas
 } from "../controllers/tasks.js";
 
 const router = Router(); //devuelve lo que se ejecuta en una constante. Router nos permite definir las urls
@@ -50,6 +51,15 @@ const router = Router(); //devuelve lo que se ejecuta en una constante. Router n
  *    tags: [Tasks]
  */
 router.get("/usuarios", getUsuarios) //get todas las tareas
+
+/** 
+ * @swagger
+ * /ultimasJornadas/:idUsuario
+ *  get:
+ *    summary: Trae las ultimas jornadas
+ *    tags: [Tasks]
+ */
+router.get("/ultimasJornadas/:idUsuario", getUltimasDosJornadas)
 
 /** 
  * @swagger

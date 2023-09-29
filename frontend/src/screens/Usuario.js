@@ -7,7 +7,7 @@ import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
-import { getJornadaActiva, getJornadasCountByIdUsuario } from '../../api';
+import { getJornadaActiva, getJornadasCountByIdUsuario, getUltimasDosJornadas } from '../../api';
 
 
 export default function Usuario({ navigation }) {
@@ -15,13 +15,26 @@ export default function Usuario({ navigation }) {
     const [edad, setEdad] = useState(0)
     const [cantJornadas, setCantJornadas] = useState()
     const [idJornadaActiva, setIdJornadaActiva] = useState(null)
+    const [medicionJornada, setMedicionJornada] = useState(null)
 
     const [fontsLoaded, setFontsLoaded] = useState(false);
-    
+
     const siHayJornadaActiva = async () => {
         const jornadaActivaes = await getJornadaActiva(contextState.usuario.idUsuario) //Si no hay una jornada activa no entra a este funcion y no setea ningún valor, raro pero nos sirve
         console.log(jornadaActivaes)
         setIdJornadaActiva(jornadaActivaes.idJornada)
+    }
+
+    const cargarDosJornadas = async () => {
+        const data = await getUltimasDosJornadas(contextState.usuario.idUsuario)
+        data.map((jornada) => (
+            jornada.fechaInicio = `${new Date(jornada.fechaInicio).toDateString()} ${new Date(jornada.fechaInicio).toLocaleTimeString('es-AR')}`,
+            jornada.fechaFin = `${new Date(jornada.fechaFin).toDateString()} ${new Date(jornada.fechaFin).toLocaleTimeString('es-AR')}`,
+            jornada.primeraFecha = `${new Date(jornada.primeraFecha).toDateString()} ${new Date(jornada.primeraFecha).toLocaleTimeString('es-AR')}`,
+            jornada.ultimaFecha = `${new Date(jornada.ultimaFecha).toDateString()} ${new Date(jornada.ultimaFecha).toLocaleTimeString('es-AR')}`,
+            jornada.mayorFecha = `${new Date(jornada.mayorFecha).toDateString()} ${new Date(jornada.mayorFecha).toLocaleTimeString('es-AR')}`
+        ))
+        setMedicionJornada(data)
     }
 
     useEffect(() => {
@@ -31,6 +44,7 @@ export default function Usuario({ navigation }) {
         cantjornadas()
         calcularEdad()
         siHayJornadaActiva()
+        cargarDosJornadas()
     }, [])
 
     const proximaPantalla = () => {
@@ -53,7 +67,7 @@ export default function Usuario({ navigation }) {
         const edadCalculada = Math.floor(diferenciaEnMilisegundos / (365.25 * 24 * 60 * 60 * 1000));
         setEdad(edadCalculada);
         console.log("La edad es:", edadCalculada);
-    }    
+    }
 
     const loadFonts = async () => {
         await Font.loadAsync({
@@ -97,9 +111,10 @@ export default function Usuario({ navigation }) {
                 </View>
             </View>
 
+            {/*
             <Text style={styles.texto}>Conectáte con otras apps:</Text>
 
-            <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <View style={styles.cuadroRectangulo}>
                     <View style={[styles.info, { paddingLeft: '2rem', paddingRight: '2rem', flex: 1, display: 'flex', alignItems: 'center' }]}>
                         <Image
@@ -111,7 +126,7 @@ export default function Usuario({ navigation }) {
                                 },
                             }}
                             style={{ width: 55, height: 55, borderRadius: 10 }}
-                        />
+                            />
                         <Image
                             source={{
                                 uri: 'https://play-lh.googleusercontent.com/r7XL36PVNtnidqy6ikRiW1AHEIsjhePrZ8W5M4cNTQy5ViF3-lIDY47hpvxc84kJ7lw',
@@ -121,7 +136,7 @@ export default function Usuario({ navigation }) {
                                 },
                             }}
                             style={{ width: 55, height: 55, borderRadius: 10 }}
-                        />
+                            />
                         <Image
                             source={{
                                 uri: 'https://i.pinimg.com/originals/f4/c9/a8/f4c9a88e93317977c3d0921b12309578.png',
@@ -131,22 +146,27 @@ export default function Usuario({ navigation }) {
                                 },
                             }}
                             style={{ width: 65, height: 65, borderRadius: 10 }}
-                        />
+                            />
                     </View>
                 </View>
             </View>
+                        */}
 
             <Text style={styles.texto}>Tus últimas jornadas:</Text>
 
             <View style={{ display: 'flex', alignItems: 'center' }}>
-                <View style={styles.cuadroJornadas}>
-                    <Text style={styles.textoJornadas}>Jornada II</Text>
-                    <Text style={styles.textofecha}>04-04-23</Text>
-                </View>
-                <View style={styles.cuadroJornadas}>
-                    <Text style={styles.textoJornadas}>Jornada II</Text>
-                    <Text style={styles.textofecha}>04-04-23</Text>
-                </View>
+                {
+                    medicionJornada != null &&
+                    medicionJornada.map((mediJornada, key) => (
+                        <View style={styles.cuadroJornadas}>
+                            <Text style={styles.textoJornadas}>Jornada {key+1}</Text>
+                            <Text style={styles.textofecha}>Promedio de alcohol: {Math.round(mediJornada.promedioGrados*1000)/1000} dg/ml</Text>
+                            <Text style={styles.textofecha}>Mayor grado: {Math.round(mediJornada.mayorGrado*1000)/1000} dg/ml</Text>
+                            <Text style={styles.textofecha}>Fecha Inicial: {mediJornada.fechaInicio}</Text>
+                            <Text style={styles.textofecha}>Fecha Final: {mediJornada.fechaFin}</Text>
+                        </View>
+                    ))
+                }
             </View>
 
             <View style={styles.footer}>

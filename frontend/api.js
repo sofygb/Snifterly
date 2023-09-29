@@ -44,6 +44,8 @@ const API21 = 'http://localhost:3000/jornadaActiva2'
 const API22 = 'http://localhost:3000/modificarUsuario'
 
 const API23 = 'http://localhost:3000/cantjornadas/count'
+
+const API24 = 'http://localhost:3000/ultimasJornadas'
 /*
 export const setJornadaActiva = async (value) => {
     try {
@@ -185,6 +187,58 @@ export const getMedicionesCountByIdJornada = async (idJornada) => {
     console.log(res) 
     return await res.json()
 }
+
+export const getUltimasDosJornadas = async (idUsuario) => {
+  const res = await fetch(API24 + `/${idUsuario}`, {
+        method: "GET",
+    })
+    console.log(res) 
+    return await res.json()
+}
+/*ejemplo de lo que retorna getUltimasDosJornadas: 
+[
+  {
+    "idJornada": 7,
+    "fechaInicio": "2023-09-29T11:25:16.000Z",
+    "fechaFin": "2023-09-29T11:32:57.000Z",
+    "idUsuario": 11,
+    "activo": 0,
+    "primeraMedicion": 20,
+    "primerGrado": 1,
+    "primeraFecha": "2023-09-29T11:25:18.000Z",
+    "primerEstado": null,
+    "promedioGrados": 2.75,
+    "ultimaMedicion": 23,
+    "ultimoGrado": 3,
+    "ultimaFecha": "2023-09-29T11:32:48.000Z",
+    "ultimoEstado": null,
+    "mayorGrado": 5,
+    "mayorMedicion": 22,
+    "mayorFecha": "2023-09-29T11:25:42.000Z",
+    "mayorEstado": null
+  },
+  {
+    "idJornada": 8,
+    "fechaInicio": "2023-09-29T11:36:21.000Z",
+    "fechaFin": "2023-09-29T12:03:00.000Z",
+    "idUsuario": 11,
+    "activo": 0,
+    "primeraMedicion": 24,
+    "primerGrado": 1,
+    "primeraFecha": "2023-09-29T11:36:22.000Z",
+    "primerEstado": null,
+    "promedioGrados": 3.8750000037252894,
+    "ultimaMedicion": 27,
+    "ultimoGrado": 0.3,
+    "ultimaFecha": "2023-09-29T12:02:50.000Z",
+    "ultimoEstado": "mal",
+    "mayorGrado": 14,
+    "mayorMedicion": 25,
+    "mayorFecha": "2023-09-29T11:36:35.000Z",
+    "mayorEstado": null
+  }
+]
+*/
 
 export const getJornadasCountByIdUsuario = async (idUsuario) => {
   const res = await fetch(API23 + `/${idUsuario}`, {

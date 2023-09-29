@@ -1,19 +1,33 @@
-import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity, InputAccessoryView, ScrollView } from 'react-native';
+import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity, InputAccessoryView, ScrollView, Dimensions } from 'react-native';
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
-import { getJornadaActiva } from '../../api';
+import { getJornadaActiva, getUltimasDosJornadas } from '../../api';
+import Carousel from 'react-native-reanimated-carousel';
 
 export default function Historial({ navigation }) {
     const { contextState, setContextState } = useContextState()
     const [fecha, setFecha] = useState(0)
     const [idJornadaActiva, setIdJornadaActiva] = useState(null)
+    const width = Dimensions.get('window').width;
 
     const siHayJornadaActiva = async () => {
         const jornadaActivaes = await getJornadaActiva(contextState.usuario.idUsuario) //Si no hay una jornada activa no entra a este funcion y no setea ningún valor, raro pero nos sirve
         console.log(jornadaActivaes)
         setIdJornadaActiva(jornadaActivaes.idJornada)
+    }
+
+    const cargarDosJornadas = async () => {
+        const data = await getUltimasDosJornadas(contextState.usuario.idUsuario)
+        data.map((jornada) => (
+            jornada.fechaInicio = `${new Date(jornada.fechaInicio).toDateString()} ${new Date(jornada.fechaInicio).toLocaleTimeString('es-AR')}`,
+            jornada.fechaFin = `${new Date(jornada.fechaFin).toDateString()} ${new Date(jornada.fechaFin).toLocaleTimeString('es-AR')}`,
+            jornada.primeraFecha = `${new Date(jornada.primeraFecha).toDateString()} ${new Date(jornada.primeraFecha).toLocaleTimeString('es-AR')}`,
+            jornada.ultimaFecha = `${new Date(jornada.ultimaFecha).toDateString()} ${new Date(jornada.ultimaFecha).toLocaleTimeString('es-AR')}`,
+            jornada.mayorFecha = `${new Date(jornada.mayorFecha).toDateString()} ${new Date(jornada.mayorFecha).toLocaleTimeString('es-AR')}`
+        ))
+        setMedicionJornada(data)
     }
 
     const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -22,7 +36,8 @@ export default function Historial({ navigation }) {
             loadFonts();
         }
         siHayJornadaActiva()
-    })
+        cargarDosJornadas()
+    },[])
 
     const loadFonts = async () => {
         await Font.loadAsync({
@@ -84,6 +99,28 @@ export default function Historial({ navigation }) {
                     </View>
                 </View>
             </View>
+            <Carousel
+                loop
+                width={width}
+                height={width / 2}
+                autoPlay={true}
+                data={idJornadaActiva} //[...new Array(6).keys()]
+                scrollAnimationDuration={1000}
+                //onSnapToItem={(index) => console.log('current index:', index)}
+                /*renderItem={({ idJornadaActiva }) => (
+                    <View
+                        style={{
+                            flex: 1,
+                            borderWidth: 1,
+                            justifyContent: 'center',
+                        }}
+                    >
+                        <Text style={{ textAlign: 'center', fontSize: 30 }}>
+                            {idJornadaActiva.idJornada}
+                        </Text>
+                    </View>
+                )}*/
+            />
 
             <View style={styles.footer}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -98,7 +135,6 @@ export default function Historial({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </View>
-
         </View>
     )
 }
