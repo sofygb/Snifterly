@@ -35,94 +35,95 @@ export default function Home({ navigation }) {
   const [lastMedicion, setLastMedicion] = useState(0);
 
   const [primeraMedicion, setPrimeraMedicion] = useState(new Date());
-  
+
   const { contextState, setContextState } = useContextState()
-  
+
   const [tiempoRestante, setTiempoRestante] = useState(new Date());
 
   const [idJornadaActiva, setIdJornadaActiva] = useState(0);
 
   const [llegaronLosValores, setLlegaronLosValores] = useState(false);
-  
+
   const isFocused = useIsFocused();
-/*
-const loadJornadaActiva = async () => {
-  const data = await getJornadaActiva(contextState.usuario.idUsuario) //Trae el ID de la jornada activa
-  setIdJornadaActiva(data)
-   
-  setContextState({
-    type: ActionTypes.SetIdJornada,
-    value: data
-  });
-  
-  console.log(data)
-  }
-*/
-  const loadJornada = async () => {
-    const datax = await getJornadaReciente(contextState.usuario.idUsuario)
-    console.log(datax)
+
+ const loadJornada = async () => {
+    setLlegaronLosValores(false)
+    const datax = await getJornadaActiva(contextState.usuario.idUsuario)
+    console.log(datax, llegaronLosValores)
 
     setContextState({
       type: ActionTypes.SetIdJornada,
       value: datax.idJornada
-  });
-  setIdJornadaActiva(datax.idJornada)
-  if(Number.isInteger(datax.idJornada))
-    setLlegaronLosValores(true)
-  }
+    });
+    setIdJornadaActiva(datax.idJornada) //idJornadaActiva --> valor 
 
+    if (datax.idJornada != 0 || contextState.jornada.idJornada == datax.idJornada) {
+      setLlegaronLosValores(true)
+    }
+    else {
+      setLlegaronLosValores(false)
+    }
+  }
+  
   const loadJornadaExtra = async () => {
     const data3 = await getAvgMediciones();
     setAvgMediciones(data3);
-
-    const data2 = await getMedicionesCountByIdJornada(idJornadaActiva);
-    setMediciones(data2);
-    console.log(data2);
-
-    const lastMedicionn = await getLastMedicionByIdJornada(contextState.jornada.idJornada)
-    console.log(lastMedicionn)
-    setLastMedicion(lastMedicionn)
-    setGradoActual(lastMedicionn.grado)
+    
+    if (idJornadaActiva != 0) {
+      const lastMedicionn = await getLastMedicionByIdJornada(idJornadaActiva)
+      console.log(lastMedicionn)
+      setLastMedicion(lastMedicionn)
+      setGradoActual(lastMedicionn.grado)
+      const data2 = await getMedicionesCountByIdJornada(idJornadaActiva);
+      setMediciones(data2);
+      console.log(data2);
+      calcularDiferencia();
+    }
 
     async function calcularDiferencia() {
       try {
-        const data4 = await getFirstMedicion(contextState.jornada.idJornada); // Obtener la fecha de la primera medición
+        const data4 = await getFirstMedicion(idJornadaActiva); // Obtener la fecha de la primera medición
         const fecha = new Date(data4.fecha);
         const horaActual = new Date();
         const diferenciaEnMilisegundos = horaActual - fecha;
-    
+
         const horas = Math.floor(diferenciaEnMilisegundos / 3600000); // 1 hora = 3600000 milisegundos
         const minutos = Math.floor((diferenciaEnMilisegundos % 3600000) / 60000); // 1 minuto = 60000 milisegundos
         const segundos = Math.floor((diferenciaEnMilisegundos % 60000) / 1000); // 1 segundo = 1000 milisegundos
-    
+
         console.log(`Diferencia: ${horas} horas, ${minutos} minutos, ${segundos} segundos`);
 
-        var tiempoFinal = new Date(1970,1,1,horas,minutos,segundos)
+        var tiempoFinal = new Date(1970, 1, 1, horas, minutos, segundos)
         //tiempoFinal.setHours(tiempoRestante.getHours() + horas, tiempoRestante.getMinutes() + minutos, tiempoRestante.getSeconds() + segundos)
 
         setTiempoRestante(tiempoFinal)
-        
+
       } catch (error) {
         console.error("Error al obtener la fecha de la primera medición", error);
       }
     }
-    
-    calcularDiferencia();
+
     console.log(tiempoRestante)
   };
-  
+
   const [fontsLoaded, setFontsLoaded] = useState(false);
+  
   useEffect(() => {
     if (!fontsLoaded) {
       loadFonts();
     }
-    loadJornada()
-  }, []);
+    if(contextState.jornada.idJornada == 0 || contextState.jornada.idJornada != idJornadaActiva){ //Si ya se seteo la jornada en el context no hace falta cargarlo nuevamente, y trae directamente las mediciones
+      loadJornada()
+    }
+    else{
+      loadJornadaExtra();
+    }
+  }, [isFocused]);
 
   useEffect(() => {
     loadJornadaExtra();
-  },[llegaronLosValores])
-  
+  }, [llegaronLosValores]);
+
   const loadFonts = async () => {
     await Font.loadAsync({
       alata: require("../assets/fonts/Alata/Alata.ttf"),
@@ -130,28 +131,14 @@ const loadJornadaActiva = async () => {
     });
     setFontsLoaded(true);
   };
-  
 
   const handleSubmit = (e) => {
     //setvarible ((e) => getCountMediciones())
     setTiempo((e) => 0);
   }
 
-  //const tiempoTranscurrido = 
-  
   return (
     <View style={styles.container}>
-      {/* <FlatList
-        data={jornada}
-        renderItem={({ item }) => {
-          return (
-            <Text>
-              idJornada: {item.idJornada}, idMedicion: {item.idMedicion}, grado:{" "}
-              {item.grado}, fecha: {item.fecha}
-            </Text>
-          );
-        }}
-      />  */}
 
       <Text style={styles.titulo}>Snifterly</Text>
 
@@ -179,7 +166,7 @@ const loadJornadaActiva = async () => {
       <View style={[styles.espacioCuadros]}>
         <View style={styles.cuadro}>
           <View style={{ flexDirection: "row", marginLeft: "0.5rem" }}>
-          <Text style={[styles.medicion, { fontSize: "2.1rem" }]}>
+            <Text style={[styles.medicion, { fontSize: "2.1rem" }]}>
               {tiempoRestante.getHours()}
             </Text>
             <Text style={[styles.medicion, { fontSize: "1rem" }]}> hs, </Text>
@@ -248,8 +235,8 @@ const loadJornadaActiva = async () => {
         </TouchableOpacity>
       </View>
 
-      <View style={[styles.botonAgregar, { flex: 2,display: "flex",justifyContent: "flex-end",marginBottom: "1rem",},]}>
-        <TouchableOpacity onPress={() => {navigation.navigate("IngresoDeDatos");}}>
+      <View style={[styles.botonAgregar, { flex: 2, display: "flex", justifyContent: "flex-end", marginBottom: "1rem", },]}>
+        <TouchableOpacity onPress={() => { navigation.navigate("IngresoDeDatos"); }}>
           <Icon icon="zondicons:add-solid" width={"3rem"} />
         </TouchableOpacity>
       </View>

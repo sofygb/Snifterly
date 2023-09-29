@@ -29,6 +29,26 @@ export default function SalirJornada({ navigation }) {
     setJornadaDesactiva()
     setFechaFinJornada(contextState.jornada.idJornada)
     console.log('hola')
+    setContextState({
+      type: ActionTypes.SetIdJornada,
+      value: 0
+    })
+    setContextState({
+      type: ActionTypes.SetFechaInicio,
+      value: 1 / 1 / 1970
+    })
+    setContextState({
+      type: ActionTypes.SetFechaFin,
+      value: 1 / 1 / 1970
+    })
+    setContextState({
+      type: ActionTypes.SetIdUsuarioJornada,
+      value: 0
+    })
+    setContextState({
+      type: ActionTypes.SetActivo,
+      value: false
+    })
   }
   return (
     <View style={styles.container}>

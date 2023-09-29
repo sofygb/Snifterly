@@ -19,8 +19,9 @@ export default function Usuario({ navigation }) {
     const [fontsLoaded, setFontsLoaded] = useState(false);
     
     const siHayJornadaActiva = async () => {
-        const jornadaActivaes = await getJornadaActiva(contextState.usuario.idUsuario)
-        setIdJornadaActiva(jornadaActivaes)
+        const jornadaActivaes = await getJornadaActiva(contextState.usuario.idUsuario) //Si no hay una jornada activa no entra a este funcion y no setea ningún valor, raro pero nos sirve
+        console.log(jornadaActivaes)
+        setIdJornadaActiva(jornadaActivaes.idJornada)
     }
 
     useEffect(() => {

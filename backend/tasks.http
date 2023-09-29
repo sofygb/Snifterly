@@ -33,7 +33,7 @@ GET {{api3}}/3
 ###
 GET {{api}}/count
 ###
-GET {{api4}}/11
+GET {{api4}}/5
 ###
 POST {{api7}}/1
 ###
@@ -47,7 +47,7 @@ GET {{api11}}/11
 ###
 GET {{api12}}
 ###
-GET {{api13}}/13
+GET {{api13}}/11
 ###
 GET {{api14}}/11
 ### No funcional de momento

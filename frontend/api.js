@@ -122,7 +122,7 @@ export const getJornada = async () => {
     return await res.json()
 }
 
-export const getJornadaActiva = async (idUsuario) => {
+export const getJornadaActiva = async (idUsuario) => { //Devuelve (si hay jornada activa): [{idJornada: int}], sino devuelve []
   const res = await fetch(API5 + `/${idUsuario}`, {
         method: "GET",
     })
