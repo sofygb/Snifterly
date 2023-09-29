@@ -2,21 +2,26 @@ import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity, 
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
+import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
+import { getJornadaActiva } from '../../api';
 
 export default function Historial({ navigation }) {
+    const { contextState, setContextState } = useContextState()
     const [fecha, setFecha] = useState(0)
+    const [idJornadaActiva, setIdJornadaActiva] = useState(null)
 
-    const loadJornada = async () => {
-        const data = await getJornada()
-        console.log(data)
-        setJornada([data])
+    const siHayJornadaActiva = async () => {
+        const jornadaActivaes = await getJornadaActiva(contextState.usuario.idUsuario) //Si no hay una jornada activa no entra a este funcion y no setea ningún valor, raro pero nos sirve
+        console.log(jornadaActivaes)
+        setIdJornadaActiva(jornadaActivaes.idJornada)
     }
+
     const [fontsLoaded, setFontsLoaded] = useState(false);
     useEffect(() => {
         if (!fontsLoaded) {
             loadFonts();
         }
-        loadJornada()
+        siHayJornadaActiva()
     })
 
     const loadFonts = async () => {
@@ -25,6 +30,15 @@ export default function Historial({ navigation }) {
             'inter': require('../assets/fonts/Inter/Inter.ttf'),
         });
         setFontsLoaded(true);
+    }
+
+    const validacion = () => {
+        if (idJornadaActiva !== null) {
+            navigation.navigate('Home')
+        }
+        else {
+            navigation.navigate('PrimeraHome')
+        }
     }
     return (
         <View style={styles.container}>
@@ -73,7 +87,7 @@ export default function Historial({ navigation }) {
 
             <View style={styles.footer}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <TouchableOpacity onPress={() => { navigation.navigate('Home') }}>
+                    <TouchableOpacity onPress={() => { validacion() }}>
                         <Icon icon="material-symbols:home" width={'2.5rem'} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { navigation.navigate('Historial') }}>

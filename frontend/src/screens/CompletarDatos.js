@@ -39,7 +39,7 @@ export default function CompletarDatos({ navigation }) {
     }
 
     const validacion = () => {
-        if(!/[^\d,.\d]|[,.]\Z|\A[,.]|[\,\.]{2}/.test(peso + altura) && (peso+altura).split(".").length <= 3 && (peso+altura).split(",").length <= 3){
+        if(!/[^\d.\d]|[.]\Z|\A[.]|[\.]{2}/.test(peso + altura) && (peso+altura).split(".").length <= 3){
             console.log("nombre del usuario que se esta creando: ", contextState.usuario.nombre)
 
             const fecha = new Date(fechaNacimiento)

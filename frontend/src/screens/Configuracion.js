@@ -24,35 +24,41 @@ export default function Configuracion({ navigation }) {
 
     const guardarNuevosDatos = () => {
         if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(email)) {
-            if (contrasenia.length >= 10) {
-                updateUsuario(nombre, fechaNacimiento, peso, altura, email, contrasenia, contextState.usuario.idUsuario)
-                setContextState({
-                    type: ActionTypes.SetNombre,
-                    value: nombre
-                });
-                setContextState({
-                    type: ActionTypes.SetContrasenia,
-                    value: contrasenia
-                });
-                setContextState({
-                    type: ActionTypes.SetEmail,
-                    value: email
-                });
-                setContextState({
-                    type: ActionTypes.SetFechaNacimiento,
-                    value: fechaNacimiento
-                });
-                setContextState({
-                    type: ActionTypes.SetPeso,
-                    value: peso
-                });
-                setContextState({
-                    type: ActionTypes.SetAltura,
-                    value: altura
-                });
+            if(!/[^\d.\d]|[.]\Z|\A[.]|[\.]{2}/.test(peso + altura) && (peso+altura).split(".").length <= 3){
+                console.log("nombre del usuario que se esta creando: ", contextState.usuario.nombre) 
+                if (contrasenia.length >= 10) {
+                    updateUsuario(nombre, fechaNacimiento, peso, altura, email, contrasenia, contextState.usuario.idUsuario)
+                    setContextState({
+                        type: ActionTypes.SetNombre,
+                        value: nombre
+                    });
+                    setContextState({
+                        type: ActionTypes.SetContrasenia,
+                        value: contrasenia
+                    });
+                    setContextState({
+                        type: ActionTypes.SetEmail,
+                        value: email
+                    });
+                    setContextState({
+                        type: ActionTypes.SetFechaNacimiento,
+                        value: fechaNacimiento
+                    });
+                    setContextState({
+                        type: ActionTypes.SetPeso,
+                        value: peso
+                    });
+                    setContextState({
+                        type: ActionTypes.SetAltura,
+                        value: altura
+                    });
+                }
+                else {
+                    console.error("Error: La contraseña debe ser mayor a 10 caracteres")
+                }
             }
-            else {
-                console.error("Error: La contraseña debe ser mayor a 10 caracteres")
+            else{
+                console.error('Error: Los valores de peso o altura introducidos no son números')
             }
         }
         else {
@@ -107,9 +113,9 @@ export default function Configuracion({ navigation }) {
                     <View style={{ flexDirection: "row", }}>
                         <Text style={{ fontSize: '1rem', fontFamily: 'Alata', fontWeight: "bold", }}>Contraseña</Text>
                         <TextInput style={{ fontSize: '1rem', fontFamily: 'Alata', marginLeft: '1.5rem' }} value={contrasenia} placeholder={mostrarContrasenia ? contrasenia : '********'} onChangeText={contrasenia => setContrasenia(contrasenia)} />
-                        <TouchableOpacity style={{ flex: 1, display: 'flex', alignItems: 'flex-end' }} onPress={toggleMostrarContrasenia}>
+                        {/* <TouchableOpacity style={{ flex: 1, display: 'flex', alignItems: 'flex-end' }} onPress={toggleMostrarContrasenia}>
                             <Icon icon={mostrarContrasenia ? 'mdi:eye-off' : 'mdi:eye'} width={30} />
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                 </View>
 
