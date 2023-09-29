@@ -113,19 +113,26 @@ export default function PrimeraHome({ navigation }) {
                                 <TouchableOpacity onPress={() => setProximaPantalla(true)}>
                                     <Icon icon="ic:outline-check-circle" color="#f86800" width={210} />
                                 </TouchableOpacity>
-                            </View>):
+                            </View>) :
                             <View style={styles.containerDos}>
-                                <View style={{flex: 1, display: 'flex', alignItems: 'center'}}>
-                                    <Text style={styles.texto}>Medición gurdada:</Text>
+                                <View style={styles.centrar}>
+                                    <View style={{marginTop: '7rem'}}>
+                                        <Text style={styles.textoDos}>Medición gurdada:</Text>
+                                    </View>
+                                    <View>
+                                        <View style={styles.circle}>
+                                            <Text style={styles.text}>XX gl/l</Text>
+                                        </View>
+                                    </View>
+                                    <TouchableOpacity style={styles.botonAceptar}>
+                                        <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Seguir</Text>
+                                    </TouchableOpacity>
                                 </View>
-                                <TouchableOpacity style={styles.botonAceptar}>
-                                    <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Seguir</Text>
-                                </TouchableOpacity>
-                                <View style={styles.finalizarJornada}>
-                                <TouchableOpacity style={styles.finalizarJornada} onPress={() => { navigation.navigate('SalirJornada') }}>
-                                    <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter', display: 'flex', alignItems: 'center', justifyContent: 'center', }]}>Finalizar jornada</Text>
-                                </TouchableOpacity>
-                            </View>
+                                
+                                    <TouchableOpacity style={[{marginBottom: '1rem'}]} onPress={() => { navigation.navigate('SalirJornada') }}>
+                                        <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter', display: 'flex', alignItems: 'center', justifyContent: 'center', }]}>Finalizar jornada</Text>
+                                    </TouchableOpacity>
+                                
                             </View>
             ) :
                 <View style={styles.container}>
@@ -171,11 +178,18 @@ const styles = StyleSheet.create({
         fontFamily: 'alata',
         backgroundImage: "linear-gradient(180deg, #FC9B29 0%, #FC8E29 0%, #FF5925 100%, #E93921)"
     },
+    centrar: {
+        flex: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontFamily: 'alata',
+        backgroundColor: 'white'
+    },
     containerDos: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        //backgroundColor: 'orange',
         fontFamily: 'alata',
         backgroundColor: 'white'
     },
@@ -221,6 +235,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         textAlign: 'center',
     },
+    textoDos: {
+        display: 'flex',
+        fontSize: '1.5rem',
+        fontFamily: 'alata',
+        justifyContent: 'center',
+        textAlign: 'center',
+        marginBottom: '2rem'
+    },
     botonAceptar: {
         display: 'flex',
         alignItems: 'center',
@@ -229,5 +251,20 @@ const styles = StyleSheet.create({
         minHeight: '3rem',
         backgroundColor: "#5654E1",
         borderRadius: 15,
+    },
+    circle: {
+        width: 175,
+        height: 175,
+        borderRadius: 100,
+        borderColor: '#F86800',
+        borderWidth: 17,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: '2rem',
+    },
+    text: {
+        color: '#F86800',
+        fontSize: 30,
+        fontWeight: "bold",
     },
 });
