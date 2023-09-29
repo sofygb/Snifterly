@@ -17,8 +17,8 @@ import DeviceModal from "../components/DeviceConnectionModal.jsx";
 export default function PrimeraHome({ navigation }) {
     const [isModalVisible, setIsModalVisible] = useState(false)
     const { contextState, setContextState } = useContextState()
-    const [sensorValue, setsensorValue] = useState(0)
-    const [medicionGuardada, setmedicionGuardada] = useState(true)
+    const [sensorValue, setsensorValue] = useState(null)
+    const [medicionGuardada, setmedicionGuardada] = useState(false)
     const [proximaPantalla, setProximaPantalla] = useState(false)
 
     const scanForDevices = async () => {
@@ -82,8 +82,8 @@ export default function PrimeraHome({ navigation }) {
     }
     return (
         <>
-            {devices == null ? (
-                sensorValue == null ? (
+            {devices != null ? (
+                sensorValue != null ? (
                     <View style={styles.containerDos}>
                         <View style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
                             <Text style={styles.texto}>¡Listo! ¡Ya puedes soplar!</Text>
