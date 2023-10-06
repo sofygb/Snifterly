@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1094092104173",
+    "project_id": "snifterly",
+    "storage_bucket": "snifterly.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094092104173:android:ed372c9087b2e6722a07e4",
+        "android_client_info": {
+          "package_name": "com.snifterly"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCw8ANf9hn06KYTGaGq5Z8SxzCcBfdvawI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

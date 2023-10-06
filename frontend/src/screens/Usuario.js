@@ -31,7 +31,7 @@ export default function Usuario({ navigation }) {
             jornada.fechaInicio = `${new Date(jornada.fechaInicio).toDateString()} ${new Date(jornada.fechaInicio).toLocaleTimeString('es-AR')}`,
             jornada.fechaFin = `${new Date(jornada.fechaFin).toDateString()} ${new Date(jornada.fechaFin).toLocaleTimeString('es-AR')}`,
             jornada.primeraFecha = `${new Date(jornada.primeraFecha).toDateString()} ${new Date(jornada.primeraFecha).toLocaleTimeString('es-AR')}`,
-            jornada.ultimaFecha = `${new Date(jornada.ultimaFecha).toDateString()} ${new Date(jornada.ultimaFecha).toLocaleTimeString('es-AR')}`,
+            jornada.ultimaFecha === null ? "No finalizado" : `${new Date(jornada.ultimaFecha).toDateString()} ${new Date(jornada.ultimaFecha).toLocaleTimeString('es-AR')}`,
             jornada.mayorFecha = `${new Date(jornada.mayorFecha).toDateString()} ${new Date(jornada.mayorFecha).toLocaleTimeString('es-AR')}`
         ))
         setMedicionJornada(data)
@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
     },
     textoJornadas: {
         fontFamily: 'alata',
-        marginLeft: '1.5rem',
+        marginLeft: '0.8rem',
         fontSize: 24,
         flex: 1,
         display: 'flex',
@@ -306,6 +306,12 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
     },
     textofecha: {
-        fontSize: 12, fontFamily: 'alata', color: '#949494', display: 'flex', justifyContent: 'flex-end', marginRight: '1rem',
+        fontSize: 16,
+        fontFamily: 'alata',
+        color: '#949494',
+        display: 'flex',
+        justifyContent: 'flex-start',
+        marginLeft: '0.8rem',
+        marginTop: '0.3rem'
     },
 });
