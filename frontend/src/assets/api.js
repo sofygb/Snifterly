@@ -48,8 +48,6 @@ const API23 = 'http://localhost:3000/cantjornadas/count'
 const API24 = 'http://localhost:3000/ultimasJornadas'
 
 const API25 = 'http://localhost:3000/jornada/usuario'
-
-const API26 = 'http://localhost:3000/jornadasYMediciones'
 /*
 export const setJornadaActiva = async (value) => {
     try {
@@ -136,14 +134,6 @@ export const getJornadaByIdUsuario = async (idUsuario) => {
   return await res.json()
 }
 
-export const getJornadasYMedicionesByIdUsuario = async (idUsuario) => {
-  const res = await fetch(API26 + `/${idUsuario}`, {
-      METHOD: "GET",
-  })
-  console.log(res) 
-  return await res.json()
-}
-
 export const getJornadaActiva = async (idUsuario) => { //Devuelve (si hay jornada activa): [{idJornada: int}], sino devuelve []
   const res = await fetch(API5 + `/${idUsuario}`, {
         method: "GET",
@@ -179,7 +169,7 @@ export const getHayJornada = async (idUsuario) => {
 export const setJornadaDesactiva = async () => {
   const res = await fetch(API9, { method: "PUT",})
     console.log(res) 
-    return await res
+    return await res.json()
 }
 
 export const setEstadoUsuario = async (idMedicion, estadoUsuario) => {

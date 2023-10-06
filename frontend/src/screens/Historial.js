@@ -1,16 +1,33 @@
-import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity, InputAccessoryView, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity, InputAccessoryView, ScrollView, Dimensions, FlatList } from 'react-native';
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
-import { getJornadaActiva, getUltimasDosJornadas } from '../../api';
+import { getJornadaActiva, getUltimasDosJornadas, getJornadasYMedicionesByIdUsuario } from '../../api';
 import Carousel from 'react-native-reanimated-carousel';
+import { useIsFocused } from "@react-navigation/native";
 
 export default function Historial({ navigation }) {
     const { contextState, setContextState } = useContextState()
     const [fecha, setFecha] = useState(0)
     const [idJornadaActiva, setIdJornadaActiva] = useState(null)
+    const [jornadas, setJornadas] = useState(null)
+    const [arrayFechas, setArrayFechas] = useState([])
+    /* 
+    formato de arrayFechas:
+    [
+        {
+            fecha: Date,
+            jornadas: [
+                ...jornadas
+            ]
+        }
+    ]
+    */
+    const isFocused = useIsFocused();
     const width = Dimensions.get('window').width;
+
+    var arrayProvisorio = []
 
     const siHayJornadaActiva = async () => {
         const jornadaActivaes = await getJornadaActiva(contextState.usuario.idUsuario) //Si no hay una jornada activa no entra a este funcion y no setea ningún valor, raro pero nos sirve
@@ -18,8 +35,9 @@ export default function Historial({ navigation }) {
         setIdJornadaActiva(jornadaActivaes.idJornada)
     }
 
-    const cargarDosJornadas = async () => {
-        const data = await getUltimasDosJornadas(contextState.usuario.idUsuario)
+    const cargarJornadas = async () => {
+        const data = await getJornadasYMedicionesByIdUsuario(contextState.usuario.idUsuario)
+        console.log(data)
         data.map((jornada) => (
             jornada.fechaInicio = `${new Date(jornada.fechaInicio).toDateString()} ${new Date(jornada.fechaInicio).toLocaleTimeString('es-AR')}`,
             jornada.fechaFin = `${new Date(jornada.fechaFin).toDateString()} ${new Date(jornada.fechaFin).toLocaleTimeString('es-AR')}`,
@@ -27,17 +45,46 @@ export default function Historial({ navigation }) {
             jornada.ultimaFecha = `${new Date(jornada.ultimaFecha).toDateString()} ${new Date(jornada.ultimaFecha).toLocaleTimeString('es-AR')}`,
             jornada.mayorFecha = `${new Date(jornada.mayorFecha).toDateString()} ${new Date(jornada.mayorFecha).toLocaleTimeString('es-AR')}`
         ))
-        setMedicionJornada(data)
+        setJornadas(data)
     }
+
+    useEffect(() => {
+        if (jornadas !== null) {
+            console.log(jornadas, arrayFechas, jornadas[0].fechaInicio.substring(0, -8)),
+                jornadas.map((jornada) => {
+                    if (arrayProvisorio.includes((item) => item.fecha.substring(0, -8) !== jornada.fechaInicio.substring(0, -8))) {
+                        arrayProvisorio = [ //Fri Oct 06 2023 09:07:50
+                            ...arrayProvisorio, {
+                                fecha: jornada.fechaInicio,
+                                jornadas: jornadas.filter((item) => item.fechaInicio.substring(0, -8) === jornada.fechaInicio.substring(0, -8))
+                            }
+                        ]
+                    }
+                    else {
+                        arrayProvisorio = [ //Fri Oct 06 2023 09:07:50
+                            ...arrayProvisorio, {
+                                ...arrayProvisorio.fecha,
+                                jornadas: [{...arrayProvisorio.jornadas}, jornada]
+                            }
+                        ]
+                    }
+                })
+        }
+        setArrayFechas(arrayProvisorio)
+    }, [jornadas])
+
+    useEffect(() => {
+        console.log(arrayFechas)
+    }, [arrayFechas])
 
     const [fontsLoaded, setFontsLoaded] = useState(false);
     useEffect(() => {
         if (!fontsLoaded) {
             loadFonts();
         }
-        siHayJornadaActiva()
-        cargarDosJornadas()
-    },[])
+        //siHayJornadaActiva()
+        contextState.jornada.idJornada === 0 ? null : cargarJornadas()
+    }, [isFocused])
 
     const loadFonts = async () => {
         await Font.loadAsync({
@@ -48,7 +95,7 @@ export default function Historial({ navigation }) {
     }
 
     const validacion = () => {
-        if (idJornadaActiva !== null) {
+        if (contextState.jornada.idJornada !== 0) {
             navigation.navigate('Home')
         }
         else {
@@ -57,57 +104,38 @@ export default function Historial({ navigation }) {
     }
     return (
         <View style={styles.container}>
-            <View style={{flexDirection: "row", marginTop: '4rem', display: 'flex', justifyContent: 'space-around'}}>
-                <Icon icon="zondicons:arrow-left" /> 
+            <View style={{ flexDirection: "row", marginTop: '4rem', display: 'flex', justifyContent: 'space-around' }}>
+                <Icon icon="zondicons:arrow-left" />
                 <Text style={styles.titulo}>04 de Abril</Text>
                 <Icon icon="zondicons:arrow-right" />
             </View>
-            <View style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '2rem'}}>
-                <View style={styles.cuadro}>
-                    <View style={{margin: '0.5rem'}}>
-                        <Text style={styles.textoJornda}>Jornada I</Text>
-                        <View style={{flexDirection: "row", marginTop: '1rem', display: 'flex', justifyContent: 'space-between'}}>
-                            <Text style={styles.texto}>01:00</Text>
-                            <Text style={styles.texto}>*Info jornada*</Text>
+            <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '2rem' }}>
+                <FlatList
+                    data={jornadas}
+                    renderItem={({ item, index }) => (
+                        <View style={styles.cuadro}>
+                            <View style={{ margin: '0.5rem' }}>
+                                <Text style={styles.textoJornda}>Jornada {index + 1}</Text>
+                                <View style={{ flexDirection: "column", marginTop: '1rem', display: 'flex', justifyContent: 'space-between' }}>
+                                    <Text style={styles.texto}>ID: {item.idJornada}</Text>
+                                    <Text style={{ ...styles.texto, fontSize: '0.8rem' }}>Fecha Inicial: {item.fechaInicio}</Text>
+                                    <Text style={{ ...styles.texto, fontSize: '0.8rem' }}>Fecha Final: {item.fechaFin === "Wed Dec 31 1969 21:00:00" ? "No finalizado" : item.fechaFin}</Text>
+                                </View>
+                            </View>
                         </View>
-                    </View>
-                </View>
-                <View style={styles.cuadro}>
-                    <View style={{margin: '0.5rem'}}>
-                        <Text style={styles.textoJornda}>Jornada II</Text>
-                        <View style={{flexDirection: "row", marginTop: '1rem', display: 'flex', justifyContent: 'space-between'}}>
-                            <Text style={styles.texto}>01:00</Text>
-                            <Text style={styles.texto}>*Info jornada*</Text>
-                        </View>
-                        <View style={{flexDirection: "row", display: 'flex', justifyContent: 'space-between'}}>
-                            <Text style={styles.texto}>01:00</Text>
-                            <Text style={styles.texto}>*Info jornada*</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.cuadro}>
-                    <View style={{margin: '0.5rem'}}>
-                        <Text style={styles.textoJornda}>Jornada III</Text>
-                        <View style={{flexDirection: "row", marginTop: '1rem', display: 'flex', justifyContent: 'space-between'}}>
-                            <Text style={styles.texto}>01:00</Text>
-                            <Text style={styles.texto}>*Info jornada*</Text>
-                        </View>
-                        <View style={{flexDirection: "row", display: 'flex', justifyContent: 'space-between'}}>
-                            <Text style={styles.texto}>02:00</Text>
-                            <Text style={styles.texto}>*Info jornada*</Text>
-                        </View>
-                    </View>
-                </View>
+                    )}
+                    keyExtractor={(item) => item.idJornada.toString()}
+                />
             </View>
             <Carousel
                 loop
                 width={width}
                 height={width / 2}
                 autoPlay={true}
-                data={idJornadaActiva} //[...new Array(6).keys()]
+                data={[...new Array(6).keys()]} //[...new Array(6).keys()]
                 scrollAnimationDuration={1000}
-                //onSnapToItem={(index) => console.log('current index:', index)}
-                /*renderItem={({ idJornadaActiva }) => (
+                onSnapToItem={(index) => console.log('current index:', index)}
+                renderItem={({ index }) => (
                     <View
                         style={{
                             flex: 1,
@@ -116,10 +144,10 @@ export default function Historial({ navigation }) {
                         }}
                     >
                         <Text style={{ textAlign: 'center', fontSize: 30 }}>
-                            {idJornadaActiva.idJornada}
+                            {index}
                         </Text>
                     </View>
-                )}*/
+                )}
             />
 
             <View style={styles.footer}>
@@ -131,7 +159,7 @@ export default function Historial({ navigation }) {
                         <Icon icon="zondicons:calendar" width={'2.3rem'} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { navigation.navigate('Usuario') }}>
-                        <Icon icon="mdi:account" width={'2.5rem'}/>
+                        <Icon icon="mdi:account" width={'2.5rem'} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -189,10 +217,10 @@ const styles = StyleSheet.create({
         shadowColor: "#560000",
         borderColor: "F9F4F0",
         shadowOffset: {
-          width: 2,
-          height: 4,
+            width: 2,
+            height: 4,
         },
         shadowOpacity: 2,
         shadowRadius: 5,
-      },
+    },
 });

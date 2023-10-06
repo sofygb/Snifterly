@@ -4,7 +4,7 @@ import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
-import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, saveJornada, getJornada, getJornadaReciente, getUltimaMedicion, setMediciones } from '../../api';
+import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, saveJornada, getJornada, getJornadaReciente, getUltimaMedicion, setMediciones, setJornadaDesactiva } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 
 //import jornadaActiva from '../../api.js'
@@ -70,6 +70,34 @@ export default function IngresoDeDatos({ navigation }) {
         setSiguientePantalla('Home')
         //siguientePantalla = 'Home'
     }*/
+    const inicializarContext = () => {
+      setContextState({
+        type: ActionTypes.SetIdJornada,
+        value: 0
+      })
+      setContextState({
+        type: ActionTypes.SetFechaInicio,
+        value: 1 / 1 / 1970
+      })
+      setContextState({
+        type: ActionTypes.SetFechaFin,
+        value: 1 / 1 / 1970
+      })
+      setContextState({
+        type: ActionTypes.SetFechaFin,
+        value: 1 / 1 / 1970
+      })
+      setContextState({
+        type: ActionTypes.SetIdUsuario,
+        value: null
+      })
+      setContextState({
+        type: ActionTypes.SetActivo,
+        value: 0
+      })
+      setJornadaDesactiva()
+      navigation.navigate('SalirJornada')
+    }
 
   return (
     <View style={styles.container}>
@@ -93,7 +121,7 @@ export default function IngresoDeDatos({ navigation }) {
       </View>
 
       <View style={styles.finalizarJornada}>
-        <TouchableOpacity style={styles.finalizarJornada} onPress={() => { navigation.navigate('SalirJornada') }}>
+        <TouchableOpacity style={styles.finalizarJornada} onPress={() => { inicializarContext() }}>
           <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter' }]}>Finalizar jornada</Text>
         </TouchableOpacity>
       </View>

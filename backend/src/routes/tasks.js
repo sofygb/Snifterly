@@ -31,7 +31,9 @@ import {
     getJornadaActiva2,
     updateUsuario,
     getJornadasCountByIdUsuario,
-    getUltimasDosJornadas
+    getUltimasDosJornadas,
+    getJornadaByIdUsuario,
+    getJornadasYMediciones
 } from "../controllers/tasks.js";
 
 const router = Router(); //devuelve lo que se ejecuta en una constante. Router nos permite definir las urls
@@ -139,6 +141,15 @@ router.get("/jornadaActivaHay/:idUsuario", getHayJornada) //get jornada activa
  *    tags: [Tasks]
  */
 router.get("/jornadaReciente/:idUsuario", getJornadaRecienteByIdUsuario) //get jornada activa
+
+/** 
+ * @swagger
+ * /jornadaActiva:
+ *  get:
+ *    summary: Trae la jornada activa
+ *    tags: [Tasks]
+ */
+router.get("/jornada/usuario/:idUsuario", getJornadaByIdUsuario) //get jornada activa
 
 /** 
  * @swagger
@@ -257,6 +268,14 @@ router.get("/jornadas/:idJornada", getJornadaById) //get una jornada por su id
  *    summary: Trae la cantidad de mediciones de una jornada requerida por su id
  */
 router.get("/jornadas/count/:idJornada", getMedicionesFromIdJornada)
+
+/** 
+ * @swagger
+ * //jornadas/count/:idJornada:
+ *  get:
+ *    summary: Trae la cantidad de mediciones de una jornada requerida por su id
+ */
+router.get("/jornadasYMediciones/:idUsuario", getJornadasYMediciones)
 
 /** 
  * @swagger
