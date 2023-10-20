@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
@@ -54,19 +53,7 @@ export default function CrearCuenta({ navigation }) {
         }
     }
 
-        // const getUsuarios = async () => {
-        //     const data = await getUsuarios()
-        //     setUsuarios(data)
-        //     console.log(data)
-        // }
-
         const [fontsLoaded, setFontsLoaded] = useState(false);
-        // useEffect(() => {
-        //     if (!fontsLoaded) {
-        //         loadFonts();
-        //     }
-        //     getUsuarios()
-        // }, [])
 
         const loadFonts = async () => {
             await Font.loadAsync({

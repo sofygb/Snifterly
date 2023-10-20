@@ -1,14 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity, InputAccessoryView, ScrollView, Image } from 'react-native';
-import { TextInput } from "@react-native-material/core";
-import { CountdownCircleTimer } from 'react-countdown-circle-timer';
-import { HomeFilled } from '@ant-design/icons';
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 import { getJornadaActiva, getJornadasCountByIdUsuario, getUltimasDosJornadas } from '../../api';
-
 
 export default function Usuario({ navigation }) {
     const { contextState, setContextState } = useContextState()

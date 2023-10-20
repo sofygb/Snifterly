@@ -1,11 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { useIsFocused } from "@react-navigation/native";
-import { getUsuarios, getHayJornada, getJornadaActiva2 } from '../../api';
+import { getUsuarios, getJornadaActiva2 } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 
 export default function InicioSesion({ navigation }) {
@@ -15,7 +14,6 @@ export default function InicioSesion({ navigation }) {
     const [jornadaActiva, setJornadaActiva] = React.useState([]);
     const isFocused = useIsFocused();
     const [mostrarContrasenia, setMostrarContrasenia] = useState(false);
-    const [contrasenia, setContrasenia] = useState('');
     
     const loadUsuarios = async () => {
         const data = await getUsuarios()
@@ -49,12 +47,6 @@ export default function InicioSesion({ navigation }) {
     }
 
     const { contextState, setContextState } = useContextState()
-    
-    const [hidePass, setHidePass] = useState(true);
-
-    const traerDatos = async (data) => {
-        return await getHayJornada(data)
-    }
     
     const logIn = () => {
         const validacion = usuarios.findIndex(usuario => usuario.email === mail && usuario.contrasenia === contraseña)
@@ -96,8 +88,6 @@ export default function InicioSesion({ navigation }) {
                 type: ActionTypes.SetAltura,
                 value: usuarios[validacion].altura
             });
-            //const datos = traerDatos(usuarios[validacion].idUsuario)
-            //console.log(datos)
             var hayJornada = false
             jornadaActiva.forEach((jornada) => {
                 if(jornada.idUsuario === usuarios[validacion].idUsuario){

@@ -1,25 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity, InputAccessoryView, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { TextInput } from "@react-native-material/core";
-import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
-import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, saveJornada, getJornada, getJornadaReciente, getUltimaMedicion, setMediciones, setJornadaDesactiva } from '../../api';
+import { getJornadaReciente, setMediciones, setJornadaDesactiva } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
-
-//import jornadaActiva from '../../api.js'
-//import siguientePantalla from '../../api.js'
 
 export default function IngresoDeDatos({ navigation }) {
   const initialText = '';
   const [text, setText] = useState(initialText);
   const { contextState, setContextState } = useContextState()
-  /* 
-  const loadJornada = async () => {
-    const data = await getJornada()
-    console.log(data)
-  }
-  */
+
   const loadJornada = async () => {
     const data = await getJornadaReciente(contextState.usuario.idUsuario)
     console.log(data)
@@ -58,18 +48,7 @@ export default function IngresoDeDatos({ navigation }) {
       console.error("Error: No se ingresó el grado")
     }
   }
-  /*
-  var jornadaActiva = getJornadaActiva(contextState.usuario.idUsuario)
-    var siguientePantalla = getSiguientePantalla()
 
-    if (!jornadaActiva) {
-        setSiguientePantalla('PrimeraHome')
-        //siguientePantalla = 'PrimeraHome'
-    }
-    else if(jornadaActiva) {
-        setSiguientePantalla('Home')
-        //siguientePantalla = 'Home'
-    }*/
     const inicializarContext = () => {
       setContextState({
         type: ActionTypes.SetIdJornada,
@@ -103,9 +82,6 @@ export default function IngresoDeDatos({ navigation }) {
     <View style={styles.container}>
       <View style={{ flex: 6, display: 'flex', justifyContent: 'center' }}>
         <Text style={styles.textoPrincipal}>Ingrese/Editar el valor que aparece en el dispositivo</Text>
-
-        {/*Puede ser util para el inicio sesion
-        <TextInput variant="outlined" label="Label" style={{ margin: 16 }} />*/}
 
         <TextInput style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} onChangeText={setText} value={text} placeholder={'agregar medición...'} id='grado'/>
 

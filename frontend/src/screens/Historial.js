@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 import { getJornadaActiva, getUltimasDosJornadas, getJornadasYMedicionesByIdUsuario } from '../../api';
-import Carousel from 'react-native-reanimated-carousel';
 import { useIsFocused } from "@react-navigation/native";
 
 export default function Historial({ navigation }) {
@@ -111,11 +110,11 @@ export default function Historial({ navigation }) {
         <View style={styles.container}>
             <View style={{ flexDirection: "row", marginTop: '4rem', display: 'flex', justifyContent: 'space-around' }}>
                 <Icon icon="zondicons:arrow-left" />
-                <Text style={styles.titulo}>04 de Abril</Text>
+                {/* <Text style={styles.titulo}>{arrayFechas[arrayFechas.length -1]}</Text> */}
                 <Icon icon="zondicons:arrow-right" />
             </View>
             <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '2rem' }}>
-                <FlatList
+                {/* <FlatList
                     data={jornadas}
                     renderItem={({ item, index }) => (
                         <View style={styles.cuadro}>
@@ -130,9 +129,10 @@ export default function Historial({ navigation }) {
                         </View>
                     )}
                     keyExtractor={(item) => item.idJornada.toString()}
-                />
+                /> */}
             </View>
-            <Carousel
+            
+            {/* <Carousel
                 loop
                 width={width}
                 height={width / 2}
@@ -153,7 +153,7 @@ export default function Historial({ navigation }) {
                         </Text>
                     </View>
                 )}
-            />
+            /> */}
 
             <View style={styles.footer}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>

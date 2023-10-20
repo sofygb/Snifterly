@@ -257,13 +257,9 @@ export default function Home({ navigation }) {
 
       <View style={styles.footer}>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("Home");
-            }}
-          >
+          
             <Icon icon="material-symbols:home" width={"2.5rem"} />
-          </TouchableOpacity>
+          
           <TouchableOpacity
             onPress={() => {
               navigation.navigate("Historial");
