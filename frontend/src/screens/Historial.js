@@ -1,4 +1,4 @@
-import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity, InputAccessoryView, ScrollView, Dimensions, FlatList } from 'react-native';
+import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity, InputAccessoryView, ScrollView, Dimensions, FlatList, Image } from 'react-native';
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
@@ -13,6 +13,7 @@ export default function Historial({ navigation }) {
     const [idJornadaActiva, setIdJornadaActiva] = useState(null)
     const [jornadas, setJornadas] = useState(null)
     const [arrayFechas, setArrayFechas] = useState([])
+    const [index, setIndex] = useState(0);
     /* 
     formato de arrayFechas:
     [
@@ -28,6 +29,10 @@ export default function Historial({ navigation }) {
     const width = Dimensions.get('window').width;
 
     var arrayProvisorio = []
+
+    const handleSelect = (selectedIndex) => {
+        setIndex(selectedIndex);
+    };
 
     const siHayJornadaActiva = async () => {
         const jornadaActivaes = await getJornadaActiva(contextState.usuario.idUsuario) //Si no hay una jornada activa no entra a este funcion y no setea ningún valor, raro pero nos sirve
@@ -64,7 +69,7 @@ export default function Historial({ navigation }) {
                         arrayProvisorio = [ //Fri Oct 06 2023 09:07:50
                             ...arrayProvisorio, {
                                 ...arrayProvisorio.fecha,
-                                jornadas: [{...arrayProvisorio.jornadas}, jornada]
+                                jornadas: [{ ...arrayProvisorio.jornadas }, jornada]
                             }
                         ]
                     }
@@ -163,6 +168,7 @@ export default function Historial({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </View>
+
         </View>
     )
 }
@@ -222,5 +228,14 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 2,
         shadowRadius: 5,
+    },
+    imagen: {
+        width: '45%',
+        height: '20%',
+        resizeMode: "contain",
+        display: 'flex',
+        alignSelf: 'center',
+        marginTop: '3rem',
+        borderRadius: 30,
     },
 });

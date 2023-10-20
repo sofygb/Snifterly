@@ -31,7 +31,7 @@ export default function Usuario({ navigation }) {
             jornada.fechaInicio = `${new Date(jornada.fechaInicio).toDateString()} ${new Date(jornada.fechaInicio).toLocaleTimeString('es-AR')}`,
             jornada.fechaFin = `${new Date(jornada.fechaFin).toDateString()} ${new Date(jornada.fechaFin).toLocaleTimeString('es-AR')}`,
             jornada.primeraFecha = `${new Date(jornada.primeraFecha).toDateString()} ${new Date(jornada.primeraFecha).toLocaleTimeString('es-AR')}`,
-            jornada.ultimaFecha === null ? "No finalizado" : `${new Date(jornada.ultimaFecha).toDateString()} ${new Date(jornada.ultimaFecha).toLocaleTimeString('es-AR')}`,
+            jornada.ultimaFecha === 'Wed Dec 31 1969 21:00:00' ? "No finalizado" : `${new Date(jornada.ultimaFecha).toDateString()} ${new Date(jornada.ultimaFecha).toLocaleTimeString('es-AR')}`,
             jornada.mayorFecha = `${new Date(jornada.mayorFecha).toDateString()} ${new Date(jornada.mayorFecha).toLocaleTimeString('es-AR')}`
         ))
         setMedicionJornada(data)

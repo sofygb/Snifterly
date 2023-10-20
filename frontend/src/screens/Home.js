@@ -44,6 +44,8 @@ export default function Home({ navigation }) {
 
   const [llegaronLosValores, setLlegaronLosValores] = useState(false);
 
+  const [calcularTiempo, setcalcularTiempo] = useState(0)
+
   const isFocused = useIsFocused();
 
  const loadJornada = async () => {
@@ -124,6 +126,14 @@ export default function Home({ navigation }) {
     loadJornadaExtra();
   }, [llegaronLosValores]);
 
+  useEffect(() => {
+    tiempoSobrio();
+  }, [gradoActual])
+
+  useEffect(() => {
+    setTiempo(calcularTiempo * 60 * 60)
+  }, [calcularTiempo])
+
   const loadFonts = async () => {
     await Font.loadAsync({
       alata: require("../assets/fonts/Alata/Alata.ttf"),
@@ -135,6 +145,10 @@ export default function Home({ navigation }) {
   const handleSubmit = (e) => {
     //setvarible ((e) => getCountMediciones())
     setTiempo((e) => 0);
+  }
+
+  const tiempoSobrio = () => {
+    setcalcularTiempo(gradoActual / 0.15)
   }
 
   return (
@@ -197,12 +211,12 @@ export default function Home({ navigation }) {
           <View style={{ display: "flex", alignItems: "center" }}>
             <CountdownCircleTimer
               isPlaying
-              duration={tiempo}
+              duration={(tiempo)}
               colors={["#5654E1", "#5A58E2", "#5160E3", "#5767E4"]}
               colorsTime={[7, 5, 2, 0]}
               size={130}
             >
-              {({ remainingTime }) => remainingTime}
+              {({ remainingTime }) => <p>{Math.trunc(remainingTime / 60**2) != 0 && <span>{Math.trunc(remainingTime / 60**2)}hs</span>} {Math.trunc((remainingTime / 60) % 60)}min {Math.trunc(remainingTime / 60**2) == 0 && <span> {remainingTime % 60}seg</span>}</p>}
             </CountdownCircleTimer>
           </View>
           <Text

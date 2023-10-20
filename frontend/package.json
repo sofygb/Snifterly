@@ -19,6 +19,7 @@
     "@react-navigation/native-stack": "^6.9.12",
     "@rneui/base": "^0.0.0-edge.2",
     "@rneui/themed": "^0.0.0-edge.2",
+    "bootstrap": "^5.3.2",
     "expo": "~48.0.18",
     "expo-cli": "^6.3.10",
     "expo-device": "^5.6.0",
@@ -28,6 +29,7 @@
     "force": "^0.0.3",
     "install": "^0.13.0",
     "react": "18.2.0",
+    "react-bootstrap": "^2.9.0",
     "react-circle-progress-bar": "^0.1.4",
     "react-countdown-circle-timer": "^3.2.1",
     "react-dom": "^18.2.0",
@@ -41,6 +43,7 @@
     "react-native-reanimated-carousel": "^3.5.1",
     "react-native-safe-area-context": "^4.5.3",
     "react-native-screens": "^3.21.0",
+    "react-native-snap-carousel": "^3.9.1",
     "react-native-vector-icons": "^10.0.0",
     "react-native-web": "~0.18.11",
     "yarn": "^1.22.19"
