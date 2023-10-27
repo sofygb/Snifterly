@@ -13,6 +13,7 @@ export default function Historial({ navigation }) {
     const [jornadas, setJornadas] = useState(null)
     const [arrayFechas, setArrayFechas] = useState([])
     const [index, setIndex] = useState(0);
+    const [fechaIndex, setFechaIndex] = useState('');
     /* 
     formato de arrayFechas:
     [
@@ -27,7 +28,6 @@ export default function Historial({ navigation }) {
     const isFocused = useIsFocused();
     const width = Dimensions.get('window').width;
 
-    var arrayProvisorio = []
 
     const handleSelect = (selectedIndex) => {
         setIndex(selectedIndex);
@@ -43,42 +43,57 @@ export default function Historial({ navigation }) {
         const data = await getJornadasYMedicionesByIdUsuario(contextState.usuario.idUsuario)
         console.log(data)
         data.map((jornada) => (
-            jornada.fechaInicio = `${new Date(jornada.fechaInicio).toDateString()} ${new Date(jornada.fechaInicio).toLocaleTimeString('es-AR')}`,
-            jornada.fechaFin = `${new Date(jornada.fechaFin).toDateString()} ${new Date(jornada.fechaFin).toLocaleTimeString('es-AR')}`,
-            jornada.primeraFecha = `${new Date(jornada.primeraFecha).toDateString()} ${new Date(jornada.primeraFecha).toLocaleTimeString('es-AR')}`,
-            jornada.ultimaFecha = `${new Date(jornada.ultimaFecha).toDateString()} ${new Date(jornada.ultimaFecha).toLocaleTimeString('es-AR')}`,
-            jornada.mayorFecha = `${new Date(jornada.mayorFecha).toDateString()} ${new Date(jornada.mayorFecha).toLocaleTimeString('es-AR')}`
+            jornada.fechaInicio = new Date(jornada.fechaInicio).toDateString() + " " + new Date(jornada.fechaInicio).toLocaleTimeString('es-AR'),
+            jornada.fechaFin = new Date(jornada.fechaFin).toDateString() + " " + new Date(jornada.fechaFin).toLocaleTimeString('es-AR'),
+            jornada.primeraFecha = new Date(jornada.primeraFecha).toDateString() + " " + new Date(jornada.primeraFecha).toLocaleTimeString('es-AR'),
+            jornada.ultimaFecha = new Date(jornada.ultimaFecha).toDateString() + " " + new Date(jornada.ultimaFecha).toLocaleTimeString('es-AR'),
+            jornada.mayorFecha = new Date(jornada.mayorFecha).toDateString() + " " + new Date(jornada.mayorFecha).toLocaleTimeString('es-AR')
         ))
         setJornadas(data)
     }
 
     useEffect(() => {
+        if (arrayFechas[index] != null) {
+            setFechaIndex(arrayFechas[index].fecha)
+        }
+    }, [arrayFechas, index])
+
+    useEffect(() => {
+        var arrayProvisorio = []
         if (jornadas !== null) {
-            console.log(jornadas, arrayFechas, jornadas[0].fechaInicio.substring(0, -8)),
-                jornadas.map((jornada) => {
-                    if (arrayProvisorio.includes((item) => item.fecha.substring(0, -8) !== jornada.fechaInicio.substring(0, -8))) {
-                        arrayProvisorio = [ //Fri Oct 06 2023 09:07:50
+            console.log(jornadas, arrayFechas, jornadas[0].fechaInicio.substring(0, jornadas[0].fechaInicio.length - 9)),
+                jornadas.map((jornada, i) => {
+                    if (arrayProvisorio.findIndex((item) => item.fecha === jornada.fechaInicio.substring(0, jornada.fechaInicio.length - 9)) === -1) {
+                        arrayProvisorio = [ //Fri Oct 06 2023 09:07:50 - CREAR NUEVO OBJETO FECHA SI NO EXISTE LA FECHA
                             ...arrayProvisorio, {
-                                fecha: jornada.fechaInicio,
-                                jornadas: jornadas.filter((item) => item.fechaInicio.substring(0, -8) === jornada.fechaInicio.substring(0, -8))
+                                fecha: jornada.fechaInicio.substring(0, jornada.fechaInicio.length - 9),
+                                jornadas: jornadas.filter((item) => item.fechaInicio.substring(0, item.fechaInicio.length - 9) === jornada.fechaInicio.substring(0, jornada.fechaInicio.length - 9))
                             }
                         ]
                     }
+                    /*  
                     else {
-                        arrayProvisorio = [ //Fri Oct 06 2023 09:07:50
-                            ...arrayProvisorio, {
-                                ...arrayProvisorio.fecha,
-                                jornadas: [{ ...arrayProvisorio.jornadas }, jornada]
-                            }
-                        ]
-                    }
+                        arrayProvisorio = [ //Fri Oct 06 2023 09:07:50 - AGREGAR NUEVA JORNADA AL OBJETO
+                        ...arrayProvisorio, {
+                            ...arrayProvisorio[i-1].fecha,
+                            jornadas: [{ ...arrayProvisorio[i-1].jornadas }, jornada]
+                        }
+                    ]
+                }
+                */
                 })
+            /*
+            jornadas.map((jornada) => {
+                if (arrayProvisorio.findIndex((item) => console.log(item))){}
+            })
+            */
         }
         setArrayFechas(arrayProvisorio)
     }, [jornadas])
 
     useEffect(() => {
         console.log(arrayFechas)
+        console.log(jornadas)
     }, [arrayFechas])
 
     const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -90,6 +105,10 @@ export default function Historial({ navigation }) {
         contextState.jornada.idJornada === 0 ? null : cargarJornadas()
     }, [isFocused])
 
+    const mostrarBotones = () => {
+
+    }
+
     const loadFonts = async () => {
         await Font.loadAsync({
             'alata': require('../assets/fonts/Alata/Alata.ttf'),
@@ -97,6 +116,8 @@ export default function Historial({ navigation }) {
         });
         setFontsLoaded(true);
     }
+
+    useEffect(() => { console.log(index) }, [index])
 
     const validacion = () => {
         if (contextState.jornada.idJornada !== 0) {
@@ -109,12 +130,39 @@ export default function Historial({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={{ flexDirection: "row", marginTop: '4rem', display: 'flex', justifyContent: 'space-around' }}>
-                <Icon icon="zondicons:arrow-left" />
-                {/* <Text style={styles.titulo}>{arrayFechas[arrayFechas.length -1]}</Text> */}
-                <Icon icon="zondicons:arrow-right" />
+                <TouchableOpacity onPress={() => { index >= jornadas.length - 3 ? null : setIndex(index + 1) }}>
+                    <Icon icon="zondicons:arrow-left" />
+                </TouchableOpacity>
+                <Text style={styles.titulo}>{fechaIndex}</Text>
+                <TouchableOpacity onPress={() => { index <= 0 ? null : setIndex(index - 1) }}>
+                    <Icon icon="zondicons:arrow-right" />
+                </TouchableOpacity>
             </View>
             <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '2rem' }}>
-                {/* <FlatList
+                {
+                    arrayFechas[index] != null && (
+                        <>
+                            {arrayFechas[index] != null && <Text style={styles.titulo}>{arrayFechas[index].jornadas.fechaInicio}</Text>}
+                            <FlatList
+                                data={arrayFechas[index].jornadas}
+                                renderItem={({ item, index }) => (
+                                    <View style={styles.cuadro}>
+                                        <View style={{ margin: '0.5rem' }}>
+                                            <Text style={styles.textoJornda}>Jornada {index + 1}</Text>
+                                            <View style={{ flexDirection: "column", marginTop: '1rem', display: 'flex', justifyContent: 'space-between' }}>
+                                                <Text style={styles.texto}>ID: {item.idJornada}</Text>
+                                                <Text style={{ ...styles.texto, fontSize: '0.8rem' }}>Fecha Inicial: {item.fechaInicio}</Text>
+                                                <Text style={{ ...styles.texto, fontSize: '0.8rem' }}>Fecha Final: {item.fechaFin === "Wed Dec 31 1969 21:00:00" ? "No finalizado" : item.fechaFin}</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+                                )}
+                            //keyExtractor={(item) => item.idJornada.toString()}
+                            />
+                        </>
+                    )
+                }
+                {/*<FlatList
                     data={jornadas}
                     renderItem={({ item, index }) => (
                         <View style={styles.cuadro}>
@@ -129,31 +177,8 @@ export default function Historial({ navigation }) {
                         </View>
                     )}
                     keyExtractor={(item) => item.idJornada.toString()}
-                /> */}
+                    />*/}
             </View>
-            
-            {/* <Carousel
-                loop
-                width={width}
-                height={width / 2}
-                autoPlay={true}
-                data={[...new Array(6).keys()]} //[...new Array(6).keys()]
-                scrollAnimationDuration={1000}
-                onSnapToItem={(index) => console.log('current index:', index)}
-                renderItem={({ index }) => (
-                    <View
-                        style={{
-                            flex: 1,
-                            borderWidth: 1,
-                            justifyContent: 'center',
-                        }}
-                    >
-                        <Text style={{ textAlign: 'center', fontSize: 30 }}>
-                            {index}
-                        </Text>
-                    </View>
-                )}
-            /> */}
 
             <View style={styles.footer}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -208,7 +233,7 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingLeft: "2rem",
         paddingRight: "2rem",
-        Height: '3rem',
+        //Height: '3rem',
     },
     cuadro: {
         borderRadius: 20,
@@ -237,5 +262,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginTop: '3rem',
         borderRadius: 30,
+    },
+    botonAgregar: {
+        width: "100%",
+        paddingRight: "25px",
+        alignItems: "flex-end",
+        justifyContent: "flex-end",
     },
 });

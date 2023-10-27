@@ -158,7 +158,7 @@ export default function Usuario({ navigation }) {
                             <Text style={styles.textofecha}>Promedio de alcohol: {Math.round(mediJornada.promedioGrados*1000)/1000} dg/ml</Text>
                             <Text style={styles.textofecha}>Mayor grado: {Math.round(mediJornada.mayorGrado*1000)/1000} dg/ml</Text>
                             <Text style={styles.textofecha}>Fecha Inicial: {mediJornada.fechaInicio}</Text>
-                            <Text style={styles.textofecha}>Fecha Final: {mediJornada.fechaFin}</Text>
+                            <Text style={styles.textofecha}>Fecha Final: {mediJornada.fechaFin === "Wed Dec 31 1969 21:00:00" ? "No finalizado" : mediJornada.fechaFin}</Text>
                         </View>
                     ))
                 }
