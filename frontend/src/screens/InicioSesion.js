@@ -47,7 +47,19 @@ export default function InicioSesion({ navigation }) {
     }
 
     const { contextState, setContextState } = useContextState()
-    
+    // const logIn = async () => {
+    //     try {
+    //         await login(mail, contraseña)
+    //         if(contextState.jornada.idJornada != -1){
+    //             navigation.navigate('Home')
+    //         }
+    //         else{
+    //             navigation.navigate('PrimeraHome')
+    //         }
+    //     } catch (error) {
+    //         console.error('Error al iniciar sesión:', error);
+    //     }
+    // }
     const logIn = () => {
         const validacion = usuarios.findIndex(usuario => usuario.email === mail && usuario.contrasenia === contraseña)
 
