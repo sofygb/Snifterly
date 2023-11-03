@@ -12,7 +12,8 @@ export const initialState = {
         email: '',
         contrasenia: '',
         fechaCreacion: 1 / 1 / 1970,
-        modResistencia: null
+        modResistencia: null,
+        token: -1,
     },
     jornada: {
         idJornada: 0,
@@ -43,6 +44,7 @@ export const ActionTypes = {
     SetContrasenia: 'SET_CONTRASENIA',
     SetFechaCreacion: 'SET_FECHACREACION',
     SetModResistencia: 'SET_MODRESISTENCIA',
+    SetToken: 'SET_TOKEN',
     //JORNADA
     SetIdJornada: 'SET_IDJORNADA',
     SetFechaInicio: 'SET_FECHAINICIO',
@@ -51,7 +53,7 @@ export const ActionTypes = {
     SetActivo: 'SET_ACTIVO',
     //MEDICION
     SetIdMedicion: 'SET_IDMEDICION',
-    SetGrado : 'SET_GRADO',
+    SetGrado: 'SET_GRADO',
     SetFecha: 'SET_FECHA',
     SetIdJornadaMedicion: 'SET_IDJORNADAMEDICION',
     SetEstado: 'SET_ESTADO'
@@ -145,6 +147,14 @@ export const reducer = (state = {}, action) => {
                     modResistencia: action.value
                 }
             };
+        case ActionTypes.SetToken:
+            return {
+                ...state,
+                usuario: {
+                    ...state.usuario,
+                    modResistencia: action.value
+                }
+            };
         //JORNADA
         case ActionTypes.SetIdJornada:
             return {
@@ -156,7 +166,7 @@ export const reducer = (state = {}, action) => {
             };
         case ActionTypes.SetFechaInicio:
             return {
-                ...state,jornada: {
+                ...state, jornada: {
                     ...state.jornada,
                     fechaInicio: action.value,
                 }

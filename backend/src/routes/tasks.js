@@ -54,13 +54,13 @@ const router = Router(); //devuelve lo que se ejecuta en una constante. Router n
  *    summary: Trae todos los usuarios
  *    tags: [Tasks]
  */
-router.get("/usuarios", getUsuarios) //get todas las tareas
+router.get("/usuarios", getUsuarios) //get todas los usuarios
 
 /** 
  * @swagger
  * /ultimasJornadas/:idUsuario
  *  get:
- *    summary: Trae las ultimas jornadas
+ *    summary: Trae las ultimas dos jornadas
  *    tags: [Tasks]
  */
 router.get("/ultimasJornadas/:idUsuario", getUltimasDosJornadas)
@@ -92,13 +92,6 @@ router.put("/modificarUsuario/:nombre/:fechaNacimiento/:peso/:altura/:email/:con
  */
 router.put("/jornadaActual/:idJornada", setFechaFinJornada)
 
-/**
- * @swagger
- * tags: 
- *  name: Tasks
- *  description: Tasks endpoint
- */
-
 /** 
  * @swagger
  * /jornadas:
@@ -121,10 +114,10 @@ router.get("/jornadaActiva2", getJornadaActiva2)
  * @swagger
  * /jornadaActiva:
  *  get:
- *    summary: Trae la jornada activa
+ *    summary: Trae el id la jornada activa
  *    tags: [Tasks]
  */
-router.get("/jornadaActiva/:idUsuario", getJornadaActiva) //get jornada activa
+router.get("/jornadaActiva/:idUsuario", getJornadaActiva)
 
 /** 
  * @swagger
@@ -133,22 +126,22 @@ router.get("/jornadaActiva/:idUsuario", getJornadaActiva) //get jornada activa
  *    summary: Trae la jornada activa
  *    tags: [Tasks]
  */
-router.get("/jornadaActivaHay/:idUsuario", getHayJornada) //get jornada activa
+router.get("/jornadaActivaHay/:idUsuario", getHayJornada)
 
 /** 
  * @swagger
  * /jornadaActiva:
  *  get:
- *    summary: Trae la jornada activa
+ *    summary: Trae todo sobre la ultima jornada terminada
  *    tags: [Tasks]
  */
-router.get("/jornadaReciente/:idUsuario", getJornadaRecienteByIdUsuario) //get jornada activa
+router.get("/jornadaReciente/:idUsuario", getJornadaRecienteByIdUsuario)
 
 /** 
  * @swagger
  * /jornadaActiva:
  *  get:
- *    summary: Trae la jornada activa
+ *    summary: Trae la jornada con el id requerido
  *    tags: [Tasks]
  */
 router.get("/jornada/usuario/:idUsuario", getJornadaByIdUsuario) //get jornada activa
@@ -175,7 +168,7 @@ router.get("/cantjornadas/count/:idUsuario", getJornadasCountByIdUsuario)
  * @swagger
  * /mediciones/first/:idJornada:
  *  get:
- *    summary: Trae la primera medicion más de una jornada
+ *    summary: Trae la fecha de una jornada donde la fecha sea la más vieja
  *    tags: [Tasks]
  */
 router.get("/mediciones/first/:idJornada", getFistFechaMedicionByIdJornada)
@@ -184,7 +177,7 @@ router.get("/mediciones/first/:idJornada", getFistFechaMedicionByIdJornada)
  * @swagger
  * /mediciones/last/:idJornada:
  *  get:
- *    summary: Trae la última medicion más de una jornada
+ *    summary: Trae la última medicion de una jornada
  *    tags: [Tasks]
  */
 router.get("/mediciones/last/:idJornada", getUltimaMedicionByIdJornada)
@@ -193,7 +186,7 @@ router.get("/mediciones/last/:idJornada", getUltimaMedicionByIdJornada)
  * @swagger
  * /ultimaMedicion:
  *  get:
- *    summary: Trae la última medición hecha
+ *    summary: Trae la última medición hecha en una determinada jornada
  *    tags: [Tasks]
  */
 router.get("/ultimaMedicion/:idJornada", getUltimaMedicion)
@@ -243,7 +236,7 @@ router.get("/usuarios/:idUsuario", getUsuarioById) //get una tarea por su id
  * @swagger
  * /usuarios/:email/:contraseña:
  *  get:
- *    summary: Trae el usuario requerido por su email y contraseña
+ *    summary: Trae el usuario requerido por su email
  */
 router.get("/usuarios/:email", getUsuarioByEmail) //NO FUNCIONA
 
@@ -267,7 +260,7 @@ router.get("/jornadas/:idJornada", getJornadaById) //get una jornada por su id
  * @swagger
  * //jornadas/count/:idJornada:
  *  get:
- *    summary: Trae la cantidad de mediciones de una jornada requerida por su id
+ *    summary: Trae todas las mediciones de la jornada requerida
  */
 router.get("/jornadas/count/:idJornada", getMedicionesFromIdJornada)
 
@@ -275,7 +268,7 @@ router.get("/jornadas/count/:idJornada", getMedicionesFromIdJornada)
  * @swagger
  * //jornadas/count/:idJornada:
  *  get:
- *    summary: Trae la cantidad de mediciones de una jornada requerida por su id
+ *    summary: Trae todas las mediciones y todas las jornadas de un usuario en especifico?
  */
 router.get("/jornadasYMediciones/:idUsuario", getJornadasYMediciones)
 
@@ -285,7 +278,7 @@ router.get("/jornadasYMediciones/:idUsuario", getJornadasYMediciones)
  *  post:
  *    summary: Crea un nuevo usuario
  */
-router.post("/usuarioNuevo/:nombre/:fechaNacimiento/:peso/:altura/:email/:contrasenia", saveUsuario) //crear una tarea
+router.post("/usuarioNuevo/:nombre/:fechaNacimiento/:peso/:altura/:email/:contrasenia", saveUsuario)
 
 /** 
  * @swagger
@@ -307,7 +300,7 @@ router.post("/jornada/:idUsuario", saveJornada) //crear una nueva jornada
  * @swagger
  * /tasks/:id:
  *  delete:
- *    summary: Elimina el usuario por su id
+ *    summary: Hello Word
  */
 router.delete("/tasks/:id", deleteTask) //delete una tarea por su id
 
@@ -331,7 +324,7 @@ router.put("/modResistencia/:modResistencia/:idUsuario", setModResistenciaByIdUs
  * @swagger
  * /medicione/:grado/:idjornada
  *  post:
- *    summary: sube los datos de la nueva medición
+ *    summary: postea los datos de la nueva medición
  */
 router.post("/newMedicion/:grado/:idJornada", setMediciones ) // nueva medición
 
