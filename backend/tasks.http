@@ -29,6 +29,8 @@
 
 @api17 = http://localhost:3000/jornadasYMediciones
 
+@api18 = http://localhost:3000/modResistencia
+
 GET {{api}}
 ### Para separar peticiones escribimos triple numeral
 GET {{api3}}
@@ -62,6 +64,8 @@ GET {{api15}}/11
 GET {{api16}}/11
 ###
 GET {{api17}}/11
+###
+PUT {{api18}}/0.3/11
 ### No funcional de momento
 POST {{api}}
 Content-Type: application/json

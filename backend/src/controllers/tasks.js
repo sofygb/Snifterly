@@ -68,6 +68,17 @@ export const setFechaFinJornada = async (req, res) => {
     console.log(rows[0])
 }
 
+export const setModResistenciaByIdUsuario = async (req, res) => {
+    const connection = await connect()
+    const [rows] = await connection.query("UPDATE usuario SET modResistencia = ? WHERE idUsuario = ?", [
+        req.params.modResistencia,
+        req.params.idUsuario,
+    ])
+    res.json(rows[0])
+
+    console.log(rows[0])
+}
+
 export const setMediciones = async (req, res) => {
     const connection = await connect()
     const [rows] = await connection.query("INSERT INTO medicion(grado, fecha, idJornada, estado) VALUES (?,NOW(),?,null)", [

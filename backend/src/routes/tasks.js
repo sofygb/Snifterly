@@ -34,7 +34,8 @@ import {
     getJornadasCountByIdUsuario,
     getUltimasDosJornadas,
     getJornadaByIdUsuario,
-    getJornadasYMediciones
+    getJornadasYMediciones,
+    setModResistenciaByIdUsuario
 } from "../controllers/tasks.js";
 
 const router = Router(); //devuelve lo que se ejecuta en una constante. Router nos permite definir las urls
@@ -317,6 +318,14 @@ router.delete("/tasks/:id", deleteTask) //delete una tarea por su id
  *    summary: el valor activo pasa a 0
  */
 router.put("/jornadaDesactiva", setJornadaDesactiva) //termina la jornada
+
+/** 
+ * @swagger
+ * /modResistencia/:modResistencia/:idUsuario:   
+ *  put:
+ *    summary: actualiza el límite de alcohol del usuario
+ */
+router.put("/modResistencia/:modResistencia/:idUsuario", setModResistenciaByIdUsuario) //termina la jornada
 
 /**
  * @swagger

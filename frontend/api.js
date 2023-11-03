@@ -50,6 +50,8 @@ const API24 = 'http://localhost:3000/ultimasJornadas'
 const API25 = 'http://localhost:3000/jornada/usuario'
 
 const API26 = 'http://localhost:3000/jornadasYMediciones'
+
+const API27 = 'http://localhost:3000/modResistencia'
 /*
 export const setJornadaActiva = async (value) => {
     try {
@@ -178,6 +180,12 @@ export const getHayJornada = async (idUsuario) => {
 
 export const setJornadaDesactiva = async () => {
   const res = await fetch(API9, { method: "PUT",})
+    console.log(res) 
+    return await res
+}
+
+export const setModResistenciaByIdUsuario = async (modResistencia, idUsuario) => {
+  const res = await fetch(API9 + `/${modResistencia}/${idUsuario}`, { method: "PUT",})
     console.log(res) 
     return await res
 }

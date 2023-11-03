@@ -5,7 +5,7 @@ import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { setContextState, ActionTypes, contextState, useContextState } from '../navigation/contextState';
-import { getJornada, setEstadoUsuario, getUltimaMedicion, getJornadaActiva, getMedicionReciente } from "../../api";
+import { getJornada, setEstadoUsuario, getUltimaMedicion, getJornadaActiva, getMedicionReciente, setModResistenciaByIdUsuario } from "../../api";
 
 
 export default function EstadoUsuario({ navigation }) {
@@ -59,6 +59,14 @@ export default function EstadoUsuario({ navigation }) {
     });
 
     setEstadoUsuario(contextState.medicion.idMedicion, estado)
+
+    if(estado == 'muy mal'){
+      setModResistenciaByIdUsuario(contextState.medicion.grado, contextState.usuario.idUsuario)
+      setContextState({
+        type: ActionTypes.SetModResistencia,
+        value: contextState.medicion.grado
+      });
+    }
 
     console.log(contextState)
   }

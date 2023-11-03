@@ -41,6 +41,10 @@ export default function IngresoDeDatos({ navigation }) {
       setContextState({
         type: ActionTypes.SetActivo,
         value: 1
+      });
+      setContextState({
+        type: ActionTypes.SetGrado,
+        value: grado
     });
       navigation.navigate('EstadoUsuario')
     }

@@ -8,12 +8,14 @@ import {
   Alert,
   SafeAreaView,
   TouchableOpacity,
-  FlatList
+  FlatList,
+  Modal,
+  Pressable
 } from "react-native";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { HomeFilled } from "@ant-design/icons";
 import { Icon } from "@iconify/react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import * as Font from "expo-font";
 import { getJornada, getMedicionesCountByIdJornada, getAvgMediciones, getFirstMedicion, getUsuarios, getMedicionReciente, getLastMedicionByIdJornada, getJornadaActiva, getJornadaReciente } from "../../api";
 import { useIsFocused } from "@react-navigation/native";
@@ -46,9 +48,13 @@ export default function Home({ navigation }) {
 
   const [calcularTiempo, setcalcularTiempo] = useState(0)
 
+  const [limiteAlcohol, setLimiteAlcohol] = useState(0)
+
+  const [modalVisible, setModalVisible] = useState(false);
+
   const isFocused = useIsFocused();
 
- const loadJornada = async () => {
+  const loadJornada = async () => {
     setLlegaronLosValores(false)
     const datax = await getJornadaActiva(contextState.usuario.idUsuario)
     console.log(datax, llegaronLosValores)
@@ -66,11 +72,11 @@ export default function Home({ navigation }) {
       setLlegaronLosValores(false)
     }
   }
-  
+
   const loadJornadaExtra = async () => {
     const data3 = await getAvgMediciones();
     setAvgMediciones(data3);
-    
+
     if (idJornadaActiva != 0) {
       const lastMedicionn = await getLastMedicionByIdJornada(idJornadaActiva)
       console.log(lastMedicionn)
@@ -109,17 +115,18 @@ export default function Home({ navigation }) {
   };
 
   const [fontsLoaded, setFontsLoaded] = useState(false);
-  
+
   useEffect(() => {
     if (!fontsLoaded) {
       loadFonts();
     }
-    if(contextState.jornada.idJornada == 0 || contextState.jornada.idJornada != idJornadaActiva){ //Si ya se seteo la jornada en el context no hace falta cargarlo nuevamente, y trae directamente las mediciones
+    if (contextState.jornada.idJornada == 0 || contextState.jornada.idJornada != idJornadaActiva) { //Si ya se seteo la jornada en el context no hace falta cargarlo nuevamente, y trae directamente las mediciones
       loadJornada()
     }
-    else{
+    else {
       loadJornadaExtra();
     }
+    setLimiteAlcohol(contextState.usuario.modResistencia)
   }, [isFocused]);
 
   useEffect(() => {
@@ -128,6 +135,9 @@ export default function Home({ navigation }) {
 
   useEffect(() => {
     tiempoSobrio();
+    if (gradoActual >= limiteAlcohol && limiteAlcohol != null && limiteAlcohol != 0) {
+      setModalVisible(true)
+    }
   }, [gradoActual])
 
   useEffect(() => {
@@ -169,7 +179,7 @@ export default function Home({ navigation }) {
         <View style={styles.cuadro}>
           <View style={{ flexDirection: "row", marginLeft: "0.5rem" }}>
             <Text style={[styles.medicion, { fontSize: "2.5rem" }]}>
-              {lastMedicion.grado}
+              {gradoActual}
             </Text>
             <Text style={styles.medicion}> dg/l</Text>
           </View>
@@ -190,17 +200,29 @@ export default function Home({ navigation }) {
             <Text style={[styles.medicion, { fontSize: "1rem" }]}> min </Text>
             {/* <Text style={[styles.medicion, { fontSize: "2.1rem" }]}>
               {tiempoRestante.getSeconds()}
-            </Text>
+              </Text>
             <Text style={[styles.medicion, { fontSize: "1rem" }]}> sec</Text> */}
           </View>
           <Text style={styles.texto}>es la longitud actual de tu jornada</Text>
         </View>
         <View style={styles.cuadro}>
           <View style={{ flexDirection: "row", marginLeft: "0.5rem" }}>
-            <Text style={[styles.medicion, { fontSize: "2.5rem" }]}>
-              0.2
-            </Text>
-            <Text style={styles.medicion}> mg/l</Text>
+            {
+              (gradoActual >= limiteAlcohol && limiteAlcohol != null && limiteAlcohol != 0) ?
+                <>
+                  <Text style={[styles.medicion, { fontSize: "2.5rem", color: 'red' }]}>
+                    {(limiteAlcohol != null && limiteAlcohol != 0) ? limiteAlcohol : '-'}
+                  </Text>
+                  <Text style={[styles.medicion, { color: 'red' }]}> mg/l</Text>
+                </>
+                :
+                <>
+                  <Text style={[styles.medicion, { fontSize: "2.5rem" }]}>
+                    {(limiteAlcohol != null && limiteAlcohol != 0) ? limiteAlcohol : '-'}
+                  </Text>
+                  <Text style={styles.medicion}> mg/l</Text>
+                </>
+            }
           </View>
           <Text style={styles.texto}>es tu límite de alcohol en sangre</Text>
         </View>
@@ -216,7 +238,7 @@ export default function Home({ navigation }) {
               colorsTime={[7, 5, 2, 0]}
               size={130}
             >
-              {({ remainingTime }) => <p>{Math.trunc(remainingTime / 60**2) != 0 && <span>{Math.trunc(remainingTime / 60**2)}hs</span>} {Math.trunc((remainingTime / 60) % 60)}min {Math.trunc(remainingTime / 60**2) == 0 && <span> {remainingTime % 60}seg</span>}</p>}
+              {({ remainingTime }) => <p>{Math.trunc(remainingTime / 60 ** 2) != 0 && <span>{Math.trunc(remainingTime / 60 ** 2)}hs</span>} {Math.trunc((remainingTime / 60) % 60)}min {Math.trunc(remainingTime / 60 ** 2) == 0 && <span> {remainingTime % 60}seg</span>}</p>}
             </CountdownCircleTimer>
           </View>
           <Text
@@ -249,6 +271,28 @@ export default function Home({ navigation }) {
         </TouchableOpacity>
       </View>
 
+      <View style={styles.centeredView}>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+            setModalVisible(!modalVisible);
+          }}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>Advertencia! Alcanzate tu límite de alcohol 😱</Text>
+              <Pressable
+                style={styles.botonFinalizar}
+                onPress={() => setModalVisible(!modalVisible)}>
+                <Text style={[{ color: "white", fontSize: "1rem" }]}>Entendido</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
+      </View>
+      
       <View style={[styles.botonAgregar, { flex: 2, display: "flex", justifyContent: "flex-end", marginBottom: "1rem", },]}>
         <TouchableOpacity onPress={() => { navigation.navigate("IngresoDeDatos"); }}>
           <Icon icon="zondicons:add-solid" width={"3rem"} />
@@ -257,9 +301,9 @@ export default function Home({ navigation }) {
 
       <View style={styles.footer}>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          
-            <Icon icon="material-symbols:home" width={"2.5rem"} />
-          
+
+          <Icon icon="material-symbols:home" width={"2.5rem"} />
+
           <TouchableOpacity
             onPress={() => {
               navigation.navigate("Historial");
@@ -276,6 +320,7 @@ export default function Home({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
+
     </View>
   );
 }
@@ -384,5 +429,46 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingLeft: "2rem",
     paddingRight: "2rem",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
   },
 });
