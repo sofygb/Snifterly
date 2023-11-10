@@ -130,7 +130,7 @@ export default function Historial({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={{ flexDirection: "row", marginTop: '4rem', display: 'flex', justifyContent: 'space-around' }}>
-                <TouchableOpacity onPress={() => { index >= jornadas.length - 3 ? null : setIndex(index + 1) }}>
+                <TouchableOpacity onPress={() => { index >= jornadas.length - 1 ? null : setIndex(index + 1) }}>
                     <Icon icon="zondicons:arrow-left" />
                 </TouchableOpacity>
                 <Text style={styles.titulo}>{fechaIndex}</Text>
