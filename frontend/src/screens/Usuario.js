@@ -100,9 +100,9 @@ export default function Usuario({ navigation }) {
                     <Text style={{ color: 'white', fontSize: 24, fontFamily: 'alata', marginRight: '1rem' }}>Sesiones</Text>
                     <Text style={{ color: 'white', fontSize: 40, fontFamily: 'alata', display: 'flex', justifyContent: 'flex-end' }}>{cantJornadas}</Text>
                 </View>
-                <View style={styles.cuadro}>
+                <View style={[styles.cuadro, {justifyContent: 'space-around'}]}>
                     <Text style={{ color: 'white', fontSize: 24, fontFamily: 'alata', marginRight: '1rem' }}>Limite alcohol</Text>
-                    <Text style={{ color: 'white', fontSize: 40, fontFamily: 'alata', display: 'flex', justifyContent: 'flex-end' }}>X%</Text>
+                    <Text style={{ color: 'white', fontSize: '170%', fontFamily: 'alata', display: 'flex', justifyContent: 'flex-end' }}>{contextState.usuario.modResistencia != null ? Math.trunc((contextState.usuario.modResistencia*100)*10/0.4)/10 : 100}%</Text>
                 </View>
             </View>
 

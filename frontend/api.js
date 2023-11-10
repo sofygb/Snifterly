@@ -185,7 +185,7 @@ export const setJornadaDesactiva = async () => {
 }
 
 export const setModResistenciaByIdUsuario = async (modResistencia, idUsuario) => {
-  const res = await fetch(API9 + `/${modResistencia}/${idUsuario}`, { method: "PUT",})
+  const res = await fetch(API27 + `/${modResistencia}/${idUsuario}`, { method: "PUT",})
     console.log(res) 
     return await res
 }

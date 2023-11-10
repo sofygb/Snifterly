@@ -36,7 +36,7 @@ export default function IngresoDeDatos({ navigation }) {
   
 
   const agregarMedicion = (grado) => {
-    if(grado != null) {
+    if(grado != null && parseInt(grado * 1000)/1000) {
       setMediciones(grado, contextState.jornada.idJornada)
       setContextState({
         type: ActionTypes.SetActivo,

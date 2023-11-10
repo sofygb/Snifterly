@@ -17,7 +17,7 @@ import { HomeFilled } from "@ant-design/icons";
 import { Icon } from "@iconify/react";
 import React, { useState, useEffect, Fragment } from "react";
 import * as Font from "expo-font";
-import { getJornada, getMedicionesCountByIdJornada, getAvgMediciones, getFirstMedicion, getUsuarios, getMedicionReciente, getLastMedicionByIdJornada, getJornadaActiva, getJornadaReciente } from "../../api";
+import { getJornada, getMedicionesCountByIdJornada, getAvgMediciones, getFirstMedicion, getUsuarios, getMedicionReciente, getLastMedicionByIdJornada, getJornadaActiva, getJornadaReciente, setModResistenciaByIdUsuario } from "../../api";
 import { useIsFocused } from "@react-navigation/native";
 import Progress from "react-circle-progress-bar";
 import { setContextState, ActionTypes, contextState, useContextState } from '../navigation/contextState';
@@ -128,15 +128,16 @@ export default function Home({ navigation }) {
     }
     setLimiteAlcohol(contextState.usuario.modResistencia)
   }, [isFocused]);
-
+  
   useEffect(() => {
     loadJornadaExtra();
   }, [llegaronLosValores]);
-
+  
   useEffect(() => {
     tiempoSobrio();
     if (gradoActual >= limiteAlcohol && limiteAlcohol != null && limiteAlcohol != 0) {
       setModalVisible(true)
+      setModResistenciaByIdUsuario(gradoActual, contextState.usuario.idUsuario)
     }
   }, [gradoActual])
 
