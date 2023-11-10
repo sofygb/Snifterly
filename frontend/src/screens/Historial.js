@@ -130,11 +130,11 @@ export default function Historial({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={{ flexDirection: "row", marginTop: '4rem', display: 'flex', justifyContent: 'space-around' }}>
-                <TouchableOpacity onPress={() => { index >= jornadas.length - 1 ? null : setIndex(index + 1) }}>
+                <TouchableOpacity onPress={() => { index < (arrayFechas.length - 1) ? setIndex(index + 1) : null  }}>
                     <Icon icon="zondicons:arrow-left" />
                 </TouchableOpacity>
                 <Text style={styles.titulo}>{fechaIndex}</Text>
-                <TouchableOpacity onPress={() => { index <= 0 ? null : setIndex(index - 1) }}>
+                <TouchableOpacity onPress={() => { index > 0 ? setIndex(index - 1) : null }}>
                     <Icon icon="zondicons:arrow-right" />
                 </TouchableOpacity>
             </View>
