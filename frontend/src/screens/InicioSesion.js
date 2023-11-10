@@ -6,6 +6,7 @@ import * as Font from 'expo-font';
 import { useIsFocused } from "@react-navigation/native";
 import { getUsuarios, getJornadaActiva2 } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
+import { useAuth } from '../context/AuthContext';
 
 export default function InicioSesion({ navigation }) {
     const [mail, setMail] = React.useState("");
@@ -14,22 +15,23 @@ export default function InicioSesion({ navigation }) {
     const [jornadaActiva, setJornadaActiva] = React.useState([]);
     const isFocused = useIsFocused();
     const [mostrarContrasenia, setMostrarContrasenia] = useState(false);
+    const { login, loading } = useAuth();
     
-    const loadUsuarios = async () => {
-        const data = await getUsuarios()
-        setUsuarios(data)
-        console.log(data)
-    }
-    const loadJornadaActiva = async () => {
-        const data = await getJornadaActiva2()
-        setJornadaActiva(data)
-        console.log(data)
-    }
+    // const loadUsuarios = async () => {
+    //     const data = await getUsuarios()
+    //     setUsuarios(data)
+    //     console.log(data)
+    // }
+    // const loadJornadaActiva = async () => {
+    //     const data = await getJornadaActiva2()
+    //     setJornadaActiva(data)
+    //     console.log(data)
+    // }
 
-    useEffect(() =>{
-        loadUsuarios()
-        loadJornadaActiva()
-    },[isFocused])
+    // useEffect(() =>{
+    //     loadUsuarios()
+    //     loadJornadaActiva()
+    // },[isFocused])
 
     const [fontsLoaded, setFontsLoaded] = useState(false);
     useEffect(() => {
@@ -47,76 +49,76 @@ export default function InicioSesion({ navigation }) {
     }
 
     const { contextState, setContextState } = useContextState()
-    // const logIn = async () => {
-    //     try {
-    //         await login(mail, contraseña)
-    //         if(contextState.jornada.idJornada != -1){
-    //             navigation.navigate('Home')
-    //         }
-    //         else{
-    //             navigation.navigate('PrimeraHome')
-    //         }
-    //     } catch (error) {
-    //         console.error('Error al iniciar sesión:', error);
-    //     }
-    // }
-    const logIn = () => {
-        const validacion = usuarios.findIndex(usuario => usuario.email === mail && usuario.contrasenia === contraseña)
-
-        if(validacion != -1) {
-            setContextState({
-                type: ActionTypes.SetIdUsuario,
-                value: usuarios[validacion].idUsuario
-            });
-            setContextState({
-                type: ActionTypes.SetNombre,
-                value: usuarios[validacion].nombre
-            });
-            setContextState({
-                type: ActionTypes.SetContrasenia,
-                value: usuarios[validacion].contrasenia
-            });
-            setContextState({
-                type: ActionTypes.SetEmail,
-                value: usuarios[validacion].email
-            });
-            setContextState({
-                type: ActionTypes.SetFechaNacimiento,
-                value: new Date(usuarios[validacion].fechaNacimiento)
-            });
-            setContextState({
-                type: ActionTypes.SetFechaCreacion,
-                value: new Date(usuarios[validacion].fechaCreacion)
-            });
-            setContextState({
-                type: ActionTypes.SetModResistencia,
-                value: usuarios[validacion].modResistencia
-            });
-            setContextState({
-                type: ActionTypes.SetPeso,
-                value: usuarios[validacion].peso
-            });
-            setContextState({
-                type: ActionTypes.SetAltura,
-                value: usuarios[validacion].altura
-            });
-            var hayJornada = false
-            jornadaActiva.forEach((jornada) => {
-                if(jornada.idUsuario === usuarios[validacion].idUsuario){
-                    hayJornada = true
-                }
-            })
-            if(hayJornada){
+    const logIn = async () => {
+        try {
+            await login(mail, contraseña)
+            if(contextState.jornada.idJornada != 0){
                 navigation.navigate('Home')
             }
             else{
                 navigation.navigate('PrimeraHome')
             }
-        }
-        else{
-            console.error("Error: Usuario no encontrado")
+        } catch (error) {
+            console.error('Error al iniciar sesión:', error);
         }
     }
+    // const logIn = () => {
+    //     const validacion = usuarios.findIndex(usuario => usuario.email === mail && usuario.contrasenia === contraseña)
+
+    //     if(validacion != -1) {
+    //         setContextState({
+    //             type: ActionTypes.SetIdUsuario,
+    //             value: usuarios[validacion].idUsuario
+    //         });
+    //         setContextState({
+    //             type: ActionTypes.SetNombre,
+    //             value: usuarios[validacion].nombre
+    //         });
+    //         setContextState({
+    //             type: ActionTypes.SetContrasenia,
+    //             value: usuarios[validacion].contrasenia
+    //         });
+    //         setContextState({
+    //             type: ActionTypes.SetEmail,
+    //             value: usuarios[validacion].email
+    //         });
+    //         setContextState({
+    //             type: ActionTypes.SetFechaNacimiento,
+    //             value: new Date(usuarios[validacion].fechaNacimiento)
+    //         });
+    //         setContextState({
+    //             type: ActionTypes.SetFechaCreacion,
+    //             value: new Date(usuarios[validacion].fechaCreacion)
+    //         });
+    //         setContextState({
+    //             type: ActionTypes.SetModResistencia,
+    //             value: usuarios[validacion].modResistencia
+    //         });
+    //         setContextState({
+    //             type: ActionTypes.SetPeso,
+    //             value: usuarios[validacion].peso
+    //         });
+    //         setContextState({
+    //             type: ActionTypes.SetAltura,
+    //             value: usuarios[validacion].altura
+    //         });
+    //         var hayJornada = false
+    //         jornadaActiva.forEach((jornada) => {
+    //             if(jornada.idUsuario === usuarios[validacion].idUsuario){
+    //                 hayJornada = true
+    //             }
+    //         })
+    //         if(hayJornada){
+    //             navigation.navigate('Home')
+    //         }
+    //         else{
+    //             navigation.navigate('PrimeraHome')
+    //         }
+    //     }
+    //     else{
+    //         console.error("Error: Usuario no encontrado")
+    //     }
+    // }
 
     return (
         <View style={styles.container}>
