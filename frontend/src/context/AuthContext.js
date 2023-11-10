@@ -1,7 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
-import { useIsFocused } from "@react-navigation/native";
-import { getUsuarios, getJornadaActiva2 } from '../../api';
 
 const AuthContext = createContext();
 
@@ -15,7 +13,7 @@ export function AuthProvider({ children }) {
     const { contextState, setContextState } = useContextState()
     const [usuarios, setUsuarios] = React.useState([]);
     const [jornadaActiva, setJornadaActiva] = React.useState([]);
-
+    const isFocused = useIsFocused();
 
     const loadUsuarios = async () => {
         const data = await getUsuarios()
@@ -31,7 +29,7 @@ export function AuthProvider({ children }) {
     useEffect(() =>{
         loadUsuarios()
         loadJornadaActiva()
-    },[])
+    },[isFocused])
 
     const login = async (email, password) => {
         setLoading(true);
