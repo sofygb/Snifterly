@@ -11,18 +11,27 @@ export default function CrearCuenta({ navigation }) {
     const [contrasenia, setContrasenia] = React.useState("");
     const { contextState, setContextState } = useContextState()
     const [usuarios, setUsuarios] = React.useState([])
-    const [esMayor, setEsMayor] = React.useState("✗")//✓✗
+    const [esMayor, setEsMayor] = React.useState(true)//✓✗
+    const [mailValido, setMailValido] = React.useState(false)
     const [mostrarContrasenia, setMostrarContrasenia] = useState(false);
 
     useEffect(() => {
         if(contrasenia.length >= 10){
-            setEsMayor("✓")
+            setEsMayor(true)
         }
         else{
-            setEsMayor("✗")
+            setEsMayor(false)
         }
     },[contrasenia])
-    
+    useEffect(() => {
+        if(/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(mail)){
+            setMailValido(true)
+        }
+        else{
+            setMailValido(false)
+        }
+    },[mail])
+
     const guardarDatos = () => {
         const validacion = usuarios.findIndex(usuario => usuario.email === mail && usuario.contrasenia === contraseña)
 
@@ -46,8 +55,10 @@ export default function CrearCuenta({ navigation }) {
                     else{
                         console.error("Error: La contraseña debe ser mayor a 10 caracteres")
                     }
+                    setMailValido(true)
                 }
                 else{
+                    setMailValido(false)
                     console.error("Error: El mail ingresado es inválido")
                 }
         }
@@ -74,7 +85,8 @@ export default function CrearCuenta({ navigation }) {
                 <TextInput keyboardType='email' variant="outlined" label="Mail" style={{ margin: 14, marginRight: 32, marginLeft: 32 }} value={mail} onChangeText={e => setMail(e)} />
                 <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: 32, marginLeft: 32 }} value={contrasenia} onChangeText={contrasenia => setContrasenia(contrasenia)} secureTextEntry={!mostrarContrasenia} trailing={<TouchableOpacity onPress={() => setMostrarContrasenia(!mostrarContrasenia)}><Icon icon={mostrarContrasenia ? 'mdi:eye-off' : 'mdi:eye'} width={30} /></TouchableOpacity>}/>
 
-                <Text style={{margin: 14, fontSize: 16, marginRight: 32, marginLeft: 32}}>Es mayor a 10 caracteres: {esMayor}</Text>
+                {!esMayor ? <Text style={{textAlign: 'center', fontSize: 14, color: 'red', marginBottom: 8}}>La contraseña tiene que tener minimo 10 caracteres</Text> : null}
+                {!mailValido ? <Text style={{textAlign: 'center', fontSize: 14, color: 'red', marginBottom: 8}}>Mail no valido</Text> : null}
 
                 <View style={styles.espacioBotonLogin}>
                     <TouchableOpacity style={styles.botonLogin} onPress={() => { guardarDatos() }}>
@@ -129,7 +141,7 @@ const styles = StyleSheet.create({
         resizeMode: "contain",
         display: 'flex',
         alignSelf: 'center',
-        marginTop: 48,
+        marginTop: 32,
         borderRadius: 30,
     },
     texto: {

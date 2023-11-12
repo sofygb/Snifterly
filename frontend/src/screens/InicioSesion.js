@@ -60,6 +60,7 @@ export default function InicioSesion({ navigation }) {
     //         console.error('Error al iniciar sesión:', error);
     //     }
     // }
+    const [cont, setCont] = useState(true);
     const logIn = () => {
         const validacion = usuarios.findIndex(usuario => usuario.email === mail && usuario.contrasenia === contraseña)
 
@@ -112,8 +113,10 @@ export default function InicioSesion({ navigation }) {
             else{
                 navigation.navigate('PrimeraHome')
             }
+            setCont(true)
         }
         else{
+            setCont(false)
             console.error("Error: Usuario no encontrado")
         }
     }
@@ -132,6 +135,8 @@ export default function InicioSesion({ navigation }) {
             <TouchableOpacity style={styles.botonContrasena}>
                 <Text style={[{ color: '#0D4CEF', fontSize: 14.4, fontFamily: 'inter', textAlign: 'right', marginRight: 16, marginBottom: 24, marginRight: 32}]}>¿Te olvidaste la contraseña?</Text>
             </TouchableOpacity>
+
+            {cont === false ? <Text style={{textAlign: 'center', fontSize: 14, color: 'red', marginBottom: 8}}>Contrasenia o mail incorrecto/s</Text> : null}
 
             <View style={styles.espacioBotonLogin}>
                 <TouchableOpacity style={styles.botonLogin} onPress={() => { logIn() }}>
@@ -157,7 +162,7 @@ export default function InicioSesion({ navigation }) {
                 </TouchableOpacity>
             </View>
         
-            <View style={{flexDirection: 'row', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', marginTop: 32}}>
+            <View style={{flexDirection: 'row', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', marginTop: 20}}>
                 <Text style={{fontSize: 16, fontFamily: 'inter' }}>¿No tienes una cuenta? </Text>
                 <TouchableOpacity onPress={() => { navigation.navigate('CrearCuenta') }}>
                     <Text style={{color: 'blue', fontSize: 16, fontFamily: 'inter' }}>Create una</Text>
@@ -197,7 +202,6 @@ const styles = StyleSheet.create({
     botonContrasena: {
         display: 'flex',
         justifyContent: 'flex-end',
-        marginBottom: 16,
     },
     botonLogin: {
         display: 'flex',
