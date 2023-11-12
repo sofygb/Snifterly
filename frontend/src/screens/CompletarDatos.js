@@ -59,13 +59,13 @@ export default function CompletarDatos({ navigation }) {
             <Text style={styles.titulo}>Te damos la bienvenida a Snifterly!</Text>
             <Text style={styles.texto}>SIGN UP</Text>
 
-            <TextInput keyboardType='decimal' variant="outlined" label="peso" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={peso} onChangeText={peso => setPeso(peso)}/>
-            <TextInput keyboardType='decimal' variant="outlined" label="altura" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={altura} onChangeText={altura => setAltura(altura)}/>
-            <TextInput keyboardType='date' variant="outlined" label="fecha de nacimiento" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} value={fechaNacimiento} placeholder="Ejemplo: dd-mm-yyyy..." onChangeText={fechaNacimiento => setFechaNacimiento(fechaNacimiento)}/>
+            <TextInput keyboardType='decimal' variant="outlined" label="peso" style={{ margin: 14, marginRight: 32, marginLeft: 32 }} value={peso} onChangeText={peso => setPeso(peso)}/>
+            <TextInput keyboardType='decimal' variant="outlined" label="altura" style={{ margin: 14, marginRight: 32, marginLeft: 32 }} value={altura} onChangeText={altura => setAltura(altura)}/>
+            <TextInput keyboardType='date' variant="outlined" label="fecha de nacimiento" style={{ margin: 14, marginRight: 32, marginLeft: 32 }} value={fechaNacimiento} placeholder="Ejemplo: dd-mm-yyyy..." onChangeText={fechaNacimiento => setFechaNacimiento(fechaNacimiento)}/>
 
             <View style={styles.espacioBotonLogin}>
                 <TouchableOpacity style={styles.botonLogin} onPress={() => { validacion() }}>
-                    <Text style={[{ color: 'white', fontSize: '1.2rem', fontFamily: 'inter' }]}>Ok</Text>
+                    <Text style={[{ color: 'white', fontSize: 19.2, fontFamily: 'inter' }]}>Ok</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -79,47 +79,47 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     titulo: {
-        fontSize: '2rem',
+        fontSize: 32,
         textAlign: 'center',
-        margin: '1rem',
-        marginLeft: '1.5rem',
-        marginRight: '1.5rem',
+        margin: 16,
+        marginLeft: 24,
+        marginRight: 24,
     },
     footer: {
         flex: 1,
         display: 'flex',
         justifyContent: 'flex-end',
-        marginBottom: '1rem',
+        marginBottom: 16,
         width: '100%',
-        paddingLeft: '2rem',
-        paddingRight: '2rem',
+        paddingLeft: 32,
+        paddingRight: 32,
     },
     imagen: {
-        width: '45%',
-        height: '20%',
+        width: 400,
+        height: 200,
         resizeMode: "contain",
         display: 'flex',
         alignSelf: 'center',
-        marginTop: '4rem',
+        marginTop: 64,
         borderRadius: 30,
     },
     texto: {
         textAlign: 'center',
-        fontSize: '1.2rem',
+        fontSize: 19.2,
     },
     finalizarJornada: {
         flex: 1,
         display: 'flex',
         justifyContent: 'flex-end',
-        marginBottom: '1rem',
-        marginTop: '0.8rem',
+        marginBottom: 16,
+        marginTop: 12.8,
     },
     botonAceptar: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        maxHeight: '3rem',
-        maxWidth: '5rem',
+        maxHeight: 48,
+        maxWidth: 80,
         backgroundColor: "#5654E1",
         borderRadius: 15,
         padding: 10,
@@ -133,8 +133,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        minHeight: '3rem',
-        minWidth: '20rem',
+        minHeight: 48,
+        minWidth: 320,
         backgroundColor: "#5654E1",
         borderRadius: 18,
         padding: 10,

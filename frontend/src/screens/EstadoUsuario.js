@@ -95,14 +95,14 @@ export default function EstadoUsuario({ navigation }) {
 
         <View style={[{ display: 'flex', alignItems: 'center' }]}>
           <TouchableOpacity style={styles.botonCancelar} onPress={() => { navigation.navigate('Home') }}>
-            <Text style={[{ fontSize: '1rem', fontFamily: 'inter' }]}>Saltear</Text>
+            <Text style={[{ fontSize: 16, fontFamily: 'inter' }]}>Saltear</Text>
           </TouchableOpacity>
         </View>
       </View>
 
       <View style={styles.finalizarJornada}>
         <TouchableOpacity style={styles.finalizarJornada} onPress={() => { navigation.navigate('SalirJornada') }}>
-          <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter', display: 'flex', alignItems: 'center', justifyContent: 'center', }]}>Finalizar jornada</Text>
+          <Text style={[{ color: 'red', fontSize: 16, fontFamily: 'inter', display: 'flex', alignItems: 'center', justifyContent: 'center', }]}>Finalizar jornada</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -117,8 +117,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    maxHeight: '3rem',
-    minWidth: '8rem',
+    maxHeight: 48,
+    minWidth: 128,
     backgroundColor: "#D9D9D9",
     borderRadius: 15,
     padding: 10,
@@ -126,39 +126,39 @@ const styles = StyleSheet.create({
   textoPrincipal: {
     display: 'flex',
     justifyContent: 'center',
-    fontSize: '1.5rem',
-    marginTop: '3rem',
-    marginBottom: '2rem',
+    fontSize: 24,
+    marginTop: 48,
+    marginBottom: 32,
     fontFamily: 'alata',
-    marginLeft: '2rem',
-    marginRight: '2rem',
+    marginLeft: 32,
+    marginRight: 32,
   },
   finalizarJornada: {
     flex: 1,
     display: 'flex',
     justifyContent: 'flex-end',
-    marginBottom: '1rem',
+    marginBottom: 16,
   },
   imagen: {
     width: '40%',
     height: '40%',
     resizeMode: "contain",
-    padding: '4rem',
+    padding: 64,
   },
   espacioCuadros: {
     display: "flex",
     width: "100%",
-    paddingLeft: "1.3rem",
-    paddingRight: "1.3rem",
+    paddingLeft: 20.8,
+    paddingRight: 20.8,
     flexDirection: "row",
     justifyContent: 'space-around',
-    marginBottom: "1rem",
+    marginBottom: 16,
   },
   cuadro: {
     borderWidth: 2,
     borderRadius: 20,
-    maxheight: "18rem",
-    maxWidth: "18rem",
+    maxheight: 288,
+    maxWidth: 288,
     backgroundColor: "#ECECEC",
     borderColor: "#ECECEC",
     fontFamily: "alata",

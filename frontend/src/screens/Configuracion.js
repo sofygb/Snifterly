@@ -82,8 +82,8 @@ export default function Configuracion({ navigation }) {
     }
     return (
         <View style={styles.container}>
-            <View style={{ margin: '2rem' }}>
-                <View style={{ flexDirection: "row", marginTop: '1.5rem' }}>
+            <View style={{ margin: 32 }}>
+                <View style={{ flexDirection: "row", marginTop: 24 }}>
                     <TouchableOpacity onPress={() => { navigation.navigate('Usuario') }}>
                         <Icon icon="basil:cross-outline" width={45} />
                     </TouchableOpacity>
@@ -101,19 +101,19 @@ export default function Configuracion({ navigation }) {
                         }}
                         style={{ width: 100, height: 100, borderRadius: 10 }}
                     />
-                    <TextInput style={{ fontSize: '1rem', fontFamily: 'Alata', marginLeft: '1.5rem' }} value={nombre} placeholder={nombre} onChangeText={nombre => setNombre(nombre)} />
+                    <TextInput style={{ fontSize: 16, fontFamily: 'Alata', marginLeft: 24 }} value={nombre} placeholder={nombre} onChangeText={nombre => setNombre(nombre)} />
                 </View>
                 <View style={styles.cuadroDos}>
                     <View style={{ flexDirection: "row", }}>
-                        <Text style={{ fontSize: '1rem', fontFamily: 'Alata', fontWeight: "bold", }}>Mail</Text>
-                        <TextInput style={{ fontSize: '1rem', fontFamily: 'Alata', marginLeft: '1.5rem' }} value={email} placeholder={email} onChangeText={email => setEmail(email)} />
+                        <Text style={{ fontSize: 16, fontFamily: 'Alata', fontWeight: "bold", }}>Mail</Text>
+                        <TextInput style={{ fontSize: 16, fontFamily: 'Alata', marginLeft: 24 }} value={email} placeholder={email} onChangeText={email => setEmail(email)} />
                     </View>
                 </View>
 
                 <View style={styles.cuadroDos}>
                     <View style={{ flexDirection: "row", }}>
-                        <Text style={{ fontSize: '1rem', fontFamily: 'Alata', fontWeight: "bold", }}>Contraseña</Text>
-                        <TextInput style={{ fontSize: '1rem', fontFamily: 'Alata', marginLeft: '1.5rem' }} value={contrasenia} placeholder={mostrarContrasenia ? contrasenia : '********'} onChangeText={contrasenia => setContrasenia(contrasenia)} />
+                        <Text style={{ fontSize: 16, fontFamily: 'Alata', fontWeight: "bold", }}>Contraseña</Text>
+                        <TextInput style={{ fontSize: 16, fontFamily: 'Alata', marginLeft: 24 }} value={contrasenia} placeholder={mostrarContrasenia ? contrasenia : '********'} onChangeText={contrasenia => setContrasenia(contrasenia)} />
                         {/* <TouchableOpacity style={{ flex: 1, display: 'flex', alignItems: 'flex-end' }} onPress={toggleMostrarContrasenia}>
                             <Icon icon={mostrarContrasenia ? 'mdi:eye-off' : 'mdi:eye'} width={30} />
                         </TouchableOpacity> */}
@@ -122,34 +122,34 @@ export default function Configuracion({ navigation }) {
 
                 <View style={styles.cuadroDos}>
                     <View style={{ flexDirection: "row", }}>
-                        <Text style={{ fontSize: '1rem', fontFamily: 'Alata', fontWeight: "bold", }}>Peso</Text>
-                        <TextInput style={{ fontSize: '1rem', fontFamily: 'Alata', marginLeft: '1.5rem' }} value={peso} placeholder={peso} onChangeText={peso => setPeso(peso)} />
+                        <Text style={{ fontSize: 16, fontFamily: 'Alata', fontWeight: "bold", }}>Peso</Text>
+                        <TextInput style={{ fontSize: 16, fontFamily: 'Alata', marginLeft: 24 }} value={peso} placeholder={peso} onChangeText={peso => setPeso(peso)} />
                     </View>
                 </View>
 
                 <View style={styles.cuadroDos}>
                     <View style={{ flexDirection: "row", }}>
-                        <Text style={{ fontSize: '1rem', fontFamily: 'Alata', fontWeight: "bold", }}>Altura</Text>
-                        <TextInput style={{ fontSize: '1rem', fontFamily: 'Alata', marginLeft: '1.5rem' }} value={altura} placeholder={altura} onChangeText={altura => SetAltura(altura)} />
+                        <Text style={{ fontSize: 16, fontFamily: 'Alata', fontWeight: "bold", }}>Altura</Text>
+                        <TextInput style={{ fontSize: 16, fontFamily: 'Alata', marginLeft: 24 }} value={altura} placeholder={altura} onChangeText={altura => SetAltura(altura)} />
                     </View>
                 </View>
 
                 <View style={styles.cuadroDos}>
                     <View style={{ flexDirection: "row", }}>
-                        <Text style={{ fontSize: '1rem', fontFamily: 'Alata', fontWeight: "bold", }}>Fecha de nacimiento</Text> {/* no se xq, pero aunque no cambies la fecha en la BD se pone 0000-00-00 */}
-                        <TextInput style={{ fontSize: '1rem', fontFamily: 'Alata', marginLeft: '1.5rem' }} value={fechaNacimiento} placeholder={fechaNacimiento} onChangeText={fechaNacimiento => setFechaNacimiento(fechaNacimiento)} />{/**.toDateString() */}
+                        <Text style={{ fontSize: 16, fontFamily: 'Alata', fontWeight: "bold", }}>Fecha de nacimiento</Text> {/* no se xq, pero aunque no cambies la fecha en la BD se pone 0000-00-00 */}
+                        <TextInput style={{ fontSize: 16, fontFamily: 'Alata', marginLeft: 24 }} value={fechaNacimiento} placeholder={fechaNacimiento} onChangeText={fechaNacimiento => setFechaNacimiento(fechaNacimiento)} />{/**.toDateString() */}
                     </View>
                 </View>
 
-                <View style={{ display: 'flex', alignItems: 'center', marginTop: '1rem' }}>
+                <View style={{ display: 'flex', alignItems: 'center', marginTop: 16 }}>
                     <TouchableOpacity onPress={() => guardarNuevosDatos()} style={styles.botonGuardar}>
-                        <Text style={{ color: 'white', fontFamily: 'inter', textAlign: 'center', fontSize: '1rem', }}>Guardar</Text>
+                        <Text style={{ color: 'white', fontFamily: 'inter', textAlign: 'center', fontSize: 16, }}>Guardar</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.cerrarSesion}>
-                    <TouchableOpacity onPress={() => { navigation.navigate('CerrarSesion') }} style={[{ marginTop: '0.5rem' }]} >
-                        <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter', }]}>Cerrar sesión</Text>
+                    <TouchableOpacity onPress={() => { navigation.navigate('CerrarSesion') }} style={[{ marginTop: 8 }]} >
+                        <Text style={[{ color: 'red', fontSize: 16, fontFamily: 'inter', }]}>Cerrar sesión</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -157,13 +157,13 @@ export default function Configuracion({ navigation }) {
             <View style={styles.footer}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <TouchableOpacity onPress={() => { navigation.navigate('PrimeraHome') }}>
-                        <Icon icon="material-symbols:home" width={'2.5rem'} />
+                        <Icon icon="material-symbols:home" width={40} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { navigation.navigate('Historial') }}>
-                        <Icon icon="zondicons:calendar" width={'2.3rem'} />
+                        <Icon icon="zondicons:calendar" width={40} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { navigation.navigate('Usuario') }}>
-                        <Icon icon="mdi:account" width={'2.5rem'} />
+                        <Icon icon="mdi:account" width={40} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -179,12 +179,12 @@ const styles = StyleSheet.create({
     },
     cuadroDos: {
         display: "flex",
-        padding: "0.5rem",
-        marginRight: "0.3rem",
-        marginLeft: "0.3rem",
-        marginTop: "1.5rem ",
-        minWidth: "18rem",
-        padding: '1rem',
+        padding: 8,
+        marginRight: 4.8,
+        marginLeft: 4.8,
+        marginTop: 24,
+        minWidth: 288,
+        padding: 16,
         borderRadius: 20,
         backgroundColor: "#F2F2F2",
         fontFamily: "alata",
@@ -194,32 +194,32 @@ const styles = StyleSheet.create({
         alignContent: 'flex-start',
         justifyContent: 'center',
         fontWeight: 'bold',
-        fontSize: '2rem',
-        marginBottom: '0.5rem',
+        fontSize: 32,
+        marginBottom: 8,
         fontFamily: 'alata',
-        paddingLeft: '4.5rem',
+        paddingLeft: 72,
     },
     cuadro: {
         display: "flex",
-        padding: "0.5rem",
-        marginRight: "0.3rem",
-        marginLeft: "0.3rem",
-        marginTop: "1.5rem ",
-        minWidth: "18rem",
-        padding: '1rem',
+        padding: 8,
+        marginRight: 4.8,
+        marginLeft: 4.8,
+        marginTop: 24,
+        minWidth: 288,
+        padding: 16,
         borderRadius: 20,
         backgroundColor: "#FFECE0",
         fontFamily: "alata",
     },
     nombreStyle: {
-        fontSize: '1rem',
+        fontSize: 16,
         fontFamily: 'Alata',
         fontWeight: "bold",
-        margin: '1rem'
+        margin: 16
     },
     botonGuardar: {
-        maxHeight: '3rem',
-        minWidth: '9rem',
+        maxHeight: 48,
+        minWidth: 144,
         backgroundColor: "#5654E1",
         borderRadius: 15,
         padding: 10,
@@ -227,17 +227,17 @@ const styles = StyleSheet.create({
     cerrarSesion: {
         display: 'flex',
         justifyContent: 'flex-end',
-        marginBottom: '1rem',
+        marginBottom: 16,
         alignItems: 'center'
     },
     footer: {
         flex: 1,
         display: 'flex',
         justifyContent: 'flex-end',
-        marginBottom: '1rem',
+        marginBottom: 16,
         width: '100%',
-        paddingLeft: "2rem",
-        paddingRight: "2rem",
-        Height: '3rem',
+        paddingLeft: 32,
+        paddingRight: 32,
+        Height: 48,
     },
 });

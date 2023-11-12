@@ -126,41 +126,41 @@ export default function InicioSesion({ navigation }) {
             <Text style={styles.titulo}>Te damos la bienvenida a Snifterly!</Text>
             <Text style={styles.texto}>SIGN IN</Text>
 
-            <TextInput variant="outlined" label="Mail" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem', borderRadius: 10 }} value={mail} onChangeText={mail => setMail(mail)}/>
-            <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem', borderRadius: 10  }} value={contraseña} secureTextEntry={!mostrarContrasenia} onChangeText={contraseña => setContraseña(contraseña)} trailing={<TouchableOpacity onPress={() => setMostrarContrasenia(!mostrarContrasenia)}><Icon icon={mostrarContrasenia ? 'mdi:eye-off' : 'mdi:eye'} width={30} /></TouchableOpacity>}/>
+            <TextInput variant="outlined" label="Mail" style={{ margin: 14, marginRight: 32, marginLeft: 32, borderRadius: 10 }} value={mail} onChangeText={mail => setMail(mail)}/>
+            <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: 32, marginLeft: 32, borderRadius: 10  }} value={contraseña} secureTextEntry={!mostrarContrasenia} onChangeText={contraseña => setContraseña(contraseña)} trailing={<TouchableOpacity onPress={() => setMostrarContrasenia(!mostrarContrasenia)}><Icon icon={mostrarContrasenia ? 'mdi:eye-off' : 'mdi:eye'} width={30} /></TouchableOpacity>}/>
             
             <TouchableOpacity style={styles.botonContrasena}>
-                <Text style={[{ color: '#0D4CEF', fontSize: '0.9rem', fontFamily: 'inter', textAlign: 'right', marginRight: '1rem', marginBottom: '1.5rem', marginRight: '2rem'}]}>¿Te olvidaste la contraseña?</Text>
+                <Text style={[{ color: '#0D4CEF', fontSize: 14.4, fontFamily: 'inter', textAlign: 'right', marginRight: 16, marginBottom: 24, marginRight: 32}]}>¿Te olvidaste la contraseña?</Text>
             </TouchableOpacity>
 
             <View style={styles.espacioBotonLogin}>
                 <TouchableOpacity style={styles.botonLogin} onPress={() => { logIn() }}>
-                    <Text style={[{ color: 'white', fontSize: '1.2rem', fontFamily: 'inter' }]}>Log in</Text>
+                    <Text style={[{ color: 'white', fontSize: 19.3, fontFamily: 'inter' }]}>Log in</Text>
                 </TouchableOpacity>
             </View>
 
-            <Text style={{textAlign: 'center', marginTop: '1.5rem', marginBottom: '1rem', marginLeft: '1rem', marginRight: '1rem', fontSize: '1.2rem'}}> ──────── Seguir con ────────</Text>
+            <Text style={{textAlign: 'center', marginTop: 24, marginBottom: 16, marginLeft: 16, marginRight: 16, fontSize: 19.3}}> ──────── Seguir con ────────</Text>
 
-            <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-around',paddingLeft: '1.5rem', paddingRight: '1.5rem',}}>
-                <TouchableOpacity style={{backgroundColor: '#40A2DA', minHeight: '3.5rem', minWidth: '10rem', borderRadius: 15, display: 'flex', justifyContent: 'center', }}>
-                    <View style={{flexDirection: 'row', marginLeft: '0.3rem'}}>
-                        <Icon icon="ri:google-fill" color="white" width={'2.3rem'}/>
-                        <Text style={{color: 'white', display: 'flex', alignItems: 'center', fontSize: '0.9rem'}}>Google</Text>
+            <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-around',paddingLeft: 24, paddingRight: 24,}}>
+                <TouchableOpacity style={{backgroundColor: '#40A2DA', minHeight: 56, minWidth: 160, borderRadius: 15, display: 'flex', justifyContent: 'center', }}>
+                    <View style={{flexDirection: 'row', marginLeft: 4.8}}>
+                        <Icon icon="ri:google-fill" color="white" width={36.8}/>
+                        <Text style={{color: 'white', display: 'flex', alignItems: 'center', fontSize: 14.4}}>Google</Text>
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={{backgroundColor: '#0F3A8D', minHeight: '3.5rem', minWidth: '10rem', borderRadius: 15, display: 'flex', justifyContent: 'center', }}>
-                    <View style={{flexDirection: 'row', marginLeft: '0.3rem'}}>
-                        <Icon icon="ant-design:facebook-filled" color="white" width={'2.3rem'}/>
-                        <Text style={{color: 'white', display: 'flex', alignItems: 'center', fontSize: '0.9rem'}}>Facebook</Text>
+                <TouchableOpacity style={{backgroundColor: '#0F3A8D', minHeight: 56, minWidth: 160, borderRadius: 15, display: 'flex', justifyContent: 'center', }}>
+                    <View style={{flexDirection: 'row', marginLeft: 4.8}}>
+                        <Icon icon="ant-design:facebook-filled" color="white" width={36.8}/>
+                        <Text style={{color: 'white', display: 'flex', alignItems: 'center', fontSize: 14.4}}>Facebook</Text>
                     </View>
                 </TouchableOpacity>
             </View>
         
-            <View style={{flexDirection: 'row', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', marginTop: '2rem'}}>
-                <Text style={{fontSize: '1rem', fontFamily: 'inter' }}>¿No tienes una cuenta? </Text>
+            <View style={{flexDirection: 'row', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', marginTop: 32}}>
+                <Text style={{fontSize: 16, fontFamily: 'inter' }}>¿No tienes una cuenta? </Text>
                 <TouchableOpacity onPress={() => { navigation.navigate('CrearCuenta') }}>
-                    <Text style={{color: 'blue', fontSize: '1rem', fontFamily: 'inter' }}>Create una</Text>
+                    <Text style={{color: 'blue', fontSize: 16, fontFamily: 'inter' }}>Create una</Text>
                 </TouchableOpacity>
             </View>
 
@@ -175,36 +175,36 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     titulo: {
-        fontSize: '2rem',
+        fontSize: 32,
         textAlign: 'center',
-        margin: '1rem',
-        marginLeft: '1.5rem',
-        marginRight: '1.5rem',
+        margin: 16,
+        marginLeft: 24,
+        marginRight: 24,
     },
     imagen: {
-        width: '45%',
-        height: '20%',
+        width: 400,
+        height: 200,
         resizeMode: "contain",
         display: 'flex',
         alignSelf: 'center',
-        marginTop: '3rem',
+        marginTop: 48,
         borderRadius: 30,
     },
     texto: {
         textAlign: 'center',
-        fontSize: '1.2rem',
+        fontSize: 19.2,
     },
     botonContrasena: {
         display: 'flex',
         justifyContent: 'flex-end',
-        marginBottom: '1rem',
+        marginBottom: 16,
     },
     botonLogin: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        minHeight: '3rem',
-        minWidth: '20rem',
+        minHeight: 48,
+        minWidth: 320,
         backgroundColor: "#5654E1",
         borderRadius: 18,
         padding: 10,

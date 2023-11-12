@@ -12,10 +12,10 @@ process.env.DATABASE || 'SnifterlyDB'
 */
 
 export const config = {
-    host        : 'localhost' ,
-    user        : 'root',
-    password    : '' ,
-    database    : 'snifterlydb' ,
+    host        : 'MYSQL5049.site4now.net' ,
+    user        : 'aa0ac9_sniferl',
+    password    : 'SnifterlyDB01' ,
+    database    : 'db_aa0ac9_sniferl' ,
 }
 
 //localhost:3000/docs

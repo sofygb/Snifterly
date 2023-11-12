@@ -15,6 +15,7 @@ import EstadoUsuario from '../screens/EstadoUsuario.js'
 import Configuracion from '../screens/Configuracion.js'
 import Sintomas from '../screens/Sintomas.js'
 import CerrarSesion from '../screens/CerrarSesion.js'
+import Test from '../screens/Test.js'
 
 const Stack = createNativeStackNavigator()
 
@@ -22,11 +23,14 @@ const MainStack = () => {
     return(
         <NavigationContainer>
             <Stack.Navigator screenOptions={{headerShown: false,}}>
-            
             <Stack.Screen
                 name= 'InicioSesion'
                 component={ InicioSesion }
                 />
+                {/* [<Stack.Screen
+                name= 'Test'
+                component={ Test }
+                />] */}
                 <Stack.Screen
                 name= 'CrearCuenta'
                 component={ CrearCuenta }
