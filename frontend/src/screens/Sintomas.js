@@ -52,7 +52,7 @@ export default function ({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <View style={{flex: 3, display: 'flex', alignContent: 'center', justifyContent: 'center', margin: '2rem'}}>
+            <View style={{flex: 3, display: 'flex', alignContent: 'center', justifyContent: 'center', margin: 32}}>
                 <Text style={styles.textoPrincipal}>¿Tenés alguno de estos síntomas?</Text>
                 {renderLabel()}
                 <Dropdown
@@ -84,12 +84,12 @@ export default function ({ navigation }) {
                     )}
                 />
                 <TouchableOpacity style={styles.aceptarBoton} onPress={() => { navigation.navigate('Home') }}>
-                    <Text style={{ color: 'white', fontFamily: 'inter', fontSize: '1rem', textAlign: 'center' }}>Aceptar</Text>
+                    <Text style={{ color: 'white', fontFamily: 'inter', fontSize: 16, textAlign: 'center' }}>Aceptar</Text>
                 </TouchableOpacity>
             </View>
 
             <TouchableOpacity style={styles.finalizarJornada} onPress={() => { navigation.navigate('SalirJornada') }}>
-                <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter', display: 'flex', alignItems: 'center', justifyContent: 'center', }]}>Finalizar jornada</Text>
+                <Text style={[{ color: 'red', fontSize: 16, fontFamily: 'inter', display: 'flex', alignItems: 'center', justifyContent: 'center', }]}>Finalizar jornada</Text>
             </TouchableOpacity>
 
         </View>
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         flex: 1,
         display: 'flex',
         justifyContent: 'flex-end',
-        marginBottom: '1rem',
+        marginBottom: 16,
     },
     dropdown: {
         height: 50,
@@ -143,20 +143,20 @@ const styles = StyleSheet.create({
     textoPrincipal: {
         display: 'flex',
         justifyContent: 'center',
-        fontSize: '1.5rem',
-        marginTop: '3rem',
-        marginBottom: '2rem',
+        fontSize: 24,
+        marginTop: 48,
+        marginBottom: 32,
         fontFamily: 'alata',
     },
     aceptarBoton: {
         display: 'flex',
         alignSelf: 'center',
         justifyContent: 'center',
-        minWidth: '8rem',
+        minWidth: 128,
         backgroundColor: "#5654E1",
         borderRadius: 15,
         padding: 10,
-        marginTop: '2rem',
-        minWidth: '10rem'
+        marginTop: 32,
+        minWidth: 160
     }
 });

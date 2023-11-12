@@ -44,13 +44,13 @@ export default function HistorialViejo({ navigation }) {
             <View style={styles.footer}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <TouchableOpacity onPress={() => { navigation.navigate('Home') }}>
-                        <Icon icon="material-symbols:home" width={'2.5rem'} />
+                        <Icon icon="material-symbols:home" width={40} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { navigation.navigate('Historial') }}>
-                        <Icon icon="zondicons:calendar" width={'2.3rem'} />
+                        <Icon icon="zondicons:calendar" width={36.8} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { navigation.navigate('Usuario') }}>
-                        <Icon icon="mdi:account" width={'2.5rem'}/>
+                        <Icon icon="mdi:account" width={40}/>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -74,10 +74,10 @@ const styles = StyleSheet.create({
         flex: 1,
         display: 'flex',
         justifyContent: 'flex-end',
-        marginBottom: '1rem',
+        marginBottom: 16,
         width: '100%',
-        paddingLeft: '2rem',
-        paddingRight: '2rem',
+        paddingLeft: 32,
+        paddingRight: 32,
     },
 
 });

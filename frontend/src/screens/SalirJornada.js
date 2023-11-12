@@ -58,10 +58,10 @@ export default function SalirJornada({ navigation }) {
 
       <View style={[styles.espaciosBotones, {flexDirection: 'row', display: 'flex', alignItems: 'flex-start' }]}>
         <TouchableOpacity style={styles.botonAceptar} onPress={() => { navigation.navigate('Home') }}>
-          <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Seguir</Text>
+          <Text style={[{ color: 'white', fontSize: 16, fontFamily: 'inter' }]}>Seguir</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.botonCancelar} onPress={() => {salirJornada(), navigation.navigate('PrimeraHome') }}>
-          <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter' }]}>Finalizar</Text>
+          <Text style={[{ color: 'red', fontSize: 16, fontFamily: 'inter' }]}>Finalizar</Text>
         </TouchableOpacity>
       </View>
 
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    minWidth: '8rem',
+    minWidth: 128,
     backgroundColor: "#5654E1",
     borderRadius: 15,
     padding: 10,
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    minWidth: '8rem',
+    minWidth: 128,
     backgroundColor: "#D9D9D9",
     borderRadius: 15,
     padding: 10,
@@ -101,17 +101,17 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: '2rem',
-    paddingLeft: '2rem',
-    paddingRight: '2rem',
+    marginTop: 32,
+    paddingLeft: 32,
+    paddingRight: 32,
   },
   textoPrincipal: {
     display: 'flex',
-    fontSize: '1.5rem',
-    marginTop: '3rem',
+    fontSize: 24,
+    marginTop: 48,
     fontFamily: 'alata',
-    marginLeft: '2rem',
-    marginRight: '2rem',
+    marginLeft: 32,
+    marginRight: 32,
     justifyContent: 'center',
     textAlign: 'center',
   },
