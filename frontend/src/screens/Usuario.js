@@ -80,8 +80,9 @@ export default function Usuario({ navigation }) {
         console.log("La edad es:", edadCalculada);
     }
     useEffect(() => {
-        cantjornadas()
-        if(usuario != null) calcularEdad()
+        //cantjornadas()
+        loadUsuario()
+        //if(usuario != null) calcularEdad()
     },[contextState.usuario.fechaNacimiento])
 
     const loadFonts = async () => {
