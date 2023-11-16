@@ -4,7 +4,7 @@ import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
-import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, newJornada, getJornada, saveJornada } from '../../api';
+import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, newJornada, getJornada, saveJornada, getUsuarioByEmailAndContrasenia } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 import { Bluetooth } from '../utils/Bluetooth';
 import DeviceModal from "../components/DeviceConnectionModal.jsx";
@@ -50,6 +50,42 @@ export default function PrimeraHome({ navigation }) {
         saveJornada(idUsuario)
     }
 
+    const setUsuarioAlContext = async () => {
+        const data = await getUsuarioByEmailAndContrasenia(contextState.usuario.email, contextState.usuario.contrasenia)
+        setContextState({
+            type: ActionTypes.SetIdUsuario,
+            value: data.idUsuario
+          });
+          setContextState({
+            type: ActionTypes.SetNombre,
+            value: data.nombre
+          });
+        setContextState({
+            type: ActionTypes.setFechaNacimiento,
+            value: data.fechaNacimiento
+          });
+          setContextState({
+            type: ActionTypes.SetAltura,
+            value: data.altura
+          });
+          setContextState({
+            type: ActionTypes.SetEmail,
+            value: data.email
+          });
+          setContextState({
+            type: ActionTypes.SetContrasenia,
+            value: data.contrasenia
+          });
+          setContextState({
+            type: ActionTypes.SetPeso,
+            value: data.peso
+          });
+          setContextState({
+            type: ActionTypes.SetFechaCreacion,
+            value: data.fechaCreacion
+          });
+    }
+
     const [fontsLoaded, setFontsLoaded] = useState(false);
     useEffect(() => {
         if (!fontsLoaded) {
@@ -57,6 +93,8 @@ export default function PrimeraHome({ navigation }) {
         }
         getDevices()
         console.log(devices)
+
+        setUsuarioAlContext()
     }, [])
     /*
     var jornadaActiva = getJornadaActiva(contextState.usuario.idUsuario)

@@ -52,6 +52,8 @@ export default function Home({ navigation }) {
 
   const [modalVisible, setModalVisible] = useState(false);
 
+  const [mensaje, setMensaje] = useState("");
+
   const isFocused = useIsFocused();
 
   const loadJornada = async () => {
@@ -127,6 +129,7 @@ export default function Home({ navigation }) {
       loadJornadaExtra();
     }
     setLimiteAlcohol(contextState.usuario.modResistencia)
+    setMensaje("Advertencia! Alcanzate tu límite de alcohol 😱")
   }, [isFocused]);
   
   useEffect(() => {
@@ -239,7 +242,7 @@ export default function Home({ navigation }) {
               colorsTime={[7, 5, 2, 0]}
               size={130}
             >
-              {({ remainingTime }) => <p>{Math.trunc(remainingTime / 60 ** 2) != 0 && <span>{Math.trunc(remainingTime / 60 ** 2)}hs</span>} {Math.trunc((remainingTime / 60) % 60)}min {Math.trunc(remainingTime / 60 ** 2) == 0 && <span> {remainingTime % 60}seg</span>}</p>}
+              {({ remainingTime }) => <><p>{Math.trunc(remainingTime / 60 ** 2) != 0 && <span>{Math.trunc(remainingTime / 60 ** 2)}hs</span>} {Math.trunc((remainingTime / 60) % 60)}min {Math.trunc(remainingTime / 60 ** 2) == 0 && <span> {remainingTime % 60}seg</span>}</p></>}
             </CountdownCircleTimer>
           </View>
           <Text
@@ -283,7 +286,7 @@ export default function Home({ navigation }) {
           }}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>Advertencia! Alcanzate tu límite de alcohol 😱</Text>
+              <Text style={styles.modalText}>{mensaje}</Text>
               <Pressable
                 style={styles.botonFinalizar}
                 onPress={() => setModalVisible(!modalVisible)}>

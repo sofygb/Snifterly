@@ -133,7 +133,7 @@ export default function Historial({ navigation }) {
                 <TouchableOpacity onPress={() => { index < (arrayFechas.length - 1) ? setIndex(index + 1) : null  }}>
                     <Icon icon="zondicons:arrow-left" />
                 </TouchableOpacity>
-                <Text style={styles.titulo}>{fechaIndex}</Text>
+                <Text style={styles.titulo}>{arrayFechas.length != 0 ? fechaIndex : "No hay jornadas aún..."}</Text>
                 <TouchableOpacity onPress={() => { index > 0 ? setIndex(index - 1) : null }}>
                     <Icon icon="zondicons:arrow-right" />
                 </TouchableOpacity>

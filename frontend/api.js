@@ -119,7 +119,7 @@ export const getUsuarioByEmailAndContrasenia = async (mail, contraseña) => {
       method: "GET",
   })
   console.log(res) 
-  return await res
+  return await res.json()
 }
 
 export const getJornada = async () => {

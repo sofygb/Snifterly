@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
-import { updateUsuario } from "../../api";
+import { getUsuarios, updateUsuario } from "../../api";
 import { Input } from '@rneui/base';
 
 export default function Configuracion({ navigation }) {
@@ -16,11 +16,28 @@ export default function Configuracion({ navigation }) {
     const [peso, setPeso] = useState(contextState.usuario.peso)
     const [altura, SetAltura] = useState(contextState.usuario.altura)
     const [email, setEmail] = useState(contextState.usuario.email)
+    const [error, setError] = useState(null)
+    const [god, setGod] = useState(null)
     const [contrasenia, setContrasenia] = useState(contextState.usuario.contrasenia)
+    const [usuario, setUsuario] = useState(null)
 
     const toggleMostrarContrasenia = () => {
         setMostrarContrasenia(!mostrarContrasenia);
     };
+
+    const loadUsuario = async () => {
+        const data = await getUsuarios()
+        const index = data.findIndex((usuario) => usuario.idUsuario === contextState.usuario.idUsuario)
+        setUsuario(data[index])
+    }
+
+    useEffect(() => {
+        loadUsuario()
+    }, [])
+
+    useEffect(() => {
+        if(usuario != null) setFechaNacimiento(new Date(usuario.fechaNacimiento).toDateString())
+    }, [usuario])
 
     const guardarNuevosDatos = () => {
         if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(email)) {
@@ -53,17 +70,25 @@ export default function Configuracion({ navigation }) {
                         type: ActionTypes.SetAltura,
                         value: altura
                     });
+                    setError(null)
+                    setGod("Datos actualizados correctamente")
                 }
                 else {
                     console.error("Error: La contraseña debe ser mayor a 10 caracteres")
+                    setError("Error: La contraseña debe ser mayor a 10 caracteres")
+                    setGod(null)
                 }
             }
             else{
                 console.error('Error: Los valores de peso o altura introducidos no son números')
+                setError('Error: Los valores de peso o altura introducidos no son números')
+                setGod(null)
             }
         }
         else {
             console.error("Error: El mail ingresado es inválido")
+            setError("Error: El mail ingresado es inválido")
+            setGod(null)
         }
     }
 
@@ -140,6 +165,9 @@ export default function Configuracion({ navigation }) {
                         <TextInput style={{ fontSize: 16, fontFamily: 'Alata', marginLeft: 24 }} value={fechaNacimiento} placeholder={fechaNacimiento} onChangeText={fechaNacimiento => setFechaNacimiento(fechaNacimiento)} />{/**.toDateString() */}
                     </View>
                 </View>
+
+            {error != null ? <Text style={{textAlign: 'center', fontSize: 14, color: 'red', marginBottom: 8}}>{error}</Text> : null}
+            {god != null ? <Text style={{textAlign: 'center', fontSize: 14, color: 'green', marginBottom: 8}}>{god}</Text> : null}
 
                 <View style={{ display: 'flex', alignItems: 'center', marginTop: 16 }}>
                     <TouchableOpacity onPress={() => guardarNuevosDatos()} style={styles.botonGuardar}>

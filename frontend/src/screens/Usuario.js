@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
-import { getJornadaActiva, getJornadasCountByIdUsuario, getUltimasDosJornadas } from '../../api';
+import { getJornadaActiva, getJornadasCountByIdUsuario, getUltimasDosJornadas, getUsuarios } from '../../api';
 
 export default function Usuario({ navigation }) {
     const { contextState, setContextState } = useContextState()
@@ -11,6 +11,7 @@ export default function Usuario({ navigation }) {
     const [cantJornadas, setCantJornadas] = useState()
     const [idJornadaActiva, setIdJornadaActiva] = useState(null)
     const [medicionJornada, setMedicionJornada] = useState(null)
+    const [usuario, setUsuario] = useState(null)
 
     const [fontsLoaded, setFontsLoaded] = useState(false);
 
@@ -32,15 +33,25 @@ export default function Usuario({ navigation }) {
         setMedicionJornada(data)
     }
 
+    const loadUsuario = async () => {
+        const data = await getUsuarios()
+        const index = data.findIndex((usuario) => usuario.idUsuario === contextState.usuario.idUsuario)
+        setUsuario(data[index])
+    }
+
     useEffect(() => {
         if (!fontsLoaded) {
             loadFonts();
         }
+        loadUsuario()
         cantjornadas()
-        calcularEdad()
         siHayJornadaActiva()
         cargarDosJornadas()
     }, [])
+    
+    useEffect(() => {
+        if(usuario != null) calcularEdad()
+    }, [usuario])
 
     const proximaPantalla = () => {
         if (idJornadaActiva !== null) {
@@ -56,13 +67,22 @@ export default function Usuario({ navigation }) {
     }
     const calcularEdad = () => {
         let fechaNacimiento = new Date(); // Declarar con let en lugar de const
-        fechaNacimiento = contextState.usuario.fechaNacimiento; // Asignar el valor
+        fechaNacimiento = new Date(usuario.fechaNacimiento); // Asignar el valor
         const fechaActual = new Date();
         const diferenciaEnMilisegundos = fechaActual - fechaNacimiento;
-        const edadCalculada = Math.floor(diferenciaEnMilisegundos / (365.25 * 24 * 60 * 60 * 1000));
+        //const edadCalculada = Math.floor(diferenciaEnMilisegundos / (365.25 * 24 * 60 * 60 * 1000));
+        const edadCalculada = parseInt(fechaActual.getFullYear()) - parseInt(fechaNacimiento.getFullYear())
         setEdad(edadCalculada);
+        setContextState({
+            type: ActionTypes.setFechaNacimiento,
+            value: fechaNacimiento
+          });
         console.log("La edad es:", edadCalculada);
     }
+    useEffect(() => {
+        cantjornadas()
+        if(usuario != null) calcularEdad()
+    },[contextState.usuario.fechaNacimiento])
 
     const loadFonts = async () => {
         await Font.loadAsync({

@@ -44,6 +44,30 @@ export default function CompletarDatos({ navigation }) {
 
             const fecha = new Date(fechaNacimiento)
             saveUsuario(nombre, `${fecha.getFullYear()}-${fecha.getMonth()}-${fecha.getDate()}`, peso, altura, mail, contrasenia)
+            setContextState({
+                type: ActionTypes.SetNombre,
+                value: nombre
+              });
+            setContextState({
+                type: ActionTypes.setFechaNacimiento,
+                value: fecha
+              });
+              setContextState({
+                type: ActionTypes.SetAltura,
+                value: altura
+              });
+              setContextState({
+                type: ActionTypes.SetEmail,
+                value: mail
+              });
+              setContextState({
+                type: ActionTypes.SetContrasenia,
+                value: contrasenia
+              });
+              setContextState({
+                type: ActionTypes.SetPeso,
+                value: peso
+              });
             navigation.navigate('PrimeraHome')
         }
         else{
@@ -61,7 +85,7 @@ export default function CompletarDatos({ navigation }) {
 
             <TextInput keyboardType='decimal' variant="outlined" label="peso" style={{ margin: 14, marginRight: 32, marginLeft: 32 }} value={peso} onChangeText={peso => setPeso(peso)}/>
             <TextInput keyboardType='decimal' variant="outlined" label="altura" style={{ margin: 14, marginRight: 32, marginLeft: 32 }} value={altura} onChangeText={altura => setAltura(altura)}/>
-            <TextInput keyboardType='date' variant="outlined" label="fecha de nacimiento" style={{ margin: 14, marginRight: 32, marginLeft: 32 }} value={fechaNacimiento} placeholder="Ejemplo: dd-mm-yyyy..." onChangeText={fechaNacimiento => setFechaNacimiento(fechaNacimiento)}/>
+            <TextInput keyboardType='date' variant="outlined" label="fecha de nacimiento" style={{ margin: 14, marginRight: 32, marginLeft: 32 }} value={fechaNacimiento} placeholder="Ejemplo: mm-dd-yyyy..." onChangeText={fechaNacimiento => setFechaNacimiento(fechaNacimiento)}/>
 
             <View style={styles.espacioBotonLogin}>
                 <TouchableOpacity style={styles.botonLogin} onPress={() => { validacion() }}>
