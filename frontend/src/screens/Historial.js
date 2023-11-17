@@ -41,6 +41,7 @@ export default function Historial({ navigation }) {
 
     const cargarJornadas = async () => {
         const data = await getJornadasYMedicionesByIdUsuario(contextState.usuario.idUsuario)
+        console.log('id usuario: ', contextState.usuario.idUsuario)
         console.log(data)
         data.map((jornada) => (
             jornada.fechaInicio = new Date(jornada.fechaInicio).toDateString() + " " + new Date(jornada.fechaInicio).toLocaleTimeString('es-AR'),
@@ -102,7 +103,10 @@ export default function Historial({ navigation }) {
             loadFonts();
         }
         //siHayJornadaActiva()
-        contextState.jornada.idJornada === 0 ? null : cargarJornadas()
+        // contextState.jornada.idJornada === 0 ? null : cargarJornadas() --> porqué?
+        cargarJornadas()
+        console.clear()
+        console.log('id de la jornada: ', contextState.jornada.idJornada)
     }, [isFocused])
 
     const mostrarBotones = () => {

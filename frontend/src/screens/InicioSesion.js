@@ -8,6 +8,7 @@ import { getUsuarios, getJornadaActiva2 } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 // import { AsyncStorage } from 'react-native';
 // import { jwtservice } from '../../middleware/middleware'
+import jwt from 'jsonwebtoken';
 
 export default function InicioSesion({ navigation }) {
     const [mail, setMail] = React.useState("");
@@ -16,7 +17,8 @@ export default function InicioSesion({ navigation }) {
     const [jornadaActiva, setJornadaActiva] = React.useState([]);
     const isFocused = useIsFocused();
     const [mostrarContrasenia, setMostrarContrasenia] = useState(false);
-    
+    const jwt = require("jsonwebtoken");
+
     const loadUsuarios = async () => {
         const data = await getUsuarios()
         setUsuarios(data)
@@ -28,17 +30,17 @@ export default function InicioSesion({ navigation }) {
         console.log(data)
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         loadUsuarios()
         loadJornadaActiva()
-    },[isFocused])
+    }, [isFocused])
 
     const [fontsLoaded, setFontsLoaded] = useState(false);
     useEffect(() => {
         if (!fontsLoaded) {
             loadFonts();
         }
-    },[])
+    }, [])
 
     const loadFonts = async () => {
         await Font.loadAsync({
@@ -66,7 +68,7 @@ export default function InicioSesion({ navigation }) {
     const logIn = async () => {
         const validacion = usuarios.findIndex(usuario => usuario.email === mail && usuario.contrasenia === contraseña)
 
-        if(validacion != -1) {
+        if (validacion != -1) {
             setContextState({
                 type: ActionTypes.SetIdUsuario,
                 value: usuarios[validacion].idUsuario
@@ -105,14 +107,14 @@ export default function InicioSesion({ navigation }) {
             });
             var hayJornada = false
             jornadaActiva.forEach((jornada) => {
-                if(jornada.idUsuario === usuarios[validacion].idUsuario){
+                if (jornada.idUsuario === usuarios[validacion].idUsuario) {
                     hayJornada = true
                 }
             })
-            if(hayJornada){
+            if (hayJornada) {
                 navigation.navigate('Home')
             }
-            else{
+            else {
                 navigation.navigate('PrimeraHome')
             }
             setCont(true)
@@ -120,15 +122,24 @@ export default function InicioSesion({ navigation }) {
             //     const user = {
             //       id: usuarios[validacion].idUsuario,
             //     };
-          
+
             //     const token = jwtservice.createToken(user);
 
             //     await AsyncStorage.setItem('token', token);
             //   } catch (error) {
             //     console.error('Error al iniciar sesión:', error);
             //   }
+            const JWT_SECRET = process.env.JWT_SECRET;
+            const token = jwt.sign({ mail }, JWT_SECRET);
+            setContextState({
+                type: ActionTypes.SetToken,
+                value: token
+            });
+            return res
+                .status(200)
+                .json({ message: "User Logged in Successfully", token });
         }
-        else{
+        else {
             setCont(false)
             console.error("Error: Usuario no encontrado")
         }
@@ -136,20 +147,20 @@ export default function InicioSesion({ navigation }) {
 
     return (
         <View style={styles.container}>
-            
-            <Image source={require('../assets/icon.png')} style={styles.imagen}/>
-            
+
+            <Image source={require('../assets/icon.png')} style={styles.imagen} />
+
             <Text style={styles.titulo}>Te damos la bienvenida a Snifterly!</Text>
             <Text style={styles.texto}>SIGN IN</Text>
 
-            <TextInput variant="outlined" label="Mail" style={{ margin: 14, marginRight: 32, marginLeft: 32, borderRadius: 10 }} value={mail} onChangeText={mail => setMail(mail)}/>
-            <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: 32, marginLeft: 32, borderRadius: 10  }} value={contraseña} secureTextEntry={!mostrarContrasenia} onChangeText={contraseña => setContraseña(contraseña)} trailing={<TouchableOpacity onPress={() => setMostrarContrasenia(!mostrarContrasenia)}><Icon icon={mostrarContrasenia ? 'mdi:eye-off' : 'mdi:eye'} width={30} /></TouchableOpacity>}/>
-            
+            <TextInput variant="outlined" label="Mail" style={{ margin: 14, marginRight: 32, marginLeft: 32, borderRadius: 10 }} value={mail} onChangeText={mail => setMail(mail)} />
+            <TextInput variant="outlined" label="Contraseña" style={{ margin: 14, marginRight: 32, marginLeft: 32, borderRadius: 10 }} value={contraseña} secureTextEntry={!mostrarContrasenia} onChangeText={contraseña => setContraseña(contraseña)} trailing={<TouchableOpacity onPress={() => setMostrarContrasenia(!mostrarContrasenia)}><Icon icon={mostrarContrasenia ? 'mdi:eye-off' : 'mdi:eye'} width={30} /></TouchableOpacity>} />
+
             <TouchableOpacity style={styles.botonContrasena}>
-                <Text style={[{ color: '#0D4CEF', fontSize: 14.4, fontFamily: 'inter', textAlign: 'right', marginRight: 16, marginBottom: 24, marginRight: 32}]}>¿Te olvidaste la contraseña?</Text>
+                <Text style={[{ color: '#0D4CEF', fontSize: 14.4, fontFamily: 'inter', textAlign: 'right', marginRight: 16, marginBottom: 24, marginRight: 32 }]}>¿Te olvidaste la contraseña?</Text>
             </TouchableOpacity>
 
-            {cont === false ? <Text style={{textAlign: 'center', fontSize: 14, color: 'red', marginBottom: 8}}>Contrasenia o mail incorrecto/s</Text> : null}
+            {cont === false ? <Text style={{ textAlign: 'center', fontSize: 14, color: 'red', marginBottom: 8 }}>Contrasenia o mail incorrecto/s</Text> : null}
 
             <View style={styles.espacioBotonLogin}>
                 <TouchableOpacity style={styles.botonLogin} onPress={() => { logIn() }}>
@@ -157,28 +168,28 @@ export default function InicioSesion({ navigation }) {
                 </TouchableOpacity>
             </View>
 
-            <Text style={{textAlign: 'center', marginTop: 24, marginBottom: 16, marginLeft: 16, marginRight: 16, fontSize: 19.3}}> ──────── Seguir con ────────</Text>
+            <Text style={{ textAlign: 'center', marginTop: 24, marginBottom: 16, marginLeft: 16, marginRight: 16, fontSize: 19.3 }}> ──────── Seguir con ────────</Text>
 
-            <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-around',paddingLeft: 24, paddingRight: 24,}}>
-                <TouchableOpacity style={{backgroundColor: '#40A2DA', minHeight: 56, minWidth: 160, borderRadius: 15, display: 'flex', justifyContent: 'center', }}>
-                    <View style={{flexDirection: 'row', marginLeft: 4.8}}>
-                        <Icon icon="ri:google-fill" color="white" width={36.8}/>
-                        <Text style={{color: 'white', display: 'flex', alignItems: 'center', fontSize: 14.4}}>Google</Text>
+            <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-around', paddingLeft: 24, paddingRight: 24, }}>
+                <TouchableOpacity style={{ backgroundColor: '#40A2DA', minHeight: 56, minWidth: 160, borderRadius: 15, display: 'flex', justifyContent: 'center', }}>
+                    <View style={{ flexDirection: 'row', marginLeft: 4.8 }}>
+                        <Icon icon="ri:google-fill" color="white" width={36.8} />
+                        <Text style={{ color: 'white', display: 'flex', alignItems: 'center', fontSize: 14.4 }}>Google</Text>
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={{backgroundColor: '#0F3A8D', minHeight: 56, minWidth: 160, borderRadius: 15, display: 'flex', justifyContent: 'center', }}>
-                    <View style={{flexDirection: 'row', marginLeft: 4.8}}>
-                        <Icon icon="ant-design:facebook-filled" color="white" width={36.8}/>
-                        <Text style={{color: 'white', display: 'flex', alignItems: 'center', fontSize: 14.4}}>Facebook</Text>
+                <TouchableOpacity style={{ backgroundColor: '#0F3A8D', minHeight: 56, minWidth: 160, borderRadius: 15, display: 'flex', justifyContent: 'center', }}>
+                    <View style={{ flexDirection: 'row', marginLeft: 4.8 }}>
+                        <Icon icon="ant-design:facebook-filled" color="white" width={36.8} />
+                        <Text style={{ color: 'white', display: 'flex', alignItems: 'center', fontSize: 14.4 }}>Facebook</Text>
                     </View>
                 </TouchableOpacity>
             </View>
-        
-            <View style={{flexDirection: 'row', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', marginTop: 20}}>
-                <Text style={{fontSize: 16, fontFamily: 'inter' }}>¿No tienes una cuenta? </Text>
+
+            <View style={{ flexDirection: 'row', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', marginTop: 20 }}>
+                <Text style={{ fontSize: 16, fontFamily: 'inter' }}>¿No tienes una cuenta? </Text>
                 <TouchableOpacity onPress={() => { navigation.navigate('CrearCuenta') }}>
-                    <Text style={{color: 'blue', fontSize: 16, fontFamily: 'inter' }}>Create una</Text>
+                    <Text style={{ color: 'blue', fontSize: 16, fontFamily: 'inter' }}>Create una</Text>
                 </TouchableOpacity>
             </View>
 
