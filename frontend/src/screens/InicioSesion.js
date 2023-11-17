@@ -6,9 +6,6 @@ import * as Font from 'expo-font';
 import { useIsFocused } from "@react-navigation/native";
 import { getUsuarios, getJornadaActiva2 } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
-// import { AsyncStorage } from 'react-native';
-// import { jwtservice } from '../../middleware/middleware'
-// import jwt from 'jsonwebtoken';
 
 export default function InicioSesion({ navigation }) {
     const [mail, setMail] = React.useState("");
@@ -131,6 +128,19 @@ export default function InicioSesion({ navigation }) {
                     hayJornada = true
                 }
             })
+
+            const payload = {
+                check:true
+            }
+            const token = jwt.sign(payload, app.get('key'),{
+                expiresIn: '7d'
+            })
+            res.json({
+                message: 'AUTENTICACIÓN EXITOSA',
+                token: token
+            })
+            console.log('el token es: ', token)
+
             if (hayJornada) {
                 navigation.navigate('Home')
             }
