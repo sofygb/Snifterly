@@ -8,7 +8,7 @@ import { getUsuarios, getJornadaActiva2 } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 // import { AsyncStorage } from 'react-native';
 // import { jwtservice } from '../../middleware/middleware'
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 
 export default function InicioSesion({ navigation }) {
     const [mail, setMail] = React.useState("");
@@ -17,7 +17,6 @@ export default function InicioSesion({ navigation }) {
     const [jornadaActiva, setJornadaActiva] = React.useState([]);
     const isFocused = useIsFocused();
     const [mostrarContrasenia, setMostrarContrasenia] = useState(false);
-    const jwt = require("jsonwebtoken");
 
     const loadUsuarios = async () => {
         const data = await getUsuarios()
@@ -49,6 +48,27 @@ export default function InicioSesion({ navigation }) {
         });
         setFontsLoaded(true);
     }
+
+    // const generarToken = () => {
+    //     const auth = new jwtservice();
+    //     const [usuario, setUsuario] = ([{
+    //         id: contextState.usuario.id
+    //     }])
+    //     return res.json({
+    //         successful: auth.createToken(),
+    //         message: "User Logged in Successfully", token ,
+    //       }).status(200);
+
+    //     // const JWT_SECRET = process.env.JWT_SECRET;
+    //     //     const token = jwt.sign({ mail }, JWT_SECRET);
+    //     //     setContextState({
+    //     //         type: ActionTypes.SetToken,
+    //     //         value: token
+    //     //     });
+    //     //     return res
+    //     //         .status(200)
+    //     //         .json({ message: "User Logged in Successfully", token });
+    // }
 
     const { contextState, setContextState } = useContextState()
     // const logIn = async () => {
@@ -129,15 +149,8 @@ export default function InicioSesion({ navigation }) {
             //   } catch (error) {
             //     console.error('Error al iniciar sesión:', error);
             //   }
-            const JWT_SECRET = process.env.JWT_SECRET;
-            const token = jwt.sign({ mail }, JWT_SECRET);
-            setContextState({
-                type: ActionTypes.SetToken,
-                value: token
-            });
-            return res
-                .status(200)
-                .json({ message: "User Logged in Successfully", token });
+            // generarToken()
+            
         }
         else {
             setCont(false)

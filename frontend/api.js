@@ -97,7 +97,6 @@ export const setJornadaActiva = async (value) => {
 
 */
 
-  
 export const getUsuarios = async () => {
     const res = await fetch(API14, {
         METHOD: "GET",
