@@ -6,6 +6,8 @@ import * as Font from 'expo-font';
 import { useIsFocused } from "@react-navigation/native";
 import { getUsuarios, getJornadaActiva2 } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
+// import { AsyncStorage } from 'react-native';
+// import { jwtservice } from '../../middleware/middleware'
 
 export default function InicioSesion({ navigation }) {
     const [mail, setMail] = React.useState("");
@@ -61,7 +63,7 @@ export default function InicioSesion({ navigation }) {
     //     }
     // }
     const [cont, setCont] = useState(true);
-    const logIn = () => {
+    const logIn = async () => {
         const validacion = usuarios.findIndex(usuario => usuario.email === mail && usuario.contrasenia === contraseña)
 
         if(validacion != -1) {
@@ -114,6 +116,17 @@ export default function InicioSesion({ navigation }) {
                 navigation.navigate('PrimeraHome')
             }
             setCont(true)
+            // try {
+            //     const user = {
+            //       id: usuarios[validacion].idUsuario,
+            //     };
+          
+            //     const token = jwtservice.createToken(user);
+
+            //     await AsyncStorage.setItem('token', token);
+            //   } catch (error) {
+            //     console.error('Error al iniciar sesión:', error);
+            //   }
         }
         else{
             setCont(false)

@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken"
 import moment from "moment"
+
 class jwtservice {
     createToken = (user) => {
         let payload = {
