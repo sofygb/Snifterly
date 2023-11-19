@@ -52,14 +52,6 @@ export default function IngresoDeDatos({ navigation }) {
       console.error("Error: No se ingresó el grado")
     }
   }
-  const validacion = () => {
-    if (contextState.jornada.idJornada !== 0) {
-        navigation.navigate('Home')
-    }
-    else {
-        navigation.navigate('PrimeraHome')
-    }
-}
 
     const inicializarContext = () => {
       setContextState({
@@ -89,7 +81,6 @@ export default function IngresoDeDatos({ navigation }) {
       setJornadaDesactiva()
       navigation.navigate('SalirJornada')
     }
-    
 
   return (
     <View style={styles.container}>
@@ -103,9 +94,9 @@ export default function IngresoDeDatos({ navigation }) {
 }
             <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Aceptar</Text>
           </TouchableOpacity>
-          {/* <TouchableOpacity style={styles.botonCancelar} onPress={() => { validacion() }}>
+          <TouchableOpacity style={styles.botonCancelar} onPress={() => { navigation.navigate("Home") }}>
             <Text style={[{ fontSize: '1rem', fontFamily: 'inter' }]}>Cancelar</Text>
-          </TouchableOpacity> */}
+          </TouchableOpacity>
         </View>
       </View>
 

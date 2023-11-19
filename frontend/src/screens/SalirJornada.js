@@ -3,7 +3,7 @@ import { StyleSheet, Button, Text, View, Alert, SafeAreaView, TouchableOpacity, 
 import { TextInput } from "@react-native-material/core";
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect } from 'react';
-import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, newJornada, setJornadaDesactiva, setFechaFinJornada } from '../../api';
+import { getJornadaActiva, getSiguientePantalla, setSiguientePantalla, newJornada, setJornadaDesactiva,setFechaFinJornada } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 import * as Font from 'expo-font';
 

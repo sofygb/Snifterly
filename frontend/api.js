@@ -97,152 +97,131 @@ export const setJornadaActiva = async (value) => {
 
 */
 
+  
 export const getUsuarios = async () => {
-  const res = await fetch(API14, {
-    METHOD: "GET",
-  })
-  console.log(res)
-  return await res.json()
+    const res = await fetch(API14, {
+        METHOD: "GET",
+    })
+    console.log(res) 
+    return await res.json()
 }
 
 export const getJornadaActiva2 = async () => {
   const res = await fetch(API21, {
-    method: "GET",
+      method: "GET",
   })
-  console.log(res)
+  console.log(res) 
   return await res.json()
 }
 
-const express = require('express')
-const app = express();
-const jwt = require('jsonwebtoken')
-const keys = require('../settings/Keys')
-
-app.set('key', keys.key)
-app.use(express.urlencoded({ extended: false }))
-app.use(express.json())
-
 export const getUsuarioByEmailAndContrasenia = async (mail, contraseña) => {
   const res = await fetch(API13 + `/${mail}/${contraseña}`, {
-    method: "GET",
+      method: "GET",
   })
-  if (res !== null) {
-    const payload = {
-      check: true
-    }
-    const token = jwt.sign(payload, app.get('key'), {
-      expiresIn: '7d'
-    })
-    res.json({
-      message: 'AUTENTICACIÓN EXITOSA',
-      token: token
-    })
-    console.log('el token es: ', token)
-  }
-  console.log(res)
+  console.log(res) 
   return await res.json()
 }
 
 export const getJornada = async () => {
-  const res = await fetch(API, {
-    METHOD: "GET",
-  })
-  console.log(res)
-  return await res.json()
+    const res = await fetch(API, {
+        METHOD: "GET",
+    })
+    console.log(res) 
+    return await res.json()
 }
 
 export const getJornadaByIdUsuario = async (idUsuario) => {
   const res = await fetch(API25 + `/${idUsuario}`, {
-    METHOD: "GET",
+      METHOD: "GET",
   })
-  console.log(res)
+  console.log(res) 
   return await res.json()
 }
 
 export const getJornadasYMedicionesByIdUsuario = async (idUsuario) => {
   const res = await fetch(API26 + `/${idUsuario}`, {
-    method: "GET",
+      METHOD: "GET",
   })
-  console.log(res)
+  console.log(res) 
   return await res.json()
 }
 
 export const getJornadaActiva = async (idUsuario) => { //Devuelve (si hay jornada activa): [{idJornada: int}], sino devuelve []
   const res = await fetch(API5 + `/${idUsuario}`, {
-    method: "GET",
-  })
-  console.log(res)
-  return await res.json()
+        method: "GET",
+    })
+    console.log(res) 
+    return await res.json()
 }
 
 export const getJornadaReciente = async (idUsuario) => {
   const res = await fetch(API15 + `/${idUsuario}`, {
-    method: "GET",
-  })
-  console.log(res)
-  return await res.json()
+        method: "GET",
+    })
+    console.log(res) 
+    return await res.json()
 }
 
 export const getMedicionReciente = async (idJornada) => {
   const res = await fetch(API16 + `/${idJornada}`, {
-    method: "GET",
-  })
-  console.log(res)
-  return await res.json()
+        method: "GET",
+    })
+    console.log(res) 
+    return await res.json()
 }
 
 export const getHayJornada = async (idUsuario) => {
   const res = await fetch(API20 + `/${idUsuario}`, {
-    method: "GET",
-  })
-  console.log(res)
-  return await res.json()
+      method: "GET",
+    })
+    console.log(res)
+    return await res.json()
 }
 
 export const setJornadaDesactiva = async () => {
-  const res = await fetch(API9, { method: "PUT", })
-  console.log(res)
-  return await res
+  const res = await fetch(API9, { method: "PUT",})
+    console.log(res) 
+    return await res
 }
 
 export const setModResistenciaByIdUsuario = async (modResistencia, idUsuario) => {
-  const res = await fetch(API27 + `/${modResistencia}/${idUsuario}`, { method: "PUT", })
-  console.log(res)
-  return await res
+  const res = await fetch(API27 + `/${modResistencia}/${idUsuario}`, { method: "PUT",})
+    console.log(res) 
+    return await res
 }
 
 export const setEstadoUsuario = async (idMedicion, estadoUsuario) => {
-  const res = await fetch(API10 + `/${idMedicion}/${estadoUsuario}`, { method: "PUT", })
-  console.log(res)
-  return await res
+  const res = await fetch(API10 + `/${idMedicion}/${estadoUsuario}`, { method: "PUT",})
+    console.log(res) 
+    return await res
 }
 
 export const updateUsuario = async (nombre, fechaNacimiento, peso, altura, email, contrasenia, idUsuario) => {
-  const res = await fetch(API22 + `/${nombre}/${fechaNacimiento}/${peso}/${altura}/${email}/${contrasenia}/${idUsuario}`, { method: "PUT", })
-  console.log(res)
-  return await res
+  const res = await fetch(API22 + `/${nombre}/${fechaNacimiento}/${peso}/${altura}/${email}/${contrasenia}/${idUsuario}`, { method: "PUT",})
+    console.log(res) 
+    return await res
 }
 
 export const setFechaFinJornada = async (idJornada) => {
-  const res = await fetch(API17 + `/${idJornada}`, { method: "PUT", })
-  console.log(res)
-  return await res
+  const res = await fetch(API17 + `/${idJornada}`, { method: "PUT",})
+    console.log(res) 
+    return await res
 }
 
 export const getMedicionesCountByIdJornada = async (idJornada) => {
-  const res = await fetch(API2 + `/${idJornada}`, {
-    METHOD: "GET",
-  })
-  console.log(res)
-  return await res.json()
+    const res = await fetch(API2 + `/${idJornada}`, {
+        METHOD: "GET",
+    })
+    console.log(res) 
+    return await res.json()
 }
 
 export const getUltimasDosJornadas = async (idUsuario) => {
   const res = await fetch(API24 + `/${idUsuario}`, {
-    method: "GET",
-  })
-  console.log(res)
-  return await res.json()
+        method: "GET",
+    })
+    console.log(res) 
+    return await res.json()
 }
 /*ejemplo de lo que retorna getUltimasDosJornadas: 
 [
@@ -291,65 +270,65 @@ export const getUltimasDosJornadas = async (idUsuario) => {
 
 export const getJornadasCountByIdUsuario = async (idUsuario) => {
   const res = await fetch(API23 + `/${idUsuario}`, {
-    METHOD: "GET",
+      METHOD: "GET",
   })
-  console.log(res)
+  console.log(res) 
   return await res.json()
 }
 
 export const getLastMedicionByIdJornada = async (idJornada) => {
   const res = await fetch(API18 + `/${idJornada}`, {
-    METHOD: "GET",
+      METHOD: "GET",
   })
-  console.log(res)
+  console.log(res) 
   return await res.json()
 }
 
 export const getAvgMediciones = async () => {
-  const res = await fetch(API3, {
-    METHOD: "GET",
-  })
-  console.log(res)
-  return await res.json()
+    const res = await fetch(API3, {
+        METHOD: "GET",
+    })
+    console.log(res) 
+    return await res.json()
 }
 
 export const getFirstMedicion = async (idJornada) => {
-  const res = await fetch(API4 + `/${idJornada}`, {
-    method: "GET",
-  })
-  console.log(res)
-  return await res.json()
+    const res = await fetch(API4 + `/${idJornada}`, {
+        method: "GET",
+    })
+    console.log(res) 
+    return await res.json()
 }
 
 export const setEstadoMedicion = async () => {
   const res = await fetch(API5, {
     METHOD: "SET",
   })
-  console.log(res)
+  console.log(res) 
   return await res.json()
 }
 
 export const setMediciones = async (grado, idJornada) => {
-  const res = await fetch(API11 + `/${grado}/${idJornada}`, { method: "POST", })
+  const res = await fetch(API11 + `/${grado}/${idJornada}`, { method: "POST",})
   console.log(res)
   return await res.json()
 }
 
 export const getUltimaMedicion = async (idJornada) => {
-  const res = await fetch(API12 + `/${idJornada}`, { method: "GET", })
+  const res = await fetch(API12 + `/${idJornada}`, { method: "GET",})
   console.log(res)
   return await res.json()
 }
 
 export const saveJornada = async (idUsuario) => {
-  const res = await fetch(API6 + `/${idUsuario}`, { method: "POST", })
-  console.log(res)
+  const res = await fetch(API6 + `/${idUsuario}`, { method: "POST",})
+  console.log(res)  
   return await res.json()
 }
 
 export const saveUsuario = async (nombre, fechaNacimiento, peso, altura, email, contraseña) => {
-  const res = await fetch(API19 + `/${nombre}/${fechaNacimiento}/${peso}/${altura}/${email}/${contraseña}`, { method: "POST", })
-  console.log(res)
+  const res = await fetch(API19 + `/${nombre}/${fechaNacimiento}/${peso}/${altura}/${email}/${contraseña}`, { method: "POST",})
+  console.log(res)  
   return await res.json()
 }
 

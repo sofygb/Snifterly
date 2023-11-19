@@ -147,7 +147,6 @@ export const getUsuarioById = async (req, res) => {
 
     console.log(rows[0])
 }
-
 export const getUsuarioByEmail = async (req, res) => {
     const connection = await connect()
     const [rows] = await connection.query("SELECT * FROM Usuario WHERE email = ?", [
