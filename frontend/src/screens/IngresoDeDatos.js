@@ -87,22 +87,22 @@ export default function IngresoDeDatos({ navigation }) {
       <View style={{ flex: 6, display: 'flex', justifyContent: 'center' }}>
         <Text style={styles.textoPrincipal}>Ingrese/Editar el valor que aparece en el dispositivo</Text>
 
-        <TextInput style={{ margin: 14, marginRight: '2rem', marginLeft: '2rem' }} onChangeText={setText} value={text} placeholder={'agregar medición...'} id='grado'/>
+        <TextInput style={{ margin: 14, marginRight: 32, marginLeft: 32 }} onChangeText={setText} value={text} placeholder={'agregar medición...'} id='grado'/>
 
         <View style={[styles.espaciosBotones, { flexDirection: 'row', display: 'flex', alignItems: 'center' }]}>
           <TouchableOpacity style={styles.botonAceptar} onPress={() => { agregarMedicion(text) }}> {//EL GETJORNDADAACTIVA TRAE UN CHOCLO
 }
-            <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Aceptar</Text>
+            <Text style={[{ color: 'white', fontSize: 16, fontFamily: 'inter' }]}>Aceptar</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.botonCancelar} onPress={() => { navigation.navigate("Home") }}>
-            <Text style={[{ fontSize: '1rem', fontFamily: 'inter' }]}>Cancelar</Text>
+            <Text style={[{ fontSize: 16, fontFamily: 'inter' }]}>Cancelar</Text>
           </TouchableOpacity>
         </View>
       </View>
 
       <View style={styles.finalizarJornada}>
         <TouchableOpacity style={styles.finalizarJornada} onPress={() => { inicializarContext() }}>
-          <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter' }]}>Finalizar jornada</Text>
+          <Text style={[{ color: 'red', fontSize: 16, fontFamily: 'inter' }]}>Finalizar jornada</Text>
         </TouchableOpacity>
       </View>
 
@@ -122,8 +122,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    maxHeight: '3rem',
-    minWidth: '8rem',
+    maxHeight: 48,
+    minWidth: 128,
     backgroundColor: "#5654E1",
     borderRadius: 15,
     padding: 10,
@@ -132,8 +132,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    maxHeight: '3rem',
-    minWidth: '8rem',
+    maxHeight: 48,
+    minWidth: 128,
     backgroundColor: "#D9D9D9",
     borderRadius: 15,
     padding: 10,
@@ -141,25 +141,25 @@ const styles = StyleSheet.create({
   espaciosBotones: {
     display: 'flex',
     width: '100%',
-    paddingLeft: '2rem',
-    paddingRight: '2rem',
+    paddingLeft: 32,
+    paddingRight: 32,
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
   textoPrincipal: {
     display: 'flex',
     justifyContent: 'center',
-    fontSize: '1.5rem',
-    marginTop: '3rem',
-    marginBottom: '2rem',
+    fontSize: 24,
+    marginTop: 48,
+    marginBottom: 32,
     fontFamily: 'alata',
-    marginLeft: '2rem',
-    marginRight: '2rem',
+    marginLeft: 32,
+    marginRight: 32,
   },
   finalizarJornada: {
     flex: 1,
     display: 'flex',
     justifyContent: 'flex-end',
-    marginBottom: '1rem',
+    marginBottom: 16,
   },
 });

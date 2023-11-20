@@ -98,7 +98,7 @@ export default function Usuario({ navigation }) {
 
             <Text style={styles.titulo}>Snifterly</Text>
 
-            <View style={[styles.info, { marginBottom: '3rem', paddingLeft: '4rem', paddingRight: '4rem', }]}>
+            <View style={[styles.info, { marginBottom: 48, paddingLeft: 64, paddingRight: 64, }]}>
                 <Image
                     source={{
                         uri: 'https://media.revistavanityfair.es/photos/60e82a56bf8d45dd8c6f5b7e/master/w_1600%2Cc_limit/250726.jpg',
@@ -109,20 +109,20 @@ export default function Usuario({ navigation }) {
                     }}
                     style={{ width: 55, height: 55, borderRadius: 100 }}
                 />
-                <Text style={{ fontSize: '1rem', fontFamily: 'Alata' }}>{contextState.usuario.nombre}
-                    <Text style={{ fontSize: '1rem', color: 'orange', marginTop: '1rem', fontFamily: 'Alata' }}>{"\n"}edad {edad} años</Text></Text>
+                <Text style={{ fontSize: 16, fontFamily: 'Alata' }}>{contextState.usuario.nombre}
+                    <Text style={{ fontSize: 16, color: 'orange', marginTop: 16, fontFamily: 'Alata' }}>{"\n"}edad {edad} años</Text></Text>
                 <TouchableOpacity onPress={() => { navigation.navigate('Configuracion') }}>
                     <Icon icon="mdi:pencil" width={30} />
                 </TouchableOpacity>
             </View>
 
-            <View style={[styles.espacioCuadros, { marginBottom: "1rem" }]}>
+            <View style={[styles.espacioCuadros, { marginBottom: 16 }]}>
                 <View style={styles.cuadro}>
-                    <Text style={{ color: 'white', fontSize: 24, fontFamily: 'alata', marginRight: '1rem' }}>Sesiones</Text>
+                    <Text style={{ color: 'white', fontSize: 24, fontFamily: 'alata', marginRight: 16 }}>Sesiones</Text>
                     <Text style={{ color: 'white', fontSize: 40, fontFamily: 'alata', display: 'flex', justifyContent: 'flex-end' }}>{cantJornadas}</Text>
                 </View>
                 <View style={[styles.cuadro, {justifyContent: 'space-around'}]}>
-                    <Text style={{ color: 'white', fontSize: 24, fontFamily: 'alata', marginRight: '1rem' }}>Limite alcohol</Text>
+                    <Text style={{ color: 'white', fontSize: 24, fontFamily: 'alata', marginRight: 16 }}>Limite alcohol</Text>
                     <Text style={{ color: 'white', fontSize: '170%', fontFamily: 'alata', display: 'flex', justifyContent: 'flex-end' }}>{contextState.usuario.modResistencia != null ? Math.trunc((contextState.usuario.modResistencia*100)*10/0.4)/10 : 100}%</Text>
                 </View>
             </View>
@@ -132,7 +132,7 @@ export default function Usuario({ navigation }) {
 
                 <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <View style={styles.cuadroRectangulo}>
-                    <View style={[styles.info, { paddingLeft: '2rem', paddingRight: '2rem', flex: 1, display: 'flex', alignItems: 'center' }]}>
+                    <View style={[styles.info, { paddingLeft: 32, paddingRight: 32, flex: 1, display: 'flex', alignItems: 'center' }]}>
                         <Image
                             source={{
                                 uri: 'https://logodownload.org/wp-content/uploads/2015/05/uber-logo-1-1.png',
@@ -188,13 +188,13 @@ export default function Usuario({ navigation }) {
             <View style={styles.footer}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <TouchableOpacity onPress={() => { proximaPantalla() }}>
-                        <Icon icon="material-symbols:home" width={'2.5rem'} />
+                        <Icon icon="material-symbols:home" width={40} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { navigation.navigate('Historial') }}>
-                        <Icon icon="zondicons:calendar" width={'2.3rem'} />
+                        <Icon icon="zondicons:calendar" width={36.8} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { navigation.navigate('Perfil') }}>
-                        <Icon icon="mdi:account" width={'2.5rem'} />
+                        <Icon icon="mdi:account" width={40} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -210,31 +210,31 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     titulo: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontWeight: "bold",
-        fontSize: "1.5rem",
-        marginTop: "3rem",
-        marginBottom: "3rem",
-        fontFamily: "alata",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontWeight: 'bold',
+        fontSize: 24,
+        marginTop: 48,
+        marginBottom: 48,
+        fontFamily: 'alata',
     },
     footer: {
         flex: 1,
         display: 'flex',
         justifyContent: 'flex-end',
-        marginBottom: '1rem',
+        marginBottom: 16,
         width: '100%',
-        paddingLeft: '2rem',
-        paddingRight: '2rem',
+        paddingLeft: 32,
+        paddingRight: 32,
     },
     imagen: {
         width: 40, height: 40,
-        resizeMode: "contain",
-        padding: '10rem',
+        resizeMode: 'contain',
+        padding: 160,
     },
     info: {
-        flexDirection: "row",
+        flexDirection: 'row',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -244,14 +244,14 @@ const styles = StyleSheet.create({
     cuadro: {
         borderWidth: 2,
         borderRadius: 20,
-        padding: "0.5rem",
-        minheight: "11rem",
-        maxWidth: "7rem",
-        padding: "0.3rem",
-        backgroundColor: "#FF7F00",
-        borderColor: "#FF7F00",
-        fontFamily: "alata",
-        shadowColor: "#C1C0C0",
+        padding: 8,
+        minheight: 176,
+        maxWidth: 112,
+        padding: 4.8,
+        backgroundColor: '#FF7F00',
+        borderColor: '#FF7F00',
+        fontFamily: 'alata',
+        shadowColor: '#C1C0C0',
         shadowOffset: {
             width: 2,
             height: 4,
@@ -260,26 +260,26 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
     },
     espacioCuadros: {
-        display: "flex",
-        width: "100%",
-        paddingLeft: "4rem",
-        paddingRight: "4rem",
-        flexDirection: "row",
-        justifyContent: "space-between",
+        display: 'flex',
+        width: '100%',
+        paddingLeft: 64,
+        paddingRight: 64,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     cuadroRectangulo: {
-        display: "flex",
-        padding: "0.5rem",
-        marginRight: "0.3rem",
-        marginLeft: "0.3rem",
-        marginTop: "1rem ",
-        minWidth: "22rem",
-        minHeight: "6rem",
+        display: 'flex',
+        padding: 8,
+        marginRight: 4.8,
+        marginLeft: 4.8,
+        marginTop: 16,
+        minWidth: 350,
+        minHeight: 96,
         borderRadius: 20,
-        backgroundColor: "#CECECE",
-        borderColor: "#CECECE",
-        fontFamily: "alata",
-        shadowColor: "#C4C4C4",
+        backgroundColor: '#CECECE',
+        borderColor: '#CECECE',
+        fontFamily: 'alata',
+        shadowColor: '#C4C4C4',
         shadowOffset: {
             width: 2,
             height: 4,
@@ -289,31 +289,31 @@ const styles = StyleSheet.create({
     },
     texto: {
         fontFamily: 'alata',
-        marginLeft: '2rem',
+        marginLeft: 32,
         fontSize: 20,
-        marginTop: '1rem',
+        marginTop: 16,
     },
     textoJornadas: {
         fontFamily: 'alata',
-        marginLeft: '0.8rem',
+        marginLeft: 12.8,
         fontSize: 24,
         flex: 1,
         display: 'flex',
         alignItems: 'center',
     },
     cuadroJornadas: {
-        display: "flex",
-        padding: "0.5rem",
-        marginRight: "0.3rem",
-        marginLeft: "0.3rem",
-        marginTop: "1rem ",
-        minWidth: "20rem",
-        minHeight: "4rem",
+        display: 'flex',
+        padding: 8,
+        marginRight: 4.8,
+        marginLeft: 4.8,
+        marginTop: 16,
+        minWidth: 320,
+        minHeight: 64,
         borderRadius: 20,
-        backgroundColor: "#F9F4F0",
-        borderColor: "#F9F4F0",
-        fontFamily: "alata",
-        shadowColor: "#C4C4C4",
+        backgroundColor: '#F9F4F0',
+        borderColor: '#F9F4F0',
+        fontFamily: 'alata',
+        shadowColor: '#C4C4C4',
         shadowOffset: {
             width: 2,
             height: 4,
@@ -327,7 +327,7 @@ const styles = StyleSheet.create({
         color: '#949494',
         display: 'flex',
         justifyContent: 'flex-start',
-        marginLeft: '0.8rem',
-        marginTop: '0.3rem'
+        marginLeft: 12.8,
+        marginTop: 4.8
     },
 });

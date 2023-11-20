@@ -133,16 +133,16 @@ export default function Historial({ navigation }) {
     }
     return (
         <View style={styles.container}>
-            <View style={{ flexDirection: "row", marginTop: '4rem', display: 'flex', justifyContent: 'space-around' }}>
-                <TouchableOpacity onPress={() => { index < (arrayFechas.length - 1) ? setIndex(index + 1) : null  }}>
+            <View style={{ flexDirection: "row", marginTop: 64, display: 'flex', justifyContent: 'space-around' }}>
+                <TouchableOpacity onPress={() => { index > 0 ? setIndex(index - 1) : null }}>
                     <Icon icon="zondicons:arrow-left" />
                 </TouchableOpacity>
                 <Text style={styles.titulo}>{arrayFechas.length != 0 ? fechaIndex : "No hay jornadas aún..."}</Text>
-                <TouchableOpacity onPress={() => { index > 0 ? setIndex(index - 1) : null }}>
+                <TouchableOpacity onPress={() => { index < (arrayFechas.length - 1) ? setIndex(index + 1) : null }}>
                     <Icon icon="zondicons:arrow-right" />
                 </TouchableOpacity>
             </View>
-            <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '2rem' }}>
+            <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 32 }}>
                 {
                     arrayFechas[index] != null && (
                         <>
@@ -151,12 +151,12 @@ export default function Historial({ navigation }) {
                                 data={arrayFechas[index].jornadas}
                                 renderItem={({ item, index }) => (
                                     <View style={styles.cuadro}>
-                                        <View style={{ margin: '0.5rem' }}>
+                                        <View style={{ margin: 8 }}>
                                             <Text style={styles.textoJornda}>Jornada {index + 1}</Text>
-                                            <View style={{ flexDirection: "column", marginTop: '1rem', display: 'flex', justifyContent: 'space-between' }}>
+                                            <View style={{ flexDirection: "column", marginTop: 16, display: 'flex', justifyContent: 'space-between' }}>
                                                 <Text style={styles.texto}>ID: {item.idJornada}</Text>
-                                                <Text style={{ ...styles.texto, fontSize: '0.8rem' }}>Fecha Inicial: {item.fechaInicio}</Text>
-                                                <Text style={{ ...styles.texto, fontSize: '0.8rem' }}>Fecha Final: {item.fechaFin === "Wed Dec 31 1969 21:00:00" ? "No finalizado" : item.fechaFin}</Text>
+                                                <Text style={{ ...styles.texto, fontSize: 12.8 }}>Fecha Inicial: {item.fechaInicio}</Text>
+                                                <Text style={{ ...styles.texto, fontSize: 12.8 }}>Fecha Final: {item.fechaFin === "Wed Dec 31 1969 21:00:00" ? "No finalizado" : item.fechaFin}</Text>
                                             </View>
                                         </View>
                                     </View>
@@ -170,12 +170,12 @@ export default function Historial({ navigation }) {
                     data={jornadas}
                     renderItem={({ item, index }) => (
                         <View style={styles.cuadro}>
-                            <View style={{ margin: '0.5rem' }}>
+                            <View style={{ margin: 8 }}>
                                 <Text style={styles.textoJornda}>Jornada {index + 1}</Text>
-                                <View style={{ flexDirection: "column", marginTop: '1rem', display: 'flex', justifyContent: 'space-between' }}>
+                                <View style={{ flexDirection: "column", marginTop: 16, display: 'flex', justifyContent: 'space-between' }}>
                                     <Text style={styles.texto}>ID: {item.idJornada}</Text>
-                                    <Text style={{ ...styles.texto, fontSize: '0.8rem' }}>Fecha Inicial: {item.fechaInicio}</Text>
-                                    <Text style={{ ...styles.texto, fontSize: '0.8rem' }}>Fecha Final: {item.fechaFin === "Wed Dec 31 1969 21:00:00" ? "No finalizado" : item.fechaFin}</Text>
+                                    <Text style={{ ...styles.texto, fontSize: 12.8 }}>Fecha Inicial: {item.fechaInicio}</Text>
+                                    <Text style={{ ...styles.texto, fontSize: 12.8 }}>Fecha Final: {item.fechaFin === "Wed Dec 31 1969 21:00:00" ? "No finalizado" : item.fechaFin}</Text>
                                 </View>
                             </View>
                         </View>
@@ -187,13 +187,13 @@ export default function Historial({ navigation }) {
             <View style={styles.footer}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <TouchableOpacity onPress={() => { validacion() }}>
-                        <Icon icon="material-symbols:home" width={'2.5rem'} />
+                        <Icon icon="material-symbols:home" width={40} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { navigation.navigate('Historial') }}>
-                        <Icon icon="zondicons:calendar" width={'2.3rem'} />
+                        <Icon icon="zondicons:calendar" width={36.8} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { navigation.navigate('Usuario') }}>
-                        <Icon icon="mdi:account" width={'2.5rem'} />
+                        <Icon icon="mdi:account" width={40} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -212,20 +212,20 @@ const styles = StyleSheet.create({
     },
     titulo: {
         fontWeight: "bold",
-        fontSize: "1.5rem",
+        fontSize: 24,
         fontFamily: "alata",
     },
     textoJornda: {
-        marginLeft: "0.5rem",
-        marginRight: "0.5rem",
-        fontSize: "1.5rem",
+        marginLeft: 8,
+        marginRight: 8,
+        fontSize: 24,
         color: "#4B4B4B",
         fontFamily: "alata",
     },
     texto: {
-        marginLeft: "0.5rem",
-        marginRight: "0.5rem",
-        fontSize: "1rem",
+        marginLeft: 8,
+        marginRight: 8,
+        fontSize: 16,
         color: "#4B4B4B",
         fontFamily: "alata",
     },
@@ -233,20 +233,20 @@ const styles = StyleSheet.create({
         flex: 1,
         display: 'flex',
         justifyContent: 'flex-end',
-        marginBottom: '1rem',
+        marginBottom: 16,
         width: '100%',
-        paddingLeft: "2rem",
-        paddingRight: "2rem",
-        //Height: '3rem',
+        paddingLeft: 32,
+        paddingRight: 32,
+        //Height: 18,
     },
     cuadro: {
         borderRadius: 20,
-        padding: "0.5rem",
-        margin: "1rem",
-        minheight: "11rem",
-        minWidth: "18rem",
-        maxWidth: "20rem",
-        padding: "0.3rem",
+        padding: 8,
+        margin: 16,
+        minheight: 176,
+        minWidth: 288,
+        maxWidth: 320,
+        padding: 4.8,
         backgroundColor: "#F9F4F0",
         fontFamily: "alata",
         shadowColor: "#560000",
@@ -264,12 +264,12 @@ const styles = StyleSheet.create({
         resizeMode: "contain",
         display: 'flex',
         alignSelf: 'center',
-        marginTop: '3rem',
+        marginTop: 18,
         borderRadius: 30,
     },
     botonAgregar: {
         width: "100%",
-        paddingRight: "25px",
+        paddingRight: 25,
         alignItems: "flex-end",
         justifyContent: "flex-end",
     },

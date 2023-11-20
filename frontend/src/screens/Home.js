@@ -170,10 +170,10 @@ export default function Home({ navigation }) {
 
       <Text style={styles.titulo}>Snifterly</Text>
 
-      <View style={[styles.espacioCuadros, { marginBottom: "1rem" }]}>
+      <View style={[styles.espacioCuadros, { marginBottom: 16 }]}>
         <View style={styles.cuadro}>
-          <View style={{ flexDirection: "row", marginLeft: "0.5rem" }}>
-            <Text name='count' style={[styles.medicion, { fontSize: "2.5rem" }]}>
+          <View style={{ flexDirection: 'row', marginLeft: 8 }}>
+            <Text name='count' style={[styles.medicion, { fontSize: 40 }]}>
               {mediciones}
             </Text>
             <Text style={styles.medicion}> veces</Text>
@@ -181,8 +181,8 @@ export default function Home({ navigation }) {
           <Text style={styles.texto}>te has hecho una medición</Text>
         </View>
         <View style={styles.cuadro}>
-          <View style={{ flexDirection: "row", marginLeft: "0.5rem" }}>
-            <Text style={[styles.medicion, { fontSize: "2.5rem" }]}>
+          <View style={{ flexDirection: 'row', marginLeft: 8 }}>
+            <Text style={[styles.medicion, { fontSize: 40 }]}>
               {gradoActual}
             </Text>
             <Text style={styles.medicion}> dg/l</Text>
@@ -193,35 +193,35 @@ export default function Home({ navigation }) {
 
       <View style={[styles.espacioCuadros]}>
         <View style={styles.cuadro}>
-          <View style={{ flexDirection: "row", marginLeft: "0.5rem" }}>
-            <Text style={[styles.medicion, { fontSize: "2.1rem" }]}>
+          <View style={{ flexDirection: 'row', marginLeft: 8 }}>
+            <Text style={[styles.medicion, { fontSize: 33.6 }]}>
               {tiempoRestante.getHours()}
             </Text>
-            <Text style={[styles.medicion, { fontSize: "1rem" }]}> hs, </Text>
-            <Text style={[styles.medicion, { fontSize: "2.1rem" }]}>
+            <Text style={[styles.medicion, { fontSize: 16 }]}> hs, </Text>
+            <Text style={[styles.medicion, { fontSize: 33.6 }]}>
               {tiempoRestante.getMinutes()}
             </Text>
-            <Text style={[styles.medicion, { fontSize: "1rem" }]}> min </Text>
-            {/* <Text style={[styles.medicion, { fontSize: "2.1rem" }]}>
+            <Text style={[styles.medicion, { fontSize: 16 }]}> min </Text>
+            {/* <Text style={[styles.medicion, { fontSize: 33.6 }]}>
               {tiempoRestante.getSeconds()}
               </Text>
-            <Text style={[styles.medicion, { fontSize: "1rem" }]}> sec</Text> */}
+            <Text style={[styles.medicion, { fontSize: 16 }]}> sec</Text> */}
           </View>
           <Text style={styles.texto}>es la longitud actual de tu jornada</Text>
         </View>
         <View style={styles.cuadro}>
-          <View style={{ flexDirection: "row", marginLeft: "0.5rem" }}>
+          <View style={{ flexDirection: 'row', marginLeft: 8 }}>
             {
               (gradoActual >= limiteAlcohol && limiteAlcohol != null && limiteAlcohol != 0) ?
                 <>
-                  <Text style={[styles.medicion, { fontSize: "2.5rem", color: 'red' }]}>
+                  <Text style={[styles.medicion, { fontSize: 40, color: 'red' }]}>
                     {(limiteAlcohol != null && limiteAlcohol != 0) ? limiteAlcohol : '-'}
                   </Text>
                   <Text style={[styles.medicion, { color: 'red' }]}> mg/l</Text>
                 </>
                 :
                 <>
-                  <Text style={[styles.medicion, { fontSize: "2.5rem" }]}>
+                  <Text style={[styles.medicion, { fontSize: 40 }]}>
                     {(limiteAlcohol != null && limiteAlcohol != 0) ? limiteAlcohol : '-'}
                   </Text>
                   <Text style={styles.medicion}> mg/l</Text>
@@ -232,13 +232,13 @@ export default function Home({ navigation }) {
         </View>
       </View>
 
-      <View style={{ display: "flex", alignItems: "center" }}>
-        <View style={[styles.cuadroDelCronometro, { marginBottom: "1rem" }]}>
-          <View style={{ display: "flex", alignItems: "center" }}>
+      <View style={{ display: 'flex', alignItems: 'center' }}>
+        <View style={[styles.cuadroDelCronometro, { marginBottom: 16 }]}>
+          <View style={{ display: 'flex', alignItems: 'center' }}>
             <CountdownCircleTimer
               isPlaying
               duration={(tiempo)}
-              colors={["#5654E1", "#5A58E2", "#5160E3", "#5767E4"]}
+              colors={['#5654E1', '#5A58E2', '#5160E3', '#5767E4']}
               colorsTime={[7, 5, 2, 0]}
               size={130}
             >
@@ -248,15 +248,15 @@ export default function Home({ navigation }) {
           <Text
             style={[
               styles.texto,
-              { fontWeight: "bold", fontSize: "0.8rem", textAlign: "center" },
+              { fontWeight: 'bold', fontSize: 12.8, textAlign: 'center' },
             ]}
           >
-            te falta para alcanzar{" "}
+            te falta para alcanzar{' '}
           </Text>
           <Text
             style={[
               styles.texto,
-              { fontWeight: "bold", fontSize: "0.8rem", textAlign: "center" },
+              { fontWeight: 'bold', fontSize: 12.8, textAlign: 'center' },
             ]}
           >
             alcohol 0 en sangre
@@ -264,14 +264,14 @@ export default function Home({ navigation }) {
         </View>
       </View>
 
-      <View style={{ display: "flex", alignItems: "center" }}>
+      <View style={{ display: 'flex', alignItems: 'center' }}>
         <TouchableOpacity
           style={styles.botonFinalizar}
           onPress={() => {
             navigation.navigate("SalirJornada");
           }}
         >
-          <Text style={[{ color: "white", fontSize: "1rem" }]}>Finalizar</Text>
+          <Text style={[{ color: 'white', fontSize: 16 }]}>Finalizar</Text>
         </TouchableOpacity>
       </View>
 
@@ -290,37 +290,37 @@ export default function Home({ navigation }) {
               <Pressable
                 style={styles.botonFinalizar}
                 onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={[{ color: "white", fontSize: "1rem" }]}>Entendido</Text>
+                <Text style={[{ color: 'white', fontSize: 16 }]}>Entendido</Text>
               </Pressable>
             </View>
           </View>
         </Modal>
       </View>
       
-      <View style={[styles.botonAgregar, { flex: 2, display: "flex", justifyContent: "flex-end", marginBottom: "1rem", },]}>
+      <View style={[styles.botonAgregar, { flex: 2, display: 'flex', justifyContent: 'flex-end', marginBottom: 16, },]}>
         <TouchableOpacity onPress={() => { navigation.navigate("IngresoDeDatos"); }}>
-          <Icon icon="zondicons:add-solid" width={"3rem"} />
+          <Icon icon="zondicons:add-solid" width={48} />
         </TouchableOpacity>
       </View>
 
       <View style={styles.footer}>
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
-          <Icon icon="material-symbols:home" width={"2.5rem"} />
+          <Icon icon="material-symbols:home" width={40} />
 
           <TouchableOpacity
             onPress={() => {
               navigation.navigate("Historial");
             }}
           >
-            <Icon icon="zondicons:calendar" width={"2.3rem"} />
+            <Icon icon="zondicons:calendar" width={33.8} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
               navigation.navigate("Usuario");
             }}
           >
-            <Icon icon="mdi:account" width={"2.5rem"} />
+            <Icon icon="mdi:account" width={40} />
           </TouchableOpacity>
         </View>
       </View>
@@ -333,33 +333,33 @@ export default function Home({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    display: "flex",
+    display: 'flex',
     flex: 1,
-    fontFamily: "Alata",
+    fontFamily: 'Alata',
     backgroundColor: 'white',
   },
   titulo: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontWeight: "bold",
-    fontSize: "1.5rem",
-    marginTop: "3rem",
-    marginBottom: "3rem",
-    fontFamily: "alata",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    fontSize: 24,
+    marginTop: 48,
+    marginBottom: 48,
+    fontFamily: 'alata',
   },
   cuadroDelCronometro: {
-    display: "flex",
-    padding: "0.5rem",
-    marginRight: "0.3rem",
-    marginLeft: "0.3rem",
-    marginTop: "1.5rem ",
-    minWidth: "22rem",
+    display: 'flex',
+    padding: 8,
+    marginRight: 4.8,
+    marginLeft: 4.8,
+    marginTop: 24,
+    minWidth: 352,
     borderRadius: 20,
-    backgroundColor: "#ECECEC",
-    borderColor: "#ECECEC",
-    fontFamily: "alata",
-    shadowColor: "#C4C4C4",
+    backgroundColor: '#ECECEC',
+    borderColor: '#ECECEC',
+    fontFamily: 'alata',
+    shadowColor: '#C4C4C4',
     shadowOffset: {
       width: 2,
       height: 4,
@@ -370,14 +370,14 @@ const styles = StyleSheet.create({
   cuadro: {
     borderWidth: 2,
     borderRadius: 20,
-    padding: "0.5rem",
-    minheight: "11rem",
-    maxWidth: "10rem",
-    padding: "0.3rem",
-    backgroundColor: "#ECECEC",
-    borderColor: "#ECECEC",
-    fontFamily: "alata",
-    shadowColor: "#C1C0C0",
+    padding: 8,
+    minheight: 176,
+    maxWidth: 160,
+    padding: 4.8,
+    backgroundColor: '#ECECEC',
+    borderColor: '#ECECEC',
+    fontFamily: 'alata',
+    shadowColor: '#C1C0C0',
     shadowOffset: {
       width: 2,
       height: 4,
@@ -386,53 +386,53 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
   },
   espacioCuadros: {
-    display: "flex",
-    width: "100%",
-    paddingLeft: "1.7rem",
-    paddingRight: "1.7rem",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    display: 'flex',
+    width: '100%',
+    paddingLeft: 27.2,
+    paddingRight: 27.2,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   medicion: {
-    fontSize: "1.2rem",
-    fontWeight: "bold",
-    fontFamily: "alata",
-    color: "#5654E1",
+    fontSize: 19.2,
+    fontWeight: 'bold',
+    fontFamily: 'alata',
+    color: '#5654E1',
     display: 'flex',
     alignSelf: 'flex-end'
   },
   texto: {
-    marginLeft: "0.5rem",
-    marginRight: "0.5rem",
-    fontSize: "0.8rem",
-    color: "#4B4B4B",
-    fontFamily: "alata",
+    marginLeft: 8,
+    marginRight: 8,
+    fontSize: 12.8,
+    color: '#4B4B4B',
+    fontFamily: 'alata',
   },
   botonFinalizar: {
     flex: 1,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    maxHeight: "3rem",
-    minWidth: "8rem",
-    backgroundColor: "#5654E1",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxHeight: 48,
+    minWidth: 128,
+    backgroundColor: '#5654E1',
     borderRadius: 15,
     padding: 10,
   },
   botonAgregar: {
-    width: "100%",
-    paddingRight: "25px",
-    alignItems: "flex-end",
-    justifyContent: "flex-end",
+    width: '100%',
+    paddingRight: 25,
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
   },
   footer: {
     flex: 1,
-    display: "flex",
-    justifyContent: "flex-end",
-    marginBottom: "1rem",
-    width: "100%",
-    paddingLeft: "2rem",
-    paddingRight: "2rem",
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginBottom: 16,
+    width: '100%',
+    paddingLeft: 32,
+    paddingRight: 32,
   },
   centeredView: {
     flex: 1,

@@ -128,7 +128,7 @@ export default function PrimeraHome({ navigation }) {
                         </View>
                         <View style={styles.finalizarJornada}>
                             <TouchableOpacity style={styles.finalizarJornada} onPress={() => { navigation.navigate('SalirJornada') }}>
-                                <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter', display: 'flex', alignItems: 'center', justifyContent: 'center', }]}>Finalizar jornada</Text>
+                                <Text style={[{ color: 'red', fontSize: 16, fontFamily: 'inter', display: 'flex', alignItems: 'center', justifyContent: 'center', }]}>Finalizar jornada</Text>
                             </TouchableOpacity>
                         </View>
                     </View>) :
@@ -137,12 +137,12 @@ export default function PrimeraHome({ navigation }) {
                             <View style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
                                 <Text style={styles.texto}>Leyendo Medición...</Text>
                             </View>
-                            <View style={{ flexDirection: "row", marginTop: '2rem', display: 'flex', justifyContent: 'space-around' }}>
+                            <View style={{ flexDirection: "row", marginTop: 32, display: 'flex', justifyContent: 'space-around' }}>
                                 <iframe src="https://gifer.com/embed/2uGh" frameBorder="0" allowFullScreen></iframe>
                             </View>
                             <View style={styles.finalizarJornada}>
                                 <TouchableOpacity style={styles.finalizarJornada} onPress={() => { navigation.navigate('SalirJornada') }}>
-                                    <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter', display: 'flex', alignItems: 'center', justifyContent: 'center', }]}>Finalizar jornada</Text>
+                                    <Text style={[{ color: 'red', fontSize: 16, fontFamily: 'inter', display: 'flex', alignItems: 'center', justifyContent: 'center', }]}>Finalizar jornada</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>) :
@@ -154,7 +154,7 @@ export default function PrimeraHome({ navigation }) {
                             </View>) :
                             <View style={styles.containerDos}>
                                 <View style={styles.centrar}>
-                                    <View style={{marginTop: '7rem'}}>
+                                    <View style={{marginTop: 112}}>
                                         <Text style={styles.textoDos}>Medición gurdada:</Text>
                                     </View>
                                     <View>
@@ -163,12 +163,12 @@ export default function PrimeraHome({ navigation }) {
                                         </View>
                                     </View>
                                     <TouchableOpacity style={styles.botonAceptar}>
-                                        <Text style={[{ color: 'white', fontSize: '1rem', fontFamily: 'inter' }]}>Seguir</Text>
+                                        <Text style={[{ color: 'white', fontSize: 16, fontFamily: 'inter' }]}>Seguir</Text>
                                     </TouchableOpacity>
                                 </View>
                                 
-                                    <TouchableOpacity style={[{marginBottom: '1rem'}]} onPress={() => { navigation.navigate('SalirJornada') }}>
-                                        <Text style={[{ color: 'red', fontSize: '1rem', fontFamily: 'inter', display: 'flex', alignItems: 'center', justifyContent: 'center', }]}>Finalizar jornada</Text>
+                                    <TouchableOpacity style={[{marginBottom: 16}]} onPress={() => { navigation.navigate('SalirJornada') }}>
+                                        <Text style={[{ color: 'red', fontSize: 16, fontFamily: 'inter', display: 'flex', alignItems: 'center', justifyContent: 'center', }]}>Finalizar jornada</Text>
                                     </TouchableOpacity>
                                 
                             </View>
@@ -178,7 +178,7 @@ export default function PrimeraHome({ navigation }) {
 
                     <View style={styles.botonAgregar}>
                         <TouchableOpacity onPress={() => { openModal, crearJornada(), navigation.navigate('IngresoDeDatos') }}>
-                            <Icon icon="icon-park-solid:add-one" color="white" width={'9rem'} />
+                            <Icon icon="icon-park-solid:add-one" color="white" width={144} />
                         </TouchableOpacity>
                         <DeviceModal
                             closeModal={hideModal}
@@ -186,19 +186,19 @@ export default function PrimeraHome({ navigation }) {
                             connectToPeripheral={Bluetooth.getConnectedDevice()}
                             devices={Bluetooth.getAllDevices()}
                         />
-                        <Text style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', fontFamily: 'Alata', marginTop: '1rem' }}>nueva jornada</Text>
+                        <Text style={{ textAlign: 'center', color: 'white', fontSize: 24, fontFamily: 'Alata', marginTop: 16 }}>nueva jornada</Text>
                     </View>
 
                     <View style={styles.footer}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <TouchableOpacity onPress={() => { navigation.navigate('PrimeraHome') }}>
-                                <Icon icon="material-symbols:home" width={'2.5rem'} color="white" />
+                                <Icon icon="material-symbols:home" width={40} color="white" />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => { navigation.navigate('Historial') }}>
-                                <Icon icon="zondicons:calendar" width={'2.3rem'} color="white" />
+                                <Icon icon="zondicons:calendar" width={13.8} color="white" />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => { navigation.navigate('Usuario') }}>
-                                <Icon icon="mdi:account" width={'2.5rem'} color="white" />
+                                <Icon icon="mdi:account" width={40} color="white" />
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -236,9 +236,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         fontWeight: 'bold',
-        fontSize: '2rem',
-        marginTop: '3rem',
-        marginBottom: '8rem',
+        fontSize: 32,
+        marginTop: 48,
+        marginBottom: 128,
         fontFamily: 'alata',
         color: 'white',
     },
@@ -246,10 +246,10 @@ const styles = StyleSheet.create({
         flex: 1,
         display: 'flex',
         justifyContent: 'flex-end',
-        marginBottom: '1rem',
+        marginBottom: 16,
         width: '100%',
-        paddingLeft: '2rem',
-        paddingRight: '2rem',
+        paddingLeft: 32,
+        paddingRight: 32,
     },
     botonAgregar: {
         flex: 1,
@@ -261,32 +261,32 @@ const styles = StyleSheet.create({
         flex: 1,
         display: 'flex',
         justifyContent: 'flex-end',
-        marginBottom: '1rem',
+        marginBottom: 16,
     },
     texto: {
         display: 'flex',
-        fontSize: '1.5rem',
-        marginTop: '3rem',
+        fontSize: 24,
+        marginTop: 48,
         fontFamily: 'alata',
-        marginLeft: '2rem',
-        marginRight: '2rem',
+        marginLeft: 32,
+        marginRight: 32,
         justifyContent: 'center',
         textAlign: 'center',
     },
     textoDos: {
         display: 'flex',
-        fontSize: '1.5rem',
+        fontSize: 24,
         fontFamily: 'alata',
         justifyContent: 'center',
         textAlign: 'center',
-        marginBottom: '2rem'
+        marginBottom: 32
     },
     botonAceptar: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        minWidth: '8rem',
-        minHeight: '3rem',
+        minWidth: 128,
+        minHeight: 48,
         backgroundColor: "#5654E1",
         borderRadius: 15,
     },
@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
         borderWidth: 17,
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: '2rem',
+        marginBottom: 32,
     },
     text: {
         color: '#F86800',
