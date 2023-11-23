@@ -17,17 +17,17 @@ export default function CompletarDatos({ navigation }) {
     const mail = contextState.usuario.email
     const contrasenia = contextState.usuario.contrasenia
 
-    const loadJornada = async () => {
-        const data = await getJornada()
-        console.log(data)
-        setJornada([data])
-    }
+    // const loadJornada = async () => {
+    //     const data = await getJornada()
+    //     console.log(data)
+    //     setJornada([data])
+    // }
     const [fontsLoaded, setFontsLoaded] = useState(false);
     useEffect(() => {
         if (!fontsLoaded) {
             loadFonts();
         }
-        loadJornada()
+        // loadJornada()
     },[])
 
     const loadFonts = async () => {

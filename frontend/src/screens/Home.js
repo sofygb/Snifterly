@@ -313,7 +313,7 @@ export default function Home({ navigation }) {
               navigation.navigate("Historial");
             }}
           >
-            <Icon icon="zondicons:calendar" width={33.8} />
+            <Icon icon="zondicons:calendar" width={36.8} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {

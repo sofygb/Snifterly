@@ -72,7 +72,7 @@ export default function IngresoDeDatos({ navigation }) {
       })
       setContextState({
         type: ActionTypes.SetIdUsuario,
-        value: null
+        value: 0
       })
       setContextState({
         type: ActionTypes.SetActivo,

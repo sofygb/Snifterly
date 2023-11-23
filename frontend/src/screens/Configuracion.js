@@ -188,7 +188,7 @@ export default function Configuracion({ navigation }) {
                         <Icon icon="material-symbols:home" width={40} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { navigation.navigate('Historial') }}>
-                        <Icon icon="zondicons:calendar" width={40} />
+                        <Icon icon="zondicons:calendar" width={36.8} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { navigation.navigate('Usuario') }}>
                         <Icon icon="mdi:account" width={40} />

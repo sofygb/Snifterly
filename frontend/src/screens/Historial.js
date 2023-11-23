@@ -102,7 +102,7 @@ export default function Historial({ navigation }) {
         if (!fontsLoaded) {
             loadFonts();
         }
-        //siHayJornadaActiva()
+        // siHayJornadaActiva()
         // contextState.jornada.idJornada === 0 ? null : cargarJornadas() --> porqué?
         cargarJornadas()
         console.clear()
