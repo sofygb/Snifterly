@@ -109,10 +109,6 @@ export default function Historial({ navigation }) {
         console.log('id de la jornada: ', contextState.jornada.idJornada)
     }, [isFocused])
 
-    const mostrarBotones = () => {
-
-    }
-
     const loadFonts = async () => {
         await Font.loadAsync({
             'alata': require('../assets/fonts/Alata/Alata.ttf'),
