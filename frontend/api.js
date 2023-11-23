@@ -114,6 +114,10 @@ export const getJornadaActiva2 = async () => {
   return await res.json()
 }
 
+// const express = require('express')
+// const app = express ()
+// const jwt = require('jsonwebtoken')
+// const keys = require('./src/settings/Keys')
 export const getUsuarioByEmailAndContrasenia = async (mail, contraseña) => {
   const res = await fetch(API13 + `/${mail}/${contraseña}`, {
       method: "GET",
