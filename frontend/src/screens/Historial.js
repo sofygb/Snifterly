@@ -62,15 +62,17 @@ export default function Historial({ navigation }) {
     useEffect(() => {
         var arrayProvisorio = []
         if (jornadas !== null) {
-            console.log(jornadas, arrayFechas, jornadas[0].fechaInicio.substring(0, jornadas[0].fechaInicio.length - 9)),
+            if(jornadas.length !== 0){
+
+                console.log(jornadas, arrayFechas, jornadas[0].fechaInicio.substring(0, jornadas[0].fechaInicio.length - 9)),
                 jornadas.map((jornada, i) => {
                     if (arrayProvisorio.findIndex((item) => item.fecha === jornada.fechaInicio.substring(0, jornada.fechaInicio.length - 9)) === -1) {
                         arrayProvisorio = [ //Fri Oct 06 2023 09:07:50 - CREAR NUEVO OBJETO FECHA SI NO EXISTE LA FECHA
-                            ...arrayProvisorio, {
-                                fecha: jornada.fechaInicio.substring(0, jornada.fechaInicio.length - 9),
-                                jornadas: jornadas.filter((item) => item.fechaInicio.substring(0, item.fechaInicio.length - 9) === jornada.fechaInicio.substring(0, jornada.fechaInicio.length - 9))
-                            }
-                        ]
+                        ...arrayProvisorio, {
+                            fecha: jornada.fechaInicio.substring(0, jornada.fechaInicio.length - 9),
+                            jornadas: jornadas.filter((item) => item.fechaInicio.substring(0, item.fechaInicio.length - 9) === jornada.fechaInicio.substring(0, jornada.fechaInicio.length - 9))
+                        }
+                    ]
                     }
                     /*  
                     else {
@@ -82,12 +84,13 @@ export default function Historial({ navigation }) {
                     ]
                 }
                 */
-                })
+            })
             /*
             jornadas.map((jornada) => {
                 if (arrayProvisorio.findIndex((item) => console.log(item))){}
             })
             */
+            }
         }
         setArrayFechas(arrayProvisorio)
     }, [jornadas])

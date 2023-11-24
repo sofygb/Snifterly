@@ -15,23 +15,23 @@ export default function EstadoUsuario({ navigation }) {
 
   const loadJornada = async () => {
     const medicionReciente = await getMedicionReciente(contextState.jornada.idJornada)
-    console.log(medicionReciente)
+    console.log(medicionReciente[0])
 
     setContextState({
       type: ActionTypes.SetIdMedicion,
-      value: medicionReciente.idMedicion
+      value: medicionReciente[0].idMedicion
     });
     setContextState({
       type: ActionTypes.SetGrado,
-      value: medicionReciente.grado
+      value: medicionReciente[0].grado
     });
     setContextState({
       type: ActionTypes.SetFecha,
-      value: new Date (medicionReciente.fecha)
+      value: new Date (medicionReciente[0].fecha)
     });
     setContextState({
       type: ActionTypes.SetIdJornadaMedicion,
-      value: medicionReciente.idJornada
+      value: medicionReciente[0].idJornada
     });
   }
   const [fontsLoaded, setFontsLoaded] = useState(false);

@@ -82,8 +82,14 @@ export default function Home({ navigation }) {
     if (idJornadaActiva != 0) {
       const lastMedicionn = await getLastMedicionByIdJornada(idJornadaActiva)
       console.log(lastMedicionn)
-      setLastMedicion(lastMedicionn)
-      setGradoActual(lastMedicionn.grado)
+      if(lastMedicionn.length != 0){
+        setLastMedicion(lastMedicionn[0])
+        setGradoActual(lastMedicionn[0].grado)
+      }
+      else{
+        setLastMedicion({})
+        setGradoActual(0)
+      }
       const data2 = await getMedicionesCountByIdJornada(idJornadaActiva);
       setMediciones(data2);
       console.log(data2);
@@ -141,6 +147,11 @@ export default function Home({ navigation }) {
     if (gradoActual >= limiteAlcohol && limiteAlcohol != null && limiteAlcohol != 0) {
       setModalVisible(true)
       setModResistenciaByIdUsuario(gradoActual, contextState.usuario.idUsuario)
+      setLimiteAlcohol(gradoActual)
+      setContextState({
+        type: ActionTypes.SetModResistencia,
+        value: gradoActual
+      });
     }
   }, [gradoActual])
 

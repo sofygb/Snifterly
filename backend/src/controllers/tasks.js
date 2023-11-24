@@ -43,7 +43,7 @@ export const getUltimasDosJornadas = async (req, res) => {
 
 export const getJornadasYMediciones = async (req, res) => {
     const connection = await connect()
-    const [rows] = await connection.query("SELECT jornada.*, medicion.idMedicion AS primeraMedicion, medicion.grado AS primerGrado, medicion.fecha AS primeraFecha, medicion.estado AS primerEstado, AVG(grado) AS promedioGrados, MAX(idMedicion) AS ultimaMedicion, (SELECT grado FROM medicion WHERE idJornada = jornada.idJornada ORDER BY fecha DESC LIMIT 1) AS ultimoGrado, (SELECT fecha FROM medicion WHERE idJornada = jornada.idJornada ORDER BY fecha DESC LIMIT 1) AS ultimaFecha, (SELECT estado FROM medicion WHERE idJornada = jornada.idJornada ORDER BY fecha DESC LIMIT 1) AS ultimoEstado, MAX(grado) AS mayorGrado, (SELECT idMedicion FROM medicion WHERE idJornada = jornada.idJornada AND grado = (SELECT MAX(grado) FROM medicion WHERE idJornada = jornada.idJornada) ORDER BY fecha DESC LIMIT 1) AS mayorMedicion, (SELECT fecha FROM medicion WHERE idJornada = jornada.idJornada AND grado = (SELECT MAX(grado) FROM medicion WHERE idJornada = jornada.idJornada) ORDER BY fecha DESC LIMIT 1) AS mayorFecha, (SELECT estado FROM medicion WHERE idJornada = jornada.idJornada AND grado = (SELECT MAX(grado) FROM medicion WHERE idJornada = jornada.idJornada) ORDER BY fecha DESC LIMIT 1) AS mayorEstado FROM jornada INNER JOIN medicion ON jornada.idJornada = medicion.idJornada WHERE idUsuario = 11 GROUP BY jornada.idJornada ORDER BY fechaFin, idMedicion", [
+    const [rows] = await connection.query("SELECT jornada.*, medicion.idMedicion AS primeraMedicion, medicion.grado AS primerGrado, medicion.fecha AS primeraFecha, medicion.estado AS primerEstado, AVG(grado) AS promedioGrados, MAX(idMedicion) AS ultimaMedicion, (SELECT grado FROM medicion WHERE idJornada = jornada.idJornada ORDER BY fecha DESC LIMIT 1) AS ultimoGrado, (SELECT fecha FROM medicion WHERE idJornada = jornada.idJornada ORDER BY fecha DESC LIMIT 1) AS ultimaFecha, (SELECT estado FROM medicion WHERE idJornada = jornada.idJornada ORDER BY fecha DESC LIMIT 1) AS ultimoEstado, MAX(grado) AS mayorGrado, (SELECT idMedicion FROM medicion WHERE idJornada = jornada.idJornada AND grado = (SELECT MAX(grado) FROM medicion WHERE idJornada = jornada.idJornada) ORDER BY fecha DESC LIMIT 1) AS mayorMedicion, (SELECT fecha FROM medicion WHERE idJornada = jornada.idJornada AND grado = (SELECT MAX(grado) FROM medicion WHERE idJornada = jornada.idJornada) ORDER BY fecha DESC LIMIT 1) AS mayorFecha, (SELECT estado FROM medicion WHERE idJornada = jornada.idJornada AND grado = (SELECT MAX(grado) FROM medicion WHERE idJornada = jornada.idJornada) ORDER BY fecha DESC LIMIT 1) AS mayorEstado FROM jornada INNER JOIN medicion ON jornada.idJornada = medicion.idJornada WHERE idUsuario = ? GROUP BY jornada.idJornada ORDER BY fechaFin, idMedicion", [
 	req.params.idUsuario,
     ])
     res.json(rows)
@@ -258,9 +258,12 @@ export const getUltimaMedicionByIdJornada = async (req, res) => {
     const [rows] = await connection.query("SELECT * FROM Medicion WHERE idJornada = ? ORDER BY fecha DESC LIMIT 1", [
         req.params.idJornada,
     ])
-    res.json(rows[0])
 
-    console.log(rows[0])
+    //JSON.stringify(res.outputData) === '[]' ? res.json([]) : res.json(rows[0])
+
+    res.json(rows)
+
+    console.log(rows)
 }
 
 export const saveUsuario = async (req, res) => {

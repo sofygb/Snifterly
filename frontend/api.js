@@ -281,10 +281,11 @@ export const getJornadasCountByIdUsuario = async (idUsuario) => {
 }
 
 export const getLastMedicionByIdJornada = async (idJornada) => {
-  const res = await fetch(API18 + `/${idJornada}`, {
+  var res = await fetch(API18 + `/${idJornada}`, {
       METHOD: "GET",
   })
   console.log(res) 
+  //res != undefined ? res = res.json() : null
   return await res.json()
 }
 

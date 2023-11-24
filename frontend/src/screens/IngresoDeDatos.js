@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { TextInput } from "@react-native-material/core";
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
-import { getJornadaReciente, setMediciones, setJornadaDesactiva } from '../../api';
+import { getJornadaReciente, setMediciones, setJornadaDesactiva, getJornadaActiva } from '../../api';
 import { ActionTypes, setContextState, useContextState } from '../navigation/contextState';
 
 export default function IngresoDeDatos({ navigation }) {
@@ -11,7 +11,7 @@ export default function IngresoDeDatos({ navigation }) {
   const { contextState, setContextState } = useContextState()
 
   const loadJornada = async () => {
-    const data = await getJornadaReciente(contextState.usuario.idUsuario)
+    const data = await getJornadaActiva(contextState.usuario.idUsuario)
     console.log(data)
 
     setContextState({
