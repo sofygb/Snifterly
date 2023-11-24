@@ -147,11 +147,11 @@ export default function Home({ navigation }) {
     if (gradoActual >= limiteAlcohol && limiteAlcohol != null && limiteAlcohol != 0) {
       setModalVisible(true)
       setModResistenciaByIdUsuario(gradoActual, contextState.usuario.idUsuario)
-      setLimiteAlcohol(gradoActual)
+      /*setLimiteAlcohol(gradoActual)
       setContextState({
         type: ActionTypes.SetModResistencia,
         value: gradoActual
-      });
+      });*/
     }
   }, [gradoActual])
 
