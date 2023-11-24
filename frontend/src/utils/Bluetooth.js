@@ -7,8 +7,8 @@ import * as ExpoDevice from "expo-device"
 
 import base64 from "react-native-base64"
 
-const HEART_RATE_UUID = "0000180d-0000-1000-8000-00805f9b34fb"
-const HEART_RATE_CHARACTERISTIC = "00002a37-0000-1000-8000-00805f9b34fb"
+const SERVICE_UUID = "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
+const CHARACTERISTIC_UUID = "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 
 /*interface BluetoothLowEnergyApi {
   requestPermissions(): Promise<boolean>;
@@ -38,7 +38,7 @@ export class  Bluetooth {
     return this.allDevices;
   }
 
-  static requestAndroid31Permissions = async () => {
+  static requestAndroid31Permissions = async () => { //version 31 OK?
     const bluetoothScanPermission = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
       {
@@ -71,7 +71,9 @@ export class  Bluetooth {
     )
   }
 
-  static requestPermissions = async () => {
+ /* 
+ Esto de abajo es necesario? O reiterativo?
+ static requestPermissions = async () => {
     if (Platform.OS === "android") {
       if ((ExpoDevice.platformApiLevel ?? -1) < 31) {
         const granted = await PermissionsAndroid.request(
@@ -91,7 +93,7 @@ export class  Bluetooth {
     } else {
       return true
     }
-  }
+  }*/
 
   static isDuplicteDevice = (devices, nextDevice) =>
     devices.findIndex(device => nextDevice.id === device.id) > -1
@@ -101,7 +103,7 @@ export class  Bluetooth {
       if (error) {
         console.log(error)
       }
-      if (device && device.name?.includes("CorSense")) {
+      if (device && device.name?.includes("ESP32_BLE_Server")) {
         setAllDevices(prevState => {
           if (!isDuplicteDevice(prevState, device)) {
             return [...prevState, device]
@@ -158,8 +160,8 @@ export class  Bluetooth {
   static startStreamingData = async device => {
     if (device) {
       device.monitorCharacteristicForService(
-        HEART_RATE_UUID,
-        HEART_RATE_CHARACTERISTIC,
+        SERVICE_UUID,
+        CHARACTERISTIC_UUID,
         onMedicionUpdate
       )
     } else {
