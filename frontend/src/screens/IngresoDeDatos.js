@@ -94,9 +94,9 @@ export default function IngresoDeDatos({ navigation }) {
 }
             <Text style={[{ color: 'white', fontSize: 16, fontFamily: 'inter' }]}>Aceptar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.botonCancelar} onPress={() => { navigation.navigate("Home") }}>
+          {/* <TouchableOpacity style={styles.botonCancelar} onPress={() => { navigation.navigate("Home") }}>
             <Text style={[{ fontSize: 16, fontFamily: 'inter' }]}>Cancelar</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
 

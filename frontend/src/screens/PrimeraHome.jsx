@@ -28,7 +28,7 @@ export default function PrimeraHome({ navigation }) {
         }
     }
 
-    const [devices, setDevices] = useState(12)
+    const [devices, setDevices] = useState(null)
 
     const getDevices = async () => {
         setDevices(await Bluetooth.getAllDevices())

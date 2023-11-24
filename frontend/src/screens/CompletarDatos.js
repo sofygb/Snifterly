@@ -83,6 +83,7 @@ export default function CompletarDatos({ navigation }) {
             <Text style={styles.titulo}>Te damos la bienvenida a Snifterly!</Text>
             <Text style={styles.texto}>SIGN UP</Text>
 
+            <Text style={[styles.texto, {fontSize: 12}]}>Poner los valores con coma</Text>
             <TextInput keyboardType='decimal' variant="outlined" label="peso" style={{ margin: 14, marginRight: 32, marginLeft: 32 }} value={peso} onChangeText={peso => setPeso(peso)}/>
             <TextInput keyboardType='decimal' variant="outlined" label="altura" style={{ margin: 14, marginRight: 32, marginLeft: 32 }} value={altura} onChangeText={altura => setAltura(altura)}/>
             <TextInput keyboardType='date' variant="outlined" label="fecha de nacimiento" style={{ margin: 14, marginRight: 32, marginLeft: 32 }} value={fechaNacimiento} placeholder="Ejemplo: mm-dd-yyyy..." onChangeText={fechaNacimiento => setFechaNacimiento(fechaNacimiento)}/>
